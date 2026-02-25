@@ -547,6 +547,26 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 5d13804e-858c-4f52-85ad-9b0588404462
     m_ActionName: 'Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 341e7af7-6dc4-4eb4-81f4-ded35ff621a1
+    m_ActionName: 'Player/CameraRotate[/Keyboard/q,/Keyboard/r]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1280518096}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 0262504d-65cf-4007-a4ff-0ed5a131142b
+    m_ActionName: 'Player/CameraZoom[/Mouse/scroll/up,/Mouse/scroll/down]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -730,6 +750,9 @@ MonoBehaviour:
   targetTransform: {fileID: 1280518098}
   cameraMovementSpeed: 2
   cameraRotationSpeed: 2
+  cameraDistanceMin: 0
+  cameraDistanceMax: 10
+  cameraDistance: 5
 --- !u!1 &2076496370
 GameObject:
   m_ObjectHideFlags: 0

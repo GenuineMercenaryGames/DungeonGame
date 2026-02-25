@@ -29,6 +29,13 @@ public class PlayerController : MonoBehaviour
         inputMove = inputMoveRaw.normalized;
     }
 
+    public void InputCameraZoom(InputAction.CallbackContext ctx)
+    {
+        Debug.Log("EEEEEEE");
+        float val = ctx.ReadValue<float>();
+        CameraManager.Instance.AddCameraZoom(val);
+    }
+
     private void UpdateMove()
     {
         // TODO : Change to use vectors relative to camera...
