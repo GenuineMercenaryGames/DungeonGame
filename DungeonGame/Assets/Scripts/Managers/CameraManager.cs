@@ -6,8 +6,11 @@ public class CameraManager : SingletonPersistent<CameraManager>
 
     [Header("Transform References")]
     [SerializeField] private Transform cameraTransform;
-    [SerializeField] private Transform springTransform; // NOTE : Maybe the name "pivotTransform" would make more sense, but I like the fact that this has the same text length as the other var names... also it's the Unreal Engine terminology, so maybe more people get what I mean? kinda?
+    [SerializeField] private Transform anchorTransform;
+    [SerializeField] private Transform springTransform;
     [SerializeField] private Transform targetTransform; // NOTE : This is currently hardcoded. In the future, make it be extracted from the Player Manager or whatever.
+
+    // NOTE : Anchor and spring are 2 types of pivots for the camera.
 
     [Header("Camera Settings")]
     [SerializeField] private float cameraMovementSpeed;
@@ -22,7 +25,8 @@ public class CameraManager : SingletonPersistent<CameraManager>
     void Update()
     {
         delta = Time.deltaTime;
-        UpdateSpringPosition();
+        UpdateAnchorPosition();
+        UpdateCameraPosition();
         UpdateCameraRotation();
     }
 
@@ -33,11 +37,16 @@ public class CameraManager : SingletonPersistent<CameraManager>
 
     #region PrivateMethods
 
-    private void UpdateSpringPosition()
+    private void UpdateAnchorPosition()
     {
-        var origin = springTransform.position;
-        var target = targetTransform.position;
-        springTransform.position = Vector3.Lerp(origin, target, delta * cameraMovementSpeed);
+        anchorTransform.position = targetTransform.position;
+    }
+
+    private void UpdateCameraPosition()
+    {
+        var origin = cameraTransform.position;
+        var target = springTransform.position;
+        cameraTransform.position = Vector3.Lerp(origin, target, delta * cameraMovementSpeed);
     }
 
     private void UpdateCameraRotation()
@@ -46,6 +55,7 @@ public class CameraManager : SingletonPersistent<CameraManager>
         var origin = springTransform.rotation;
         var target = Quaternion.LookRotation(dir, Vector3.up);
         springTransform.rotation = Quaternion.Lerp(origin, target, delta * cameraRotationSpeed);
+        cameraTransform.rotation = springTransform.rotation;
     }
 
     #endregion

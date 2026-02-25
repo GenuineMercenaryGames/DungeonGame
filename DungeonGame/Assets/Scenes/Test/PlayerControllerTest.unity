@@ -129,7 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 23953402}
   m_Layer: 0
-  m_Name: CameraPivot
+  m_Name: CameraAnchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -298,7 +298,7 @@ GameObject:
   m_Component:
   - component: {fileID: 787517955}
   m_Layer: 0
-  m_Name: CameraPivot
+  m_Name: CameraSpring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -313,7 +313,7 @@ Transform:
   m_GameObject: {fileID: 787517954}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 6.58, z: -5.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -564,7 +564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cb3059606196134bb3f89979c1bafe1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  walkSpeed: 0
+  walkSpeed: 10
 --- !u!1 &1314379024
 GameObject:
   m_ObjectHideFlags: 0
@@ -695,7 +695,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1780676171
 Transform:
   m_ObjectHideFlags: 0
@@ -725,10 +725,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraManager
   cameraTransform: {fileID: 71496356}
-  springTransform: {fileID: 23953402}
+  anchorTransform: {fileID: 23953402}
+  springTransform: {fileID: 787517955}
   targetTransform: {fileID: 1280518098}
-  cameraMovementSpeed: 1
-  cameraRotationSpeed: 1
+  cameraMovementSpeed: 2
+  cameraRotationSpeed: 2
 --- !u!1 &2076496370
 GameObject:
   m_ObjectHideFlags: 0
