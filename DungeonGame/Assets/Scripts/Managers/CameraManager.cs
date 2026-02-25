@@ -15,6 +15,9 @@ public class CameraManager : SingletonPersistent<CameraManager>
     [Header("Camera Settings")]
     [SerializeField] private float cameraMovementSpeed;
     [SerializeField] private float cameraRotationSpeed;
+    [SerializeField] private float cameraDistanceMin;
+    [SerializeField] private float cameraDistanceMax;
+    [SerializeField] private float cameraDistance;
 
     private float delta;
 
@@ -33,6 +36,22 @@ public class CameraManager : SingletonPersistent<CameraManager>
     #endregion
 
     #region PublicMethods
+
+    public void AddCameraZoom(float amount)
+    {
+        SetCameraZoom(cameraDistance + amount);
+    }
+
+    public void SetCameraZoom(float amount)
+    {
+        cameraDistance = Mathf.Clamp(amount, cameraDistanceMin, cameraDistanceMax);
+    }
+
+    public float GetCameraZoom()
+    {
+        return cameraDistance;
+    }
+
     #endregion
 
     #region PrivateMethods
@@ -44,18 +63,24 @@ public class CameraManager : SingletonPersistent<CameraManager>
 
     private void UpdateCameraPosition()
     {
+        var dir = -GetLookDirection();
         var origin = cameraTransform.position;
-        var target = springTransform.position;
+        var target = anchorTransform.position + dir * cameraDistance;
         cameraTransform.position = Vector3.Lerp(origin, target, delta * cameraMovementSpeed);
     }
 
     private void UpdateCameraRotation()
     {
-        var dir = (targetTransform.position - springTransform.position).normalized;
+        var dir = GetLookDirection();
         var origin = springTransform.rotation;
         var target = Quaternion.LookRotation(dir, Vector3.up);
         springTransform.rotation = Quaternion.Lerp(origin, target, delta * cameraRotationSpeed);
         cameraTransform.rotation = springTransform.rotation;
+    }
+
+    private Vector3 GetLookDirection()
+    {
+        return (targetTransform.position - springTransform.position).normalized;
     }
 
     #endregion
