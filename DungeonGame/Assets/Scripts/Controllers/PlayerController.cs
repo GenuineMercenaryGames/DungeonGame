@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         delta = Time.deltaTime;
+        UpdateLookAt();
         UpdateMove();
     }
 
@@ -31,7 +32,6 @@ public class PlayerController : MonoBehaviour
 
     public void InputCameraZoom(InputAction.CallbackContext ctx)
     {
-        Debug.Log("EEEEEEE");
         float val = ctx.ReadValue<float>();
         CameraManager.Instance.AddCameraZoom(val);
     }
@@ -41,10 +41,29 @@ public class PlayerController : MonoBehaviour
         CameraManager.Instance.AddCameraVibration(5);
     }
 
+    public void InputLook(InputAction.CallbackContext ctx)
+    {
+        Vector2 v = ctx.ReadValue<Vector2>();
+        // Debug.Log($"the value is : {v}");
+    }
+
     private void UpdateMove()
     {
         // TODO : Change to use vectors relative to camera...
+        // TODO : Gravity support. Trivial to add, but I also want to add some basic forces support for easy knockback and dashing uniform support.
         Vector3 move = (transform.forward * inputMove.y + transform.right * inputMove.x) * walkSpeed * delta;
         characterController.Move(move);
     }
+
+    private void UpdateLookAt()
+    {
+        var cam = Camera.main;
+
+        Vector3 viewportPosPlayer = cam.WorldToViewportPoint(transform.position);
+        Vector3 viewportPosMouse = cam.ScreenToViewportPoint(Mouse.current.position.ReadValue());
+        Vector3 dir = (viewportPosMouse - viewportPosPlayer).normalized;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90.0f;
+        transform.rotation = Quaternion.Euler(0, -angle, 0);
+    }
+
 }
