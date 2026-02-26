@@ -32,6 +32,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "DEBUG_CameraVibrate",
+                    "type": "Button",
+                    "id": "e5116570-6536-49d5-b273-40980d755e29",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -155,6 +164,17 @@
                     "action": "CameraZoom",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "aed46f7f-c98f-429d-8e77-defab438b1fb",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DEBUG_CameraVibrate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

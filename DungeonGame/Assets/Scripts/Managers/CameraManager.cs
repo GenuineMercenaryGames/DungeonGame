@@ -18,8 +18,11 @@ public class CameraManager : SingletonPersistent<CameraManager>
     [SerializeField] private float cameraDistanceMin;
     [SerializeField] private float cameraDistanceMax;
     [SerializeField] private float cameraDistance;
+    [SerializeField] private float vibrationDecay;
 
     private float delta;
+
+    private float vibration;
 
     #endregion
 
@@ -31,6 +34,7 @@ public class CameraManager : SingletonPersistent<CameraManager>
         UpdateAnchorPosition();
         UpdateCameraPosition();
         UpdateCameraRotation();
+        UpdateCameraVibration();
     }
 
     #endregion
@@ -50,6 +54,11 @@ public class CameraManager : SingletonPersistent<CameraManager>
     public float GetCameraZoom()
     {
         return cameraDistance;
+    }
+
+    public void AddCameraVibration(float amount)
+    {
+        vibration += amount;
     }
 
     #endregion
@@ -81,6 +90,15 @@ public class CameraManager : SingletonPersistent<CameraManager>
     private Vector3 GetLookDirection()
     {
         return (targetTransform.position - springTransform.position).normalized;
+    }
+
+    private void UpdateCameraVibration()
+    {
+        if (vibration < 0.0f)
+            return;
+        Vector3 dir = Random.insideUnitSphere;
+        cameraTransform.position += dir * vibration * delta;
+        vibration -= vibrationDecay * delta;
     }
 
     #endregion

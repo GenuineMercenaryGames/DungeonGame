@@ -36,6 +36,11 @@ public class PlayerController : MonoBehaviour
         CameraManager.Instance.AddCameraZoom(val);
     }
 
+    public void InputDEBUGCameraVibrate(InputAction.CallbackContext ctx)
+    {
+        CameraManager.Instance.AddCameraVibration(5);
+    }
+
     private void UpdateMove()
     {
         // TODO : Change to use vectors relative to camera...
