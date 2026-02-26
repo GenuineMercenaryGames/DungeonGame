@@ -750,8 +750,8 @@ MonoBehaviour:
   targetTransform: {fileID: 1280518098}
   cameraMovementSpeed: 2
   cameraRotationSpeed: 2
-  cameraDistanceMin: 0
-  cameraDistanceMax: 10
+  cameraDistanceMin: 8
+  cameraDistanceMax: 20
   cameraDistance: 5
 --- !u!1 &2076496370
 GameObject:
