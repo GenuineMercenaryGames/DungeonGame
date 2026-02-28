@@ -47,6 +47,12 @@ public class PlayerController : MonoBehaviour
         // Debug.Log($"the value is : {v}");
     }
 
+    public void InputAttack(InputAction.CallbackContext ctx)
+    {
+        Debug.Log("Player Attack!");
+        // TODO : Implement logic
+    }
+
     private void UpdateMove()
     {
         // TODO : Change to use vectors relative to camera...
