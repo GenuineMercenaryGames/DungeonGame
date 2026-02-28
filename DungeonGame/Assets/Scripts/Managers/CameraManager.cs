@@ -2,14 +2,13 @@ using UnityEngine;
 
 public class CameraManager : SingletonPersistent<CameraManager>
 {
-    #region Variables
+    #region Serialized Variables
 
     [Header("Transform References")]
     [SerializeField] private Transform cameraTransform;
-    [SerializeField] private Transform anchorTransform;
-    [SerializeField] private Transform springTransform;
+    [SerializeField] private Transform anchorTransform; // base transform
+    [SerializeField] private Transform springTransform; // probe transform
     [SerializeField] private Transform targetTransform; // NOTE : This is currently hardcoded. In the future, make it be extracted from the Player Manager or whatever.
-
     // NOTE : Anchor and spring are 2 types of pivots for the camera.
 
     [Header("Camera Settings")]
@@ -20,9 +19,20 @@ public class CameraManager : SingletonPersistent<CameraManager>
     [SerializeField] private float cameraDistance;
     [SerializeField] private float vibrationDecay;
 
+    #endregion
+
+    #region Private Variables
+
     private float delta;
 
     private float vibration;
+
+    #endregion
+
+    #region Properties
+
+    public Vector3 ForwardMoveVector { get { return springTransform.forward; } }
+    public Vector3 RightMoveVector { get { return springTransform.right; } }
 
     #endregion
 
@@ -39,7 +49,7 @@ public class CameraManager : SingletonPersistent<CameraManager>
 
     #endregion
 
-    #region PublicMethods
+    #region PublicMethods - Zoom
 
     public void AddCameraZoom(float amount)
     {
@@ -55,6 +65,10 @@ public class CameraManager : SingletonPersistent<CameraManager>
     {
         return cameraDistance;
     }
+
+    #endregion
+
+    #region PublicMethods - Vibration
 
     public void AddCameraVibration(float amount)
     {
@@ -81,10 +95,9 @@ public class CameraManager : SingletonPersistent<CameraManager>
     private void UpdateCameraRotation()
     {
         var dir = GetLookDirection();
-        var origin = springTransform.rotation;
+        var origin = cameraTransform.rotation;
         var target = Quaternion.LookRotation(dir, Vector3.up);
-        springTransform.rotation = Quaternion.Lerp(origin, target, delta * cameraRotationSpeed);
-        cameraTransform.rotation = springTransform.rotation;
+        cameraTransform.rotation = Quaternion.Lerp(origin, target, delta * cameraRotationSpeed);
     }
 
     private Vector3 GetLookDirection()

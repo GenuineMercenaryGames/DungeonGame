@@ -51,7 +51,9 @@ public class PlayerController : MonoBehaviour
     {
         // TODO : Change to use vectors relative to camera...
         // TODO : Gravity support. Trivial to add, but I also want to add some basic forces support for easy knockback and dashing uniform support.
-        Vector3 move = (transform.forward * inputMove.y + transform.right * inputMove.x) * walkSpeed * delta;
+        Vector3 forward = GetMoveForward();
+        Vector3 right = GetMoveRight();
+        Vector3 move = (forward * inputMove.y + right * inputMove.x) * walkSpeed * delta;
         characterController.Move(move);
     }
 
@@ -64,6 +66,16 @@ public class PlayerController : MonoBehaviour
         Vector3 dir = (viewportPosMouse - viewportPosPlayer).normalized;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90.0f;
         transform.rotation = Quaternion.Euler(0, -angle, 0);
+    }
+
+    private Vector3 GetMoveForward()
+    {
+        return CameraManager.Instance.ForwardMoveVector;
+    }
+
+    private Vector3 GetMoveRight()
+    {
+        return CameraManager.Instance.RightMoveVector;
     }
 
 }
