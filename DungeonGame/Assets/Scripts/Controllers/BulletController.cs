@@ -30,6 +30,11 @@ public class BulletController : MonoBehaviour
         lastCollidedObject = null;
         elapsedTime = 0.0f;
         bounces = 0;
+    }
+
+    void Start()
+    {
+        // NOTE : When object pooling is implemented, this bit of logic CANNOT go here. Need to move to some init function of sorts.
         rb.linearVelocity = transform.forward * Speed;
     }
 
