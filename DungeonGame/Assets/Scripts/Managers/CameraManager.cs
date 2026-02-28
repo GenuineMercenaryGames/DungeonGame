@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CameraManager : SingletonPersistent<CameraManager>
 {
@@ -17,6 +18,7 @@ public class CameraManager : SingletonPersistent<CameraManager>
     [SerializeField] private float cameraDistanceMin;
     [SerializeField] private float cameraDistanceMax;
     [SerializeField] private float cameraDistance;
+    [SerializeField] private float cameraDistancePlaneMax;
     [SerializeField] private float vibrationDecay;
 
     #endregion
@@ -81,7 +83,24 @@ public class CameraManager : SingletonPersistent<CameraManager>
 
     private void UpdateAnchorPosition()
     {
+        // TODO : Clean this code up a bit lol...
+
         anchorTransform.position = targetTransform.position;
+
+        var cam = Camera.main;
+        Vector3 viewportPosPlayer = cam.WorldToViewportPoint(anchorTransform.position);
+        Vector3 viewportPosMouse = cam.ScreenToViewportPoint(Mouse.current.position.ReadValue());
+        Vector3 vec = (viewportPosMouse - viewportPosPlayer);
+        Vector3 v = new Vector3(vec.x, 0.0f, vec.y);
+        Vector3 dir = v.normalized;
+
+        float cursorDist = v.magnitude; // NOTE : Since this is calculated in viewport space, this should give us a value in range [0, 1], so that's perfect for lerping.
+        // float chosenCamDist = Mathf.Min(cameraDistancePlaneMax, cursorDist);
+        float chosenCamDist = Mathf.Lerp(0.0f, cameraDistancePlaneMax, cursorDist);
+
+        Debug.Log($"the distance is : {cursorDist}");
+
+        anchorTransform.position += chosenCamDist * dir;
     }
 
     private void UpdateCameraPosition()
@@ -102,7 +121,7 @@ public class CameraManager : SingletonPersistent<CameraManager>
 
     private Vector3 GetLookDirection()
     {
-        return (targetTransform.position - springTransform.position).normalized;
+        return (anchorTransform.position - springTransform.position).normalized;
     }
 
     private void UpdateCameraVibration()
