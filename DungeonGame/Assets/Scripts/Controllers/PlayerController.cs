@@ -4,12 +4,15 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float walkSpeed;
+    [SerializeField] private float runSpeed;
 
     private CharacterController characterController;
     private WeaponController weaponController;
 
     private Vector2 inputMoveRaw;
     private Vector2 inputMove;
+
+    private bool isRunning;
 
     private float delta;
 
@@ -57,13 +60,19 @@ public class PlayerController : MonoBehaviour
         Attack();
     }
 
+    public void InputRun(InputAction.CallbackContext ctx)
+    {
+        isRunning = ctx.phase == InputActionPhase.Performed;
+    }
+
     private void UpdateMove()
     {
         // TODO : Change to use vectors relative to camera...
         // TODO : Gravity support. Trivial to add, but I also want to add some basic forces support for easy knockback and dashing uniform support.
         Vector3 forward = GetMoveForward();
         Vector3 right = GetMoveRight();
-        Vector3 move = (forward * inputMove.y + right * inputMove.x) * walkSpeed * delta;
+        float speed = isRunning ? runSpeed : walkSpeed;
+        Vector3 move = (forward * inputMove.y + right * inputMove.x) * speed * delta;
         characterController.Move(move);
     }
 
