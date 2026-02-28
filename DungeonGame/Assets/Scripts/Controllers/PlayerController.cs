@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float walkSpeed;
 
     private CharacterController characterController;
+    private WeaponController weaponController;
 
     private Vector2 inputMoveRaw;
     private Vector2 inputMove;
@@ -15,6 +16,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        weaponController = GetComponent<WeaponController>();
     }
 
     void Update()
@@ -50,7 +52,9 @@ public class PlayerController : MonoBehaviour
     public void InputAttack(InputAction.CallbackContext ctx)
     {
         Debug.Log("Player Attack!");
-        // TODO : Implement logic
+        if (ctx.phase != InputActionPhase.Performed)
+            return;
+        Attack();
     }
 
     private void UpdateMove()
@@ -82,6 +86,11 @@ public class PlayerController : MonoBehaviour
     private Vector3 GetMoveRight()
     {
         return CameraManager.Instance.RightMoveVector;
+    }
+
+    private void Attack()
+    {
+        weaponController.Attack();
     }
 
 }
