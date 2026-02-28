@@ -935,7 +935,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponController
   bulletSpawnTransform: {fileID: 2130637330}
   bulletPrefab: {fileID: 7759707805804090412, guid: 431f391e3665cf34d97e5424be6a4b1c, type: 3}
-  timeBetweenShots: 10
+  timeBetweenShots: 0.5
 --- !u!1 &1314379024
 GameObject:
   m_ObjectHideFlags: 0
