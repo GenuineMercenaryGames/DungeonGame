@@ -17,8 +17,6 @@ public class BobController : MonoBehaviour
 
     void Update()
     {
-        Vector3 oldPos = transform.position;
-        Vector3 newPos = new Vector3(oldPos.x, oldPos.y + Mathf.Sin(Time.time) * maxBobDistance, oldPos.z);
-        bobTarget.position = newPos;
+        bobTarget.position = transform.position + bobAxis.normalized * Mathf.Sin(Time.time) * maxBobDistance;
     }
 }
