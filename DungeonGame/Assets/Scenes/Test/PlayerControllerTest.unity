@@ -524,7 +524,7 @@ GameObject:
   - component: {fileID: 267474349}
   - component: {fileID: 267474348}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: BobbingCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -543,7 +543,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BobController
   bobTarget: {fileID: 225827987}
-  maxBobDistance: 5
+  bobAxis: {x: 0, y: 1, z: 0}
+  maxBobDistance: 1
 --- !u!4 &267474349
 Transform:
   m_ObjectHideFlags: 0
@@ -842,7 +843,6 @@ GameObject:
   - component: {fileID: 1047184063}
   - component: {fileID: 1047184062}
   - component: {fileID: 1047184061}
-  - component: {fileID: 1047184065}
   m_Layer: 0
   m_Name: Cube (5)
   m_TagString: Untagged
@@ -936,27 +936,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1047184060}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.8, y: 2.94, z: -2.66797}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 2052338143}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1047184065
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1047184060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ba51cb754ac9324cb47b541ca3c6eba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpinController
-  spinAxis: {x: 0, y: 1, z: 0}
-  spinSpeed: 180
 --- !u!1001 &1271430463
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1785,6 +1771,54 @@ MonoBehaviour:
   cameraDistance: 5
   cameraDistancePlaneMax: 5
   vibrationDecay: 0.1
+--- !u!1 &2052338141
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2052338143}
+  - component: {fileID: 2052338142}
+  m_Layer: 0
+  m_Name: SpinningCube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2052338142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052338141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ba51cb754ac9324cb47b541ca3c6eba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpinController
+  spinTarget: {fileID: 1047184064}
+  spinAxis: {x: 0, y: 1, z: 0}
+  spinSpeed: 180
+--- !u!4 &2052338143
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2052338141}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.8, y: 2.94, z: -2.66797}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1047184064}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2076496370
 GameObject:
   m_ObjectHideFlags: 0
@@ -2005,4 +2039,4 @@ SceneRoots:
   - {fileID: 147062287}
   - {fileID: 1537034883}
   - {fileID: 267474349}
-  - {fileID: 1047184064}
+  - {fileID: 2052338143}

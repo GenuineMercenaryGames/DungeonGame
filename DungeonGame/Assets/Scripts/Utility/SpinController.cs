@@ -17,6 +17,6 @@ public class SpinController : MonoBehaviour
 
     void Update()
     {
-        spinTarget.Rotate(spinAxis, spinSpeed * Time.deltaTime);
+        spinTarget.Rotate(spinAxis.normalized, spinSpeed * Time.deltaTime);
     }
 }
