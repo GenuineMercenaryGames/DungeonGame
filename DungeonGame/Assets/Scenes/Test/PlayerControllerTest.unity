@@ -1406,7 +1406,7 @@ MonoBehaviour:
   cameraDistanceMin: 8
   cameraDistanceMax: 20
   cameraDistance: 5
-  vibrationDecay: 10
+  vibrationDecay: 0.1
 --- !u!1 &2076496370
 GameObject:
   m_ObjectHideFlags: 0

@@ -111,7 +111,7 @@ public class CameraManager : SingletonPersistent<CameraManager>
             return;
         Vector3 dir = Random.insideUnitSphere;
         cameraTransform.position += dir * vibration * delta;
-        vibration -= vibrationDecay * delta;
+        vibration *= Mathf.Pow(vibrationDecay, delta); // NOTE : Exponential decay ensures that we have framrate independent decay without making the mistake of multiplying the value by a near 0 value, which would make the shake end in one frame.
     }
 
     #endregion
