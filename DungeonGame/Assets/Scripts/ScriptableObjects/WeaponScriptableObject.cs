@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu]
-public class WeaponData : ScriptableObject
+public class WeaponDataSO : ScriptableObject
 {
     public string Name;
     public float Damage;
