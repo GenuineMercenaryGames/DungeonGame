@@ -90,7 +90,15 @@ public class PlayerController : MonoBehaviour
 
     private void Attack()
     {
-        weaponController.Attack();
+        bool hasShot = weaponController.Attack();
+        if (hasShot)
+            CameraManager.Instance.AddCameraVibration(4.0f);
+        // TODO : For now, only the player can add this vibration when we shoot.
+        // Since enemies can also have a weapons that shoots, and heavy weapons at that, it would be logical for the vibration to take place whenever an
+        // explosion or loud shot takes place near the player's location. So, maybe just make it so that the weapon systems adds camera vibration based on
+        // the distance to the camera's ground anchor point?
+        // Note that the anchor point is pretty much the player's location, but doing it like this would allow for cinematics and such to have environment-driven
+        // vibrations without hardcoded events even if the camera is pointing to a location that is far from the player's position.
     }
 
 }

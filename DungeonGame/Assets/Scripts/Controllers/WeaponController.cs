@@ -23,12 +23,12 @@ public class WeaponController : MonoBehaviour
         elapsedTime += Time.deltaTime;
     }
 
-    public void Attack()
+    public bool Attack()
     {
         if (elapsedTime < timeBetweenShots)
         {
             Debug.Log("CANNOT SHOOT BULLET YET");
-            return;
+            return false;
         }
         elapsedTime = 0.0f;
 
@@ -38,5 +38,7 @@ public class WeaponController : MonoBehaviour
         var obj = Instantiate(bulletPrefab);
         obj.transform.position = bulletSpawnTransform.position;
         obj.transform.rotation = bulletSpawnTransform.rotation;
+
+        return true;
     }
 }
