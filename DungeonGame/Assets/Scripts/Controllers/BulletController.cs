@@ -65,8 +65,8 @@ public class BulletController : MonoBehaviour
         Vector3 L = transform.forward;
         Vector3 N = collision.GetContact(0).normal;
         Vector3 R = Vector3.Reflect(L, N);
-        // transform.forward = R;
-        rb.linearVelocity = R * Speed;
+        transform.rotation = Quaternion.LookRotation(R, Vector3.up);
+        rb.linearVelocity = transform.forward * Speed;
 
         if (bounces >= Bounces)
         {
