@@ -10,8 +10,11 @@ public class BulletController : MonoBehaviour
     [SerializeField] public float Damage;
     [SerializeField] public float Speed;
     [SerializeField] public float LifeTime;
+    [SerializeField] public int Bounces;
 
+    private GameObject lastCollidedObject;
     private float elapsedTime;
+    private int bounces; // total impacts that have taken place
 
     #endregion
 
@@ -19,12 +22,14 @@ public class BulletController : MonoBehaviour
 
     void Awake()
     {
-        elapsedTime = 0.0f;
         rb = GetComponent<Rigidbody>();
     }
 
     void OnEnable()
     {
+        lastCollidedObject = null;
+        elapsedTime = 0.0f;
+        bounces = 0;
         rb.linearVelocity = transform.forward * Speed;
     }
 
@@ -40,8 +45,30 @@ public class BulletController : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        if (lastCollidedObject == collision.gameObject)
+        {
+            return;
+        }
+
         // TODO : Implement other bullet impact logic. For now, just destroy the gameobject.
-        DestroyBullet();
+        // TODO : Check if the collided with target contains a health component. If so, ignore bounce logic and just kill the projectile because it already impacted with an imaginarily squishy killable thing.
+
+        Debug.Log($"collision {bounces}");
+
+        lastCollidedObject = collision.gameObject;
+
+        Vector3 L = transform.forward;
+        Vector3 N = collision.GetContact(0).normal;
+        Vector3 R = Vector3.Reflect(L, N);
+        // transform.forward = R;
+        rb.linearVelocity = R * Speed;
+
+        if (bounces >= Bounces)
+        {
+            DestroyBullet();
+        }
+
+        ++bounces;
     }
 
     #endregion
