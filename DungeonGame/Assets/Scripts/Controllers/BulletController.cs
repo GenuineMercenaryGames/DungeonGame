@@ -50,15 +50,16 @@ public class BulletController : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.TryGetComponent<HealthController>(out var health))
+        {
+            health.Health.Value -= Damage;
+            DestroyBullet();
+        }
+
         if (lastCollidedObject == collision.gameObject)
         {
             return;
         }
-
-        // TODO : Implement other bullet impact logic. For now, just destroy the gameobject.
-        // TODO : Check if the collided with target contains a health component. If so, ignore bounce logic and just kill the projectile because it already impacted with an imaginarily squishy killable thing.
-
-        // Debug.Log($"collision {bounces}");
 
         lastCollidedObject = collision.gameObject;
 
@@ -74,6 +75,8 @@ public class BulletController : MonoBehaviour
         }
 
         ++bounces;
+
+        // TODO : Modify to make use of object pooling. Main changes should probably go in the DestroyBullet() function.
     }
 
     #endregion
