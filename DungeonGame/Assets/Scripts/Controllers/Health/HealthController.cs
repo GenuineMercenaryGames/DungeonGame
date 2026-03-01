@@ -12,22 +12,22 @@ public class HealthController : MonoBehaviour
         if(maxHealth <= 0.0f)
             maxHealth = 1.0f;
 
-        Health.OnValueChanged += ClampHealthValue;
-        MaxHealth.OnValueChanged += ClampMaxHealthValue;
+        Health.AddPreprocessor(ClampHealthValue);
+        MaxHealth.AddPreprocessor(ClampMaxHealthValue);
 
         MaxHealth.Value = maxHealth;
         Health.Value = maxHealth;
     }
 
     // Limit the current health value to a value in range [0, maxHealth].
-    private void ClampHealthValue(float oldValue, float newValue)
+    private void ClampHealthValue(out float outHealth, float inHealth)
     {
-        Health.SetValueWithoutNotify(Mathf.Clamp(newValue, 0.0f, MaxHealth.GetValue()));
+        outHealth = Mathf.Clamp(inHealth, 0.0f, MaxHealth.GetValue());
     }
 
     // Limit the max health value to 1.0f at the very least.
-    private void ClampMaxHealthValue(float oldValue, float newValue)
+    private void ClampMaxHealthValue(out float outMaxHealth, float inMaxHealth)
     {
-        MaxHealth.SetValueWithoutNotify(Mathf.Max(1.0f, newValue));
+        outMaxHealth = Mathf.Max(1.0f, inMaxHealth);
     }
 }

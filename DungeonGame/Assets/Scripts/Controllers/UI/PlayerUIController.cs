@@ -11,8 +11,8 @@ public class PlayerUIController : MonoBehaviour
     {
         var player = PlayerManager.Instance.Player;
         
-        player.healthController.Health.OnValueChanged += UpdateHealth;
-        player.Coins.OnValueChanged += UpdateCoins;
+        player.healthController.Health.AddListener(UpdateHealth);
+        player.Coins.AddListener(UpdateCoins);
 
         player.healthController.Health.Notify();
         player.Coins.Notify();
