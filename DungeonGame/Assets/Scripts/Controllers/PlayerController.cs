@@ -31,6 +31,10 @@ public class PlayerController : MonoBehaviour
         weaponController = GetComponent<WeaponController>();
         healthController = GetComponent<HealthController>();
         shieldController = GetComponent<ShieldController>();
+
+        PlayerManager.Instance.Player = this;
+        // NOTE : This is a temporary hack because the player prefab is placed manually within the scene.
+        // Once the actual spawning logic is implemented within the PlayerManager, this will be removed. But for now, we need this.
     }
 
     void Update()
