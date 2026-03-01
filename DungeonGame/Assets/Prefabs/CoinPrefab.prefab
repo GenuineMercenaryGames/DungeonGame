@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 698482363765942115}
   - component: {fileID: 8220227987916709345}
   - component: {fileID: 8619878482754198029}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: CoinPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -192,6 +192,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 5ab32d71a8d2dd14fbbd7a9ba37e7974, type: 3}
       propertyPath: m_Name
       value: placeholder_coin_0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5ab32d71a8d2dd14fbbd7a9ba37e7974, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
