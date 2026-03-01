@@ -7,5 +7,11 @@ using UnityEngine;
 // it yet, but it will be required once the project advances to the next stage.
 public class PlayerManager : Singleton<PlayerManager>
 {
-    public PlayerController Player;
+    public PlayerController Player { get; private set; }
+
+    public void SetPlayer(PlayerController player)
+    {
+        Player = player;
+        UIManager.Instance.PlayerUI.Init();
+    }
 }

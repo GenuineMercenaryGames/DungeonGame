@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public WeaponController weaponController;
     public HealthController healthController;
     public ShieldController shieldController;
+    public ObservableVariable<int> Coins = new(0);
 
     private Vector2 inputMoveRaw;
     private Vector2 inputMove;
@@ -25,14 +26,17 @@ public class PlayerController : MonoBehaviour
 
     #region MonoBehaviour
 
-    void Start()
+    void Awake()
     {
         characterController = GetComponent<CharacterController>();
         weaponController = GetComponent<WeaponController>();
         healthController = GetComponent<HealthController>();
         shieldController = GetComponent<ShieldController>();
+    }
 
-        PlayerManager.Instance.Player = this;
+    void Start()
+    {
+        PlayerManager.Instance.SetPlayer(this);
         // NOTE : This is a temporary hack because the player prefab is placed manually within the scene.
         // Once the actual spawning logic is implemented within the PlayerManager, this will be removed. But for now, we need this.
     }
