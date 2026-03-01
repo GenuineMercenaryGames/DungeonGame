@@ -4,3 +4,4 @@
 *.mat linguist-generated=true
 *.unity linguist-generated=true
 *.meta linguist-generated=true
+*/Assets/TextMesh?Pro/** linguist-generated
