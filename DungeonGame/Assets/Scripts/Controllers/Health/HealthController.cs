@@ -9,11 +9,14 @@ public class HealthController : MonoBehaviour
 
     void Awake()
     {
+        if(maxHealth <= 0.0f)
+            maxHealth = 1.0f;
+
         Health.OnValueChanged += ClampHealthValue;
         MaxHealth.OnValueChanged += ClampMaxHealthValue;
 
-        Health.SetValueAndNotify(maxHealth);
-        MaxHealth.SetValueAndNotify(maxHealth);
+        MaxHealth.Value = maxHealth;
+        Health.Value = maxHealth;
     }
 
     // Limit the current health value to a value in range [0, maxHealth].
