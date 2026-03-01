@@ -58,7 +58,7 @@ public class BulletController : MonoBehaviour
         // TODO : Implement other bullet impact logic. For now, just destroy the gameobject.
         // TODO : Check if the collided with target contains a health component. If so, ignore bounce logic and just kill the projectile because it already impacted with an imaginarily squishy killable thing.
 
-        Debug.Log($"collision {bounces}");
+        // Debug.Log($"collision {bounces}");
 
         lastCollidedObject = collision.gameObject;
 

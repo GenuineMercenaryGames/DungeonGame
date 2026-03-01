@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
 
     public void InputAttack(InputAction.CallbackContext ctx)
     {
-        Debug.Log("Player Attack!");
+        // Debug.Log("Player Attack!");
         if (ctx.phase != InputActionPhase.Performed)
             return;
         Attack();

@@ -10,8 +10,12 @@ public class PlayerUIController : MonoBehaviour
     public void Init()
     {
         var player = PlayerManager.Instance.Player;
+        
         player.healthController.Health.OnValueChanged += UpdateHealth;
         player.Coins.OnValueChanged += UpdateCoins;
+
+        player.healthController.Health.Notify();
+        player.Coins.Notify();
     }
 
     private void UpdateHealth(float _, float value)

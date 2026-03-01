@@ -98,7 +98,7 @@ public class CameraManager : SingletonPersistent<CameraManager>
         // float chosenCamDist = Mathf.Min(cameraDistancePlaneMax, cursorDist);
         float chosenCamDist = Mathf.Lerp(0.0f, cameraDistancePlaneMax, cursorDist);
 
-        Debug.Log($"the distance is : {cursorDist}");
+        // Debug.Log($"the distance is : {cursorDist}");
 
         anchorTransform.position += chosenCamDist * dir;
     }
