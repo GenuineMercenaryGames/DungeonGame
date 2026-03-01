@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    #region Variables
+
     [SerializeField] private float walkSpeed;
     [SerializeField] private float runSpeed;
 
@@ -16,6 +18,10 @@ public class PlayerController : MonoBehaviour
 
     private float delta;
 
+    #endregion
+
+    #region MonoBehaviour
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -28,6 +34,10 @@ public class PlayerController : MonoBehaviour
         UpdateLookAt();
         UpdateMove();
     }
+
+    #endregion
+
+    #region PublicMethods - Input
 
     public void InputMove(InputAction.CallbackContext ctx)
     {
@@ -64,6 +74,10 @@ public class PlayerController : MonoBehaviour
     {
         isRunning = ctx.phase == InputActionPhase.Performed;
     }
+
+    #endregion
+
+    #region PrivateMethods
 
     private void UpdateMove()
     {
@@ -109,5 +123,7 @@ public class PlayerController : MonoBehaviour
         // Note that the anchor point is pretty much the player's location, but doing it like this would allow for cinematics and such to have environment-driven
         // vibrations without hardcoded events even if the camera is pointing to a location that is far from the player's position.
     }
+
+    #endregion
 
 }
