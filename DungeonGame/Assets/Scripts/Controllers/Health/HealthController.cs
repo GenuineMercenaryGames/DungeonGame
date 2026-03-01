@@ -2,12 +2,29 @@ using UnityEngine;
 
 public class HealthController : MonoBehaviour
 {
-    [SerializeField] private float currentValue;
-    [SerializeField] private float maxValue;
-    [SerializeField] private float minValue;
+    [SerializeField] private float maxHealth;
 
-    public float Value { get { return currentValue; } set { currentValue = value; } }
-    public float MinValue { get { return minValue; } set { minValue = value; } }
-    public float MaxValue { get { return maxValue; } set { maxValue = value; } }
+    public ObservableVariable<float> Health = new();
+    public ObservableVariable<float> MaxHealth = new();
 
+    void Awake()
+    {
+        Health.OnValueChanged += ClampHealthValue;
+        MaxHealth.OnValueChanged += ClampMaxHealthValue;
+
+        Health.SetValueAndNotify(maxHealth);
+        MaxHealth.SetValueAndNotify(maxHealth);
+    }
+
+    // Limit the current health value to a value in range [0, maxHealth].
+    private void ClampHealthValue(float oldValue, float newValue)
+    {
+        Health.SetValueWithoutNotify(Mathf.Clamp(newValue, 0.0f, MaxHealth.GetValue()));
+    }
+
+    // Limit the max health value to 1.0f at the very least.
+    private void ClampMaxHealthValue(float oldValue, float newValue)
+    {
+        MaxHealth.SetValueWithoutNotify(Mathf.Max(1.0f, newValue));
+    }
 }
