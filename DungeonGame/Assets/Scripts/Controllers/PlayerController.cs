@@ -5,11 +5,14 @@ public class PlayerController : MonoBehaviour
 {
     #region Variables
 
+    [Header("Movement Settings")]
     [SerializeField] private float walkSpeed;
     [SerializeField] private float runSpeed;
 
-    private CharacterController characterController;
-    private WeaponController weaponController;
+    public CharacterController characterController;
+    public WeaponController weaponController;
+    public HealthController healthController;
+    public ShieldController shieldController;
 
     private Vector2 inputMoveRaw;
     private Vector2 inputMove;
@@ -26,6 +29,8 @@ public class PlayerController : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         weaponController = GetComponent<WeaponController>();
+        healthController = GetComponent<HealthController>();
+        shieldController = GetComponent<ShieldController>();
     }
 
     void Update()
