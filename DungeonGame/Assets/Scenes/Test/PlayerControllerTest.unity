@@ -2300,7 +2300,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpinController
   spinTarget: {fileID: 749243571}
   spinAxis: {x: 0, y: 1, z: 0}
-  spinSpeed: 10
+  spinSpeed: 50
 --- !u!135 &1480174646
 SphereCollider:
   m_ObjectHideFlags: 0
