@@ -27,12 +27,12 @@ public class WeaponController : MonoBehaviour
     {
         if (elapsedTime < timeBetweenShots)
         {
-            Debug.Log("CANNOT SHOOT BULLET YET");
+            // Debug.Log("CANNOT SHOOT BULLET YET");
             return false;
         }
         elapsedTime = 0.0f;
 
-        Debug.Log("SHOOTING BULLET NOW");
+        // Debug.Log("SHOOTING BULLET NOW");
 
         // TODO : Modify the logic to make use of object pooling later on.
         var obj = Instantiate(bulletPrefab);

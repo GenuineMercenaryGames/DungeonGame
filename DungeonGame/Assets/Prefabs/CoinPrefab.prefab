@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 3007774809918028528}
   - component: {fileID: 698482363765942115}
   - component: {fileID: 8220227987916709345}
-  m_Layer: 0
+  - component: {fileID: 8619878482754198029}
+  m_Layer: 11
   m_Name: CoinPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,6 +112,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3de7accb7ef21cc40be7299a5de8b863, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttractableItem
+--- !u!114 &8619878482754198029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 778846711962324316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dacbfdcdf616c374192177769a9a4492, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CoinController
+  coinType: 0
 --- !u!1001 &2796803800246605690
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -178,6 +192,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 5ab32d71a8d2dd14fbbd7a9ba37e7974, type: 3}
       propertyPath: m_Name
       value: placeholder_coin_0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5ab32d71a8d2dd14fbbd7a9ba37e7974, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

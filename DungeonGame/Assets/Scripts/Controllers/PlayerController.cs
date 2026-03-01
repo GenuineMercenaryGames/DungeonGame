@@ -3,11 +3,17 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    #region Variables
+
+    [Header("Movement Settings")]
     [SerializeField] private float walkSpeed;
     [SerializeField] private float runSpeed;
 
-    private CharacterController characterController;
-    private WeaponController weaponController;
+    public CharacterController characterController;
+    public WeaponController weaponController;
+    public HealthController healthController;
+    public ShieldController shieldController;
+    public ObservableVariable<int> Coins = new(0);
 
     private Vector2 inputMoveRaw;
     private Vector2 inputMove;
@@ -16,10 +22,23 @@ public class PlayerController : MonoBehaviour
 
     private float delta;
 
-    void Start()
+    #endregion
+
+    #region MonoBehaviour
+
+    void Awake()
     {
         characterController = GetComponent<CharacterController>();
         weaponController = GetComponent<WeaponController>();
+        healthController = GetComponent<HealthController>();
+        shieldController = GetComponent<ShieldController>();
+    }
+
+    void Start()
+    {
+        PlayerManager.Instance.SetPlayer(this);
+        // NOTE : This is a temporary hack because the player prefab is placed manually within the scene.
+        // Once the actual spawning logic is implemented within the PlayerManager, this will be removed. But for now, we need this.
     }
 
     void Update()
@@ -28,6 +47,10 @@ public class PlayerController : MonoBehaviour
         UpdateLookAt();
         UpdateMove();
     }
+
+    #endregion
+
+    #region PublicMethods - Input
 
     public void InputMove(InputAction.CallbackContext ctx)
     {
@@ -54,7 +77,7 @@ public class PlayerController : MonoBehaviour
 
     public void InputAttack(InputAction.CallbackContext ctx)
     {
-        Debug.Log("Player Attack!");
+        // Debug.Log("Player Attack!");
         if (ctx.phase != InputActionPhase.Performed)
             return;
         Attack();
@@ -64,6 +87,10 @@ public class PlayerController : MonoBehaviour
     {
         isRunning = ctx.phase == InputActionPhase.Performed;
     }
+
+    #endregion
+
+    #region PrivateMethods
 
     private void UpdateMove()
     {
@@ -109,5 +136,7 @@ public class PlayerController : MonoBehaviour
         // Note that the anchor point is pretty much the player's location, but doing it like this would allow for cinematics and such to have environment-driven
         // vibrations without hardcoded events even if the camera is pointing to a location that is far from the player's position.
     }
+
+    #endregion
 
 }

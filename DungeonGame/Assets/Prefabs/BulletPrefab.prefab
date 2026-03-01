@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6584402316310719179}
   - component: {fileID: 4931076411889085344}
   - component: {fileID: 4230068265534844611}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 5682410527648269903}
   - component: {fileID: 5604019670323470556}
   - component: {fileID: 8681635098137866251}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: BulletPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
