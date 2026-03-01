@@ -4,7 +4,8 @@ public class ObservableVariable<T>
 {
     
     private T _value;
-    public Action<T, T> OnValueChanged;
+    private Action<T> _onValueChanged1T;
+    private Action<T, T> _onValueChanged2T;
 
     public T Value { get { return GetValue(); } set { SetValueAndNotify(value); } }
 
@@ -13,12 +14,14 @@ public class ObservableVariable<T>
     public ObservableVariable(T value = default)
     {
         this._value = value;
-        this.OnValueChanged = null;
+        this._onValueChanged1T = null;
+        this._onValueChanged2T = null;
     }
 
-    public void Notify(T oldValue, T newValue)
+    private void Notify(T oldValue, T newValue)
     {
-        this.OnValueChanged?.Invoke(oldValue, newValue);
+        this._onValueChanged1T?.Invoke(newValue);
+        this._onValueChanged2T?.Invoke(oldValue, newValue);
     }
 
     public void Notify()
@@ -54,6 +57,32 @@ public class ObservableVariable<T>
     public T GetValue()
     {
         return _value;
+    }
+
+    public void AddListener(Action<T> fn)
+    {
+        _onValueChanged1T += fn;
+    }
+
+    public void AddListener(Action<T, T> fn)
+    {
+        _onValueChanged2T += fn;
+    }
+
+    public void RemoveListener(Action<T> fn)
+    {
+        _onValueChanged1T -= fn;
+    }
+
+    public void RemoveListener(Action<T, T> fn)
+    {
+        _onValueChanged2T -= fn;
+    }
+
+    public void RemoveAllListeners()
+    {
+        _onValueChanged1T = null;
+        _onValueChanged2T = null;
     }
 
 }
