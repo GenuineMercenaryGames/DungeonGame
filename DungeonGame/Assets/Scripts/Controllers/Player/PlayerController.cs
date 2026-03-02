@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,6 +10,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float walkSpeed;
     [SerializeField] private float runSpeed;
     [SerializeField] private float gravitySpeed;
+    [SerializeField] public float dashSpeed;
+    [SerializeField] public float dashDuration;
+    [SerializeField] public float dashCooldown;
 
     public CharacterController characterController;
     public WeaponController weaponController;
@@ -20,8 +24,9 @@ public class PlayerController : MonoBehaviour
     private Vector2 inputMove;
 
     private bool isRunning;
+    private bool canDash;
 
-    private float delta;
+    private float delta { get { return Time.deltaTime; } }
 
     #endregion
 
@@ -33,6 +38,9 @@ public class PlayerController : MonoBehaviour
         weaponController = GetComponent<WeaponController>();
         healthController = GetComponent<HealthController>();
         shieldController = GetComponent<ShieldController>();
+
+        isRunning = false;
+        canDash = true;
     }
 
     void Start()
@@ -44,7 +52,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        delta = Time.deltaTime;
         UpdateLookAt();
         UpdateMove();
     }
@@ -86,15 +93,19 @@ public class PlayerController : MonoBehaviour
 
     public void InputAttack(InputAction.CallbackContext ctx)
     {
-        // Debug.Log("Player Attack!");
-        if (ctx.phase != InputActionPhase.Performed)
-            return;
-        Attack();
+        if (ctx.phase == InputActionPhase.Performed)
+            Attack();
     }
 
     public void InputRun(InputAction.CallbackContext ctx)
     {
         isRunning = ctx.phase == InputActionPhase.Performed;
+    }
+
+    public void InputDash(InputAction.CallbackContext ctx)
+    {
+        if (ctx.phase == InputActionPhase.Performed)
+            Dash();
     }
 
     #endregion
@@ -163,6 +174,28 @@ public class PlayerController : MonoBehaviour
         // the distance to the camera's ground anchor point?
         // Note that the anchor point is pretty much the player's location, but doing it like this would allow for cinematics and such to have environment-driven
         // vibrations without hardcoded events even if the camera is pointing to a location that is far from the player's position.
+    }
+
+    private void Dash()
+    {
+        if (canDash)
+            StartCoroutine(DashCoroutine(transform.forward));
+    }
+
+    private IEnumerator DashCoroutine(Vector3 direction)
+    {
+        canDash = false;
+        float elapsedTime = 0.0f;
+
+        while (elapsedTime < dashDuration)
+        {
+            Move(dashSpeed * direction * delta);
+            elapsedTime += delta;
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
     }
 
     #endregion
