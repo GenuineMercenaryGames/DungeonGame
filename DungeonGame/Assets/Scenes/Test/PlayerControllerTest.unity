@@ -2108,6 +2108,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: f395cbe8-399c-4b75-8e8b-dee38e3392d6
     m_ActionName: 'Player/Run[/Keyboard/shift]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1280518100}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: InputDash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c099fa43-1f25-48d4-87c5-12051fc420a8
+    m_ActionName: 'Player/Dash[/Keyboard/space]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -2127,6 +2143,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   walkSpeed: 10
   runSpeed: 15
+  gravitySpeed: 0.1
+  dashSpeed: 60
+  dashDuration: 0.1
+  dashCooldown: 0.2
   characterController: {fileID: 0}
   weaponController: {fileID: 0}
   healthController: {fileID: 0}
