@@ -8,9 +8,9 @@ public class PlayerController : MonoBehaviour
     [Header("Movement Settings")]
     [SerializeField] private float walkSpeed;
     [SerializeField] private float runSpeed;
+    [SerializeField] private float gravitySpeed;
 
     public CharacterController characterController;
-    public PlayerMovement playerMovement;
     public WeaponController weaponController;
     public HealthController healthController;
     public ShieldController shieldController;
@@ -30,7 +30,6 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         characterController = GetComponent<CharacterController>();
-        playerMovement = GetComponent<PlayerMovement>();
         weaponController = GetComponent<WeaponController>();
         healthController = GetComponent<HealthController>();
         shieldController = GetComponent<ShieldController>();
@@ -102,13 +101,34 @@ public class PlayerController : MonoBehaviour
 
     #region PrivateMethods
 
+    private void Move(Vector3 deltaX)
+    {
+        characterController.Move(deltaX);
+    }
+
+    private void Move(float x, float y, float z)
+    {
+        Move(new Vector3(x, y, z));
+    }
+
     private void UpdateMove()
+    {
+        UpdateMoveWalk();
+        UpdateMoveGravity();
+    }
+
+    private void UpdateMoveWalk()
     {
         Vector3 forward = GetMoveForward();
         Vector3 right = GetMoveRight();
         float speed = isRunning ? runSpeed : walkSpeed;
-        Vector3 move = (forward * inputMove.y + right * inputMove.x) * speed;
-        playerMovement.AddVelocity(move);
+        Vector3 move = (forward * inputMove.y + right * inputMove.x) * speed * delta;
+        Move(move);
+    }
+
+    private void UpdateMoveGravity()
+    {
+        Move(0, -gravitySpeed, 0);
     }
 
     private void UpdateLookAt()
