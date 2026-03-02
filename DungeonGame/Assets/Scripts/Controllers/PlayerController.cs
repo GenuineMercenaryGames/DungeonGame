@@ -64,6 +64,14 @@ public class PlayerController : MonoBehaviour
         CameraManager.Instance.AddCameraZoom(val);
     }
 
+    public void InputCameraRotate(InputAction.CallbackContext ctx)
+    {
+        // TODO : Fix issue where camera look at logic expects an additional rotation of 0.0f always... rotating breaks the aiming because of that added offset.
+        // This is trivial to fix, but it's 2AM, so I'm going to leave the task for tomorrow lol.
+        float val = ctx.ReadValue<float>();
+        CameraManager.Instance.AddCameraRotation(val * 25.0f);
+    }
+
     public void InputDEBUGCameraVibrate(InputAction.CallbackContext ctx)
     {
         CameraManager.Instance.AddCameraVibration(5);

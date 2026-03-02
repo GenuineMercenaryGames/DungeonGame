@@ -79,6 +79,21 @@ public class CameraManager : SingletonPersistent<CameraManager>
 
     #endregion
 
+    #region PublicMethods - Rotation
+
+    public void AddCameraRotation(float angleIncrement)
+    {
+        float baseAngle = anchorTransform.rotation.eulerAngles.y;
+        SetCameraRotation(baseAngle +  angleIncrement);
+    }
+
+    public void SetCameraRotation(float angle)
+    {
+        anchorTransform.rotation = Quaternion.Euler(0, angle, 0);
+    }
+
+    #endregion
+
     #region PrivateMethods
 
     private void UpdateAnchorPosition()

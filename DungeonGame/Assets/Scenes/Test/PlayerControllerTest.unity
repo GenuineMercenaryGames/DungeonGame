@@ -1830,7 +1830,19 @@ MonoBehaviour:
     m_ActionId: 5d13804e-858c-4f52-85ad-9b0588404462
     m_ActionName: 'Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1280518100}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: InputCameraRotate
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 341e7af7-6dc4-4eb4-81f4-ded35ff621a1
     m_ActionName: 'Player/CameraRotate[/Keyboard/q,/Keyboard/r]'
   - m_PersistentCalls:
