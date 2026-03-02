@@ -133,7 +133,7 @@ public class PlayerController : MonoBehaviour
         Vector3 forward = GetMoveForward();
         Vector3 right = GetMoveRight();
         float speed = isRunning ? runSpeed : walkSpeed;
-        Vector3 move = (forward * inputMove.y + right * inputMove.x) * speed * delta;
+        Vector3 move = GetMoveVector() * speed * delta;
         Move(move);
     }
 
@@ -163,6 +163,13 @@ public class PlayerController : MonoBehaviour
         return CameraManager.Instance.RightMoveVector;
     }
 
+    private Vector3 GetMoveVector()
+    {
+        Vector3 forward = GetMoveForward();
+        Vector3 right = GetMoveRight();
+        return forward * inputMove.y + right * inputMove.x;
+    }
+
     private void Attack()
     {
         bool hasShot = weaponController.Attack();
@@ -179,7 +186,7 @@ public class PlayerController : MonoBehaviour
     private void Dash()
     {
         if (canDash)
-            StartCoroutine(DashCoroutine(transform.forward));
+            StartCoroutine(DashCoroutine(GetMoveVector()));
     }
 
     private IEnumerator DashCoroutine(Vector3 direction)
