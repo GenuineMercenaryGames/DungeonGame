@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float runSpeed;
 
     public CharacterController characterController;
+    public PlayerMovement playerMovement;
     public WeaponController weaponController;
     public HealthController healthController;
     public ShieldController shieldController;
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour
     void Awake()
     {
         characterController = GetComponent<CharacterController>();
+        playerMovement = GetComponent<PlayerMovement>();
         weaponController = GetComponent<WeaponController>();
         healthController = GetComponent<HealthController>();
         shieldController = GetComponent<ShieldController>();
@@ -102,13 +104,11 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateMove()
     {
-        // TODO : Change to use vectors relative to camera...
-        // TODO : Gravity support. Trivial to add, but I also want to add some basic forces support for easy knockback and dashing uniform support.
         Vector3 forward = GetMoveForward();
         Vector3 right = GetMoveRight();
         float speed = isRunning ? runSpeed : walkSpeed;
-        Vector3 move = (forward * inputMove.y + right * inputMove.x) * speed * delta;
-        characterController.Move(move);
+        Vector3 move = (forward * inputMove.y + right * inputMove.x) * speed;
+        playerMovement.AddVelocity(move);
     }
 
     private void UpdateLookAt()
