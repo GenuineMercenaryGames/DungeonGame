@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbd1bffd0557ffd4eb21a14c717385e4, type: 3}
+  m_Name: WeaponDefinition_BasicSword
+  m_EditorClassIdentifier: Assembly-CSharp::BasicSwordDefinition
+  id: e38d48ed-00a5-45ee-8da6-1056bd2b0939
+  displayName: BasicSword_Weapon
+  icon: {fileID: 0}
+  description: Initial basic sword
+  rarity: 0
+  tags: []
+  pickupPrefab: {fileID: 8859411712154100050, guid: 31d721cf59d00af48a216c612c085c34, type: 3}
+  attackDefinition: {fileID: 11400000, guid: 5caf07bb7adaab8478e3f8e8b374053e, type: 2}
+  baseDamage: 1
+  attacksPerSecond: 2
+  weaponModules: []
+  hitStop: 0.06
+  swingSfx: {fileID: 0}
