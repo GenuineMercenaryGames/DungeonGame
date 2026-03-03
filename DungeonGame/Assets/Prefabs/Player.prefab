@@ -126,6 +126,8 @@ GameObject:
   - component: {fileID: 5615926700092881918}
   - component: {fileID: 8303384289916994450}
   - component: {fileID: 715896558839009256}
+  - component: {fileID: 69676583197729814}
+  - component: {fileID: 7944833954613938594}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -268,6 +270,30 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: d569f0ef-7907-4c7a-a708-c28c5451a887
     m_ActionName: 'Player/Look[/Mouse/delta/up,/Mouse/delta/down,/Mouse/delta/left,/Mouse/delta/right]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 715896558839009256}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: InputAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f5aa1360-3568-49f5-a106-512394262ca3
+    m_ActionName: 'Player/Attack[/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f395cbe8-399c-4b75-8e8b-dee38e3392d6
+    m_ActionName: 'Player/Run[/Keyboard/shift]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c099fa43-1f25-48d4-87c5-12051fc420a8
+    m_ActionName: 'Player/Dash[/Keyboard/space]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -286,6 +312,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   walkSpeed: 10
+  runSpeed: 0
+  gravitySpeed: 0
+  dashSpeed: 0
+  dashDuration: 0
+  dashCooldown: 0
+  characterController: {fileID: 0}
+  weaponController: {fileID: 0}
+  healthController: {fileID: 0}
+  shieldController: {fileID: 0}
+  attackOrchestrator: {fileID: 0}
+--- !u!114 &69676583197729814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6302145485158645409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5710e84beea578a42bb5b5d29e0f6860, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerItemSystem
+--- !u!114 &7944833954613938594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6302145485158645409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7e9cb68d12e2784d83d82c35013699c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AttackOrchestrator
+  itemSystem: {fileID: 69676583197729814}
 --- !u!1 &7052064410787958162
 GameObject:
   m_ObjectHideFlags: 0
