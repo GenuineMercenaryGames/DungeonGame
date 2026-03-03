@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public HealthController healthController;
     public ShieldController shieldController;
     public ObservableVariable<int> Coins = new(0);
+    [SerializeField] private AttackOrchestrator attackOrchestrator;
 
     private Vector2 inputMoveRaw;
     private Vector2 inputMove;
@@ -38,6 +39,7 @@ public class PlayerController : MonoBehaviour
         weaponController = GetComponent<WeaponController>();
         healthController = GetComponent<HealthController>();
         shieldController = GetComponent<ShieldController>();
+        attackOrchestrator = GetComponent<AttackOrchestrator>();
 
         isRunning = false;
         canDash = true;
@@ -93,8 +95,10 @@ public class PlayerController : MonoBehaviour
 
     public void InputAttack(InputAction.CallbackContext ctx)
     {
+        Debug.Log("Attack!!!!!!!!!!!!");
         if (ctx.phase == InputActionPhase.Performed)
             Attack();
+        attackOrchestrator.TryAttack();
     }
 
     public void InputRun(InputAction.CallbackContext ctx)
