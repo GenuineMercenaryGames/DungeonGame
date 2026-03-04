@@ -219,7 +219,7 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateAnimation()
     {
-        float dampTime = 0.2f;
+        float dampTime = 0.02f;
         float speed = isRunning ? 1.0f : 0.0f;
         Vector3 worldMove = new Vector3(inputMoveRaw.x, 0.0f, inputMoveRaw.y);
         Vector3 localMove = transform.InverseTransformDirection(worldMove);
