@@ -1065,6 +1065,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerMesh
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 932e882680ef8fc4c8d0cae6976ac90a, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 0498e14f359db9a40b8b922d608af077, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1073,6 +1077,11 @@ PrefabInstance:
 --- !u!4 &668069250 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 932e882680ef8fc4c8d0cae6976ac90a, type: 3}
+  m_PrefabInstance: {fileID: 668069249}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &668069251 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 932e882680ef8fc4c8d0cae6976ac90a, type: 3}
   m_PrefabInstance: {fileID: 668069249}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &684857617
@@ -1761,7 +1770,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &949463870
 Transform:
   m_ObjectHideFlags: 0
@@ -2268,6 +2277,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cb3059606196134bb3f89979c1bafe1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  animator: {fileID: 668069251}
+  attackOrchestrator: {fileID: 0}
   walkSpeed: 10
   runSpeed: 15
   gravitySpeed: 0.1
@@ -2278,7 +2289,6 @@ MonoBehaviour:
   weaponController: {fileID: 0}
   healthController: {fileID: 0}
   shieldController: {fileID: 0}
-  attackOrchestrator: {fileID: 0}
 --- !u!114 &1280518101
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6,6 +6,10 @@ public class PlayerController : MonoBehaviour
 {
     #region Variables
 
+    [Header("Components")]
+    [SerializeField] private Animator animator;
+    [SerializeField] private AttackOrchestrator attackOrchestrator;
+
     [Header("Movement Settings")]
     [SerializeField] private float walkSpeed;
     [SerializeField] private float runSpeed;
@@ -19,7 +23,6 @@ public class PlayerController : MonoBehaviour
     public HealthController healthController;
     public ShieldController shieldController;
     public ObservableVariable<int> Coins = new(0);
-    [SerializeField] private AttackOrchestrator attackOrchestrator;
 
     private Vector2 inputMoveRaw;
     private Vector2 inputMove;
@@ -56,6 +59,7 @@ public class PlayerController : MonoBehaviour
     {
         UpdateLookAt();
         UpdateMove();
+        UpdateAnimation();
     }
 
     #endregion
@@ -178,7 +182,11 @@ public class PlayerController : MonoBehaviour
     {
         bool hasShot = weaponController.Attack();
         if (hasShot)
+        {
             CameraManager.Instance.AddCameraVibration(4.0f);
+            animator.SetTrigger("TriggerShoot");
+        }
+
         // TODO : For now, only the player can add this vibration when we shoot.
         // Since enemies can also have a weapons that shoots, and heavy weapons at that, it would be logical for the vibration to take place whenever an
         // explosion or loud shot takes place near the player's location. So, maybe just make it so that the weapon systems adds camera vibration based on
@@ -207,6 +215,17 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(dashCooldown);
         canDash = true;
+    }
+
+    private void UpdateAnimation()
+    {
+        float dampTime = 0.2f;
+        float speed = isRunning ? 1.0f : 0.0f;
+        float moveX = inputMoveRaw.x;
+        float moveY = inputMoveRaw.y;
+        animator.SetFloat("Speed", speed, dampTime, delta);
+        animator.SetFloat("MoveX", moveX, dampTime, delta);
+        animator.SetFloat("MoveY", moveY, dampTime, delta);
     }
 
     #endregion
