@@ -822,7 +822,7 @@ MonoBehaviour:
   cameraDistanceMax: 20
   cameraDistance: 5
   cameraDistancePlaneMax: 0
-  vibrationDecay: 10
+  vibrationDecay: 0.1
 --- !u!4 &1785982706
 Transform:
   m_ObjectHideFlags: 0
