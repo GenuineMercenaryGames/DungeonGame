@@ -4,15 +4,24 @@ public class ObjectPoolController : MonoBehaviour
 {
     [Header("Object Pool Settings")]
     [SerializeField] private GameObject prefab;
-    [SerializeField] private int initialCapacity;
-    [SerializeField] private bool allowRegrow;
-    [SerializeField] private int regrowFactor;
+    [SerializeField] private int initialCapacity = 20;
+    [SerializeField] private bool allowRegrow = true;
+    [SerializeField] private int regrowFactor = 2;
 
     private ObjectPoolStorage pool;
+    private bool initialized;
 
-    void Awake()
+    void Start()
     {
+        Init(prefab, initialCapacity, allowRegrow, regrowFactor);
+    }
+
+    public void Init(GameObject prefab, int initialCapacity = 20, bool allowRegrow = true, int regrowFactor = 2)
+    {
+        if (initialized)
+            return;
         pool = new ObjectPoolStorage(transform, prefab, initialCapacity, allowRegrow, regrowFactor);
+        initialized = true;
     }
 
     public GameObject Get()
