@@ -64,7 +64,7 @@ public class ObjectPoolStorage
         }
 
         GameObject obj = Objects.Pop();
-        obj.SetActive(true);
+        obj.SetActive(true); // NOTE : For seamless integration with OnEnable() hacks, we could actually NOT return the game object enabled. The responsibility of enabling it would fall on the caller, but the polleable object could encapsulate its logic entirely without any external init methods of any kind.
         return obj;
     }
 
