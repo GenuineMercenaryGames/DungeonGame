@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ObjectPoolController : MonoBehaviour
 {
-    [Header("Pool Config")]
+    [Header("Object Pool Settings")]
     [SerializeField] private GameObject prefab;
     [SerializeField] private int initialCapacity;
     [SerializeField] private bool allowRegrow;
@@ -22,14 +22,7 @@ public class ObjectPoolController : MonoBehaviour
 
     public T Get<T>() where T : Component
     {
-        var obj = pool.Get();
-        var component = obj.GetComponent<T>();
-        if (component == null)
-        {
-            pool.Return(obj);
-            return null;
-        }
-        return component;
+        return pool.Get<T>();
     }
 
     public void Return(GameObject obj)
@@ -39,6 +32,6 @@ public class ObjectPoolController : MonoBehaviour
 
     public void Return<T>(T component) where T : Component
     {
-        pool.Return(component.gameObject);
+        pool.Return(component);
     }
 }
