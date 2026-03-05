@@ -5,39 +5,45 @@ public class ObjectPoolStorage
 {
     #region Variables
 
-    private GameObject _prefab;
-    private int _capacity;
-    private Stack<GameObject> _objects;
-    private bool _regrow;
-    private ObjectPool _parent;
+    public Transform ParentTransform { get; set; }
+    public GameObject Prefab { get; private set; }
+    public Stack<GameObject> Objects { get; private set; }
+    public int Capacity { get; private set; }
+    public int RegrowFactor { get; set; }
+    public bool CanRegrow { get; set; }
+
+    #endregion
+
+    #region Constructor
+
+    public ObjectPoolStorage(Transform parentTransform, GameObject prefab, int initialCapacity = 20, bool allowRegrow = true, int regrowFactor = 2)
+    {
+        ParentTransform = parentTransform;
+        Prefab = prefab;
+        Capacity = initialCapacity;
+        RegrowFactor = regrowFactor;
+        CanRegrow = allowRegrow;
+        Objects = new(Capacity);
+        CreateInstances(Capacity);
+    }
 
     #endregion
 
     #region PublicMethods
 
-    public void Init(GameObject prefab, int capacity, bool regrow, ObjectPool parent)
-    {
-        _prefab = prefab;
-        _capacity = capacity;
-        _objects = new Stack<GameObject>(_capacity);
-        _regrow = regrow;
-        _parent = parent;
-        PushN(_capacity);
-    }
-
     public void Resize(int newCapacity)
     {
-        if (newCapacity < _capacity)
+        if (newCapacity < Capacity)
             return;
 
-        int count = newCapacity - _capacity;
-        PushN(count);
-        _capacity = newCapacity;
+        int count = newCapacity - Capacity;
+        CreateInstances(count);
+        Capacity = newCapacity;
     }
 
     public void Clear()
     {
-        foreach (var obj in _objects)
+        foreach (var obj in Objects)
         {
             obj.SetActive(false);
         }
@@ -45,11 +51,11 @@ public class ObjectPoolStorage
 
     public GameObject Get()
     {
-        if (_objects.Count <= 0)
+        if (Objects.Count <= 0)
         {
-            if (_regrow)
+            if (CanRegrow)
             {
-                Resize(_capacity * 2);
+                Resize(Capacity * 2);
             }
             else
             {
@@ -57,7 +63,7 @@ public class ObjectPoolStorage
             }
         }
 
-        GameObject obj = _objects.Pop();
+        GameObject obj = Objects.Pop();
         obj.SetActive(true);
         return obj;
     }
@@ -65,30 +71,44 @@ public class ObjectPoolStorage
     public void Return(GameObject obj)
     {
         obj.SetActive(false);
-        _objects.Push(obj);
+        Objects.Push(obj);
     }
 
     #endregion
 
     #region PrivateMethods
 
-    private GameObject CreateObjectInstance()
+    private GameObject CreateInstance()
     {
-        // NOTE : Add further logic here if need be
-        GameObject obj = GameObject.Instantiate(_prefab, _parent.transform);
-        PooledObject pooled = obj.GetComponent<PooledObject>(); // NOTE : Can't add it all willy-nilly because some of the objects rely on having the ability to get this component on awake, so I guess it is the user's responsibility to add the component themselves...
-        if (pooled == null) pooled = obj.AddComponent<PooledObject>();
-        pooled.owningPool = _parent;
-        obj.SetActive(false);
-        return obj;
+        GameObject go = UnityInstantiate();
+        PooledObject po = go.GetComponent<PooledObject>();
+        if (po == null)
+            po = go.AddComponent<PooledObject>();
+        po.owningPool = this;
+        go.SetActive(false);
+        return go;
     }
 
-    private void PushN(int n)
+    private void CreateInstances(int n)
     {
         for (int i = 0; i < n; ++i)
         {
-            GameObject obj = CreateObjectInstance();
-            _objects.Push(obj);
+            GameObject obj = CreateInstance();
+            Objects.Push(obj);
+        }
+    }
+
+    private GameObject UnityInstantiate()
+    {
+        if (ParentTransform == null)
+        {
+            var go = GameObject.Instantiate(Prefab);
+            return go;
+        }
+        else
+        {
+            var go = GameObject.Instantiate(Prefab, ParentTransform);
+            return go;
         }
     }
 
