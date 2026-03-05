@@ -74,6 +74,23 @@ public class ObjectPoolStorage
         Objects.Push(obj);
     }
 
+    public T Get<T>() where T : Component
+    {
+        var obj = Get();
+        var component = obj.GetComponent<T>();
+        if (component == null)
+        {
+            Return(obj);
+            return null;
+        }
+        return component;
+    }
+
+    public void Return<T>(T component) where T : Component
+    {
+        Return(component.gameObject);
+    }
+
     #endregion
 
     #region PrivateMethods
@@ -84,7 +101,7 @@ public class ObjectPoolStorage
         PooledObject po = go.GetComponent<PooledObject>();
         if (po == null)
             po = go.AddComponent<PooledObject>();
-        po.owningPool = this;
+        po.OwningPool = this;
         go.SetActive(false);
         return go;
     }
