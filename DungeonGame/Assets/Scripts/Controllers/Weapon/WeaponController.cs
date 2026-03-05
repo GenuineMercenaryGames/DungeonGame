@@ -13,9 +13,16 @@ public class WeaponController : MonoBehaviour
 
     private float elapsedTime;
 
+    private ObjectPoolController pool;
+
     void Awake()
     {
         elapsedTime = 0.0f;
+    }
+
+    void Start()
+    {
+        pool = ObjectPoolManager.Instance.GetObjectPool(bulletPrefab);
     }
 
     void Update()
@@ -25,20 +32,19 @@ public class WeaponController : MonoBehaviour
 
     public bool Attack()
     {
+        // ROF check
         if (elapsedTime < timeBetweenShots)
-        {
-            // Debug.Log("CANNOT SHOOT BULLET YET");
             return false;
-        }
         elapsedTime = 0.0f;
 
-        // Debug.Log("SHOOTING BULLET NOW");
+        // Spawn the bullet
+        // var obj = Instantiate(bulletPrefab);
+        var bullet = pool.Get<BulletController>();
+        bullet.transform.position = bulletSpawnTransform.position;
+        bullet.transform.rotation = bulletSpawnTransform.rotation;
+        bullet.Init();
 
-        // TODO : Modify the logic to make use of object pooling later on.
-        var obj = Instantiate(bulletPrefab);
-        obj.transform.position = bulletSpawnTransform.position;
-        obj.transform.rotation = bulletSpawnTransform.rotation;
-
+        // Notify success
         return true;
     }
 }
