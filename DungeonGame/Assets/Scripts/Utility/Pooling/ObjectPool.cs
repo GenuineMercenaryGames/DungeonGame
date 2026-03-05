@@ -1,18 +1,18 @@
 using UnityEngine;
 
-public class ObjectPool : MonoBehaviour
+public class ObjectPoolController : MonoBehaviour
 {
     [Header("Pool Config")]
     [SerializeField] private GameObject prefab;
-    [SerializeField] private int capacity;
-    [SerializeField] private bool regrow;
+    [SerializeField] private int initialCapacity;
+    [SerializeField] private bool allowRegrow;
+    [SerializeField] private int regrowFactor;
 
     private ObjectPoolStorage pool;
 
     void Awake()
     {
-        pool = new ObjectPoolStorage();
-        pool.Init(prefab, capacity, regrow, this);
+        pool = new ObjectPoolStorage(transform, prefab, initialCapacity, allowRegrow, regrowFactor);
     }
 
     public GameObject Get()
