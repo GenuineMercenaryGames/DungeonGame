@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class PooledObject : MonoBehaviour
 {
-    [HideInInspector] public ObjectPool owningPool;
+    [HideInInspector] public ObjectPoolStorage OwningPool;
     public void Return()
     {
-        if (owningPool != null)
+        if (OwningPool != null)
         {
             // Return to owning pool.
-            owningPool.Return(gameObject);
+            OwningPool.Return(gameObject);
         }
         else
         {
