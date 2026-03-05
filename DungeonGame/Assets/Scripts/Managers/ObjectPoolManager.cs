@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ObjectPoolManager : Singleton<ObjectPoolManager>
 {
-    private Dictionary<GameObject, ObjectPoolController> objectPools;
+    private Dictionary<GameObject, ObjectPoolController> objectPools = new();
 
     public void EnsurePool(GameObject prefab)
     {
