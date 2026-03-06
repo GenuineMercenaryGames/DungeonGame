@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BulletController : MonoBehaviour
+public class BulletController : PooledObject
 {
     #region Variables
 
@@ -23,19 +23,16 @@ public class BulletController : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        Init();
     }
 
-    void OnEnable()
+    public void Init()
     {
         lastCollidedObject = null;
         elapsedTime = 0.0f;
         bounces = 0;
-    }
-
-    void Start()
-    {
-        // NOTE : When object pooling is implemented, this bit of logic CANNOT go here. Need to move to some init function of sorts.
         rb.linearVelocity = transform.forward * Speed;
+        rb.angularVelocity = Vector3.zero;
     }
 
     void Update()
@@ -85,9 +82,12 @@ public class BulletController : MonoBehaviour
 
     private void DestroyBullet()
     {
-        // TODO : Implement object pooling logic later on. For now, we just destroy the bullet's gameobject and call it a day.
-        this.gameObject.SetActive(false);
-        Destroy(this.gameObject);
+        // The old implementation just destroys the bullet's gameobject and that's it. The new implementation makes use of object pooling if possible.
+        // If the bullet was spawned from a pool, it will be automatically returned. Otherwise, it will be destroyed.
+        // this.gameObject.SetActive(false);
+        // Destroy(this.gameObject);
+
+        Return();
     }
 
     #endregion
