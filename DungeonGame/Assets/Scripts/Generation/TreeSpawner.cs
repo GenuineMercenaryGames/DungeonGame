@@ -4,6 +4,7 @@ public class TreeSpawner : MonoBehaviour
 {
     public GameObject treePrefab;
     public GameObject[] treeSpawnAreas;
+    public NavMeshController navMeshController;
 
     [Tooltip("Number of trees per 100 square units of plane")]
     public float treeDensity = 5f;

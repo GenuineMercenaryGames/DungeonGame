@@ -1,0 +1,168 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &7836508070358413695
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7996408572775879113, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 1c609f84a66140948886f25f7e391a1e, type: 2}
+    - target: {fileID: 8095927965497407739, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8095927965497407739, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8095927965497407739, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8095927965497407739, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8095927965497407739, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8095927965497407739, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8095927965497407739, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8095927965497407739, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8095927965497407739, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8095927965497407739, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8095927965497407739, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8095927965497407739, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8095927965497407739, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8867960657160430145, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
+      propertyPath: m_Name
+      value: MeleeEnemy Variant
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8867960657160430145, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8276931086839774128}
+    - targetCorrespondingSourceObject: {fileID: 8867960657160430145, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6356936227823532053}
+    - targetCorrespondingSourceObject: {fileID: 8867960657160430145, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 684441977385676734}
+    - targetCorrespondingSourceObject: {fileID: 8867960657160430145, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4119802822765938422}
+  m_SourcePrefab: {fileID: 100100000, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
+--- !u!1 &1716308692965397310 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8867960657160430145, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
+  m_PrefabInstance: {fileID: 7836508070358413695}
+  m_PrefabAsset: {fileID: 0}
+--- !u!195 &8276931086839774128
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1716308692965397310}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 3
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &6356936227823532053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1716308692965397310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66c372e435b5db940809867218e8f861, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MeleeEnemy
+  playerScanningRange: 7
+  playerAttackRange: 2
+  moveSpeed: 3
+  currentStateDebug: 
+  shotLine: {fileID: 0}
+  playerController: {fileID: 0}
+  agent: {fileID: 0}
+  healthController: {fileID: 0}
+--- !u!114 &684441977385676734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1716308692965397310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b1f7e1a1b2d8ce4bacf68787e9072c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthController
+  maxHealth: 100
+--- !u!65 &4119802822765938422
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1716308692965397310}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.5, z: 0}

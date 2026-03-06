@@ -11,6 +11,8 @@ public class RoomDecorator : MonoBehaviour
     [Tooltip("Number of objects per 100 square units")]
     public float objectDensity = 5f;
 
+    public NavMeshController navMeshController;
+
     public void DecoratePlanes()
     {
         foreach (GameObject plane in roomPlanes)
@@ -37,15 +39,24 @@ public class RoomDecorator : MonoBehaviour
                 GameObject prefab = decorationPrefabs[Random.Range(0, decorationPrefabs.Length)];
 
                 Quaternion rot = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
-
-                Instantiate(prefab, spawnPos, rot);
+                
+                GameObject inst = Instantiate(prefab, spawnPos, rot);
+                // Necesito que los obstáculos generados procedimentalmente estén en la layer World para que el NavMesh se genere correctamente.
+                SetLayerRecursively(inst, LayerMask.NameToLayer("World"));
             }
             Destroy(plane);
         }
+    }
+    private void SetLayerRecursively(GameObject obj, int layer)
+    {
+        obj.layer = layer;
+        foreach (Transform child in obj.transform)
+            SetLayerRecursively(child.gameObject, layer);
     }
 
     void Start()
     {
         DecoratePlanes();
+        navMeshController.Regenerate();
     }
 }
