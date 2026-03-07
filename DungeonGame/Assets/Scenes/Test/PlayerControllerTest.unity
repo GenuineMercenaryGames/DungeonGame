@@ -1055,11 +1055,6 @@ MonoBehaviour:
   weaponController: {fileID: 684857619}
   spawnTransform: {fileID: 1402432730}
   projectilePrefab: {fileID: 7759707805804090412, guid: 431f391e3665cf34d97e5424be6a4b1c, type: 3}
---- !u!1 &701879617 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 56c2b36b2f1ac304199dbf4468fa1f5e, type: 3}
-  m_PrefabInstance: {fileID: 843194239}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &729987546
 GameObject:
   m_ObjectHideFlags: 0
@@ -1511,95 +1506,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 56c2b36b2f1ac304199dbf4468fa1f5e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 843194245}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 56c2b36b2f1ac304199dbf4468fa1f5e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 843194244}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 56c2b36b2f1ac304199dbf4468fa1f5e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 843194243}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56c2b36b2f1ac304199dbf4468fa1f5e, type: 3}
 --- !u!4 &843194240 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 56c2b36b2f1ac304199dbf4468fa1f5e, type: 3}
   m_PrefabInstance: {fileID: 843194239}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &843194243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 701879617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4013861583e40654ebac9cdf4acfd831, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WeaponControllerTest
-  BaseDamage: 0
-  BaseTimeBetweenShots: 0
-  Ammo: 0
-  OnShootPressed:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 843194244}
-        m_TargetAssemblyTypeName: FullAutoWeapon, Assembly-CSharp
-        m_MethodName: ShootFullAutoBegin
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnShootReleased:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &843194244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 701879617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75563fe59dbdab54089a6d95e44d6fe0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FullAutoWeapon
-  weaponController: {fileID: 0}
---- !u!114 &843194245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 701879617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0325f34249aa05441a3e761b11bc7025, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ProjectileWeaponController
-  weaponController: {fileID: 0}
-  spawnTransform: {fileID: 0}
-  projectilePrefab: {fileID: 0}
 --- !u!1 &905593285
 GameObject:
   m_ObjectHideFlags: 0
