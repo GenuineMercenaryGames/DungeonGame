@@ -204,7 +204,10 @@ public class PlayerController : MonoBehaviour
     private void Dash()
     {
         if (canDash)
+        {
+            animator.SetTrigger("TriggerDash");
             StartCoroutine(DashCoroutine(GetMoveVector()));
+        }
     }
 
     private IEnumerator DashCoroutine(Vector3 direction)
