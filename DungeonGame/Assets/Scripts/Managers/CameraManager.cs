@@ -123,7 +123,8 @@ public class CameraManager : SingletonPersistent<CameraManager>
         var dir = -GetLookDirection();
         var origin = cameraTransform.position;
         var target = anchorTransform.position + dir * cameraDistance;
-        cameraTransform.position = Vector3.Lerp(origin, target, delta * cameraMovementSpeed);
+        // cameraTransform.position = Vector3.Lerp(origin, target, delta * cameraMovementSpeed);
+        cameraTransform.position = target; // NOTE : Lerp disabled for now because it gives a better camera feel tbh...
     }
 
     private void UpdateCameraRotation()
