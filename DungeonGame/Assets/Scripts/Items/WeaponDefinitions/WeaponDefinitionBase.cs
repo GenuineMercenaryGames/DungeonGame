@@ -8,6 +8,7 @@ public abstract class WeaponDefinitionBase : ItemDefinitionBase
 {
     [Header("Weapon")]
     [SerializeField] private WeaponAttackDefinition attackDefinition;       // Reference to the weapon asset that defines how weapon atatcks
+    [SerializeField] private GameObject weaponSkin;
 
     [Header("Base Weapon Stats")]
     [Min(0f)][SerializeField] private float baseDamage = 1f;                // Base damage of the weapon

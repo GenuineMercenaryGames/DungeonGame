@@ -23,10 +23,13 @@ public class MeleeAttackDefinition : WeaponAttackDefinition
         ctx.meleeRadius = baseRange;
     }
 
-    public override void Execute(Transform attacker, Vector3 aimDir, in AttackContext ctx)
+    public override bool Execute(Transform weaponTransform, Vector3 aimDir, in AttackContext ctx)
     {
         Debug.Log($"[Melee Execute] dmg={ctx.damage}, ignite={ctx.igniteOnHit}, arc={ctx.meleeArcDegrees}.\n" +
-            $"Origin={attacker}, Direction={aimDir}");
+            $"Origin={weaponTransform}, Direction={aimDir}");
+
         // Spawn hitbox, projectiles, etc.
+
+        return true;
     }
 }

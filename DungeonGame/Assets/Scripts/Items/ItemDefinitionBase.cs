@@ -33,7 +33,7 @@ public abstract class ItemDefinitionBase : ScriptableObject
 
     // Opcional: prefab que aparece en el suelo/tienda
     [Header("World (Optional)")]
-    [SerializeField] private GameObject pickupPrefab;               // To display the item in the scene
+    [SerializeField] private GameObject pickupPrefab;               // To display the item in the scene. MESH RENDERER for the pickup
 
     public string Id
     {
