@@ -70,6 +70,12 @@ public class PlayerController : MonoBehaviour
     {
         inputMoveRaw = ctx.ReadValue<Vector2>();
         inputMove = inputMoveRaw.normalized;
+
+        // NOTE : This is retarded, but some keyboard devices actually DO normalize the signal on input for some reason, so, for non-normalized inputs, we need
+        // this hack. Also for controller support to properly translate animation to 2-axis cardinal setup. Anyway, fuck my life, and fuck this hack.
+        // This used to not be the case tho. Older Unity versions handled analogue input properly, but it seems like the future has something else in store for us...
+        inputMoveRaw.x = inputMoveRaw.x == 0.0f ? 0.0f : Mathf.Sign(inputMoveRaw.x);
+        inputMoveRaw.y = inputMoveRaw.y == 0.0f ? 0.0f : Mathf.Sign(inputMoveRaw.y);
     }
 
     public void InputCameraZoom(InputAction.CallbackContext ctx)
@@ -219,6 +225,7 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateAnimation()
     {
+        Debug.Log($"The input is: raw:{inputMoveRaw}, noRaw:{inputMove}");
         float dampTime = 0.02f;
         float speed = isRunning ? 1.0f : 0.0f;
         Vector3 worldMove = new Vector3(inputMoveRaw.x, 0.0f, inputMoveRaw.y);
