@@ -463,7 +463,7 @@ MonoBehaviour:
   gravitySpeed: 0.1
   dashSpeed: 60
   dashDuration: 0.1
-  dashCooldown: 0.2
+  dashCooldown: 0.8
   characterController: {fileID: 0}
   weaponController: {fileID: 0}
   healthController: {fileID: 0}
