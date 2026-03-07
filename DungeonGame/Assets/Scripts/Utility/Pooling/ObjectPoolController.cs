@@ -11,6 +11,8 @@ public class ObjectPoolController : MonoBehaviour
     private ObjectPoolStorage pool;
     private bool initialized;
 
+    public ObjectPoolStorage Storage { get { return pool; } }
+
     void Start()
     {
         Init(prefab, initialCapacity, allowRegrow, regrowFactor);

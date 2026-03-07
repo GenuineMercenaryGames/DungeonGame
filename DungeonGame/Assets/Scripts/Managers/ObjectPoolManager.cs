@@ -5,25 +5,37 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
 {
     private Dictionary<GameObject, ObjectPoolController> objectPools = new();
 
-    public void EnsurePool(GameObject prefab)
+    public ObjectPoolController EnsureObjectPool(GameObject prefab, int initialCount = 20)
     {
+        ObjectPoolController pool;
         if (objectPools.ContainsKey(prefab))
-            return;
+        {
+            // Ensure that the pool has at least as much capacity reserved as specified
+            pool = objectPools[prefab];
+            if (pool.Storage.Capacity < initialCount)
+            {
+                pool.Storage.Resize(initialCount);
+            }
+        }
+        else
+        {
+            // Spawn pool parent game object
+            var go = new GameObject($"ObjectPool {objectPools.Count} ({prefab.name})");
+            go.transform.parent = transform;
+            go.transform.localPosition = Vector3.zero;
+            go.transform.localRotation = Quaternion.identity;
 
-        var go = new GameObject($"ObjectPool {objectPools.Count} ({prefab.name})");
-        go.transform.parent = transform;
-        go.transform.localPosition = Vector3.zero;
-        go.transform.localRotation = Quaternion.identity;
-
-        var pool = go.AddComponent<ObjectPoolController>();
-        pool.Init(prefab);
-        objectPools.Add(prefab, pool);
+            // Add pool component
+            pool = go.AddComponent<ObjectPoolController>();
+            pool.Init(prefab, initialCount);
+            objectPools.Add(prefab, pool);
+        }
+        return pool;
     }
 
     public ObjectPoolController GetObjectPool(GameObject prefab)
     {
-        EnsurePool(prefab);
-        return objectPools[prefab];
+        return EnsureObjectPool(prefab);
     }
 
 }
