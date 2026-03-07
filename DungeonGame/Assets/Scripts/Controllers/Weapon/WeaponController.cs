@@ -13,7 +13,8 @@ public class WeaponController : MonoBehaviour
 
     private float elapsedTime;
 
-    private ObjectPoolController pool;
+    private static ObjectPoolController pool;
+    private static bool poolGotten = false;
 
     void Awake()
     {
@@ -22,7 +23,10 @@ public class WeaponController : MonoBehaviour
 
     void Start()
     {
-        pool = ObjectPoolManager.Instance.GetObjectPool(bulletPrefab);
+        if (!poolGotten)
+        {
+            pool = ObjectPoolManager.Instance.GetObjectPool(bulletPrefab);
+        }
     }
 
     void Update()

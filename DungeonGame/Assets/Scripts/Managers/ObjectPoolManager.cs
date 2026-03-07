@@ -5,6 +5,9 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
 {
     private Dictionary<GameObject, ObjectPoolController> objectPools = new();
 
+    // TODO : Clean this up a bit, because pretty much both ensure pool and get pool do the same thing now.
+    // The code is slowly evolving, we'll see what the requirements really are down the line, but this may have actually been overkill for this project...
+
     public ObjectPoolController EnsureObjectPool(GameObject prefab, int initialCount = 20)
     {
         ObjectPoolController pool;
