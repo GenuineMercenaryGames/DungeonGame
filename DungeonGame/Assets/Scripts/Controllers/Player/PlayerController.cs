@@ -181,7 +181,15 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 forward = GetMoveForward();
         Vector3 right = GetMoveRight();
-        return forward * inputMove.y + right * inputMove.x;
+        Vector3 moveVector = forward * inputMove.y + right * inputMove.x;
+        return moveVector;
+    }
+
+    private Vector3 GetDashVector()
+    {
+        Vector3 moveVector = GetMoveVector();
+        Vector3 dashVector = moveVector.magnitude > 0.0f ? moveVector : transform.forward;
+        return dashVector;
     }
 
     private void Attack()
@@ -206,7 +214,7 @@ public class PlayerController : MonoBehaviour
         if (canDash)
         {
             animator.SetTrigger("TriggerDash");
-            StartCoroutine(DashCoroutine(GetMoveVector()));
+            StartCoroutine(DashCoroutine(GetDashVector()));
         }
     }
 
@@ -228,16 +236,16 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateAnimation()
     {
-        Debug.Log($"The input is: raw:{inputMoveRaw}, noRaw:{inputMove}");
         float dampTime = 0.02f;
         float speed = isRunning ? 1.0f : 0.0f;
         Vector3 worldMove = new Vector3(inputMoveRaw.x, 0.0f, inputMoveRaw.y);
         Vector3 localMove = transform.InverseTransformDirection(worldMove);
-        float moveX = localMove.x;
-        float moveY = localMove.z;
+        float moveX = localMove.x * 2.0f;
+        float moveY = localMove.z * 2.0f;
         animator.SetFloat("Speed", speed, dampTime, delta);
         animator.SetFloat("MoveX", moveX, dampTime, delta);
         animator.SetFloat("MoveY", moveY, dampTime, delta);
+        Debug.Log($"The input is: raw:{inputMoveRaw}, noRaw:{inputMove}, anim:{new Vector2(moveX, moveY)}");
     }
 
     #endregion
