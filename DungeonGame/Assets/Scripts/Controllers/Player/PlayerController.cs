@@ -92,9 +92,11 @@ public class PlayerController : MonoBehaviour
         CameraManager.Instance.AddCameraRotation(val * 25.0f);
     }
 
-    public void InputDEBUGCameraVibrate(InputAction.CallbackContext ctx)
+    // NOTE : This is a temporary hack to test the melee animations, disregard completely because we'll have a proper handling in future versions.
+    bool attackMode = true; // true -> gun, false -> melee
+    public void InputDEBUGCameraVibrate(InputAction.CallbackContext ctx) // For now, this has been repurposed to work as the melee to gun switch button.
     {
-        CameraManager.Instance.AddCameraVibration(5);
+        attackMode = !attackMode;
     }
 
     public void InputLook(InputAction.CallbackContext ctx)
@@ -192,7 +194,19 @@ public class PlayerController : MonoBehaviour
         return dashVector;
     }
 
+    // NOTE : Again, this is a temporary hack just to quickly test the melee attack animations system.
+    // TODO : Unify the logic and move it away from being spread out like this, basically look for something better than this temporary crap.
+    // The idea would be for the weapon controller system to be unified enough that we could tell from here if its a melee attack or not, and change the
+    // animation set the player uses depending on that, as well as being able to maintain a single attack function here.
     private void Attack()
+    {
+        if (attackMode)
+            AttackGun();
+        else
+            AttackMelee();
+    }
+
+    private void AttackGun()
     {
         bool hasShot = weaponController.Attack();
         if (hasShot)
@@ -207,6 +221,43 @@ public class PlayerController : MonoBehaviour
         // the distance to the camera's ground anchor point?
         // Note that the anchor point is pretty much the player's location, but doing it like this would allow for cinematics and such to have environment-driven
         // vibrations without hardcoded events even if the camera is pointing to a location that is far from the player's position.
+    }
+
+    int currentMeleeAttack = 0;
+    bool isAttackingMelee = false;
+    private void AttackMelee()
+    {
+        if (!isAttackingMelee)
+        {
+            StartCoroutine(AttackMeleeCoro(currentMeleeAttack % 3));
+            ++currentMeleeAttack;
+        }
+    }
+
+    // NOTE : Yes, I know the melee animations look like fucking ASS. I need to find something that looks good, but this is good enough for
+    // the alpha. I'll improve them if I find the time to do so. For now, we'll have to make do with what we have. And what we have is "no time to fuck around".
+    private IEnumerator AttackMeleeCoro(int meleeAttackIndex)
+    {
+        isAttackingMelee = true;
+        
+        int layerIndex = animator.GetLayerIndex("CombatMelee");
+        string meleeAttackStr = $"Locomotion.Attack{meleeAttackIndex}";
+        float elapsedTime = 0.0f;
+        float meleeDuration = 0.25f;
+
+        animator.SetLayerWeight(animator.GetLayerIndex("Combat"), 0.0f);
+        animator.CrossFadeInFixedTime(meleeAttackStr, 0.1f);
+        // animator.Play(meleeAttackStr);
+        while (elapsedTime < meleeDuration)
+        {
+            Move(10.0f * transform.forward * delta);
+            elapsedTime += delta;
+            yield return null;
+        }
+        animator.SetLayerWeight(animator.GetLayerIndex("Combat"), 1.0f);
+        animator.CrossFadeInFixedTime("Locomotion.LocomotionBlendTree", 0.1f);
+
+        isAttackingMelee = false;
     }
 
     private void Dash()
@@ -245,7 +296,7 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("Speed", speed, dampTime, delta);
         animator.SetFloat("MoveX", moveX, dampTime, delta);
         animator.SetFloat("MoveY", moveY, dampTime, delta);
-        Debug.Log($"The input is: raw:{inputMoveRaw}, noRaw:{inputMove}, anim:{new Vector2(moveX, moveY)}");
+        // Debug.Log($"The input is: raw:{inputMoveRaw}, noRaw:{inputMove}, anim:{new Vector2(moveX, moveY)}");
     }
 
     #endregion
