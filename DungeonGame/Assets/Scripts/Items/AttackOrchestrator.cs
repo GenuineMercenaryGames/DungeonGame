@@ -6,6 +6,8 @@ public class AttackOrchestrator : MonoBehaviour
     [SerializeField] private PlayerItemSystem itemSystem;
     [SerializeField] private Transform playerWeaponTansform;
 
+    private ObjectPoolController pool;
+
     void Start()
     {
         //pool = ObjectPoolManager.Instance.GetObjectPool(bulletPrefab);

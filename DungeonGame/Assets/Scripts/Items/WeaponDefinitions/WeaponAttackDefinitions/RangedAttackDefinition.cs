@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Roguelike/Weapons/Attacks/Ranged Attack")]
@@ -14,6 +15,7 @@ public class RangedAttackDefinition : WeaponAttackDefinition
     void Awake()
     {
         elapsedTime = 0.0f;
+        //pool = ObjectPoolManager.Instance.GetObjectPool(bulletPrefab);
     }
 
     public override void BuildBaseContext(in WeaponDefinitionBase weapon, ref AttackContext ctx)
