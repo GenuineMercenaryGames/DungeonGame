@@ -52,14 +52,14 @@ public abstract class Enemy : MonoBehaviour
     {
         agent.ResetPath();
         animator.SetTrigger("MeleeAttack");
+        //GetComponent<WeaponController>().Attack();
         playerController.healthController.Health.Value -= 20f;
     }
     public void RangeAttack()
     {
         agent.ResetPath();
         animator.SetTrigger("MeleeAttack");
-        ShowShotLine(target.position);
-        playerController.healthController.Health.Value -= 20f;
+        GetComponent<WeaponController>().Attack();
     }
 
     public bool IsDead()
@@ -93,9 +93,7 @@ public abstract class Enemy : MonoBehaviour
 
     public bool ReachedDestination()
     {
-        return !agent.pathPending
-            && agent.remainingDistance <= agent.stoppingDistance
-            && (!agent.hasPath || agent.velocity.sqrMagnitude < 0.01f);
+        return agent.remainingDistance < 0.01f;
     }
 
     int maxPoints = 10;
@@ -198,5 +196,17 @@ public abstract class Enemy : MonoBehaviour
         currentStateDebug = fsm.GetActiveHierarchyPath();
         float normalizedSpeed = (agent.velocity.magnitude / moveSpeed);
         animator.SetFloat("MoveSpeed", normalizedSpeed);
+
+        if (agent == null) return;
+        if (agent.pathPending) return;
+        if (agent.path == null) return;
+
+        Vector3[] corners = agent.path.corners;
+        if (corners == null || corners.Length < 2) return;
+
+        for (int i = 0; i < corners.Length - 1; i++)
+        {
+            Debug.DrawLine(corners[i], corners[i + 1], Color.green);
+        }
     }
 }
