@@ -5,10 +5,12 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
 {
     private Dictionary<GameObject, ObjectPoolController> objectPools = new();
 
-    // TODO : Clean this up a bit, because pretty much both ensure pool and get pool do the same thing now.
-    // The code is slowly evolving, we'll see what the requirements really are down the line, but this may have actually been overkill for this project...
+    [SerializeField] private ObjectPoolController bulletPool;
+    [SerializeField] private ObjectPoolController particlePool;
+    public ObjectPoolController BulletPool { get { return bulletPool; } }
+    public ObjectPoolController ParticlePool { get { return particlePool; } }
 
-    public ObjectPoolController EnsureObjectPool(GameObject prefab, int initialCount = 20)
+    public ObjectPoolController GetObjectPool(GameObject prefab, int initialCount = 20)
     {
         ObjectPoolController pool;
         if (objectPools.ContainsKey(prefab))
@@ -35,10 +37,4 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
         }
         return pool;
     }
-
-    public ObjectPoolController GetObjectPool(GameObject prefab)
-    {
-        return EnsureObjectPool(prefab);
-    }
-
 }
