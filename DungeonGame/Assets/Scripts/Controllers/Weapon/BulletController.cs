@@ -12,6 +12,7 @@ public class BulletController : PooledObject
     [SerializeField] public float LifeTime;
     [SerializeField] public int Bounces;
 
+    public GameObject Owner;
     private GameObject lastCollidedObject;
     private float elapsedTime;
     private int bounces; // total impacts that have taken place
@@ -47,6 +48,10 @@ public class BulletController : PooledObject
 
     void OnCollisionEnter(Collision collision)
     {
+
+        if (collision.gameObject == Owner)
+            return;
+
         if (collision.gameObject.TryGetComponent<HealthController>(out var health))
         {
             health.Health.Value -= Damage;

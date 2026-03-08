@@ -46,7 +46,8 @@ public class WeaponController : MonoBehaviour
         var bullet = pool.Get<BulletController>();
         bullet.transform.position = bulletSpawnTransform.position;
         bullet.transform.rotation = bulletSpawnTransform.rotation;
-        bullet.Init();
+        bullet.Owner = gameObject;
+        bullet.Init(); // Re-init con la llamada de Init desde Awake()?
 
         // Notify success
         return true;
