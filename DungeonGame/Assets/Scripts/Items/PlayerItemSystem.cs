@@ -1,11 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static WeaponAttackDefinition;
 
 public class PlayerItemSystem : MonoBehaviour
 {
     public WeaponDefinitionBase equippedWeapon { get; private set; }            // The player's currently equipped weapon
     private readonly List<PassiveItemDefinitionBase> passiveItems = new();      // List of passive items, they contain the modules that will affect the attack
     private readonly List<PassiveWeaponModuleDefinition> activeModules = new(); // We could obtain the modules from the passive items
+
+    private static ObjectPoolController pool;
 
     public List<PassiveWeaponModuleDefinition> ActiveModules
     {
@@ -15,6 +18,13 @@ public class PlayerItemSystem : MonoBehaviour
     public void EquipWeapon(WeaponDefinitionBase weapon)
     {
         equippedWeapon = weapon;
+
+        var weaponDef = equippedWeapon.AttackDefinition as RangedAttackDefinition;
+        //if (equippedWeapon.AttackDefinition.AttackKind == AttackKindEnum.RANGED)
+        if (weaponDef)
+        {
+            pool = ObjectPoolManager.Instance.GetObjectPool(((BasicGunDefinition)weapon).bulletPrefab);
+        }
         Debug.Log($"Equipped weapon: {equippedWeapon}");
         // Rebuild modules
     }

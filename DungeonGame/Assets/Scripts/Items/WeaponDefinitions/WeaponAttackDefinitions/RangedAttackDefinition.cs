@@ -1,4 +1,5 @@
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Roguelike/Weapons/Attacks/Ranged Attack")]
@@ -8,6 +9,10 @@ public class RangedAttackDefinition : WeaponAttackDefinition
     [SerializeField] private float baseRange = 8f;
     [SerializeField] private int baseProjectileCount = 1;
     [SerializeField] private float baseSpreadDegrees = 0f;
+
+    private static ObjectPoolController pool;
+
+    //ObjectPoolController bulletPool;
     //[SerializeField] private GameObject defaultProjectilePrefab;
 
     private float elapsedTime;
@@ -52,13 +57,21 @@ public class RangedAttackDefinition : WeaponAttackDefinition
 
         // Spawn the bullet
         // var obj = Instantiate(bulletPrefab);
-        var bullet = ctx.projectilePrefab;
+        //var bullet = ctx.projectilePrefab;
+        //bullet.transform.position = weaponTransform.position;
+        //bullet.transform.rotation = weaponTransform.rotation;
+        //
+        //// Instantiate
+        ////bullet.Init();
+        //ObjectPoolManager.Instance.GetObjectPool(bullet);
+        //var obj = Instantiate(bullet);
+
+        pool = ObjectPoolManager.Instance.GetObjectPool(ctx.projectilePrefab);
+        var bullet = pool.Get<BulletController>();
         bullet.transform.position = weaponTransform.position;
         bullet.transform.rotation = weaponTransform.rotation;
-
-        // Instantiate
-        //bullet.Init();
-        var obj = Instantiate(bullet);
+        bullet.Owner = ctx.attacker;
+        bullet.Init(); // Re-init con la llamada de Init desde Awake()?
 
         return true;
     }

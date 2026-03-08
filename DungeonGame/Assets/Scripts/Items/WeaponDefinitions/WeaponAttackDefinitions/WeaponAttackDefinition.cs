@@ -27,6 +27,7 @@ public struct AttackContext
     public WeaponAttackDefinition.AttackKindEnum attacKind;
 
     // Comunes
+    public GameObject attacker;
     public float damage;
     public float timeBetweenAttacks;
     public float attacksPerSecondMult;
@@ -36,6 +37,8 @@ public struct AttackContext
     public int projectileCount;
     public float spreadDegrees;
     public GameObject projectilePrefab;
+    // BulletPool
+
 
     // Melee (ejemplo simple)
     public float meleeArcDegrees;

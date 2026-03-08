@@ -4,6 +4,6 @@ using UnityEngine;
 public class BasicGunDefinition : WeaponDefinitionBase
 {
     [SerializeField] public GameObject bulletPrefab;
-
-    
+    [SerializeField] private AudioClip shootSfx;
+    [SerializeField] private AudioClip reloadSfx;
 }

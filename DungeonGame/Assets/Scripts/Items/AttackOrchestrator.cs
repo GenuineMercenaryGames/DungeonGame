@@ -6,8 +6,6 @@ public class AttackOrchestrator : MonoBehaviour
     [SerializeField] private PlayerItemSystem itemSystem;
     [SerializeField] private Transform playerWeaponTansform;
 
-    private ObjectPoolController pool;
-
     void Start()
     {
         //pool = ObjectPoolManager.Instance.GetObjectPool(bulletPrefab);
@@ -21,7 +19,7 @@ public class AttackOrchestrator : MonoBehaviour
         //}
     }
 
-    public bool TryAttack()
+    public bool TryAttack(GameObject attacker)
     {
         WeaponDefinitionBase weapon = itemSystem.equippedWeapon;
         
@@ -32,6 +30,7 @@ public class AttackOrchestrator : MonoBehaviour
         }
 
         AttackContext ctx = default;
+        ctx.attacker = attacker;
         weapon.AttackDefinition.BuildBaseContext(weapon, ref ctx);
 
         foreach(PassiveWeaponModuleDefinition module in itemSystem.ActiveModules)

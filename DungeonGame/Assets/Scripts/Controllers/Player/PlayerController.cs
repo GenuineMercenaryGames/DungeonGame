@@ -110,7 +110,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Attack!!!!!!!!!!!!");
         if (ctx.phase == InputActionPhase.Performed)
             Attack();
-        bool attackOk = attackOrchestrator.TryAttack();
+        bool attackOk = attackOrchestrator.TryAttack(gameObject);
     }
 
     public void InputRun(InputAction.CallbackContext ctx)
