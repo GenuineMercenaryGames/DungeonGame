@@ -14,7 +14,7 @@ public class HealthTest : MonoBehaviour
 
     void Update()
     {
-            currentHealth -= 1f;
+        currentHealth -= 1f;
         healthBar.fillAmount = Mathf.Lerp(healthBar.fillAmount,currentHealth / maxHealth,Time.deltaTime * 5f);
     }
 }
