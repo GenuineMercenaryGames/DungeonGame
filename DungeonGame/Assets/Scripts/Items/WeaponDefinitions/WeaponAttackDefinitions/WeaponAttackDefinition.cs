@@ -27,7 +27,9 @@ public struct AttackContext
     public WeaponAttackDefinition.AttackKindEnum attacKind;
 
     // Comunes
+    public GameObject attacker;
     public float damage;
+    public float timeBetweenAttacks;
     public float attacksPerSecondMult;
     public float range;
 
@@ -35,6 +37,8 @@ public struct AttackContext
     public int projectileCount;
     public float spreadDegrees;
     public GameObject projectilePrefab;
+    // BulletPool
+
 
     // Melee (ejemplo simple)
     public float meleeArcDegrees;
@@ -109,5 +113,5 @@ public abstract class WeaponAttackDefinition : ScriptableObject
     /// </summary>
     /// <param name="p"> Read-only moment of the attack. When does the attack occur. </param>
     /// <param name="ctx"> Read-only context, already built in BuildBaseContext. Read to execute. </param>
-    public abstract void Execute(Transform attacker, Vector3 aimDir, in AttackContext ctx);
+    public abstract bool Execute(Transform weaponTransform, Vector3 aimDir, in AttackContext ctx);
 }

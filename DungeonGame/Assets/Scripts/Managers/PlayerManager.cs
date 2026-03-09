@@ -12,6 +12,6 @@ public class PlayerManager : Singleton<PlayerManager>
     public void SetPlayer(PlayerController player)
     {
         Player = player;
-        UIManager.Instance.PlayerUI.Init();
+        //UIManager.Instance.PlayerUI.Init();
     }
 }
