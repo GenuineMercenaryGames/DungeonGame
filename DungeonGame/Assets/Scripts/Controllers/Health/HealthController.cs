@@ -9,8 +9,8 @@ public class HealthController : MonoBehaviour
     public ObservableVariable<float> Health = new();
     public ObservableVariable<float> MaxHealth = new();
 
-    public Image healthBar;
-    public bool IsDead => Health.GetValue() <= 0;
+    public bool IsDead { get { return Health.Value <= 0; } }
+    public bool IsAlive { get { return Health.Value > 0; } }
 
     void Awake()
     {
@@ -19,8 +19,6 @@ public class HealthController : MonoBehaviour
 
         Health.AddPreprocessor(ClampHealthValue);
         MaxHealth.AddPreprocessor(ClampMaxHealthValue);
-
-        Health.AddListener(OnHealthChanged);
 
         MaxHealth.Value = maxHealth;
         Health.Value = maxHealth;
@@ -36,20 +34,5 @@ public class HealthController : MonoBehaviour
     private void ClampMaxHealthValue(out float outMaxHealth, float inMaxHealth)
     {
         outMaxHealth = Mathf.Max(1.0f, inMaxHealth);
-    }
-
-    private void OnHealthChanged(float oldValue, float newValue)
-    {
-        if (newValue <= 0f)
-        {
-            Object.FindFirstObjectByType<MenuUIManager>().ShowGameOver();
-            Time.timeScale = 0f;
-            OnDeath();
-        }
-    }
-
-    protected virtual void OnDeath()
-    {
-        Destroy(gameObject);
     }
 }

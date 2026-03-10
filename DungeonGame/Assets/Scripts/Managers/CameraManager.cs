@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CameraManager : SingletonPersistent<CameraManager>
+public class CameraManager : Singleton<CameraManager>
 {
     #region Serialized Variables
 

@@ -46,6 +46,8 @@ public class PlayerController : MonoBehaviour
 
         isRunning = false;
         canDash = true;
+
+        healthController.Health.AddListener(OnDeath); // Self contained. The player handles their own fucking death. For anyone reading, for the love of God, implement things like this from now on rather than stuffing your logic inside of the HealthController class, ffs.
     }
 
     void Start()
@@ -297,6 +299,20 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("MoveX", moveX, dampTime, delta);
         animator.SetFloat("MoveY", moveY, dampTime, delta);
         // Debug.Log($"The input is: raw:{inputMoveRaw}, noRaw:{inputMove}, anim:{new Vector2(moveX, moveY)}");
+    }
+
+    #endregion
+
+    #region PrivateMethods - Health
+
+    private void OnDeath(float oldValue, float newValue)
+    {
+        if (newValue <= 0f)
+        {
+            UIManager.Instance.PauseUI.ShowGameOver();
+            Time.timeScale = 0f; // Temporary hack, as per Celia's code, God help us, because with this, we return to the main menu with time scale 0 LOL.
+            // TODO : Play death animation and disable controls.
+        }
     }
 
     #endregion

@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class MenuUIManager : MonoBehaviour
+public class PauseUIController : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenuPanel;
     [SerializeField] private GameObject gameOverPanel;

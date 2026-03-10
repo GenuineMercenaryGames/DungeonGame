@@ -5,11 +5,6 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
 {
     private Dictionary<GameObject, ObjectPoolController> objectPools = new();
 
-    [SerializeField] private ObjectPoolController bulletPool;
-    [SerializeField] private ObjectPoolController particlePool;
-    public ObjectPoolController BulletPool { get { return bulletPool; } }
-    public ObjectPoolController ParticlePool { get { return particlePool; } }
-
     public ObjectPoolController GetObjectPool(GameObject prefab, int initialCount = 20)
     {
         ObjectPoolController pool;

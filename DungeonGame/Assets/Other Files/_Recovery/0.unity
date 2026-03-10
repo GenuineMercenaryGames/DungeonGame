@@ -287,8 +287,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
   healthFill: {fileID: 1965998834}
   energyFill: {fileID: 579748823}
-  meleeIcon: {fileID: 858908263}
-  rangedIcon: {fileID: 1044818341}
+  primaryIcon: {fileID: 0}
+  secondaryIcon: {fileID: 0}
 --- !u!4 &403313852
 Transform:
   m_ObjectHideFlags: 0
@@ -1461,7 +1461,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b667827ce536eda4eacfc47be3a706f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  healthFill: {fileID: 1965998834}
+  healthBar: {fileID: 0}
+  maxHealth: 100
 --- !u!114 &1965998837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1474,7 +1475,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b667827ce536eda4eacfc47be3a706f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthTest
-  healthFill: {fileID: 579748823}
+  healthBar: {fileID: 0}
+  maxHealth: 100
 --- !u!1 &2076496370
 GameObject:
   m_ObjectHideFlags: 0

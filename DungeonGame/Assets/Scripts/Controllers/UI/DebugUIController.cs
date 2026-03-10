@@ -1,7 +1,9 @@
 using TMPro;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
+using static UnityEngine.Rendering.DebugUI;
 
-public class PlayerUIController : MonoBehaviour
+public class DebugUIController : MonoBehaviour
 {
     [SerializeField] private TMP_Text textHealth;
     [SerializeField] private TMP_Text textShield;
