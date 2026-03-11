@@ -5842,7 +5842,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df921c491b53dfa4da413d0a8c473e12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OpenURLController
-  URL: https://genuine-mercenary-games.itch.io/
+  URL: https://genuinemercenarygames.itch.io/
 --- !u!114 &1840362952
 MonoBehaviour:
   m_ObjectHideFlags: 0
