@@ -16,5 +16,7 @@ public class GameOverUIController : MonoBehaviour
         gameObject.SetActive(true); // Temporary hack. Will add animations later. There will not be any need for this by then.
         victoryText.gameObject.SetActive(isVictory);
         defeatText.gameObject.SetActive(!isVictory);
+        GameTime.IsPaused = true;
+        GameTime.CanPause = false;
     }
 }
