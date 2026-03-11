@@ -61,6 +61,7 @@ public abstract class Enemy : MonoBehaviour
     public void RangeAttack()
     {
         agent.ResetPath();
+        // Por ahora hago la melee animation, hasta que quitemos los placeholders.
         animator.SetTrigger("MeleeAttack");
         GetComponent<WeaponController>().Attack();
     }
@@ -81,6 +82,24 @@ public abstract class Enemy : MonoBehaviour
         return PointInDirectPlayerSight(target.position);
     }
 
+    public void LookToPlayer()
+    {
+        transform.LookAt(target.position);
+    }
+
+    public void SmoothLookToPlayer()
+    {
+        Vector3 dir = target.position - transform.position;
+        dir.y = 0f;
+        if (dir.sqrMagnitude < 0.0001f) return;
+        Quaternion targetRotation = Quaternion.LookRotation(dir);
+        transform.rotation = Quaternion.RotateTowards(
+            transform.rotation,
+            targetRotation,
+            180f * Time.deltaTime
+        );
+    }
+
     void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
@@ -98,6 +117,18 @@ public abstract class Enemy : MonoBehaviour
     public bool ReachedDestination()
     {
         return agent.remainingDistance < 0.01f;
+    }
+
+    public bool InViewAngle()
+    {
+        Vector3 toPlayer = target.position - transform.position;
+        toPlayer.y = 0f; 
+
+        if (toPlayer.sqrMagnitude < 0.0001f)
+            return true;
+
+        float angle = Vector3.Angle(transform.forward, toPlayer);
+        return angle <= 10 * 0.5f;
     }
 
     int maxPoints = 10;

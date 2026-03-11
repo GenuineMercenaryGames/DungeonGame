@@ -22,6 +22,7 @@ public class RangeEnemy : Enemy
         sm.SetStartState("Wandering");
 
         sm.AddState("GoReachablePos", f.CreateStateAimPlayer(playerSeparationRange));
+        sm.AddState("LookPlayer", f.CreateStateLookPlayer());
         sm.AddState("AttackPlayer", f.CreateStateRangeAttack());
         sm.AddState("Dead", f.CreateStateDeath());
 
@@ -31,7 +32,10 @@ public class RangeEnemy : Enemy
         sm.AddTransition("GoReachablePos", "Wandering",
             transition => DistanceToPlayer() > playerScanningRange);
 
-        sm.AddTransition("GoReachablePos", "AttackPlayer");
+        sm.AddTransition("GoReachablePos", "LookPlayer");
+
+        sm.AddTransition("LookPlayer", "AttackPlayer");
+
         sm.AddTransition("AttackPlayer", "GoReachablePos",
             transition => DistanceToPlayer() > playerAttackRange);
 

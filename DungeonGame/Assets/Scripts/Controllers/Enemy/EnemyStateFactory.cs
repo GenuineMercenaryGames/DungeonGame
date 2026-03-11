@@ -23,7 +23,22 @@ public class EnemyStateFactory
     public State CreateStateRangeAttack()
     {
         return new State(
-            onEnter: _ => enemy.RangeAttack()
+            onEnter: _ =>
+            {
+                enemy.LookToPlayer();
+                enemy.RangeAttack();
+            }
+        );
+    }
+    public State CreateStateLookPlayer()
+    {
+        return new State(
+            onLogic:_ =>
+            {
+                enemy.SmoothLookToPlayer();
+            },
+            canExit: _ => enemy.InViewAngle(),
+            needsExitTime: true
         );
     }
     public State CreateStateDeath()
