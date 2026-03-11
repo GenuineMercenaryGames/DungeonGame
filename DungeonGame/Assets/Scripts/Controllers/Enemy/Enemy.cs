@@ -18,8 +18,6 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] private LineRenderer shotLine;
     private float shotLineTime = 0.06f;
 
-
-    public PlayerController playerController;
     public NavMeshAgent agent;
     public HealthController healthController;
 
@@ -53,7 +51,11 @@ public abstract class Enemy : MonoBehaviour
         agent.ResetPath();
         animator.SetTrigger("MeleeAttack");
         //GetComponent<WeaponController>().Attack();
-        playerController.healthController.Health.Value -= 20f;
+        
+        // NOTE : Kike, doesn't this always damage the target regardless of the distance?
+        // -Dani
+        var health = target.GetComponent<HealthController>();
+        if(health != null) health.Health.Value -= 20f;
     }
     public void RangeAttack()
     {
@@ -185,7 +187,7 @@ public abstract class Enemy : MonoBehaviour
 
     void Start()
     {
-        target = playerController.characterController.transform;
+        target = PlayerManager.Instance.Player.transform;
         fsm = MainFSM();
         fsm.Init();
     }
