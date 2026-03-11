@@ -34,7 +34,8 @@ public class TreeSpawner : MonoBehaviour
 
                 Quaternion rot = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
 
-                Instantiate(treePrefab, spawnPos, rot);
+                GameObject inst = Instantiate(treePrefab, spawnPos, rot);
+                inst.transform.parent = transform;
             }
 
             plane.GetComponent<MeshRenderer>().enabled = false;

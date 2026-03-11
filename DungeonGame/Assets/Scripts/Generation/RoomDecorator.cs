@@ -41,6 +41,7 @@ public class RoomDecorator : MonoBehaviour
                 Quaternion rot = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
                 
                 GameObject inst = Instantiate(prefab, spawnPos, rot);
+                inst.transform.parent = transform;
                 // Necesito que los obstáculos generados procedimentalmente estén en la layer World para que el NavMesh se genere correctamente.
                 SetLayerRecursively(inst, LayerMask.NameToLayer("World"));
             }
