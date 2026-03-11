@@ -195,6 +195,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 14416802}
   m_CullTransparentMesh: 1
+--- !u!1 &25865677
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 25865678}
+  m_Layer: 0
+  m_Name: Environment
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &25865678
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25865677}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 973794545}
+  - {fileID: 1127624647}
+  - {fileID: 1454238215}
+  - {fileID: 1406592439}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &40134204
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,7 +243,7 @@ GameObject:
   - component: {fileID: 40134206}
   - component: {fileID: 40134205}
   m_Layer: 13
-  m_Name: Plane
+  m_Name: RoomPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -493,7 +528,7 @@ GameObject:
   - component: {fileID: 103791496}
   - component: {fileID: 103791499}
   m_Layer: 0
-  m_Name: Plane (7)
+  m_Name: TreePlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -692,7 +727,7 @@ GameObject:
   - component: {fileID: 125356518}
   - component: {fileID: 125356521}
   m_Layer: 0
-  m_Name: Plane (16)
+  m_Name: TreePlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -859,7 +894,7 @@ GameObject:
   - component: {fileID: 180829763}
   - component: {fileID: 180829766}
   m_Layer: 0
-  m_Name: Plane (11)
+  m_Name: TreePlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1362,7 +1397,7 @@ GameObject:
   - component: {fileID: 281759236}
   - component: {fileID: 281759235}
   m_Layer: 0
-  m_Name: Plane (24)
+  m_Name: TreePlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1593,7 +1628,7 @@ GameObject:
   - component: {fileID: 321237124}
   - component: {fileID: 321237127}
   m_Layer: 0
-  m_Name: Plane (13)
+  m_Name: TreePlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1803,7 +1838,7 @@ GameObject:
   - component: {fileID: 332092866}
   - component: {fileID: 332092869}
   m_Layer: 0
-  m_Name: Plane (18)
+  m_Name: TreePlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2065,7 +2100,7 @@ GameObject:
   - component: {fileID: 415841561}
   - component: {fileID: 415841564}
   m_Layer: 0
-  m_Name: Plane (23)
+  m_Name: TreePlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2231,7 +2266,7 @@ GameObject:
   - component: {fileID: 434939992}
   - component: {fileID: 434939991}
   m_Layer: 13
-  m_Name: Plane (1)
+  m_Name: RoomPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2408,7 +2443,7 @@ GameObject:
   - component: {fileID: 473059925}
   - component: {fileID: 473059928}
   m_Layer: 0
-  m_Name: Plane (7)
+  m_Name: TreePlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2744,7 +2779,7 @@ GameObject:
   - component: {fileID: 511551830}
   - component: {fileID: 511551833}
   m_Layer: 0
-  m_Name: Plane (19)
+  m_Name: TreePlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3109,7 +3144,7 @@ GameObject:
   - component: {fileID: 654908565}
   - component: {fileID: 654908564}
   m_Layer: 13
-  m_Name: Plane (5)
+  m_Name: RoomPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3847,7 +3882,7 @@ GameObject:
   - component: {fileID: 740920634}
   - component: {fileID: 740920637}
   m_Layer: 0
-  m_Name: Plane (7)
+  m_Name: TreePlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3982,7 +4017,7 @@ GameObject:
   - component: {fileID: 751041858}
   - component: {fileID: 751041861}
   m_Layer: 0
-  m_Name: Plane (7)
+  m_Name: TreePlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4834,7 +4869,7 @@ GameObject:
   - component: {fileID: 901387989}
   - component: {fileID: 901387992}
   m_Layer: 0
-  m_Name: Plane (7)
+  m_Name: TreePlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5256,7 +5291,7 @@ GameObject:
   - component: {fileID: 953831134}
   - component: {fileID: 953831137}
   m_Layer: 0
-  m_Name: Plane (22)
+  m_Name: TreePlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5415,7 +5450,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 25865678}
     m_Modifications:
     - target: {fileID: 8031339192871210686, guid: 3f9b178ccd3b86f4ebbfc1f5a2815e56, type: 3}
       propertyPath: m_LocalScale.x
@@ -5431,15 +5466,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8031339192871210686, guid: 3f9b178ccd3b86f4ebbfc1f5a2815e56, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.96
+      value: 0.9599991
       objectReference: {fileID: 0}
     - target: {fileID: 8031339192871210686, guid: 3f9b178ccd3b86f4ebbfc1f5a2815e56, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.6391811
+      value: -0.63918114
       objectReference: {fileID: 0}
     - target: {fileID: 8031339192871210686, guid: 3f9b178ccd3b86f4ebbfc1f5a2815e56, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.02
+      value: -0.01999998
       objectReference: {fileID: 0}
     - target: {fileID: 8031339192871210686, guid: 3f9b178ccd3b86f4ebbfc1f5a2815e56, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5447,7 +5482,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8031339192871210686, guid: 3f9b178ccd3b86f4ebbfc1f5a2815e56, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8031339192871210686, guid: 3f9b178ccd3b86f4ebbfc1f5a2815e56, type: 3}
       propertyPath: m_LocalRotation.y
@@ -5455,7 +5490,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8031339192871210686, guid: 3f9b178ccd3b86f4ebbfc1f5a2815e56, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8031339192871210686, guid: 3f9b178ccd3b86f4ebbfc1f5a2815e56, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5471,13 +5506,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8957304962413023527, guid: 3f9b178ccd3b86f4ebbfc1f5a2815e56, type: 3}
       propertyPath: m_Name
-      value: Ground_03 (4)
+      value: Ground
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f9b178ccd3b86f4ebbfc1f5a2815e56, type: 3}
+--- !u!4 &973794545 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8031339192871210686, guid: 3f9b178ccd3b86f4ebbfc1f5a2815e56, type: 3}
+  m_PrefabInstance: {fileID: 973794544}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &980311864
 GameObject:
   m_ObjectHideFlags: 0
@@ -5492,7 +5532,7 @@ GameObject:
   - component: {fileID: 980311866}
   - component: {fileID: 980311869}
   m_Layer: 0
-  m_Name: Plane (7)
+  m_Name: TreePlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6005,12 +6045,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1127624645}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.18, y: -0.19462, z: -2.02}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 23.18, y: -0.19462013, z: -2.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 25865678}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1127624648
 MonoBehaviour:
@@ -6078,7 +6118,7 @@ GameObject:
   - component: {fileID: 1136547979}
   - component: {fileID: 1136547982}
   m_Layer: 0
-  m_Name: Plane (20)
+  m_Name: TreePlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6245,7 +6285,7 @@ GameObject:
   - component: {fileID: 1140528642}
   - component: {fileID: 1140528645}
   m_Layer: 0
-  m_Name: Plane (10)
+  m_Name: TreePlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6422,7 +6462,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthController
   maxHealth: 100
-  healthBar: {fileID: 0}
 --- !u!114 &1150182070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6551,7 +6590,7 @@ GameObject:
   - component: {fileID: 1160511958}
   - component: {fileID: 1160511961}
   m_Layer: 0
-  m_Name: Plane (17)
+  m_Name: TreePlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6686,7 +6725,7 @@ GameObject:
   - component: {fileID: 1172780587}
   - component: {fileID: 1172780586}
   m_Layer: 0
-  m_Name: Plane (25)
+  m_Name: TreePlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6957,7 +6996,7 @@ GameObject:
   - component: {fileID: 1250493538}
   - component: {fileID: 1250493537}
   m_Layer: 13
-  m_Name: Plane (2)
+  m_Name: RoomPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7476,7 +7515,7 @@ GameObject:
   - component: {fileID: 1351024393}
   - component: {fileID: 1351024396}
   m_Layer: 0
-  m_Name: Plane (7)
+  m_Name: TreePlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7717,7 +7756,7 @@ GameObject:
   - component: {fileID: 1389585623}
   - component: {fileID: 1389585626}
   m_Layer: 0
-  m_Name: Plane (14)
+  m_Name: TreePlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7848,7 +7887,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1406592439}
   m_Layer: 0
-  m_Name: TreePlanes (7)
+  m_Name: TreePlanes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7862,7 +7901,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1406592438}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 73.4, y: -0.20015, z: -15.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7893,7 +7932,7 @@ Transform:
   - {fileID: 1351024392}
   - {fileID: 980311865}
   - {fileID: 751041857}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 25865678}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1410745652
 GameObject:
@@ -8045,7 +8084,7 @@ GameObject:
   - component: {fileID: 1429428148}
   - component: {fileID: 1429428147}
   m_Layer: 13
-  m_Name: Plane (6)
+  m_Name: RoomPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8202,8 +8241,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1454238214}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.27, y: -0.14814, z: -12.95}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -5.2700005, y: -0.14813995, z: -12.950001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8214,7 +8253,7 @@ Transform:
   - {fileID: 1950846638}
   - {fileID: 1986975623}
   - {fileID: 434939990}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 25865678}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1454238216
 MonoBehaviour:
@@ -8327,7 +8366,7 @@ GameObject:
   - component: {fileID: 1483607700}
   - component: {fileID: 1483607703}
   m_Layer: 0
-  m_Name: Plane (21)
+  m_Name: TreePlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8494,7 +8533,7 @@ GameObject:
   - component: {fileID: 1518965365}
   - component: {fileID: 1518965368}
   m_Layer: 0
-  m_Name: Plane (12)
+  m_Name: TreePlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9503,7 +9542,7 @@ GameObject:
   - component: {fileID: 1810370714}
   - component: {fileID: 1810370717}
   m_Layer: 0
-  m_Name: Plane (8)
+  m_Name: TreePlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10055,7 +10094,7 @@ GameObject:
   - component: {fileID: 1950846640}
   - component: {fileID: 1950846639}
   m_Layer: 13
-  m_Name: Plane (3)
+  m_Name: RoomPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10200,7 +10239,7 @@ GameObject:
   - component: {fileID: 1986975625}
   - component: {fileID: 1986975624}
   m_Layer: 13
-  m_Name: Plane (4)
+  m_Name: RoomPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10389,7 +10428,7 @@ GameObject:
   - component: {fileID: 2010442076}
   - component: {fileID: 2010442079}
   m_Layer: 0
-  m_Name: Plane (15)
+  m_Name: TreePlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10599,7 +10638,7 @@ GameObject:
   - component: {fileID: 2039199459}
   - component: {fileID: 2039199462}
   m_Layer: 0
-  m_Name: Plane (7)
+  m_Name: TreePlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11081,7 +11120,7 @@ GameObject:
   - component: {fileID: 2112102239}
   - component: {fileID: 2112102242}
   m_Layer: 0
-  m_Name: Plane (9)
+  m_Name: TreePlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11316,10 +11355,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 654090777}
   - {fileID: 381010510}
-  - {fileID: 973794544}
-  - {fileID: 1454238215}
-  - {fileID: 1127624647}
-  - {fileID: 1406592439}
+  - {fileID: 25865678}
   - {fileID: 488996317}
   - {fileID: 1539061160}
   - {fileID: 186414540}

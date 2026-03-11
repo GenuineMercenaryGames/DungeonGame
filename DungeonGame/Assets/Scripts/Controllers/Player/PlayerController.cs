@@ -309,8 +309,8 @@ public class PlayerController : MonoBehaviour
     {
         if (newValue <= 0f)
         {
-            UIManager.Instance.PauseUI.ShowGameOver();
-            Time.timeScale = 0f; // Temporary hack, as per Celia's code, God help us, because with this, we return to the main menu with time scale 0 LOL.
+            UIManager.Instance.GameOverUI.ShowGameOver(false);
+
             // TODO : Play death animation and disable controls.
         }
     }
