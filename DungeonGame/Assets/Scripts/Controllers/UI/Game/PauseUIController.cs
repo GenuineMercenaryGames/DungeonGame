@@ -10,6 +10,8 @@ public class PauseUIController : MonoBehaviour
 
     public void Pause()
     {
+        if (!GameTime.CanPause)
+            return;
         GameTime.IsPaused = true;
         gameObject.SetActive(true);
     }
