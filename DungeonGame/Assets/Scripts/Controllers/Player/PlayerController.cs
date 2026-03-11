@@ -47,18 +47,19 @@ public class PlayerController : MonoBehaviour
         isRunning = false;
         canDash = true;
 
-        healthController.Health.AddListener(OnDeath); // Self contained. The player handles their own fucking death. For anyone reading, for the love of God, implement things like this from now on rather than stuffing your logic inside of the HealthController class, ffs.
-    }
+        // Self contained. The player handles their own fucking death.
+        // For anyone reading, for the love of God, implement things like this from now on rather than stuffing your logic inside of the HealthController class, ffs.
+        healthController.Health.AddListener(OnDeath);
 
-    void Start()
-    {
-        PlayerManager.Instance.SetPlayer(this);
         // NOTE : This is a temporary hack because the player prefab is placed manually within the scene.
-        // Once the actual spawning logic is implemented within the PlayerManager, this will be removed. But for now, we need this.
+        // Once the actual spawning logic is implemented within the PlayerManager, this could be removed. But for now, we need this.
+        PlayerManager.Instance.SetPlayer(this);
     }
 
     void Update()
     {
+        if (GameTime.IsPaused)
+            return;
         UpdateLookAt();
         UpdateMove();
         UpdateAnimation();
@@ -124,6 +125,15 @@ public class PlayerController : MonoBehaviour
     {
         if (ctx.phase == InputActionPhase.Performed)
             Dash();
+    }
+
+    public void InputPause(InputAction.CallbackContext ctx)
+    {
+        // NOTE : Ugly temporary hack to get things working. In the future, this logic should be more self contained. For now, fuck it.
+        if(GameTime.IsPaused && GameTime.CanPause)
+            UIManager.Instance.PauseUI.Resume();
+        else
+            UIManager.Instance.PauseUI.Pause();
     }
 
     #endregion

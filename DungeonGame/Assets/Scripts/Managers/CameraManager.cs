@@ -5,12 +5,13 @@ public class CameraManager : Singleton<CameraManager>
 {
     #region Serialized Variables
 
+    // NOTE : Anchor and spring are 2 types of pivots for the camera.
     [Header("Transform References")]
-    [SerializeField] private Transform cameraTransform;
     [SerializeField] private Transform anchorTransform; // base transform
     [SerializeField] private Transform springTransform; // probe transform
-    [SerializeField] private Transform targetTransform; // NOTE : This is currently hardcoded. In the future, make it be extracted from the Player Manager or whatever.
-    // NOTE : Anchor and spring are 2 types of pivots for the camera.
+
+    private Transform cameraTransform;
+    private Transform targetTransform;
 
     [Header("Camera Settings")]
     [SerializeField] private float cameraMovementSpeed;
@@ -40,8 +41,16 @@ public class CameraManager : Singleton<CameraManager>
 
     #region MonoBehaviour
 
+    void Start()
+    {
+        cameraTransform = Camera.main.transform;
+        targetTransform = PlayerManager.Instance.Player.transform;
+    }
+
     void Update()
     {
+        if (GameTime.IsPaused)
+            return;
         delta = Time.deltaTime;
         UpdateAnchorPosition();
         UpdateCameraPosition();

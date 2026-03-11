@@ -5,6 +5,7 @@ using UnityEngine;
 // spawning logic to be used, which will take quite a few lines of code.
 // That code will go here. So, this is just a warning to other readers, to not delete this or think it is useless. Right now, it lacks code, because it doesn't need
 // it yet, but it will be required once the project advances to the next stage.
+[DefaultExecutionOrder(-100)] // Retarded hack because someone broke scene loading and we don't have time to actually fix it. Fuck you btw.
 public class PlayerManager : Singleton<PlayerManager>
 {
     public PlayerController Player { get; private set; }
@@ -12,6 +13,5 @@ public class PlayerManager : Singleton<PlayerManager>
     public void SetPlayer(PlayerController player)
     {
         Player = player;
-        //UIManager.Instance.PlayerUI.Init();
     }
 }
