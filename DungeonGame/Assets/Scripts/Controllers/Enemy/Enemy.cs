@@ -53,7 +53,8 @@ public abstract class Enemy : MonoBehaviour
         //GetComponent<WeaponController>().Attack();
         
         // NOTE : Kike, doesn't this always damage the target regardless of the distance?
-        // -Dani
+        // -Dani 
+        // -Kike: sí, estoy esperando al melee para meterlo bien.
         var health = target.GetComponent<HealthController>();
         if(health != null) health.Health.Value -= 20f;
     }
@@ -88,7 +89,8 @@ public abstract class Enemy : MonoBehaviour
 #if UNITY_EDITOR
         if (Application.isPlaying && fsm != null)
         {
-            Handles.Label(transform.position + Vector3.up * 5f, fsm.GetActiveHierarchyPath());
+            Handles.Label(transform.position + Vector3.up * 1f, fsm.GetActiveHierarchyPath());
+            Handles.Label(transform.position + Vector3.up * 2f, "Health: " + healthController.Health.Value + " / " + healthController.MaxHealth.Value);
         }
 #endif
     }
