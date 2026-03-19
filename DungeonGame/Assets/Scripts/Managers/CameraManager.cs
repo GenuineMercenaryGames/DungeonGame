@@ -107,8 +107,6 @@ public class CameraManager : Singleton<CameraManager>
 
     private void UpdateAnchorPosition()
     {
-        // TODO : Clean this code up a bit lol...
-
         anchorTransform.position = targetTransform.position;
 
         var cam = Camera.main;
@@ -117,9 +115,9 @@ public class CameraManager : Singleton<CameraManager>
         Vector3 vec = (viewportPosMouse - viewportPosPlayer);
         Vector3 v = new Vector3(vec.x, 0.0f, vec.y);
         Vector3 dir = v.normalized;
+        dir = dir.z * ForwardMoveVector + dir.x * RightMoveVector;
 
-        float cursorDist = v.magnitude; // NOTE : Since this is calculated in viewport space, this should give us a value in range [0, 1], so that's perfect for lerping.
-        // float chosenCamDist = Mathf.Min(cameraDistancePlaneMax, cursorDist);
+        float cursorDist = v.magnitude;
         float chosenCamDist = Mathf.Lerp(0.0f, cameraDistancePlaneMax, cursorDist);
 
         // Debug.Log($"the distance is : {cursorDist}");
