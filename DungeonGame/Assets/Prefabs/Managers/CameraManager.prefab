@@ -45,12 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c472c99589ed50a459e3eddf2c0ecd20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraManager
-  cameraTransform: {fileID: 0}
   anchorTransform: {fileID: 7213543165030311671}
   springTransform: {fileID: 3723157779360938842}
-  targetTransform: {fileID: 0}
   cameraMovementSpeed: 2
-  cameraRotationSpeed: 2
+  cameraRotationSpeed: 5
   cameraDistanceMin: 8
   cameraDistanceMax: 20
   cameraDistance: 8

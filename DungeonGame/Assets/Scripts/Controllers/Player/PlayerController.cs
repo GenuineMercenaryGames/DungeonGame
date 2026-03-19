@@ -17,6 +17,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float dashDuration;
     [SerializeField] public float dashCooldown;
 
+    [Header("Camera Settings")]
+    [SerializeField] private float cameraRotationSpeed;
+
     public CharacterController characterController;
     public WeaponController weaponController;
     public HealthController healthController;
@@ -25,6 +28,7 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 inputMoveRaw;
     private Vector2 inputMove;
+    private float inputCameraRotation;
 
     private bool isRunning;
     private bool canDash;
@@ -61,6 +65,7 @@ public class PlayerController : MonoBehaviour
         UpdateLookAt();
         UpdateMove();
         UpdateAnimation();
+        UpdateCameraRot();
     }
 
     #endregion
@@ -87,10 +92,7 @@ public class PlayerController : MonoBehaviour
 
     public void InputCameraRotate(InputAction.CallbackContext ctx)
     {
-        // TODO : Fix issue where camera look at logic expects an additional rotation of 0.0f always... rotating breaks the aiming because of that added offset.
-        // This is trivial to fix, but it's 2AM, so I'm going to leave the task for tomorrow lol.
-        float val = ctx.ReadValue<float>();
-        CameraManager.Instance.AddCameraRotation(val * 25.0f);
+        inputCameraRotation = ctx.ReadValue<float>();
     }
 
     // NOTE : This is a temporary hack to test the melee animations, disregard completely because we'll have a proper handling in future versions.
@@ -186,6 +188,11 @@ public class PlayerController : MonoBehaviour
 
             transform.rotation = Quaternion.LookRotation(direction);
         }
+    }
+
+    private void UpdateCameraRot()
+    {
+        CameraManager.Instance.AddCameraRotation(inputCameraRotation * cameraRotationSpeed);
     }
 
     private Vector3 GetMoveForward()

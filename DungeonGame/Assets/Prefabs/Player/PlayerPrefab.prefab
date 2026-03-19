@@ -473,13 +473,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   animator: {fileID: 8260451027818967867}
-  attackOrchestrator: {fileID: 0}
   walkSpeed: 5
   runSpeed: 10
   gravitySpeed: 0.1
   dashSpeed: 60
   dashDuration: 0.1
   dashCooldown: 0.8
+  cameraRotationSpeed: 0.12
   characterController: {fileID: 0}
   weaponController: {fileID: 0}
   healthController: {fileID: 0}
