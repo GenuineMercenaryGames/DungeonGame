@@ -170,12 +170,22 @@ public class PlayerController : MonoBehaviour
     private void UpdateLookAt()
     {
         var cam = Camera.main;
+        float groundY = transform.position.y;
+        Ray ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
 
-        Vector3 viewportPosPlayer = cam.WorldToViewportPoint(transform.position);
-        Vector3 viewportPosMouse = cam.ScreenToViewportPoint(Mouse.current.position.ReadValue());
-        Vector3 dir = (viewportPosMouse - viewportPosPlayer).normalized;
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90.0f;
-        transform.rotation = Quaternion.Euler(0, -angle, 0);
+        Plane plane = new(Vector3.up, new Vector3(0, groundY, 0));
+
+        float distance;
+
+        if (plane.Raycast(ray, out distance))
+        {
+            Vector3 hitPoint = ray.GetPoint(distance);
+
+            Vector3 direction = hitPoint - transform.position;
+            direction.y = 0;
+
+            transform.rotation = Quaternion.LookRotation(direction);
+        }
     }
 
     private Vector3 GetMoveForward()
