@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
 
     [Header("Components")]
     [SerializeField] private Animator animator;
-    [SerializeField] private AttackOrchestrator attackOrchestrator;
 
     [Header("Movement Settings")]
     [SerializeField] private float walkSpeed;
@@ -42,7 +41,6 @@ public class PlayerController : MonoBehaviour
         weaponController = GetComponent<WeaponController>();
         healthController = GetComponent<HealthController>();
         shieldController = GetComponent<ShieldController>();
-        attackOrchestrator = GetComponent<AttackOrchestrator>();
 
         isRunning = false;
         canDash = true;
@@ -110,10 +108,9 @@ public class PlayerController : MonoBehaviour
 
     public void InputAttack(InputAction.CallbackContext ctx)
     {
-        Debug.Log("Attack!!!!!!!!!!!!");
+        // Debug.Log("Attack!!!!!!!!!!!!");
         if (ctx.phase == InputActionPhase.Performed)
             Attack();
-        bool attackOk = attackOrchestrator.TryAttack(gameObject);
     }
 
     public void InputRun(InputAction.CallbackContext ctx)

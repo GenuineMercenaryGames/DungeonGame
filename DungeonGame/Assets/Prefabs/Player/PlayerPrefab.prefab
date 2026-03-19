@@ -235,8 +235,6 @@ GameObject:
   - component: {fileID: 2861035253389806486}
   - component: {fileID: 8134169243092587801}
   - component: {fileID: 8161196081900676829}
-  - component: {fileID: 6304136664798109556}
-  - component: {fileID: 7525488258260988764}
   m_Layer: 10
   m_Name: PlayerPrefab
   m_TagString: Untagged
@@ -475,7 +473,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   animator: {fileID: 8260451027818967867}
-  attackOrchestrator: {fileID: 6304136664798109556}
+  attackOrchestrator: {fileID: 0}
   walkSpeed: 5
   runSpeed: 10
   gravitySpeed: 0.1
@@ -535,32 +533,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6304136664798109556
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6595957621760308155}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7e9cb68d12e2784d83d82c35013699c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AttackOrchestrator
-  itemSystem: {fileID: 7525488258260988764}
-  playerWeaponTansform: {fileID: 2593472836194151284}
---- !u!114 &7525488258260988764
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6595957621760308155}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5710e84beea578a42bb5b5d29e0f6860, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerItemSystem
 --- !u!1 &6735522987910781076
 GameObject:
   m_ObjectHideFlags: 0
