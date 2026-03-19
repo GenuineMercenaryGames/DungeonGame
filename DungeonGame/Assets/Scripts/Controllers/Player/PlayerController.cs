@@ -308,7 +308,7 @@ public class PlayerController : MonoBehaviour
     {
         float dampTime = 0.02f;
         float speed = isRunning ? 1.0f : 0.0f;
-        Vector3 worldMove = new Vector3(inputMoveRaw.x, 0.0f, inputMoveRaw.y);
+        Vector3 worldMove = GetMoveForward() * inputMoveRaw.y + GetMoveRight() * inputMoveRaw.x;
         Vector3 localMove = transform.InverseTransformDirection(worldMove);
         float moveX = localMove.x * 2.0f;
         float moveY = localMove.z * 2.0f;
