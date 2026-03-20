@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ca4931bf6286e0941b46ea5deee04751, type: 3}
-  m_Name: PassiveItem_Fire
+  m_Name: FireItem_PDB
   m_EditorClassIdentifier: Assembly-CSharp::FirePassiveItem
   id: d8d39dc9-c57b-4d2f-a102-4c97c159950f
   displayName: FireItem
@@ -18,7 +18,7 @@ MonoBehaviour:
   description: This item grants fire effect to the weapon
   rarity: 1
   tags: []
-  pickupPrefab: {fileID: 0}
+  pickupPrefab: {fileID: 7148433632459303654, guid: bc00c1fbf8925a7449a9ae578620ad3e, type: 3}
   maxStacks: 1
   modules:
   - {fileID: 11400000, guid: 7304fc465b871bb47ba455725368a082, type: 2}

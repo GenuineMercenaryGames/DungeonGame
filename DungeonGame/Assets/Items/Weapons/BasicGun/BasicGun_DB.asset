@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 944237c0bf5d78046af446bd7d58f60b, type: 3}
-  m_Name: BasicGun
+  m_Name: BasicGun_DB
   m_EditorClassIdentifier: Assembly-CSharp::BasicGunDefinition
   id: f7a814d9-8db8-4d18-91c5-c47076ab94a5
   displayName: Basic Gun
@@ -20,10 +20,12 @@ MonoBehaviour:
 '
   rarity: 0
   tags: []
-  pickupPrefab: {fileID: 0}
+  pickupPrefab: {fileID: 3389774178781486740, guid: ab32eebaa6292c947b3c66afb27ca6ea, type: 3}
   attackDefinition: {fileID: 11400000, guid: 1c333864ebb648a4fb580a334673a06b, type: 2}
   weaponSkin: {fileID: 3389774178781486740, guid: ab32eebaa6292c947b3c66afb27ca6ea, type: 3}
   baseDamage: 1
   attacksPerSecond: 2
   weaponModules: []
   bulletPrefab: {fileID: 7759707805804090412, guid: 431f391e3665cf34d97e5424be6a4b1c, type: 3}
+  shootSfx: {fileID: 0}
+  reloadSfx: {fileID: 0}
