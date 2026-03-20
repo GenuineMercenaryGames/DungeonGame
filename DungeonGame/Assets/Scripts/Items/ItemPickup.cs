@@ -3,19 +3,22 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class ItemPickup : MonoBehaviour
 {
-    public enum PickupType { WEAPON, PASSIVE }
-
-    [SerializeField] private PickupType type;
-
     [Header("Assign one depending on type")]
-    [SerializeField] private WeaponDefinitionBase weapon;
-    [SerializeField] private PassiveItemDefinitionBase passiveItem;
+    [SerializeField] private ItemDefinitionBase m_item;
+
+    private GameObject itemMesh;
+    [SerializeField] GameObject defaultMesh;
 
     private void Reset()
     {
         // Para que funcione como trigger automáticamente
         Collider col = GetComponent<Collider>();
         col.isTrigger = true;
+    }
+
+    private void Start()
+    {
+        RenderMesh();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -28,22 +31,52 @@ public class ItemPickup : MonoBehaviour
             if (playerItems == null) return;
         }
 
-        if (type == PickupType.WEAPON && weapon != null)
-        {
-            playerItems.EquipWeapon(weapon);
-            Debug.Log($"[Pickup] Weapon collected: {weapon.DisplayName}");
-            Destroy(gameObject);
-            return;
-        }
+        var weaponItem = m_item as WeaponDefinitionBase;
 
-        if (type == PickupType.PASSIVE && passiveItem != null)
+        if(weaponItem)
         {
-            playerItems.AddPasiveItem(passiveItem); // si renombras, cambia aquí
-            Debug.Log($"[Pickup] Passive collected: {passiveItem.DisplayName}");
+            playerItems.EquipWeapon(weaponItem);
+            Debug.Log($"[Pickup] Weapon collected: {weaponItem.DisplayName}");
             Destroy(gameObject);
-            return;
         }
+        else
+        {
+            var passiveItem = m_item as PassiveItemDefinitionBase;
 
-        Debug.LogWarning("[Pickup] Misconfigured pickup (missing reference).");
+            if(passiveItem)
+            {
+                playerItems.AddPasiveItem(passiveItem); // si renombras, cambia aquí
+                Debug.Log($"[Pickup] Passive collected: {passiveItem.DisplayName}");
+                Destroy(gameObject);
+            }
+            else
+            {
+                Debug.LogWarning("[Pickup] Misconfigured pickup (missing reference).");
+            }
+        }
+    }
+
+    private void CreateItemPickup(ItemDefinitionBase item)
+    {
+        m_item = item;
+
+        RenderMesh();
+    }
+
+    private void RenderMesh()
+    {
+        if(m_item == null || m_item.PickupPrefab == null)
+        {
+            defaultMesh.SetActive(true);
+            Debug.LogWarning("[Pickup] Misconfigured pickup (missing mesh to render).");
+            // itemMesh = Instantiate(defaultMesh, transform);
+        }
+        else
+        {
+            defaultMesh.SetActive(false);
+            itemMesh = Instantiate(m_item.PickupPrefab, transform);
+            itemMesh.transform.localPosition = Vector3.zero;
+            itemMesh.transform.localRotation = Quaternion.identity;
+        }
     }
 }

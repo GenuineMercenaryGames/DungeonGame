@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1cce916f2fe143641933deb9a4f68f5c, type: 3}
-  m_Name: BasicRangedAttack
+  m_Name: BasicRanged_AS
   m_EditorClassIdentifier: Assembly-CSharp::RangedAttackDefinition
   m_attackKind: 0
   baseRange: 8

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cbd1bffd0557ffd4eb21a14c717385e4, type: 3}
-  m_Name: WeaponDefinition_BasicSword
+  m_Name: BasicSword_DB
   m_EditorClassIdentifier: Assembly-CSharp::BasicSwordDefinition
   id: e38d48ed-00a5-45ee-8da6-1056bd2b0939
   displayName: BasicSword_Weapon
