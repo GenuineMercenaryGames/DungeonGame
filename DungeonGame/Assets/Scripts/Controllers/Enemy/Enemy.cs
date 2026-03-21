@@ -5,6 +5,14 @@ using UnityEngine.UIElements;
 using UnityHFSM;
 using static UnityEngine.UI.Image;
 
+public enum EnemyStates
+{
+    Wandering,
+    Combat,
+    Flee,
+    Dead
+}
+
 public abstract class Enemy : MonoBehaviour
 {
 
@@ -13,6 +21,8 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected float playerAttackRange = 5.0f;
     [SerializeField] protected float moveSpeed = 3.0f;
 
+    private bool attackFinished = true;
+
     // Debug
     [SerializeField] private string currentStateDebug;
     [SerializeField] private LineRenderer shotLine;
@@ -20,10 +30,12 @@ public abstract class Enemy : MonoBehaviour
 
     public NavMeshAgent agent;
     public HealthController healthController;
+    public UtilitySystem utilitySystem;
 
     private Transform target;
-    private StateMachine fsm;
+    public StateMachine fsm;
     private Animator animator;
+    private EnemyStates currentRequestedState;
 
     protected abstract StateMachine MainFSM();
 
@@ -42,28 +54,66 @@ public abstract class Enemy : MonoBehaviour
         agent.SetDestination(position);
     }
 
+    public bool HasFinshedAttack()
+    {
+        return attackFinished;
+    }
+
     public void StayStill()
     {
         agent.ResetPath();
     }
-    public void MeleeAttack()
+    public void Attack()
     {
-        agent.ResetPath();
-        animator.SetTrigger("MeleeAttack");
-        //GetComponent<WeaponController>().Attack();
-        
-        // NOTE : Kike, doesn't this always damage the target regardless of the distance?
-        // -Dani 
-        // -Kike: sí, estoy esperando al melee para meterlo bien.
-        var health = target.GetComponent<HealthController>();
-        if(health != null) health.Health.Value -= 20f;
+        if (attackFinished)
+        {
+            attackFinished = false;
+            agent.ResetPath();
+            animator.SetTrigger("MeleeAttack");
+            GetComponent<WeaponController>().AttackPressed();
+        }
     }
-    public void RangeAttack()
+    public void FinishAttack()
     {
-        agent.ResetPath();
-        // Por ahora hago la melee animation, hasta que quitemos los placeholders.
-        animator.SetTrigger("MeleeAttack");
-        GetComponent<WeaponController>().Attack();
+        attackFinished = true;
+    }
+
+    public Vector3 GetFleePoint(float fleeDistance, float sampleRadius = 2f, int maxTries = 6)
+    {
+        if (target == null || agent == null)
+            return transform.position;
+
+        Vector3 fleeDirection = transform.position - target.position;
+        fleeDirection.y = 0f;
+
+        if (fleeDirection.sqrMagnitude < 0.0001f)
+            fleeDirection = -transform.forward;
+
+        fleeDirection.Normalize();
+
+        for (int i = 0; i < maxTries; i++)
+        {
+            float distanceFactor = 1f - (i * 0.15f);
+            float currentDistance = Mathf.Max(1f, fleeDistance * distanceFactor);
+
+            Vector3 candidate = transform.position + fleeDirection * currentDistance;
+
+            if (NavMesh.SamplePosition(candidate, out NavMeshHit hit, sampleRadius, NavMesh.AllAreas))
+            {
+                NavMeshPath path = new NavMeshPath();
+
+                if (agent.CalculatePath(hit.position, path) && path.status == NavMeshPathStatus.PathComplete)
+                    return hit.position;
+            }
+        }
+
+        return transform.position;
+    }
+
+    public void Flee(float fleeDistance)
+    {
+        Vector3 fleePoint = GetFleePoint(fleeDistance);
+        MoveTowardsPoint(fleePoint);
     }
 
     public bool IsDead()
@@ -84,7 +134,13 @@ public abstract class Enemy : MonoBehaviour
 
     public void LookToPlayer()
     {
-        transform.LookAt(target.position);
+        Vector3 direction = target.position - transform.position;
+        direction.y = 0f;
+
+        if (direction.sqrMagnitude < 0.0001f)
+            return;
+
+        transform.rotation = Quaternion.LookRotation(direction);
     }
 
     public void SmoothLookToPlayer()
@@ -129,6 +185,11 @@ public abstract class Enemy : MonoBehaviour
 
         float angle = Vector3.Angle(transform.forward, toPlayer);
         return angle <= 10 * 0.5f;
+    }
+
+    public bool InAttackRange()
+    {
+        return Vector3.Distance(target.position, transform.position) < playerAttackRange;
     }
 
     int maxPoints = 10;
@@ -211,6 +272,7 @@ public abstract class Enemy : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         healthController = GetComponent<HealthController>();
+        utilitySystem = GetComponent<UtilitySystem>();
         if (shotLine != null)
         {
             shotLine.positionCount = 2;
@@ -227,6 +289,14 @@ public abstract class Enemy : MonoBehaviour
 
     void Update()
     {
+        EnemyStates bestState = utilitySystem.GetBestState();
+
+        if (bestState != currentRequestedState)
+        {
+            fsm.RequestStateChange(bestState.ToString());
+            currentRequestedState = bestState;
+        }
+
         fsm.OnLogic();
         currentStateDebug = fsm.GetActiveHierarchyPath();
         float normalizedSpeed = (agent.velocity.magnitude / moveSpeed);
@@ -244,4 +314,27 @@ public abstract class Enemy : MonoBehaviour
             Debug.DrawLine(corners[i], corners[i + 1], Color.green);
         }
     }
+
+    // Implementación base del score, las clases derivadas deberían sobreescribir el score si se quiere cambiar el comportamiento.
+    public float GetScore(EnemyStates state)
+    {
+        float playerDistance = Vector3.Distance(target.transform.position, transform.position);
+
+        switch (state)
+        {
+            case EnemyStates.Wandering:
+                return playerDistance > playerScanningRange ? 0.2f : 0f;
+            case EnemyStates.Combat:
+                if (playerDistance > playerScanningRange)
+                    return 0f;
+                return 1f - (playerDistance / playerScanningRange);
+            case EnemyStates.Flee:
+                return healthController.Health.Value / healthController.MaxHealth.Value < 0.2 ? 1.0f : 0.0f;
+            case EnemyStates.Dead:
+                return IsDead() ? 1 : 0;
+        }
+        Debug.Log("Estado no manejado.");
+        return 0f;
+    }
+
 }

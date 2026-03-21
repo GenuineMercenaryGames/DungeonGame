@@ -19,21 +19,11 @@ public class MeleeEnemy : Enemy
         sm.AddState("Wandering", f.CreateWanderFSM(10, 5));
         sm.SetStartState("Wandering");
 
-        sm.AddState("FollowPlayer", f.CreateStateFollowPlayer());
-        sm.AddState("AttackPlayer", f.CreateStateMeleeAttack());
+        sm.AddState("Combat", f.CreateMeleeCombatFSM());
+        sm.AddState("AttackPlayer", f.CreateStateAttack());
+        sm.AddState("Flee", f.CreateStateFlee(10));
         sm.AddState("Dead", f.CreateStateDeath());
 
-        sm.AddTransition("Wandering", "FollowPlayer",
-            transition => DistanceToPlayer() < playerScanningRange);
-
-        sm.AddTransition("FollowPlayer", "Wandering",
-            transition => DistanceToPlayer() > playerScanningRange);
-
-        sm.AddTransition("FollowPlayer", "AttackPlayer",
-            transition => DistanceToPlayer() < playerAttackRange);
-
-        sm.AddTransition("AttackPlayer", "FollowPlayer",
-            transition => DistanceToPlayer() > playerAttackRange);
 
         sm.AddTransitionFromAny("Dead",
             transition => IsDead());

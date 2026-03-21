@@ -5,6 +5,8 @@ public class EnemyStateFactory
 {
     private Enemy enemy;
 
+
+
     public EnemyStateFactory(Enemy enemy) {  this.enemy = enemy; }
 
     #region States
@@ -14,20 +16,21 @@ public class EnemyStateFactory
             onLogic: _ => enemy.MoveTowardsPlayer()
         );
     }
-    public State CreateStateMeleeAttack()
+    public State CreateStateFlee(float dist)
     {
         return new State(
-            onEnter: _ => enemy.MeleeAttack()
+            onLogic: _ => enemy.Flee(dist)
         );
     }
-    public State CreateStateRangeAttack()
+    public State CreateStateAttack()
     {
         return new State(
-            onEnter: _ =>
+            onLogic: _ =>
             {
-                enemy.LookToPlayer();
-                enemy.RangeAttack();
-            }
+                enemy.Attack();
+            },
+            canExit: _ => enemy.HasFinshedAttack(),
+            needsExitTime: true
         );
     }
     public State CreateStateLookPlayer()
@@ -95,6 +98,37 @@ public class EnemyStateFactory
         sm.AddTransition("Wait", "Move");
 
         sm.SetStartState("Wait");
+        return sm;
+    }
+
+    public StateMachine CreateMeleeCombatFSM()
+    {
+        var sm = new StateMachine();
+
+        sm.AddState("FollowPlayer", CreateStateFollowPlayer());
+        sm.AddState("Attack", CreateStateAttack());
+
+        sm.AddTransition("FollowPlayer", "Attack", transition => enemy.InAttackRange());
+        sm.AddTransition("Attack", "FollowPlayer", transition => !enemy.InAttackRange());
+
+        sm.SetStartState("FollowPlayer");
+        return sm;
+    }
+
+    public StateMachine CreateRangeCombatFSM(float attackDistance)
+    {
+        var sm = new StateMachine();
+
+        sm.AddState("GoAimPoint", CreateStateAimPlayer(attackDistance));
+        sm.AddState("LookPlayer", CreateStateLookPlayer());
+        sm.AddState("Attack", CreateStateAttack());
+
+        sm.AddTransition("GoAimPoint", "LookPlayer");
+        sm.AddTransition("LookPlayer", "Attack");
+        //sm.AddTransition("Attack", "GoAimPoint", transition => !enemy.InDirectPlayerSight());
+        sm.AddTransition("Attack", "LookPlayer");
+
+        sm.SetStartState("GoAimPoint");
         return sm;
     }
 
