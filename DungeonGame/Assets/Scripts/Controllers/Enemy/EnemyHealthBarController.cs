@@ -13,18 +13,29 @@ public class HealthBarController : MonoBehaviour
     // Por ahora he hecho que solo se muestre cuando recibe daño, pero se puede modificar para que salga en otras ocasiones.
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    public void HideBar()
+    {
+        healthFill.enabled = false;
+        healthFillBackground.enabled = false;
+    }
+
+    public void ShowBar()
+    {
+        healthFill.enabled = true;
+        healthFillBackground.enabled = true;
+    }
+
     void Start()
     {
         healthController = GetComponent<HealthController>();
-        healthFill.enabled = false;
-        healthFillBackground.enabled = false;
+        HideBar();
 
         ObservableVariable<float>.FuncIn2<float> callback = (oldHealth, newHealth) =>
         {
             healthFill.fillAmount = newHealth / healthController.MaxHealth.Value;
             hideCooldown = showTime;
-            healthFill.enabled = true;
-            healthFillBackground.enabled = true;
+            ShowBar();
         };
 
         healthController.Health.AddListener(callback);
@@ -38,8 +49,7 @@ public class HealthBarController : MonoBehaviour
 
         if (hideCooldown <= 0)
         {
-            healthFill.enabled = false;
-            healthFillBackground.enabled = false;
+            HideBar();
             hideCooldown = 0.0f;
         }
         else

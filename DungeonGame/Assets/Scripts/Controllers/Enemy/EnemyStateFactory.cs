@@ -54,6 +54,7 @@ public class EnemyStateFactory
             onEnter: _ =>
             {
                 enemy.StayStill();
+                enemy.healthBarController.HideBar();
 
                 startRotation = enemy.transform.localRotation;
                 targetRotation = startRotation * Quaternion.Euler(0.0f, 0.0f, 90.0f);

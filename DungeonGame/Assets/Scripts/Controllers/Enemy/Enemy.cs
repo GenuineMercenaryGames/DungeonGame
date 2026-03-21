@@ -31,6 +31,7 @@ public abstract class Enemy : MonoBehaviour
     public NavMeshAgent agent;
     public HealthController healthController;
     public UtilitySystem utilitySystem;
+    public HealthBarController healthBarController;
 
     private Transform target;
     public StateMachine fsm;
@@ -273,6 +274,7 @@ public abstract class Enemy : MonoBehaviour
         animator = GetComponent<Animator>();
         healthController = GetComponent<HealthController>();
         utilitySystem = GetComponent<UtilitySystem>();
+        healthBarController = GetComponent<HealthBarController>();
         if (shotLine != null)
         {
             shotLine.positionCount = 2;
