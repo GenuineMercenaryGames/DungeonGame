@@ -169,6 +169,9 @@ public class PlayerController : MonoBehaviour
 
     public void InputInteract(InputAction.CallbackContext ctx)
     {
+        if (ctx.phase != InputActionPhase.Performed)
+            return;
+
         // TODO : Make this follow a generic interface for any type of interactable object so that this works with buttons as well, which will be
         // pretty cool for door opening and whatnot... imagine a horde of motherfuckers coming at you, and you press a button to lock a gate. That'd be
         // pretty cool imo, ngl.
@@ -184,6 +187,8 @@ public class PlayerController : MonoBehaviour
                 break;
             }
         }
+        // NOTE : Maybe also make it so that the player's look at influences the interacted with object, so that the player is forced to look in the direction
+        // of the interaction to be able to properly execute it ("can't" press buttons with your butt lol).
     }
 
     #endregion

@@ -14,6 +14,7 @@ public class MeleeWeapon : MonoBehaviour
 
     void Start()
     {
+        wc = GetComponent<WeaponController>();
         results = new Collider[10];
         elapsedTime = timeBetweenAttacks;
     }
