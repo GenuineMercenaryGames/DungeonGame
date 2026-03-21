@@ -1,28 +1,29 @@
 using UnityEngine;
 
-public class FullAutoWeapon : MonoBehaviour
+[RequireComponent(typeof(SingleProjectileWeapon))]
+public class AutomaticProjectileWeapon : MonoBehaviour
 {
-    [SerializeField] private ProjectileWeaponController weaponController;
-    
+    private SingleProjectileWeapon sp;
     private bool isShooting;
 
     void Start()
     {
+        sp = GetComponent<SingleProjectileWeapon>();
         isShooting = false;
     }
 
     void Update()
     {
         if (isShooting)
-            weaponController.Shoot();
+            sp.Shoot();
     }
 
-    public void ShootFullAutoBegin()
+    public void ShootStart()
     {
         isShooting = true;
     }
 
-    public void ShootFullAutoStop()
+    public void ShootStop()
     {
         isShooting = false;
     }
