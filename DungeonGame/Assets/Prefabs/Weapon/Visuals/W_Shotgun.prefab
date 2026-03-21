@@ -40,9 +40,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5280774140723094235}
-  - component: {fileID: 2399212554582591786}
-  - component: {fileID: 6441748242361407144}
-  - component: {fileID: 8826309879389833390}
+  - component: {fileID: 6347994958213877598}
+  - component: {fileID: 99872613670782186}
+  - component: {fileID: 2006089462244169016}
   m_Layer: 0
   m_Name: W_Shotgun
   m_TagString: Untagged
@@ -67,7 +67,7 @@ Transform:
   - {fileID: 8384120323269190355}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2399212554582591786
+--- !u!114 &6347994958213877598
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -76,18 +76,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 8042391627988696333}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4013861583e40654ebac9cdf4acfd831, type: 3}
+  m_Script: {fileID: 11500000, guid: 9fd42b95aa3cf1a4595cf9615e272f99, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WeaponControllerTest
-  BaseDamage: 10
-  BaseTimeBetweenShots: 0.2
-  Ammo: 100
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponController
+  bulletSpawnTransform: {fileID: 0}
   OnShootPressed:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8826309879389833390}
-        m_TargetAssemblyTypeName: FullAutoWeapon, Assembly-CSharp
-        m_MethodName: ShootFullAutoBegin
+      - m_Target: {fileID: 2006089462244169016}
+        m_TargetAssemblyTypeName: ShotgunProjectileWeapon, Assembly-CSharp
+        m_MethodName: Shoot
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -99,20 +97,13 @@ MonoBehaviour:
         m_CallState: 2
   OnShootReleased:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8826309879389833390}
-        m_TargetAssemblyTypeName: FullAutoWeapon, Assembly-CSharp
-        m_MethodName: ShootFullAutoStop
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &6441748242361407144
+      m_Calls: []
+  OnShootTick:
+    m_PersistentCalls:
+      m_Calls: []
+  Damage: 0
+  owner: {fileID: 0}
+--- !u!114 &99872613670782186
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,11 +114,11 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0325f34249aa05441a3e761b11bc7025, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ProjectileWeaponController
-  weaponController: {fileID: 2399212554582591786}
-  spawnTransform: {fileID: 8384120323269190355}
+  m_EditorClassIdentifier: Assembly-CSharp::SingleProjectileWeapon
   projectilePrefab: {fileID: 7759707805804090412, guid: 431f391e3665cf34d97e5424be6a4b1c, type: 3}
---- !u!114 &8826309879389833390
+  timeBetweenShots: 0.8
+  spreadAngle: 15
+--- !u!114 &2006089462244169016
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -136,10 +127,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8042391627988696333}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75563fe59dbdab54089a6d95e44d6fe0, type: 3}
+  m_Script: {fileID: 11500000, guid: 01caece4455709246960002c27426509, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FullAutoWeapon
-  weaponController: {fileID: 6441748242361407144}
+  m_EditorClassIdentifier: Assembly-CSharp::ShotgunProjectileWeapon
+  pelletCount: 5
 --- !u!1001 &7094246678626813892
 PrefabInstance:
   m_ObjectHideFlags: 0
