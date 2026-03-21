@@ -7,6 +7,7 @@ public class PlayerUIController : MonoBehaviour
     [SerializeField] private float lerpSpeed;
     [SerializeField] private Image imageHealth;
     [SerializeField] private TMP_Text textCoins;
+    [SerializeField] private TMP_Text textAmmo;
 
     void Start()
     {
