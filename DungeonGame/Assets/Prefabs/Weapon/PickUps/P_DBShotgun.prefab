@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9020884149110170140}
   - component: {fileID: 8685976299623097078}
   - component: {fileID: 327999910348637840}
+  - component: {fileID: 6930080307291565017}
   m_Layer: 0
   m_Name: P_DBShotgun
   m_TagString: Untagged
@@ -69,6 +70,21 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6930080307291565017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8526972919876599581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ba51cb754ac9324cb47b541ca3c6eba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpinController
+  spinTarget: {fileID: 9020884149110170140}
+  spinAxis: {x: 0, y: 1, z: 0}
+  spinSpeed: 90
 --- !u!1001 &3202311516759177411
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -99,7 +115,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9f85ab76366ed604f99f01719041aef2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.407
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9f85ab76366ed604f99f01719041aef2, type: 3}
       propertyPath: m_LocalRotation.w

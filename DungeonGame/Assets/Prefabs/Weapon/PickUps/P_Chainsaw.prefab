@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1928691695838300286}
   - component: {fileID: 3936643810658479736}
   - component: {fileID: 7462750379520893974}
+  - component: {fileID: 7817656940869979148}
   m_Layer: 0
   m_Name: P_Chainsaw
   m_TagString: Untagged
@@ -69,6 +70,21 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7817656940869979148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4570825568052782637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ba51cb754ac9324cb47b541ca3c6eba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpinController
+  spinTarget: {fileID: 1928691695838300286}
+  spinAxis: {x: 0, y: 1, z: 0}
+  spinSpeed: 90
 --- !u!1001 &1369822998327977204
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -91,7 +107,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f6759864a284b3b4e916061043b75f49, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f6759864a284b3b4e916061043b75f49, type: 3}
       propertyPath: m_LocalPosition.y
@@ -99,7 +115,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f6759864a284b3b4e916061043b75f49, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.545
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f6759864a284b3b4e916061043b75f49, type: 3}
       propertyPath: m_LocalRotation.w
