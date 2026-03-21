@@ -7,5 +7,4 @@ public class WeaponDefinition : ScriptableObject
     public string WeaponName;
     public float WeaponDamage;
     public float TimeBetweenShots;
-    public AttackDefinition AttackDefinition;
 }
