@@ -6,10 +6,7 @@ public class WeaponController : MonoBehaviour
     [SerializeField] private Transform bulletSpawnTransform;
 
     [Header("Settings")]
-    [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private float timeBetweenShots;
-
-    // TODO : Use an actual weapon scriptable object here for the weapon settings.
+    [SerializeField] private WeaponDefinition weaponDefinition;
 
     private float elapsedTime;
 
