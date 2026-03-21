@@ -22,4 +22,16 @@ public abstract class PassiveItemDefinitionBase : ItemDefinitionBase
     {
         get { return modules; }
     }
+
+    /// Se llama al recoger el item pasivo (1 vez).
+    public virtual void OnAdded(PlayerItemSystem player)
+    {
+        Debug.Log($"[Module Added] {name}");
+    }
+
+    /// Se llama al quitar el pasivo (si lo implementáis).
+    public virtual void OnRemoved(PlayerItemSystem player)
+    {
+        Debug.Log($"[Module Removed] {name}");
+    }
 }

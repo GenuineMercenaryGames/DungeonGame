@@ -10,6 +10,8 @@ public class PlayerItemSystem : MonoBehaviour
 
     private static ObjectPoolController pool;
 
+    private PlayerController playerController;
+
     public List<PassiveWeaponModuleDefinition> ActiveModules
     {
         get { return activeModules; }
@@ -39,14 +41,25 @@ public class PlayerItemSystem : MonoBehaviour
 
         passiveItems.Add(passiveItem);
         Debug.Log($"Added passive item: {passiveItem}");
+
+        passiveItem.OnAdded(this);
         
         foreach(var module in passiveItem.Modules)
         {
             activeModules.Add(module);
-            module.OnAdded(this);
         }
 
         // Order the list of modules according to priority. Items with higher priority will have prefernce when adding functionality to the attack
         activeModules.Sort((a, b) => a.Priority.CompareTo(b.Priority));
+    }
+
+    public void SetPlayerController(PlayerController playerController)
+    {
+        this.playerController = playerController;
+    }
+
+    public PlayerController GetPlayerController()
+    {
+        return playerController;
     }
 }

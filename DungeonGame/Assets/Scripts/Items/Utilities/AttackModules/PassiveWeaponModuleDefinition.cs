@@ -10,18 +10,6 @@ public abstract class PassiveWeaponModuleDefinition : ScriptableObject
         get { return priority; }
     }
 
-    /// Se llama al recoger el item pasivo (1 vez).
-    public virtual void OnAdded(PlayerItemSystem player)
-    {
-        Debug.Log($"[Module Added] {name}");
-    }
-
-    /// Se llama al quitar el pasivo (si lo implementáis).
-    public virtual void OnRemoved(PlayerItemSystem player)
-    {
-        Debug.Log($"[Module Removed] {name}");
-    }
-
     /// <summary>
     /// It is called every attack to modify the context.
     /// Modify the attack context.
