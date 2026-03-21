@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
     public ShieldController shieldController;
     public ObservableVariable<int> Coins = new(0);
 
+    public PlayerItemSystem itemSystem; 
+
     private Vector2 inputMoveRaw;
     private Vector2 inputMove;
     private float inputCameraRotation;
@@ -45,6 +47,7 @@ public class PlayerController : MonoBehaviour
         weaponController = GetComponent<WeaponController>();
         healthController = GetComponent<HealthController>();
         shieldController = GetComponent<ShieldController>();
+        itemSystem = GetComponent<PlayerItemSystem>();
 
         isRunning = false;
         canDash = true;
