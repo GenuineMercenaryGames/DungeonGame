@@ -518,6 +518,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: b5da9872-f372-4334-aac6-85a69969673c
     m_ActionName: 'Player/SelectSecondary[/Keyboard/2]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8309826755787934211}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: InputInteract
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3ff9b54f-aa5e-4f45-b92f-d0bb5bdf6161
+    m_ActionName: 'Player/Interact[/Keyboard/f]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -545,8 +561,10 @@ MonoBehaviour:
   dashDuration: 0.1
   dashCooldown: 0.8
   cameraRotationSpeed: 0.12
-  weaponPrimary: {fileID: 8516118946767772037, guid: 8c58455697b33854aab8d32a63c9753f, type: 3}
-  weaponSecondary: {fileID: 6775412326175625343, guid: bc8acc7d8b71c6c44bb7e90dd63d45e6, type: 3}
+  weapons:
+  - {fileID: 4335688936017390888, guid: 4f05eab3c98457f409aa4d798e9ae777, type: 3}
+  - {fileID: 6775412326175625343, guid: bc8acc7d8b71c6c44bb7e90dd63d45e6, type: 3}
+  equipedWeaponIndex: 0
   characterController: {fileID: 0}
   weaponController: {fileID: 0}
   healthController: {fileID: 0}
@@ -573,6 +591,7 @@ MonoBehaviour:
   OnShootTick:
     m_PersistentCalls:
       m_Calls: []
+  Damage: 0
   owner: {fileID: 0}
 --- !u!114 &8134169243092587801
 MonoBehaviour:
