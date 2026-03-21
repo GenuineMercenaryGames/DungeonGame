@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
 
     [Header("Components")]
     [SerializeField] private Animator animator;
+    [SerializeField] private Transform weaponSocket;
+    [SerializeField] private Transform bulletSocket;
 
     [Header("Movement Settings")]
     [SerializeField] private float walkSpeed;
@@ -20,6 +22,13 @@ public class PlayerController : MonoBehaviour
     [Header("Camera Settings")]
     [SerializeField] private float cameraRotationSpeed;
 
+    [Header("Weapons")]
+    [SerializeField] private GameObject weaponPrimary;
+    [SerializeField] private GameObject weaponSecondary;
+
+    private GameObject currentWeapon;
+
+    [Header("Stuff that should be hidden later")]
     public CharacterController characterController;
     public WeaponController weaponController;
     public HealthController healthController;
@@ -110,9 +119,17 @@ public class PlayerController : MonoBehaviour
 
     public void InputAttack(InputAction.CallbackContext ctx)
     {
-        // Debug.Log("Attack!!!!!!!!!!!!");
-        if (ctx.phase == InputActionPhase.Performed)
-            Attack();
+        switch (ctx.phase)
+        {
+            case InputActionPhase.Performed:
+                AttackPressed();
+                break;
+            case InputActionPhase.Canceled:
+                AttackReleased();
+                break;
+            default:
+                break;
+        }
     }
 
     public void InputRun(InputAction.CallbackContext ctx)
@@ -133,6 +150,16 @@ public class PlayerController : MonoBehaviour
             UIManager.Instance.PauseUI.Resume();
         else
             UIManager.Instance.PauseUI.Pause();
+    }
+
+    public void InputEquipPrimary(InputAction.CallbackContext ctx)
+    {
+        EquipPrimary();
+    }
+
+    public void InputEquipSecondary(InputAction.CallbackContext ctx)
+    {
+        EquipSecondary();
     }
 
     #endregion
@@ -213,11 +240,32 @@ public class PlayerController : MonoBehaviour
         return moveVector;
     }
 
-    private Vector3 GetDashVector()
+    private void UpdateAnimation()
     {
-        Vector3 moveVector = GetMoveVector();
-        Vector3 dashVector = moveVector.magnitude > 0.0f ? moveVector : transform.forward;
-        return dashVector;
+        float dampTime = 0.02f;
+        float speed = isRunning ? 1.0f : 0.0f;
+        Vector3 worldMove = GetMoveForward() * inputMoveRaw.y + GetMoveRight() * inputMoveRaw.x;
+        Vector3 localMove = transform.InverseTransformDirection(worldMove);
+        float moveX = localMove.x * 2.0f;
+        float moveY = localMove.z * 2.0f;
+        animator.SetFloat("Speed", speed, dampTime, delta);
+        animator.SetFloat("MoveX", moveX, dampTime, delta);
+        animator.SetFloat("MoveY", moveY, dampTime, delta);
+        // Debug.Log($"The input is: raw:{inputMoveRaw}, noRaw:{inputMove}, anim:{new Vector2(moveX, moveY)}");
+    }
+
+    #endregion
+
+    #region PrivateMethods - Combat
+
+    private void AttackPressed()
+    {
+        weaponController.AttackPressed();
+    }
+
+    private void AttackReleased()
+    {
+        weaponController.AttackReleased();
     }
 
     // NOTE : Again, this is a temporary hack just to quickly test the melee attack animations system.
@@ -265,7 +313,7 @@ public class PlayerController : MonoBehaviour
     private IEnumerator AttackMeleeCoro(int meleeAttackIndex)
     {
         isAttackingMelee = true;
-        
+
         int layerIndex = animator.GetLayerIndex("CombatMelee");
         string meleeAttackStr = $"Locomotion.Attack{meleeAttackIndex}";
         float elapsedTime = 0.0f;
@@ -284,6 +332,17 @@ public class PlayerController : MonoBehaviour
         animator.CrossFadeInFixedTime("Locomotion.LocomotionBlendTree", 0.1f);
 
         isAttackingMelee = false;
+    }
+
+    #endregion
+
+    #region PrivateMethods - Dash
+
+    private Vector3 GetDashVector()
+    {
+        Vector3 moveVector = GetMoveVector();
+        Vector3 dashVector = moveVector.magnitude > 0.0f ? moveVector : transform.forward;
+        return dashVector;
     }
 
     private void Dash()
@@ -311,20 +370,6 @@ public class PlayerController : MonoBehaviour
         canDash = true;
     }
 
-    private void UpdateAnimation()
-    {
-        float dampTime = 0.02f;
-        float speed = isRunning ? 1.0f : 0.0f;
-        Vector3 worldMove = GetMoveForward() * inputMoveRaw.y + GetMoveRight() * inputMoveRaw.x;
-        Vector3 localMove = transform.InverseTransformDirection(worldMove);
-        float moveX = localMove.x * 2.0f;
-        float moveY = localMove.z * 2.0f;
-        animator.SetFloat("Speed", speed, dampTime, delta);
-        animator.SetFloat("MoveX", moveX, dampTime, delta);
-        animator.SetFloat("MoveY", moveY, dampTime, delta);
-        // Debug.Log($"The input is: raw:{inputMoveRaw}, noRaw:{inputMove}, anim:{new Vector2(moveX, moveY)}");
-    }
-
     #endregion
 
     #region PrivateMethods - Health
@@ -339,6 +384,29 @@ public class PlayerController : MonoBehaviour
 
             // TODO : Play death animation and disable controls.
         }
+    }
+
+    #endregion
+
+    #region PrivateMethods - Equip
+
+    private void EquipPrimary()
+    {
+        EquipWeapon(weaponPrimary);
+    }
+
+    private void EquipSecondary()
+    {
+        EquipWeapon(weaponSecondary);
+    }
+
+    private void EquipWeapon(GameObject weapon)
+    {
+        Destroy(currentWeapon);
+        currentWeapon = Instantiate(weapon, weaponSocket);
+        weaponController = currentWeapon.GetComponent<WeaponController>();
+        weaponController.bulletSpawnTransform = bulletSocket;
+        weaponController.owner = this.gameObject;
     }
 
     #endregion
