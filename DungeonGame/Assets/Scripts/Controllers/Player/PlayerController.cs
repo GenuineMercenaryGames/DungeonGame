@@ -23,8 +23,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float cameraRotationSpeed;
 
     [Header("Weapons")]
-    [SerializeField] private GameObject weaponPrimary;
-    [SerializeField] private GameObject weaponSecondary;
+    [SerializeField] public GameObject[] weapons;
+    [SerializeField] public int equipedWeaponIndex;
 
     private GameObject currentWeapon;
 
@@ -65,6 +65,11 @@ public class PlayerController : MonoBehaviour
         // NOTE : This is a temporary hack because the player prefab is placed manually within the scene.
         // Once the actual spawning logic is implemented within the PlayerManager, this could be removed. But for now, we need this.
         PlayerManager.Instance.SetPlayer(this);
+    }
+
+    void Start()
+    {
+        EquipPrimary();
     }
 
     void Update()
@@ -160,6 +165,25 @@ public class PlayerController : MonoBehaviour
     public void InputEquipSecondary(InputAction.CallbackContext ctx)
     {
         EquipSecondary();
+    }
+
+    public void InputInteract(InputAction.CallbackContext ctx)
+    {
+        // TODO : Make this follow a generic interface for any type of interactable object so that this works with buttons as well, which will be
+        // pretty cool for door opening and whatnot... imagine a horde of motherfuckers coming at you, and you press a button to lock a gate. That'd be
+        // pretty cool imo, ngl.
+        // Also do note that this code is pretty fucking hack as it is. I will rework this "tomorrow" (today in 4 hours, lol) when I wake up. Get off my case!
+        float interactionRadius = 2.0f;
+        Collider[] hits = Physics.OverlapSphere(transform.position, interactionRadius);
+        foreach (var hit in hits)
+        {
+            var pu = hit.GetComponent<WeaponPickUp>();
+            if (pu != null)
+            {
+                pu.PickUp(this);
+                break;
+            }
+        }
     }
 
     #endregion
@@ -392,15 +416,17 @@ public class PlayerController : MonoBehaviour
 
     private void EquipPrimary()
     {
-        EquipWeapon(weaponPrimary);
+        equipedWeaponIndex = 0;
+        EquipWeapon(weapons[0]);
     }
 
     private void EquipSecondary()
     {
-        EquipWeapon(weaponSecondary);
+        equipedWeaponIndex = 1;
+        EquipWeapon(weapons[1]);
     }
 
-    private void EquipWeapon(GameObject weapon)
+    public void EquipWeapon(GameObject weapon)
     {
         Destroy(currentWeapon);
         currentWeapon = Instantiate(weapon, weaponSocket);
