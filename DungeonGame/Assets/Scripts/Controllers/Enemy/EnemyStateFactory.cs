@@ -44,10 +44,32 @@ public class EnemyStateFactory
             needsExitTime: true
         );
     }
-    public State CreateStateDeath()
+    public State CreateStateDeath(float fallTime = 2f)
     {
+        Quaternion startRotation = Quaternion.identity;
+        Quaternion targetRotation = Quaternion.identity;
+        bool destroyed = false;
+
         return new State(
-            onEnter: _ => Object.Destroy(enemy.gameObject)
+            onEnter: _ =>
+            {
+                enemy.StayStill();
+
+                startRotation = enemy.transform.localRotation;
+                targetRotation = startRotation * Quaternion.Euler(0.0f, 0.0f, 90.0f);
+                destroyed = false;
+            },
+            onLogic: state =>
+            {
+                float t = Mathf.Clamp01(state.timer.Elapsed / fallTime); // Recuerda que tengo que usar el state timer más, que se me olvida que existe.
+                enemy.transform.localRotation = Quaternion.Slerp(startRotation, targetRotation, t);
+
+                if (!destroyed && state.timer.Elapsed >= fallTime)
+                {
+                    destroyed = true;
+                    Object.Destroy(enemy.gameObject);
+                }
+            }
         );
     }
     public State CreateStateWait(float time)
