@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 487d66794366ece4e91338b0d3c90c6e, type: 3}
+  m_Name: ForestGenerator
+  m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.ScriptableObjects.DungeonGenerator
+  roomCount: 50
+  roomMaxSize: {x: 80, y: 80}
+  roomMinSize: {x: 30, y: 30}
+  TreeDensity: 20
+  TreeMesh: {fileID: -5773737330183453750, guid: 603970f97e50c56488ec3c5a6febd940, type: 3}
+  TreeMaterial: {fileID: 2100000, guid: 93caadf4359ae8143aad35b3145d31af, type: 2}
+  floorPlane: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  floorMaterial: {fileID: 2100000, guid: 42408edba4996274e9929b98382b40aa, type: 2}
