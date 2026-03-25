@@ -54,6 +54,8 @@ public class ItemPickup : MonoBehaviour
                 Debug.LogWarning("[Pickup] Misconfigured pickup (missing reference).");
             }
         }
+
+        SfxManager.Instance.PlaySfx(AudioNames.ItemPickupSfx);
     }
 
     private void CreateItemPickup(ItemDefinitionBase item)
