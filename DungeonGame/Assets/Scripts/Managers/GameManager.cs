@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
         {
             enemy.Health.AddListener(EnemyKilled);
         }
+
+        BackgroundMusicManager.Instance.PlayBackgroundMusicWithFade(AudioNames.BackgroundMusic, 2.5f);
     }
 
     void EnemyKilled(float oldValue, float newValue)
