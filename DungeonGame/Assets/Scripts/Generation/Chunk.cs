@@ -1,4 +1,6 @@
 ﻿using Assets.Scripts.ScriptableObjects;
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Generation
@@ -18,6 +20,8 @@ namespace Assets.Scripts.Generation
 
         private bool _isPopulated;
 
+        public Mesh WalkablePlane;
+
         public Chunk(Vector3 worldPosition, int chunkCellSize, World world)
         {
             _world = world;
@@ -30,6 +34,8 @@ namespace Assets.Scripts.Generation
             _treeCount = 0;
 
             _isPopulated = false;
+
+            WalkablePlane = new Mesh();
         }
 
         public void PopulateChunk(DungeonGenerator generator)
@@ -58,6 +64,61 @@ namespace Assets.Scripts.Generation
             }
 
             _isPopulated = true;
+
+
+            // Create walkable mesh
+            // TODO: Remake properly
+            List<Vector3> vertices = new List<Vector3>();
+            List<int> indices = new List<int>();
+            for (int x = 0; x < _grid.Size.x; x++)
+            {
+                for (int y = 0; y < _grid.Size.y; y++)
+                {
+                    Vector2Int pos = new Vector2Int(x, y);
+                    if (_grid[pos] == CellType.ROOM || _grid[pos] == CellType.HALLWAY)
+                    {
+                        float xp = x + _worldPosition.x;
+                        float yp = _worldPosition.y;
+                        float zp = y + _worldPosition.z;
+                        int v = vertices.Count;
+                        vertices.Add(new Vector3(xp, yp, zp));
+                        vertices.Add(new Vector3(xp + 1.0f, yp, zp));
+                        vertices.Add(new Vector3(xp, yp, zp + 1.0f));
+                        vertices.Add(new Vector3(xp + 1.0f, yp, zp + 1.0f));
+
+                        indices.Add(v);
+                        indices.Add(v + 3);
+                        indices.Add(v + 1);
+                        indices.Add(v);
+                        indices.Add(v + 2);
+                        indices.Add(v + 3);
+                    }
+                }
+            }
+
+            WalkablePlane.SetVertices(vertices);
+            WalkablePlane.SetIndices(indices, MeshTopology.Triangles, 0);
+            WalkablePlane.RecalculateNormals();
+
+
+            // Spawn stuff
+            // TODO: REMAKE PROPERLY
+            for (int x = 0; x < _grid.Size.x; x++)
+            {
+                for (int y = 0; y < _grid.Size.y; y++)
+                {
+                    Vector2Int pos = new Vector2Int(x, y);
+                    if (_grid[pos] == CellType.ROOM || _grid[pos] == CellType.HALLWAY)
+                    {
+                        int p = _world.GetRandom().Next(0, _currentGenerator.PrefabsToSpawn.Length);
+                        float r = _world.GetRandom().Next(0, 100) / 100.0f;
+                        if(r <= _currentGenerator.PrefabsProbabilities[p])
+                        {
+                            GameObject.Instantiate(_currentGenerator.PrefabsToSpawn[p], new Vector3(pos.x, 0.0f, pos.y) + _worldPosition, Quaternion.identity);
+                        }
+                    }
+                }
+            }
         }
 
         public void RenderChunk()
@@ -65,9 +126,9 @@ namespace Assets.Scripts.Generation
             if (!_isPopulated) return;
 
             Vector3 size = new Vector3(_grid.Size.x, 0.25f, _grid.Size.y);
-            Vector3 position = _worldPosition + new Vector3(size.x * 0.5f, size.y * 0.5f, size.z * 0.5f);
-            Matrix4x4 floorMatrix = Matrix4x4.TRS(position, Quaternion.identity, size);
-            Graphics.RenderMesh(in _currentGenerator.RParamsFloor, _currentGenerator.floorPlane, 0, floorMatrix);
+            Vector3 position = Vector3.zero;// _worldPosition;// + new Vector3(size.x * 0.5f, size.y * 0.5f, size.z * 0.5f);
+            Matrix4x4 floorMatrix = Matrix4x4.TRS(position, Quaternion.identity, Vector3.one);
+            Graphics.RenderMesh(in _currentGenerator.RParamsFloor, WalkablePlane, 0, floorMatrix);
 
             if (_treeCount == 0) return;
             Graphics.RenderMeshInstanced(in _currentGenerator.RParamsTrees, _currentGenerator.TreeMesh, 0, _treeMatrices, _treeCount, 0);

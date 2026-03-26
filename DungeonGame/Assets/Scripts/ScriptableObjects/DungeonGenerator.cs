@@ -24,6 +24,11 @@ namespace Assets.Scripts.ScriptableObjects
 
         public RenderParams RParamsFloor;
 
+
+        [Header("Spawn")]
+        public GameObject[] PrefabsToSpawn;
+        public float[] PrefabsProbabilities;
+
         private void OnValidate()
         {
             RParamsTrees = new RenderParams(TreeMaterial);

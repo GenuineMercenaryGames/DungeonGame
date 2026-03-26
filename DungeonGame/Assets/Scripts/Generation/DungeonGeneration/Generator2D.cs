@@ -7,52 +7,18 @@ using Assets.Scripts.Generation.DungeonGeneration.Utils;
 using static UnityEditor.FilePathAttribute;
 using Assets.Scripts.ScriptableObjects;
 using Assets.Scripts.Generation;
+using Rect = Assets.Scripts.Generation.Rect;
 
 public class Generator2D {
-    struct Room
-    { 
-        public int RectCount { get { return _rectCount; } }
-        public Rect[] Rects;
-        private int _rectCount;
-
-        public Room(int maxRectCount)
-        {
-            Rects = new Rect[maxRectCount];
-            _rectCount = 0;
-        }
-
-        public void AddRect(Rect a)
-        {
-            Rects[_rectCount++] = a;
-        }
-    }
-
-    struct Rect {
-        public RectInt bounds;
-        public int ParentRoom { get; set; }
-
-        public Rect(Vector2Int location, Vector2Int size, int parentRoom) {
-            bounds = new RectInt(location, size);
-            ParentRoom = parentRoom;
-        }
-
-
-        public static bool Intersect(Rect a, Rect b) {
-            return !((a.bounds.position.x >= (b.bounds.position.x + b.bounds.size.x)) || ((a.bounds.position.x + a.bounds.size.x) <= b.bounds.position.x)
-                || (a.bounds.position.y >= (b.bounds.position.y + b.bounds.size.y)) || ((a.bounds.position.y + a.bounds.size.y) <= b.bounds.position.y));
-        }
-    }
 
     private DungeonGenerator _generator;
 
     private const int PARENT_ROOM_NULL = 0;
-    private const int MAX_ROOM_COUNT = 256;
-    private const int MAX_RECT_PER_ROOM_COUNT = 16;
+    private const int MAX_RECT_PER_ROOM_COUNT = 32;
 
     private World _world;
 
     DynamicArray<Rect> _roomRects;
-
     DynamicArray<Room> _rooms;
 
     Random _random;
@@ -62,13 +28,13 @@ public class Generator2D {
     List<Vertex> vertices;
     List<Prim.Edge> edges;
 
-    public Generator2D(World world, Random random) {
-        _roomRects = new DynamicArray<Rect>(MAX_ROOM_COUNT);
-        _rooms = new DynamicArray<Room>(MAX_ROOM_COUNT); 
+    public Generator2D(World world, Random random, int maxRoomCount, DynamicArray<Room> rooms) {
+        _roomRects = new DynamicArray<Rect>(maxRoomCount);
         vertices = new List<Vertex>();
         edges = new List<Prim.Edge>();
         _world = world;
         _random = random;
+        _rooms = rooms;
     }
 
     public void Generate(DungeonGenerator generator) {
