@@ -58,6 +58,6 @@ public class RoomDecorator : MonoBehaviour
     void Start()
     {
         DecoratePlanes();
-        navMeshController.Regenerate();
+        navMeshController.Regenerate(new Assets.Scripts.Generation.Chunk[0]);
     }
 }

@@ -20,3 +20,5 @@ MonoBehaviour:
   TreeMaterial: {fileID: 2100000, guid: 93caadf4359ae8143aad35b3145d31af, type: 2}
   floorPlane: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   floorMaterial: {fileID: 2100000, guid: 42408edba4996274e9929b98382b40aa, type: 2}
+  PrefabsToSpawn: []
+  PrefabsProbabilities: []

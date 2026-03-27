@@ -1,3 +1,4 @@
+using Assets.Scripts.Generation;
 using UnityEngine;
 
 // NOTE : The current implementation is a temporary workaround to get things going for the deadline.
@@ -6,6 +7,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private HealthController[] enemies;
+    [SerializeField] private GameObject player;
+    [SerializeField] private World worldGenerator;
+
     int deaths;
     int numEnemies;
 
@@ -17,6 +21,9 @@ public class GameManager : MonoBehaviour
         {
             enemy.Health.AddListener(EnemyKilled);
         }
+
+        if(worldGenerator != null)
+            player.transform.position = new Vector3(worldGenerator.PlayerSpawnPosition.x, player.transform.position.y, worldGenerator.PlayerSpawnPosition.z); // TODO: No sé si meter esto aquí o hacer un manager dedicado. -kike
 
         BackgroundMusicManager.Instance.PlayBackgroundMusicWithFade(AudioNames.BackgroundMusic, 2.5f);
     }

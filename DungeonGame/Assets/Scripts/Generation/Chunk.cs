@@ -110,11 +110,15 @@ namespace Assets.Scripts.Generation
                     Vector2Int pos = new Vector2Int(x, y);
                     if (_grid[pos] == CellType.ROOM || _grid[pos] == CellType.HALLWAY)
                     {
-                        int p = _world.GetRandom().Next(0, _currentGenerator.PrefabsToSpawn.Length);
-                        float r = _world.GetRandom().Next(0, 100) / 100.0f;
-                        if(r <= _currentGenerator.PrefabsProbabilities[p])
+                        // Te he metido esta comprobación para evitar que pete sin prefabs - kike
+                        if (_currentGenerator.PrefabsToSpawn.Length != 0) 
                         {
-                            GameObject.Instantiate(_currentGenerator.PrefabsToSpawn[p], new Vector3(pos.x, 0.0f, pos.y) + _worldPosition, Quaternion.identity);
+                            int p = _world.GetRandom().Next(0, _currentGenerator.PrefabsToSpawn.Length);
+                            float r = _world.GetRandom().Next(0, 100) / 100.0f;
+                            if (r <= _currentGenerator.PrefabsProbabilities[p])
+                            {
+                                GameObject gameObject = GameObject.Instantiate(_currentGenerator.PrefabsToSpawn[p], new Vector3(pos.x, 0.0f, pos.y) + _worldPosition, Quaternion.identity);
+                            }
                         }
                     }
                 }
