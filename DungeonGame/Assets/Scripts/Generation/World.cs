@@ -16,23 +16,19 @@ namespace Assets.Scripts.Generation
         DESERT
     }
 
-    public enum CellType
-    {
-        NONE,
-        HALLWAY,
-        ROOM
-    }
-
-    public struct Room
+    public class Room
     {
         public int RectCount { get { return _rectCount; } }
         public Rect[] Rects;
         private int _rectCount;
 
+        public bool HasSpawnedContents { get; set; }
+
         public Room(int maxRectCount)
         {
             Rects = new Rect[maxRectCount];
             _rectCount = 0;
+            HasSpawnedContents = false;
         }
 
         public void AddRect(Rect a)
@@ -64,6 +60,18 @@ namespace Assets.Scripts.Generation
 
     public class World : MonoBehaviour
     {
+        // Constants
+        public const ushort CELL_TYPE_ROOM = 2;
+        public const ushort CELL_TYPE_HALLWAY = 1;
+        public const ushort CELL_TYPE_EMPTY = 0;
+
+        // Events
+        public event Action<Chunk> OnChunkLoad;
+        public event Action<Chunk> OnChunkUnload;
+
+        public event Action<Room> OnRoomEnter;
+        public event Action<Room> OnRoomExit;
+
         public Vector2Int MaxWorldSizeInCells { get { return maxWorldSizeInCells; } }
         public Vector3 PlayerSpawnPosition { get { return _playerSpawnPosition; } }
         [SerializeField] private Vector2Int maxWorldSizeInCells;
@@ -85,13 +93,15 @@ namespace Assets.Scripts.Generation
         private const int MAX_ROOM_COUNT = 256;
 
         private Vector3 _playerSpawnPosition;
+        private ushort _lastPlayerCell = 0;
 
-        public void SetCell(Vector2Int pos, CellType cell)
+
+        public void SetCell(Vector2Int pos, ushort cell)
         {
             GetChunk(pos).SetCell(GetLocalPos(pos), cell);
         }
 
-        public CellType GetCell(Vector2Int pos) 
+        public ushort GetCell(Vector2Int pos) 
         {
             return GetChunk(pos).GetCell(GetLocalPos(pos));
         }
@@ -153,6 +163,23 @@ namespace Assets.Scripts.Generation
 
         private void LateUpdate()
         {
+            // Check if player changed room
+            ushort currentPlayerCell = GetCell(new Vector2Int((int)player.transform.position.x, (int)player.transform.position.z));
+            if(currentPlayerCell != _lastPlayerCell)
+            {
+                if (_lastPlayerCell >= CELL_TYPE_ROOM)
+                {
+                    OnRoomExit?.Invoke(_rooms[_lastPlayerCell - CELL_TYPE_ROOM]);
+                }
+                if(currentPlayerCell >= CELL_TYPE_ROOM) 
+                {
+                    OnRoomEnter?.Invoke(_rooms[currentPlayerCell - CELL_TYPE_ROOM]);
+                }
+
+                _lastPlayerCell = currentPlayerCell;
+            }
+
+            // Render chunks
             for (int x = -playerChunkVisibleRange; x <= playerChunkVisibleRange; x++)
             {
                 for (int y = -playerChunkVisibleRange; y <= playerChunkVisibleRange; y++)
@@ -194,12 +221,32 @@ namespace Assets.Scripts.Generation
                 }
             }
 
-            navMeshController.Regenerate(_chunks);
+            navMeshController?.Regenerate(_chunks);
         }
 
         public System.Random GetRandom()
         {
             return _random;
+        }
+
+        private void OnDrawGizmos()
+        {
+            return;
+            if (_chunks == null) return;
+            for (int x = -playerChunkVisibleRange; x <= playerChunkVisibleRange; x++)
+            {
+                for (int y = -playerChunkVisibleRange; y <= playerChunkVisibleRange; y++)
+                {
+                    Vector2Int playerChunkCoord = GetChunkCoord(player.transform.position);
+                    Vector2Int pos = new Vector2Int(x, y) + playerChunkCoord;
+                    if (IsChunkCoordInWorldBounds(pos))
+                    {
+                        _chunks[GetIndexFromChunkCoord(pos)].DrawGizmos();
+                    }
+                }
+            }
+
+                    
         }
 
         private void OnDrawGizmosSelected()

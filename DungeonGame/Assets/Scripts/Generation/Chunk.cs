@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts.ScriptableObjects;
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,10 +6,12 @@ namespace Assets.Scripts.Generation
 {
     public class Chunk
     {
+        public bool IsLoaded { get; private set; }
+
         private World _world;
         private Vector3 _worldPosition;
 
-        private Grid2D<CellType> _grid;
+        private Grid2D<ushort> _grid;
 
         // TODO: Change approach. This needs further talk as it depends
         // on how assets will be done, etc.
@@ -25,7 +26,7 @@ namespace Assets.Scripts.Generation
         public Chunk(Vector3 worldPosition, int chunkCellSize, World world)
         {
             _world = world;
-            _grid = new Grid2D<CellType>(new Vector2Int(chunkCellSize, chunkCellSize), Vector2Int.zero);
+            _grid = new Grid2D<ushort>(new Vector2Int(chunkCellSize, chunkCellSize), Vector2Int.zero);
             _worldPosition = worldPosition;
             
             // Tree stuff
@@ -46,7 +47,7 @@ namespace Assets.Scripts.Generation
                 for (int y = 0; y < _grid.Size.y; y++)
                 {
                     Vector2Int pos = new Vector2Int(x, y);
-                    if (_grid[pos] == CellType.NONE)
+                    if (_grid[pos] == World.CELL_TYPE_EMPTY)
                     {
                         // Check if tree can be generated
                         float r = _world.GetRandom().Next(0, 100);
@@ -75,7 +76,7 @@ namespace Assets.Scripts.Generation
                 for (int y = 0; y < _grid.Size.y; y++)
                 {
                     Vector2Int pos = new Vector2Int(x, y);
-                    if (_grid[pos] == CellType.ROOM || _grid[pos] == CellType.HALLWAY)
+                    if (_grid[pos] >= World.CELL_TYPE_ROOM || _grid[pos] == World.CELL_TYPE_HALLWAY)
                     {
                         float xp = x + _worldPosition.x;
                         float yp = _worldPosition.y;
@@ -103,6 +104,7 @@ namespace Assets.Scripts.Generation
 
             // Spawn stuff
             // TODO: REMAKE PROPERLY
+            /* Commented temporarily? If spawn is handled elsewhere in the end, then remove this code
             for (int x = 0; x < _grid.Size.x; x++)
             {
                 for (int y = 0; y < _grid.Size.y; y++)
@@ -122,7 +124,17 @@ namespace Assets.Scripts.Generation
                         }
                     }
                 }
-            }
+            }*/
+        }
+
+        public void LoadChunk()
+        {
+            IsLoaded = true;
+        }
+
+        public void UnloadChunk()
+        {
+            IsLoaded = false;
         }
 
         public void RenderChunk()
@@ -138,12 +150,12 @@ namespace Assets.Scripts.Generation
             Graphics.RenderMeshInstanced(in _currentGenerator.RParamsTrees, _currentGenerator.TreeMesh, 0, _treeMatrices, _treeCount, 0);
         }
 
-        public void SetCell(Vector2Int pos, CellType cell)
+        public void SetCell(Vector2Int pos, ushort cell)
         {
             _grid[pos] = cell;
         }
 
-        public CellType GetCell(Vector2Int pos)
+        public ushort GetCell(Vector2Int pos)
         {
             return _grid[pos];
         }
@@ -156,19 +168,20 @@ namespace Assets.Scripts.Generation
                 {
                     switch(_grid[new Vector2Int(x, y)])
                     {
-                        case CellType.NONE:
+                        case World.CELL_TYPE_EMPTY:
                             Gizmos.color = Color.red;
                             break;
-                        case CellType.HALLWAY:
+                        case World.CELL_TYPE_HALLWAY:
                             Gizmos.color = Color.blue;
                             break;
-                        case CellType.ROOM:
+                        case World.CELL_TYPE_ROOM:
+                        default:
                             Gizmos.color = Color.purple;
                             break;
                     }
 
                     Vector3 pos = new Vector3(x, 0.0f, y) + _worldPosition;
-                    Gizmos.DrawCube(pos - new Vector3(0.5f, 0.0f, 0.5f), Vector3.one);
+                    Gizmos.DrawSphere(pos - new Vector3(0.5f, 0.0f, 0.5f), 0.5f);
                 }
             }
         }

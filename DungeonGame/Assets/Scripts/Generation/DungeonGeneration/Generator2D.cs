@@ -48,6 +48,17 @@ public class Generator2D {
         Triangulate();
         CreateHallways();
         PathfindHallways();
+
+        for(int i = 0; i < _rooms.Count; i++) 
+        { 
+            for(int j = 0; j < _rooms[i].RectCount; j++)
+            {
+                foreach (var p in _rooms[i].Rects[j].bounds.allPositionsWithin)
+                {
+                    _world.SetCell(p, (ushort)(i + World.CELL_TYPE_ROOM));
+                }
+            }
+        }
     }
 
     void PlaceRooms() {
@@ -75,7 +86,7 @@ public class Generator2D {
 
                 foreach (var pos in newRoom.bounds.allPositionsWithin)
                 {
-                    _world.SetCell(pos, CellType.ROOM);
+                    _world.SetCell(pos, World.CELL_TYPE_ROOM);
                 }
             }
         }
@@ -189,11 +200,11 @@ public class Generator2D {
                 
                 pathCost.cost = Vector2Int.Distance(b.Position, endPos);
 
-                if (_world.GetCell(b.Position) >= CellType.ROOM) {
+                if (_world.GetCell(b.Position) >= World.CELL_TYPE_ROOM) {
                     pathCost.cost += 10;
-                } else if (_world.GetCell(b.Position) == CellType.NONE) {
+                } else if (_world.GetCell(b.Position) == World.CELL_TYPE_EMPTY) {
                     pathCost.cost += 5;
-                } else if (_world.GetCell(b.Position) == CellType.HALLWAY) {
+                } else if (_world.GetCell(b.Position) == World.CELL_TYPE_HALLWAY) {
                     pathCost.cost += 1;
                 }
 
@@ -208,7 +219,7 @@ public class Generator2D {
                     Rect newRoom = new Rect(current, new Vector2Int(10, 10), PARENT_ROOM_NULL);
                     foreach (Vector2Int pos in newRoom.bounds.allPositionsWithin)
                     {
-                        _world.SetCell(pos, CellType.HALLWAY);
+                        _world.SetCell(pos, World.CELL_TYPE_HALLWAY);
                     }
 
                     if (i > 0) {
