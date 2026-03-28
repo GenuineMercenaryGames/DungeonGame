@@ -31,11 +31,11 @@ public abstract class Enemy : MonoBehaviour
     public NavMeshAgent agent;
     public HealthController healthController;
     public UtilitySystem utilitySystem;
-    public HealthBarController healthBarController;
+    public EnemyUIController enemyUIController;
 
     private Transform target;
     public StateMachine fsm;
-    private Animator animator;
+    public Animator animator;
     private EnemyStates currentRequestedState;
 
     protected abstract StateMachine MainFSM();
@@ -157,6 +157,7 @@ public abstract class Enemy : MonoBehaviour
         );
     }
 
+
     void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
@@ -274,7 +275,7 @@ public abstract class Enemy : MonoBehaviour
         animator = GetComponent<Animator>();
         healthController = GetComponent<HealthController>();
         utilitySystem = GetComponent<UtilitySystem>();
-        healthBarController = GetComponent<HealthBarController>();
+        enemyUIController = GetComponent<EnemyUIController>();
         if (shotLine != null)
         {
             shotLine.positionCount = 2;
@@ -301,6 +302,7 @@ public abstract class Enemy : MonoBehaviour
 
         fsm.OnLogic();
         currentStateDebug = fsm.GetActiveHierarchyPath();
+
         float normalizedSpeed = (agent.velocity.magnitude / moveSpeed);
         animator.SetFloat("MoveSpeed", normalizedSpeed);
 

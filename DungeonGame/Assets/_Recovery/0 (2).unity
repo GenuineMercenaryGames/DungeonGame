@@ -249,10 +249,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerPrefab
       objectReference: {fileID: 0}
-    - target: {fileID: 8309826755787934211, guid: e7081e3954884094983695c28fc47a31, type: 3}
-      propertyPath: limitMovementToNavmesh
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -13,7 +13,10 @@ public class EnemyStateFactory
     public State CreateStateFollowPlayer()
     {
         return new State(
-            onLogic: _ => enemy.MoveTowardsPlayer()
+            onLogic: state =>
+            {
+                enemy.MoveTowardsPlayer();
+            }
         );
     }
     public State CreateStateFlee(float dist)
@@ -44,7 +47,7 @@ public class EnemyStateFactory
             needsExitTime: true
         );
     }
-    public State CreateStateDeath(float fallTime = 2f)
+    public State CreateStateDeath(float fallTime = 5f)
     {
         Quaternion startRotation = Quaternion.identity;
         Quaternion targetRotation = Quaternion.identity;
@@ -54,7 +57,7 @@ public class EnemyStateFactory
             onEnter: _ =>
             {
                 enemy.StayStill();
-                enemy.healthBarController.HideBar();
+                enemy.enemyUIController.HideBar();
 
                 startRotation = enemy.transform.localRotation;
                 targetRotation = startRotation * Quaternion.Euler(0.0f, 0.0f, 90.0f);
@@ -62,8 +65,10 @@ public class EnemyStateFactory
             },
             onLogic: state =>
             {
-                float t = Mathf.Clamp01(state.timer.Elapsed / fallTime); // Recuerda que tengo que usar el state timer más, que se me olvida que existe.
-                enemy.transform.localRotation = Quaternion.Slerp(startRotation, targetRotation, t);
+                enemy.animator.SetTrigger("Die");
+                enemy.GetComponent<BoxCollider>().enabled = false;
+                //float t = Mathf.Clamp01(state.timer.Elapsed / fallTime); // Recuerda que tengo que usar el state timer más, que se me olvida que existe.
+                //enemy.transform.localRotation = Quaternion.Slerp(startRotation, targetRotation, t);
 
                 if (!destroyed && state.timer.Elapsed >= fallTime)
                 {
@@ -124,9 +129,15 @@ public class EnemyStateFactory
         return sm;
     }
 
-    public StateMachine CreateMeleeCombatFSM()
+    public HybridStateMachine CreateMeleeCombatFSM()
     {
-        var sm = new StateMachine();
+
+        var sm = new HybridStateMachine(
+            beforeOnEnter: self =>
+            {
+                enemy.enemyUIController.ShowWarnSign();
+            }
+        );
 
         sm.AddState("FollowPlayer", CreateStateFollowPlayer());
         sm.AddState("Attack", CreateStateAttack());
