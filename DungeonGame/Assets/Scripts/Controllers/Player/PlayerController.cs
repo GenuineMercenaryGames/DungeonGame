@@ -1,6 +1,9 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem;
+using static Unity.Collections.AllocatorManager;
+using static UnityEngine.GraphicsBuffer;
 
 public class PlayerController : MonoBehaviour
 {
@@ -18,6 +21,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float dashSpeed;
     [SerializeField] public float dashDuration;
     [SerializeField] public float dashCooldown;
+    [SerializeField] public bool limitMovementToNavmesh;
 
     [Header("Camera Settings")]
     [SerializeField] private float cameraRotationSpeed;
@@ -200,7 +204,11 @@ public class PlayerController : MonoBehaviour
 
     private void Move(Vector3 deltaX)
     {
-        characterController.Move(deltaX);
+        Vector3 targetPosition = transform.position + deltaX;
+        if (!NavMesh.Raycast(targetPosition, targetPosition, out NavMeshHit hit, NavMesh.AllAreas) || (!limitMovementToNavmesh))
+        {
+            characterController.Move(deltaX);
+        }
     }
 
     private void Move(float x, float y, float z)
