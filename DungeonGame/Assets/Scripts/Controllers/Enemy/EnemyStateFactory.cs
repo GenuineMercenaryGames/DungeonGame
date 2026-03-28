@@ -66,6 +66,7 @@ public class EnemyStateFactory
             onLogic: state =>
             {
                 enemy.animator.SetTrigger("Die");
+                enemy.GetComponent<BoxCollider>().enabled = false;
                 //float t = Mathf.Clamp01(state.timer.Elapsed / fallTime); // Recuerda que tengo que usar el state timer más, que se me olvida que existe.
                 //enemy.transform.localRotation = Quaternion.Slerp(startRotation, targetRotation, t);
 
