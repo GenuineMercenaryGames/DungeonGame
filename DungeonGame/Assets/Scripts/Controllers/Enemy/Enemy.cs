@@ -35,7 +35,7 @@ public abstract class Enemy : MonoBehaviour
 
     private Transform target;
     public StateMachine fsm;
-    private Animator animator;
+    public Animator animator;
     private EnemyStates currentRequestedState;
 
     protected abstract StateMachine MainFSM();
