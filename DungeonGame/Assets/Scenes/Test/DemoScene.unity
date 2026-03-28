@@ -858,6 +858,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4543239959661344361, guid: db0cc6549cf2f43429a7537b3ec5a641, type: 3}
   m_PrefabInstance: {fileID: 250690817}
   m_PrefabAsset: {fileID: 0}
+--- !u!224 &251422647 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3839219910696500289, guid: 92d90e71346dedd4782a42f6979ddd46, type: 3}
+  m_PrefabInstance: {fileID: 2067942058}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &255439679 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6595548756656761010, guid: 34ff6abfc1d370640a9febb8e80dd8cf, type: 3}
@@ -3329,6 +3334,81 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b1f7e1a1b2d8ce4bacf68787e9072c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthController
+--- !u!1 &822262553
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 822262554}
+  - component: {fileID: 822262556}
+  - component: {fileID: 822262555}
+  m_Layer: 5
+  m_Name: WarningSign
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &822262554
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822262553}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 251422647}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 1.58}
+  m_SizeDelta: {x: 1, y: 1}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &822262555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822262553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: aadbdea239be3944fae4c493ca574a37, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &822262556
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822262553}
+  m_CullTransparentMesh: 1
 --- !u!1001 &823739356
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8337,9 +8417,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3749768189971706992, guid: 92d90e71346dedd4782a42f6979ddd46, type: 3}
+      propertyPath: warnImage
+      value: 
+      objectReference: {fileID: 822262555}
+    - target: {fileID: 5829449635762026711, guid: 92d90e71346dedd4782a42f6979ddd46, type: 3}
+      propertyPath: m_Name
+      value: EnemyCanvas
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 3839219910696500289, guid: 92d90e71346dedd4782a42f6979ddd46, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 822262554}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92d90e71346dedd4782a42f6979ddd46, type: 3}
 --- !u!114 &2067942059 stripped

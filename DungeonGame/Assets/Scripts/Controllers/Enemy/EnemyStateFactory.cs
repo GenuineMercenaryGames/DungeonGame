@@ -13,7 +13,10 @@ public class EnemyStateFactory
     public State CreateStateFollowPlayer()
     {
         return new State(
-            onLogic: _ => enemy.MoveTowardsPlayer()
+            onLogic: state =>
+            {
+                enemy.MoveTowardsPlayer();
+            }
         );
     }
     public State CreateStateFlee(float dist)
@@ -54,7 +57,7 @@ public class EnemyStateFactory
             onEnter: _ =>
             {
                 enemy.StayStill();
-                enemy.healthBarController.HideBar();
+                enemy.enemyUIController.HideBar();
 
                 startRotation = enemy.transform.localRotation;
                 targetRotation = startRotation * Quaternion.Euler(0.0f, 0.0f, 90.0f);
@@ -125,9 +128,15 @@ public class EnemyStateFactory
         return sm;
     }
 
-    public StateMachine CreateMeleeCombatFSM()
+    public HybridStateMachine CreateMeleeCombatFSM()
     {
-        var sm = new StateMachine();
+
+        var sm = new HybridStateMachine(
+            beforeOnEnter: self =>
+            {
+                enemy.enemyUIController.ShowWarnSign();
+            }
+        );
 
         sm.AddState("FollowPlayer", CreateStateFollowPlayer());
         sm.AddState("Attack", CreateStateAttack());

@@ -342,7 +342,7 @@ GameObject:
   - component: {fileID: 6020673105523121550}
   - component: {fileID: 8076111407368277762}
   m_Layer: 5
-  m_Name: EnemyHealthBar
+  m_Name: EnemyCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -362,6 +362,7 @@ RectTransform:
   m_Children:
   - {fileID: 2247425556889218009}
   - {fileID: 8507137680518871222}
+  - {fileID: 3312124256135393590}
   m_Father: {fileID: 905203547048942676}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -571,6 +572,81 @@ Transform:
   - {fileID: 6176887663267625506}
   m_Father: {fileID: 6506397488027098008}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8450846456819813958
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3312124256135393590}
+  - component: {fileID: 2661226683933120116}
+  - component: {fileID: 3406615669326725177}
+  m_Layer: 5
+  m_Name: WarningSign
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3312124256135393590
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8450846456819813958}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3839219910696500289}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 1.58}
+  m_SizeDelta: {x: 1, y: 1}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &2661226683933120116
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8450846456819813958}
+  m_CullTransparentMesh: 1
+--- !u!114 &3406615669326725177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8450846456819813958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &8538963913782500755
 GameObject:
   m_ObjectHideFlags: 0
@@ -770,7 +846,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   healthController: {fileID: 0}
   utilitySystem: {fileID: 0}
-  healthBarController: {fileID: 0}
+  enemyUIController: {fileID: 0}
   animator: {fileID: 0}
 --- !u!114 &291797136239462352
 MonoBehaviour:
@@ -857,7 +933,9 @@ MonoBehaviour:
   healthController: {fileID: 291797136239462352}
   healthFill: {fileID: 6654323696220427344}
   healthFillBackground: {fileID: 8746300345919160261}
-  showTime: 3
+  warnImage: {fileID: 3406615669326725177}
+  healthShowTime: 3
+  warningShowTime: 1
 --- !u!114 &3708628368232453085
 MonoBehaviour:
   m_ObjectHideFlags: 0
