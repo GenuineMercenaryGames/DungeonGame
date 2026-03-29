@@ -21,6 +21,7 @@ namespace Assets.Scripts.Generation
         public int RectCount { get { return _rectCount; } }
         public Rect[] Rects;
         private int _rectCount;
+        public List<GameObject> _instances = new List<GameObject>();
 
         public bool HasSpawnedContents { get; set; }
 
@@ -141,6 +142,80 @@ namespace Assets.Scripts.Generation
             return p.x >= 0 && p.x < _chunksPerAxis.x && p.y >= 0 && p.y < _chunksPerAxis.y;
         }
 
+        private void EnableRoomContents(Room room)
+        {
+            foreach (GameObject go in room._instances)
+            {
+                if(go != null)
+                go.SetActive(true);
+            }
+        }
+
+        private void DisableRoomContents(Room room)
+        {
+            foreach (GameObject go in room._instances)
+            {
+                if(go != null)
+                go.SetActive(false);
+            }
+        }
+
+        private void SpawnRoomContents(Room room)
+        {
+
+            DungeonType type = DungeonType.FOREST;
+            DungeonGenerator gen = dungeonGenerators[(int)type];
+
+            if (room == null || room.HasSpawnedContents)
+            {
+                return;
+            }
+
+
+            int prefabCount = Mathf.Min(
+                gen.PrefabsToSpawn.Length,
+                gen.PrefabsProbabilities.Length
+            );
+
+            if (prefabCount == 0)
+            {
+                room.HasSpawnedContents = true;
+                return;
+            }
+
+
+            GameObject roomParentEmpty = new GameObject("Room Parent");
+
+            for (int i = 0; i < room.RectCount; i++)
+            {
+                RectInt bounds = room.Rects[i].bounds;
+
+                for (int x = bounds.xMin; x < bounds.xMax; x++)
+                {
+                    for (int y = bounds.yMin; y < bounds.yMax; y++)
+                    {
+                        Vector2Int pos = new Vector2Int(x, y);
+
+                        int p = _random.Next(0, prefabCount);
+                        float r = _random.Next(0, 100000) / 100000.0f;
+
+                        if (r <= gen.PrefabsProbabilities[p])
+                        {
+                            GameObject gameObject = Instantiate(
+                                gen.PrefabsToSpawn[p],
+                                new Vector3(pos.x, 0.0f, pos.y),
+                                Quaternion.identity
+                            );
+                            gameObject.transform.parent = roomParentEmpty.transform;
+                            room._instances.Add( gameObject );
+                        }
+                    }
+                }
+            }
+
+            room.HasSpawnedContents = true;
+        }
+
         void Awake()
         {
             _random = new System.Random((int)DateTime.Now.Ticks);
@@ -154,6 +229,10 @@ namespace Assets.Scripts.Generation
             _generator = new Generator2D(this, _random, MAX_ROOM_COUNT, _rooms);
 
             GenerateDungeon(DungeonType.FOREST);
+
+            OnRoomEnter += SpawnRoomContents;
+            OnRoomEnter += EnableRoomContents;
+            OnRoomExit += DisableRoomContents;
         }
 
         private void Start()
