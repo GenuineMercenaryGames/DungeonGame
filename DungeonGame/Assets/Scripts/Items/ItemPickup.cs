@@ -18,7 +18,7 @@ public class ItemPickup : MonoBehaviour
 
     private void Start()
     {
-        RenderMesh();
+        //RenderMesh();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -58,7 +58,7 @@ public class ItemPickup : MonoBehaviour
         SfxManager.Instance.PlaySfx(AudioNames.ItemPickupSfx);
     }
 
-    private void CreateItemPickup(ItemDefinitionBase item)
+    public void CreateItemPickup(ItemDefinitionBase item)
     {
         m_item = item;
 

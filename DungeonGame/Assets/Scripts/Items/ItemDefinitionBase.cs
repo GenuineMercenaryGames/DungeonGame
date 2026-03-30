@@ -29,7 +29,6 @@ public abstract class ItemDefinitionBase : ScriptableObject
 
     [Header("Meta")]
     [SerializeField] private ItemRarity rarity = ItemRarity.COMMON; // Rarity of the item for future features
-    [SerializeField] private List<string> tags = new();             // To filter item pools: E.g. "fire" "melee" "dash", let's see...
 
     // Opcional: prefab que aparece en el suelo/tienda
     [Header("World (Optional)")]
@@ -54,10 +53,6 @@ public abstract class ItemDefinitionBase : ScriptableObject
     {
         get { return rarity; }
     }
-    public IReadOnlyList<string> Tags
-    {
-        get { return tags; }
-    }
     public GameObject PickupPrefab
     {
         get { return pickupPrefab; }
@@ -71,8 +66,4 @@ public abstract class ItemDefinitionBase : ScriptableObject
             id = Guid.NewGuid().ToString();
     }
 #endif
-    public bool HasTag(string tag)
-    {
-        return (tags != null && tags.Contains(tag));
-    }
 }
