@@ -1,7 +1,8 @@
 fileFormatVersion: 2
-guid: 8c18919ec57ea2443ad970ee60e674eb
-DefaultImporter:
+guid: 9a013f7917117724dba14f2147ffc532
+NativeFormatImporter:
   externalObjects: {}
+  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
@@ -10,5 +11,5 @@ AssetOrigin:
   productId: 240360
   packageName: 3D Low-Poly Chest
   packageVersion: 1.0
-  assetPath: Assets/3D Low-Poly Chest/Chest Demo.unity
+  assetPath: Assets/3D Low-Poly Chest/Materials/chest wood_.mat
   uploadId: 546443

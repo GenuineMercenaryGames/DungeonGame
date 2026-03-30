@@ -1,7 +1,8 @@
 fileFormatVersion: 2
-guid: a40d7854b2bdd6047966a327dc7d335f
-PrefabImporter:
+guid: 30194a811625a6d44b911208eee2d458
+NativeFormatImporter:
   externalObjects: {}
+  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
@@ -10,5 +11,5 @@ AssetOrigin:
   productId: 240360
   packageName: 3D Low-Poly Chest
   packageVersion: 1.0
-  assetPath: Assets/3D Low-Poly Chest/Prefabs/Old Chest.prefab
+  assetPath: Assets/3D Low-Poly Chest/Materials/chest Metal.mat
   uploadId: 546443
