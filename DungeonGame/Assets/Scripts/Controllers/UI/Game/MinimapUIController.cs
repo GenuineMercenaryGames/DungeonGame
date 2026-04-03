@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class MinimapUIController : MonoBehaviour
 {
 
+    [SerializeField] private GameObject minimapGo;
     [SerializeField] private Image minimapImage;
     [SerializeField] private Transform minimapPointTransform;
     [SerializeField] private RectTransform minimapPointRectTransform;
@@ -18,6 +19,18 @@ public class MinimapUIController : MonoBehaviour
 
     private Sprite fullMapSprite;
     private Vector3 lastUpdatePosition;
+
+    public void ToggleMinimap()
+    {
+        if (minimapGo.activeSelf)
+        {
+            minimapGo.SetActive(false);
+        }
+        else
+        {
+            minimapGo.SetActive(true);
+        }
+    }
 
     private Sprite CreateMinimapSprite(Mesh mesh, Transform meshTransform)
     {

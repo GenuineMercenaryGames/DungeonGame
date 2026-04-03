@@ -247,6 +247,50 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4013950019250194304, guid: e7081e3954884094983695c28fc47a31, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013950019250194304, guid: e7081e3954884094983695c28fc47a31, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_ActionId
+      value: 8008fd66-e462-486c-9e67-1aae5b386d75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013950019250194304, guid: e7081e3954884094983695c28fc47a31, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_ActionName
+      value: 'Player/ToggleMinimap[/Keyboard/tab,/Keyboard/m]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013950019250194304, guid: e7081e3954884094983695c28fc47a31, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013950019250194304, guid: e7081e3954884094983695c28fc47a31, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013950019250194304, guid: e7081e3954884094983695c28fc47a31, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1164124697}
+    - target: {fileID: 4013950019250194304, guid: e7081e3954884094983695c28fc47a31, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013950019250194304, guid: e7081e3954884094983695c28fc47a31, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToggleMinimap
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013950019250194304, guid: e7081e3954884094983695c28fc47a31, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: MinimapUIController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013950019250194304, guid: e7081e3954884094983695c28fc47a31, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013950019250194304, guid: e7081e3954884094983695c28fc47a31, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6595957621760308155, guid: e7081e3954884094983695c28fc47a31, type: 3}
       propertyPath: m_Name
       value: PlayerPrefab
@@ -689,7 +733,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8128432401773430103, guid: 3aee8e466f80ca14e888edaa11642541, type: 3}
   m_PrefabInstance: {fileID: 1284394034}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1164124694
+--- !u!114 &1164124697
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -701,6 +745,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ab26e58d12d6894ca3e8509001d64fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MinimapUIController
+  minimapGo: {fileID: 1310141471}
   minimapImage: {fileID: 836590587}
   minimapPointTransform: {fileID: 408287098}
   minimapPointRectTransform: {fileID: 809026926}
@@ -882,7 +927,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8128432401773430103, guid: 3aee8e466f80ca14e888edaa11642541, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1164124694}
+      addedObject: {fileID: 1164124697}
   m_SourcePrefab: {fileID: 100100000, guid: 3aee8e466f80ca14e888edaa11642541, type: 3}
 --- !u!1 &1310141471
 GameObject:
@@ -899,7 +944,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1310141472
 RectTransform:
   m_ObjectHideFlags: 0

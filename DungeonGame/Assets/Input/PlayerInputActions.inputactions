@@ -113,6 +113,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ToggleMinimap",
+                    "type": "Button",
+                    "id": "8008fd66-e462-486c-9e67-1aae5b386d75",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -377,6 +386,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "89e2ae6c-62b9-4c92-941e-680c087fc3cf",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleMinimap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1767d0d4-0e51-43fc-91f7-a6d8380303fc",
+                    "path": "<Keyboard>/m",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleMinimap",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
