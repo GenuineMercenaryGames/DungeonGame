@@ -34,7 +34,8 @@ public class MeleeWeapon : MonoBehaviour
         {
             if (results[i] != wc.weaponUser && results[i].TryGetComponent<HealthController>(out var health))
             {
-                health.Health.Value -= damage;
+                if (results[i].TryGetComponent<EntityTeamController>(out var team) && team.Team != wc.weaponUser.teamController.Team)
+                    health.Health.Value -= damage;
             }
         }
     }
