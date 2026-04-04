@@ -25,16 +25,36 @@ public class EnemyStateFactory
             onLogic: _ => enemy.Flee(dist)
         );
     }
-    public State CreateStateAttack()
+    public HybridStateMachine CreateStateAttack()
     {
-        return new State(
-            onLogic: _ =>
+        var sm = new HybridStateMachine();
+
+        sm.AddState("AttackBegin", new State(
+            onEnter: _ =>
             {
-                enemy.Attack();
+                enemy.attackFinished = false;
+                enemy.agent.ResetPath();
+
+                enemy.animator.ResetTrigger("MeleeAttack");
+                enemy.animator.SetTrigger("MeleeAttack");
             },
             canExit: _ => enemy.HasFinshedAttack(),
             needsExitTime: true
-        );
+        ));
+
+        sm.AddState("AttackEnd", new State(
+            onEnter: _ => {
+                enemy.GetComponent<WeaponController>().AttackPressed();
+                enemy.GetComponent<WeaponController>().AttackReleased();
+            }
+        ));
+
+        sm.AddTransition("AttackBegin", "AttackEnd");
+        sm.AddTransition("AttackEnd", "AttackBegin", _ => enemy.InAttackRange());
+        sm.AddExitTransition("AttackEnd", _ => !enemy.InAttackRange());
+
+        sm.SetStartState("AttackBegin");
+        return sm;
     }
     public State CreateStateLookPlayer()
     {

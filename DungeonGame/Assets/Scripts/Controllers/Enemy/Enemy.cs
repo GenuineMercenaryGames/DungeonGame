@@ -21,7 +21,7 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected float playerAttackRange = 5.0f;
     [SerializeField] protected float moveSpeed = 3.0f;
 
-    private bool attackFinished = true;
+    public bool attackFinished = true;
 
     // Debug
     [SerializeField] private string currentStateDebug;
@@ -64,17 +64,8 @@ public abstract class Enemy : MonoBehaviour
     {
         agent.ResetPath();
     }
-    public void Attack()
-    {
-        if (attackFinished)
-        {
-            attackFinished = false;
-            agent.ResetPath();
-            animator.SetTrigger("MeleeAttack");
-            GetComponent<WeaponUser>().ShootBegin();
-        }
-    }
-    public void FinishAttack()
+
+    public void EndAnimationEvent()
     {
         attackFinished = true;
     }

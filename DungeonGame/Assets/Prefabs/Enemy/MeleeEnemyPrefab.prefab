@@ -797,13 +797,13 @@ PrefabInstance:
       addedObject: {fileID: 2686364476202997821}
     - targetCorrespondingSourceObject: {fileID: 8867960657160430145, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3532929374342619223}
-    - targetCorrespondingSourceObject: {fileID: 8867960657160430145, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 6511556155735358013}
     - targetCorrespondingSourceObject: {fileID: 8867960657160430145, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1403635811176983230}
+    - targetCorrespondingSourceObject: {fileID: 8867960657160430145, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -2887416189409340044}
   m_SourcePrefab: {fileID: 100100000, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
 --- !u!1 &559639843164309230 stripped
 GameObject:
@@ -847,6 +847,7 @@ MonoBehaviour:
   playerScanningRange: 7
   playerAttackRange: 2
   moveSpeed: 3
+  attackFinished: 1
   currentStateDebug: 
   shotLine: {fileID: 0}
   agent: {fileID: 0}
@@ -934,9 +935,9 @@ MonoBehaviour:
   OnShootPressed:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3532929374342619223}
-        m_TargetAssemblyTypeName: MeleeWeapon, Assembly-CSharp
-        m_MethodName: Attack
+      - m_Target: {fileID: -2887416189409340044}
+        m_TargetAssemblyTypeName: SingleProjectileWeapon, Assembly-CSharp
+        m_MethodName: Shoot
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -953,21 +954,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   BaseDamage: 10
---- !u!114 &3532929374342619223
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 559639843164309230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b7c907af7a32af40b0a04a76e7888ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MeleeWeapon
-  damage: 10
-  attackRadius: 3
-  timeBetweenAttacks: 1
 --- !u!114 &6511556155735358013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -985,7 +971,19 @@ MonoBehaviour:
   teamController: {fileID: 0}
   OnShootNotify:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1403635811176983230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -999,6 +997,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EntityTeamController
   Team: 2
+--- !u!114 &-2887416189409340044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559639843164309230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0325f34249aa05441a3e761b11bc7025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SingleProjectileWeapon
+  projectilePrefab: {fileID: 8952445015834523657, guid: 77074c37e23dd5548b52f09f70b8bb61, type: 3}
+  timeBetweenShots: 0.35
+  spreadAngle: 0
 --- !u!4 &905203547048942676 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8095927965497407739, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}

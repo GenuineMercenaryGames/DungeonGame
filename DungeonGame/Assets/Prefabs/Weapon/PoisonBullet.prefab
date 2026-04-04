@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletController
   Damage: 10
-  Speed: 30
+  Speed: 10
   LifeTime: 10
   Bounces: 3
   Owner: {fileID: 0}

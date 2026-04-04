@@ -213,3 +213,4 @@ MonoBehaviour:
   Speed: 30
   LifeTime: 10
   Bounces: 3
+  Owner: {fileID: 0}
