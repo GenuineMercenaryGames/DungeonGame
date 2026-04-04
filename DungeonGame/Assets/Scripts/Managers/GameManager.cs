@@ -23,8 +23,13 @@ public class GameManager : MonoBehaviour
         }
 
         if(worldGenerator != null)
+        {
+            var characterController = player.GetComponent<CharacterController>();
+            characterController.enabled = false;
             player.transform.position = new Vector3(worldGenerator.PlayerSpawnPosition.x, player.transform.position.y, worldGenerator.PlayerSpawnPosition.z); // TODO: No sé si meter esto aquí o hacer un manager dedicado. -kike
-
+            characterController.enabled = true;
+            
+        }
         BackgroundMusicManager.Instance.PlayBackgroundMusicWithFade(AudioNames.BackgroundMusic, 2.5f);
     }
 
