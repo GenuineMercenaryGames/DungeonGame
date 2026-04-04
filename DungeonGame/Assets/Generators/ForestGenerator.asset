@@ -19,7 +19,7 @@ MonoBehaviour:
   TreeMesh: {fileID: -5773737330183453750, guid: 603970f97e50c56488ec3c5a6febd940, type: 3}
   TreeMaterial: {fileID: 2100000, guid: 93caadf4359ae8143aad35b3145d31af, type: 2}
   floorPlane: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
-  floorMaterial: {fileID: 2100000, guid: 42408edba4996274e9929b98382b40aa, type: 2}
+  floorMaterial: {fileID: 2100000, guid: c05cfa4fb7a2ee54182ba974ab1031b3, type: 2}
   PrefabsToSpawn:
   - {fileID: 8903058273634794869, guid: f1fc5bb90ac285e4486771552d63bcb8, type: 3}
   - {fileID: 4263922822445002727, guid: 3cdafb3c2f54d434894928d72d282874, type: 3}
