@@ -1,5 +1,3 @@
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Roguelike/Weapons/Attacks/Ranged Attack")]
@@ -71,7 +69,7 @@ public class RangedAttackDefinition : WeaponAttackDefinition
         bullet.transform.position = weaponTransform.position;
         bullet.transform.rotation = weaponTransform.rotation;
         bullet.Owner = ctx.attacker;
-        bullet.Init(); // Re-init con la llamada de Init desde Awake()?
+        // bullet.Init(); // Re-init con la llamada de Init desde Awake()?
 
         return true;
     }

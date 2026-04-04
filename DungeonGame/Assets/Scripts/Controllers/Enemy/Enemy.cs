@@ -71,7 +71,7 @@ public abstract class Enemy : MonoBehaviour
             attackFinished = false;
             agent.ResetPath();
             animator.SetTrigger("MeleeAttack");
-            GetComponent<WeaponController>().AttackPressed();
+            GetComponent<WeaponUser>().ShootBegin();
         }
     }
     public void FinishAttack()

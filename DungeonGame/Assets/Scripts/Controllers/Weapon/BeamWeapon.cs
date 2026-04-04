@@ -35,8 +35,8 @@ public class BeamWeapon : MonoBehaviour
     private void BeamThink()
     {
         float maxDistance = 1000.0f; // NOTE : Should be a configurable variable, but hardcoded is ok for now.
-        var origin = wc.bulletSpawnTransform.position;
-        var direction = wc.bulletSpawnTransform.forward;
+        var origin = wc.weaponUser.bulletSpawnTransform.position;
+        var direction = wc.weaponUser.bulletSpawnTransform.forward;
         bool hasHit = Physics.Raycast(origin, direction, out var hitInfo, maxDistance);
         var hitPoint = hasHit ? hitInfo.point : origin + direction * maxDistance;
 
@@ -49,7 +49,7 @@ public class BeamWeapon : MonoBehaviour
         {
             if (hitInfo.collider.TryGetComponent<HealthController>(out var health))
             {
-                health.Health.Value -= /*wc.Damage*/ 1.0f * Time.deltaTime; // Temporary hack because I lost the fucking damage field...
+                health.Health.Value -= wc.BaseDamage * Time.deltaTime;
             }
         }
     }

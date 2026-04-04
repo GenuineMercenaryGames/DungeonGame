@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fd42b95aa3cf1a4595cf9615e272f99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponController
-  bulletSpawnTransform: {fileID: 0}
+  weaponUser: {fileID: 0}
   OnShootPressed:
     m_PersistentCalls:
       m_Calls:
@@ -81,8 +81,7 @@ MonoBehaviour:
   OnShootTick:
     m_PersistentCalls:
       m_Calls: []
-  Damage: 0
-  owner: {fileID: 0}
+  BaseDamage: 5
 --- !u!114 &4884239444074734869
 MonoBehaviour:
   m_ObjectHideFlags: 0

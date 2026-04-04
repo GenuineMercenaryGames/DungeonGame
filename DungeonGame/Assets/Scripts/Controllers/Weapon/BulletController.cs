@@ -24,16 +24,22 @@ public class BulletController : PooledObject
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        Init();
+        Init(null);
     }
 
-    public void Init()
+    public void Init(WeaponUser weaponUser)
     {
         lastCollidedObject = null;
         elapsedTime = 0.0f;
         bounces = 0;
         rb.linearVelocity = transform.forward * Speed;
         rb.angularVelocity = Vector3.zero;
+
+        if (weaponUser != null)
+        {
+            Damage = weaponUser.weaponController.BaseDamage;
+            Owner = weaponUser.gameObject;
+        }
     }
 
     void Update()
@@ -48,13 +54,19 @@ public class BulletController : PooledObject
 
     void OnCollisionEnter(Collision collision)
     {
-
         if (collision.gameObject == Owner)
-            return;
+            DestroyBullet();
 
         if (collision.gameObject.TryGetComponent<HealthController>(out var health))
         {
-            health.Health.Value -= Damage;
+            bool canDamage = true;
+            if (collision.gameObject.TryGetComponent<EntityTeamController>(out var teamOther) && Owner.TryGetComponent<EntityTeamController>(out var teamOwner))
+                if(teamOther.Team == teamOwner.Team)
+                    canDamage = false;
+
+            if(canDamage)
+                health.Health.Value -= Damage;
+            
             DestroyBullet();
         }
 
@@ -77,8 +89,6 @@ public class BulletController : PooledObject
         }
 
         ++bounces;
-
-        // TODO : Modify to make use of object pooling. Main changes should probably go in the DestroyBullet() function.
     }
 
     #endregion
