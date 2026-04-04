@@ -15,9 +15,6 @@ public class WeaponController : MonoBehaviour
     [SerializeField] public UnityEvent OnShootReleased;
     [SerializeField] public UnityEvent OnShootTick;
 
-    [Header("Settings")]
-    [SerializeField] public float Damage; // NOTE : This should go on the SO later on, along with the time between shots logic (ROF / cooldown).
-
     public GameObject owner;
     public bool IsShooting { get; private set; }
 
@@ -33,26 +30,28 @@ public class WeaponController : MonoBehaviour
 
     public void AttackPressed()
     {
+        if (IsShooting) return;
         IsShooting = true;
         OnShootPressed.Invoke();
     }
 
     public void AttackReleased()
     {
+        if (!IsShooting) return;
         IsShooting = false;
         OnShootReleased.Invoke();
     }
 
     public void AttackTick()
     {
-        // NOTE : This is probably fucking expensive if we have tons of weapons on the scene.
-        // It would be far better to do this through the interface + SO idea I mentioned above. But this will suffice for now.
-        // The idea is to get the implementation rolling because time is running out.
-        // Also, this function is exposed for flexibility, but it should probably (almost) NEVER be invoked manually from anywhere else.
-        if (IsShooting)
-        {
-            OnShootTick.Invoke();
-        }
+        /*
+            NOTE : This is probably fucking expensive if we have tons of weapons on the scene.
+            It would be far better to do this through the interface + SO idea I mentioned above. But this will suffice for now.
+            The idea is to get the implementation rolling because time is running out.
+            Also, this function is exposed for flexibility, but it should probably (almost) NEVER be invoked manually from anywhere else.
+        */
+        if (!IsShooting) return;
+        OnShootTick.Invoke();
     }
 
 
