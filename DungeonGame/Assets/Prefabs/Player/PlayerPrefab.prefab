@@ -262,10 +262,10 @@ GameObject:
   - component: {fileID: 1964143791971407711}
   - component: {fileID: 5135489261519212414}
   - component: {fileID: 4013950019250194304}
+  - component: {fileID: 8161196081900676829}
   - component: {fileID: 8309826755787934211}
   - component: {fileID: 2861035253389806486}
   - component: {fileID: 8134169243092587801}
-  - component: {fileID: 8161196081900676829}
   - component: {fileID: 1608805740135992940}
   m_Layer: 10
   m_Name: PlayerPrefab
@@ -535,11 +535,36 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 3ff9b54f-aa5e-4f45-b92f-d0bb5bdf6161
     m_ActionName: 'Player/Interact[/Keyboard/f]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8008fd66-e462-486c-9e67-1aae5b386d75
+    m_ActionName: 'Player/ToggleMinimap[/Keyboard/tab,/Keyboard/m]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!135 &8161196081900676829
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6595957621760308155}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8309826755787934211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -561,6 +586,7 @@ MonoBehaviour:
   dashSpeed: 60
   dashDuration: 0.1
   dashCooldown: 0.8
+  limitMovementToNavmesh: 0
   cameraRotationSpeed: 0.12
   weapons:
   - {fileID: 4335688936017390888, guid: 4f05eab3c98457f409aa4d798e9ae777, type: 3}
@@ -608,27 +634,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthController
   maxHealth: 100
---- !u!135 &8161196081900676829
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6595957621760308155}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1608805740135992940
 MonoBehaviour:
   m_ObjectHideFlags: 0
