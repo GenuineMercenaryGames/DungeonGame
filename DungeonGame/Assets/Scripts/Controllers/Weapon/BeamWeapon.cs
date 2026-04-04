@@ -49,7 +49,7 @@ public class BeamWeapon : MonoBehaviour
         {
             if (hitInfo.collider.TryGetComponent<HealthController>(out var health))
             {
-                health.Health.Value -= wc.Damage * Time.deltaTime;
+                health.Health.Value -= /*wc.Damage*/ 1.0f * Time.deltaTime; // Temporary hack because I lost the fucking damage field...
             }
         }
     }
