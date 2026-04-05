@@ -854,6 +854,7 @@ MonoBehaviour:
   healthController: {fileID: 0}
   utilitySystem: {fileID: 0}
   enemyUIController: {fileID: 0}
+  target: {fileID: 0}
   animator: {fileID: 0}
 --- !u!114 &291797136239462352
 MonoBehaviour:
@@ -938,6 +939,18 @@ MonoBehaviour:
       - m_Target: {fileID: -2887416189409340044}
         m_TargetAssemblyTypeName: SingleProjectileWeapon, Assembly-CSharp
         m_MethodName: Shoot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1669414763633783836}
+        m_TargetAssemblyTypeName: MeleeEnemy, Assembly-CSharp
+        m_MethodName: AttackVFX
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

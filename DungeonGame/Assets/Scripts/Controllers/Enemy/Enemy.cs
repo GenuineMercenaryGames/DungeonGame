@@ -33,7 +33,7 @@ public abstract class Enemy : MonoBehaviour
     public UtilitySystem utilitySystem;
     public EnemyUIController enemyUIController;
 
-    private Transform target;
+    public Transform target;
     public StateMachine fsm;
     public Animator animator;
     private EnemyStates currentRequestedState;
