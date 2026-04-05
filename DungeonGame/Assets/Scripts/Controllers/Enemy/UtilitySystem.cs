@@ -12,14 +12,6 @@ public class UtilitySystem : MonoBehaviour
 
         EnemyStates bestState = EnemyStates.Wandering;
 
-        if (enemy == null || enemy.fsm == null)
-        {
-            Debug.Log("enemy " + enemy);
-            Debug.Log("fsm " + enemy.fsm);
-            return bestState;
-        }
-            
-
         float bestScore = float.MinValue;
 
         foreach (EnemyStates state in Enum.GetValues(typeof(EnemyStates)))

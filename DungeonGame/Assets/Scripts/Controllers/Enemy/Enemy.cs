@@ -18,8 +18,8 @@ public abstract class Enemy : MonoBehaviour
 
 
     [SerializeField] protected float playerScanningRange = 10.0f;
+    [SerializeField] protected float playerFollowRange = 20.0f;
     [SerializeField] protected float playerAttackRange = 5.0f;
-    [SerializeField] protected float moveSpeed = 3.0f;
 
     public bool attackFinished = true;
 
@@ -37,6 +37,7 @@ public abstract class Enemy : MonoBehaviour
     public StateMachine fsm;
     public Animator animator;
     private EnemyStates currentRequestedState;
+    private float rage = 0.0f;
 
     protected abstract StateMachine MainFSM();
 
@@ -159,6 +160,7 @@ public abstract class Enemy : MonoBehaviour
         {
             Handles.Label(transform.position + Vector3.up * 1f, fsm.GetActiveHierarchyPath());
             Handles.Label(transform.position + Vector3.up * 2f, "Health: " + healthController.Health.Value + " / " + healthController.MaxHealth.Value);
+            Handles.Label(transform.position + Vector3.up * 3f, "Rage: " + rage);
         }
 #endif
     }
@@ -279,6 +281,31 @@ public abstract class Enemy : MonoBehaviour
         target = PlayerManager.Instance.Player.transform;
         fsm = MainFSM();
         fsm.Init();
+
+        ObservableVariable<float>.FuncIn2<float> callback = (oldHealth, newHealth) =>
+        {
+            if(newHealth < oldHealth)
+            {
+                rage += 10f;
+            }
+        };
+
+        healthController.Health.AddListener(callback);
+    }
+
+    void UpdateRage()
+    {
+        float playerDistance = Vector3.Distance(target.transform.position, transform.position);
+
+        if (playerDistance < playerScanningRange)
+        {
+            rage = 5;
+        }
+
+        if (playerDistance > playerFollowRange)
+            rage -= Time.deltaTime;
+
+        rage = Mathf.Clamp(rage, 0, 5f);
     }
 
     void Update()
@@ -294,8 +321,7 @@ public abstract class Enemy : MonoBehaviour
         fsm.OnLogic();
         currentStateDebug = fsm.GetActiveHierarchyPath();
 
-        float normalizedSpeed = (agent.velocity.magnitude / moveSpeed);
-        animator.SetFloat("MoveSpeed", normalizedSpeed);
+        animator.SetFloat("MoveSpeed", agent.velocity.magnitude);
 
         if (agent == null) return;
         if (agent.pathPending) return;
@@ -308,10 +334,12 @@ public abstract class Enemy : MonoBehaviour
         {
             Debug.DrawLine(corners[i], corners[i + 1], Color.green);
         }
+
+        UpdateRage();
     }
 
     // Implementación base del score, las clases derivadas deberían sobreescribir el score si se quiere cambiar el comportamiento.
-    public float GetScore(EnemyStates state)
+    public virtual float GetScore(EnemyStates state)
     {
         float playerDistance = Vector3.Distance(target.transform.position, transform.position);
 
@@ -320,13 +348,11 @@ public abstract class Enemy : MonoBehaviour
             case EnemyStates.Wandering:
                 return playerDistance > playerScanningRange ? 0.2f : 0f;
             case EnemyStates.Combat:
-                if (playerDistance > playerScanningRange)
-                    return 0f;
-                return 1f - (playerDistance / playerScanningRange);
-            case EnemyStates.Flee:
+                return rage / 5f;
+            case EnemyStates.Flee: // Esto puede dar problemas al retriggear el warn sign, ya que si está huyendo el enemigo y vuelve a entrar en combate, se vuelve a mostrar.
                 return healthController.Health.Value / healthController.MaxHealth.Value < 0.2 ? 1.0f : 0.0f;
             case EnemyStates.Dead:
-                return IsDead() ? 1 : 0;
+                return IsDead() ? 1000 : 0;
         }
         Debug.Log("Estado no manejado.");
         return 0f;

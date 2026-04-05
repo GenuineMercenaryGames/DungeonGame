@@ -38,6 +38,15 @@ public class EnemyStateFactory
                 enemy.animator.ResetTrigger("MeleeAttack");
                 enemy.animator.SetTrigger("MeleeAttack");
             },
+            onLogic: _ =>
+            {
+                enemy.SmoothLookToPlayer();
+            },
+            onExit: _ =>
+            {
+                enemy.animator.ResetTrigger("MeleeAttack");
+                enemy.animator.SetTrigger("StopAttack");
+            },
             canExit: _ => enemy.HasFinshedAttack(),
             needsExitTime: true
         ));
@@ -153,19 +162,31 @@ public class EnemyStateFactory
     {
 
         var sm = new HybridStateMachine(
-            beforeOnEnter: self =>
-            {
-                enemy.enemyUIController.ShowWarnSign();
-            }
+            
         );
+
+        sm.AddState("Warn", new State(
+            onEnter: _ =>
+            {
+                enemy.StayStill();
+                enemy.enemyUIController.ShowWarnSign();
+            },
+            onLogic: state =>
+            {
+                enemy.SmoothLookToPlayer();
+            },
+            canExit: state => state.timer.Elapsed > 0.5f,
+            needsExitTime: true
+        ));
 
         sm.AddState("FollowPlayer", CreateStateFollowPlayer());
         sm.AddState("Attack", CreateStateAttack());
 
+        sm.AddTransition("Warn", "FollowPlayer");
         sm.AddTransition("FollowPlayer", "Attack", transition => enemy.InAttackRange());
         sm.AddTransition("Attack", "FollowPlayer", transition => !enemy.InAttackRange());
 
-        sm.SetStartState("FollowPlayer");
+        sm.SetStartState("Warn");
         return sm;
     }
 
