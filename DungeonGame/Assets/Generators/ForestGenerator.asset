@@ -28,6 +28,7 @@ MonoBehaviour:
   - {fileID: 4385080170328260021, guid: ff62b58c5a9ea164fa8ddf8038e10cd1, type: 3}
   - {fileID: 5440707293445505367, guid: 494f6d43e170e9145bc7865d243ee00b, type: 3}
   - {fileID: 1493958779012120596, guid: b9de24523a11d714db3851b5f0f9d527, type: 3}
+  - {fileID: 559639843164309230, guid: 5119029b5e6ed7e4eb2464bcd07bacd6, type: 3}
   - {fileID: 559639843164309230, guid: 92d90e71346dedd4782a42f6979ddd46, type: 3}
   - {fileID: 778846711962324316, guid: db0cc6549cf2f43429a7537b3ec5a641, type: 3}
   PrefabsProbabilities:
@@ -38,5 +39,6 @@ MonoBehaviour:
   - 0.005
   - 0.005
   - 0.005
+  - 0.01
   - 0.01
   - 0.2
