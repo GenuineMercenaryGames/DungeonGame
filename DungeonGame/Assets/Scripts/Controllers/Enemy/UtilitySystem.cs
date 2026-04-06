@@ -9,7 +9,9 @@ public class UtilitySystem : MonoBehaviour
 
     public EnemyStates GetBestState()
     {
+
         EnemyStates bestState = EnemyStates.Wandering;
+
         float bestScore = float.MinValue;
 
         foreach (EnemyStates state in Enum.GetValues(typeof(EnemyStates)))

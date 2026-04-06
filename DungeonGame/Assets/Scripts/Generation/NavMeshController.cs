@@ -8,14 +8,17 @@ public class NavMeshController : MonoBehaviour
 
     [SerializeField] private NavMeshSurface navMeshSurface;
 
+    public Mesh fullWalkablePlane;
+    public Transform fullWalkablePlaneTransform;
+
     public void Awake()
     {
         //navMeshSurface = new NavMeshSurface();
     }
 
+    // Combine all chunk planes and assign it to the navmesh.
     public void Regenerate(Chunk[] chunks)
     {
-
 
         List<CombineInstance> combine = new();
 
@@ -35,20 +38,21 @@ public class NavMeshController : MonoBehaviour
             });
         }
 
-        Mesh combinedWalkableMesh = new Mesh();
-        combinedWalkableMesh.name = "combinedWalkableMesh";
-        combinedWalkableMesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
+        fullWalkablePlane = new Mesh();
+        fullWalkablePlane.name = "combinedWalkableMesh";
+        fullWalkablePlane.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
 
-        combinedWalkableMesh.CombineMeshes(combine.ToArray(), true, true);
-        combinedWalkableMesh.RecalculateBounds();
+        fullWalkablePlane.CombineMeshes(combine.ToArray(), true, true);
+        fullWalkablePlane.RecalculateBounds();
 
         GameObject walkable = new GameObject("combinedWalkable");
         walkable.transform.SetParent(transform, false);
+        fullWalkablePlaneTransform = walkable.transform;
 
         MeshCollider meshCollider = walkable.AddComponent<MeshCollider>();
 
-        meshCollider.sharedMesh = combinedWalkableMesh;
-
+        meshCollider.sharedMesh = fullWalkablePlane;
+        
         navMeshSurface.BuildNavMesh();
     }
 }

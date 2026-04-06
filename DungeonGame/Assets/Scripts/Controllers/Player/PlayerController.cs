@@ -2,8 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
-using static Unity.Collections.AllocatorManager;
-using static UnityEngine.GraphicsBuffer;
 
 public class PlayerController : MonoBehaviour
 {
@@ -27,6 +25,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float cameraRotationSpeed;
 
     [Header("Weapons")]
+    [SerializeField] private WeaponUser weaponUser;
     [SerializeField] public GameObject[] weapons;
     [SerializeField] public int equipedWeaponIndex;
 
@@ -322,8 +321,8 @@ public class PlayerController : MonoBehaviour
 
     private void AttackGun()
     {
-        bool hasShot = weaponController.Attack();
-        if (hasShot)
+        // bool hasShot = weaponController.Attack();
+        // if (hasShot)
         {
             CameraManager.Instance.AddCameraVibration(4.0f);
             animator.SetTrigger("TriggerShoot");
@@ -447,8 +446,8 @@ public class PlayerController : MonoBehaviour
         Destroy(currentWeapon);
         currentWeapon = Instantiate(weapon, weaponSocket);
         weaponController = currentWeapon.GetComponent<WeaponController>();
-        weaponController.bulletSpawnTransform = bulletSocket;
-        weaponController.owner = this.gameObject;
+        weaponController.weaponUser = weaponUser;
+        weaponUser.weaponController = weaponController;
     }
 
     #endregion

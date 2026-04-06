@@ -262,11 +262,12 @@ GameObject:
   - component: {fileID: 1964143791971407711}
   - component: {fileID: 5135489261519212414}
   - component: {fileID: 4013950019250194304}
-  - component: {fileID: 8309826755787934211}
-  - component: {fileID: 2861035253389806486}
-  - component: {fileID: 8134169243092587801}
   - component: {fileID: 8161196081900676829}
+  - component: {fileID: 8309826755787934211}
+  - component: {fileID: 8134169243092587801}
   - component: {fileID: 1608805740135992940}
+  - component: {fileID: 8883602011328141010}
+  - component: {fileID: 6100053061373365578}
   m_Layer: 10
   m_Name: PlayerPrefab
   m_TagString: Untagged
@@ -535,79 +536,15 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 3ff9b54f-aa5e-4f45-b92f-d0bb5bdf6161
     m_ActionName: 'Player/Interact[/Keyboard/f]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8008fd66-e462-486c-9e67-1aae5b386d75
+    m_ActionName: 'Player/ToggleMinimap[/Keyboard/tab,/Keyboard/m]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &8309826755787934211
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6595957621760308155}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8cb3059606196134bb3f89979c1bafe1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  animator: {fileID: 8260451027818967867}
-  weaponSocket: {fileID: 6434422150200460838}
-  bulletSocket: {fileID: 2593472836194151284}
-  walkSpeed: 5
-  runSpeed: 10
-  gravitySpeed: 0.1
-  dashSpeed: 60
-  dashDuration: 0.1
-  dashCooldown: 0.8
-  cameraRotationSpeed: 0.12
-  weapons:
-  - {fileID: 4335688936017390888, guid: 4f05eab3c98457f409aa4d798e9ae777, type: 3}
-  - {fileID: 6775412326175625343, guid: bc8acc7d8b71c6c44bb7e90dd63d45e6, type: 3}
-  equipedWeaponIndex: 0
-  characterController: {fileID: 0}
-  weaponController: {fileID: 0}
-  healthController: {fileID: 0}
-  shieldController: {fileID: 0}
-  itemSystem: {fileID: 0}
---- !u!114 &2861035253389806486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6595957621760308155}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fd42b95aa3cf1a4595cf9615e272f99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WeaponController
-  bulletSpawnTransform: {fileID: 2593472836194151284}
-  OnShootPressed:
-    m_PersistentCalls:
-      m_Calls: []
-  OnShootReleased:
-    m_PersistentCalls:
-      m_Calls: []
-  OnShootTick:
-    m_PersistentCalls:
-      m_Calls: []
-  Damage: 0
-  owner: {fileID: 0}
---- !u!114 &8134169243092587801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6595957621760308155}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b1f7e1a1b2d8ce4bacf68787e9072c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HealthController
-  maxHealth: 100
 --- !u!135 &8161196081900676829
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -629,6 +566,52 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8309826755787934211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6595957621760308155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cb3059606196134bb3f89979c1bafe1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  animator: {fileID: 8260451027818967867}
+  weaponSocket: {fileID: 6434422150200460838}
+  bulletSocket: {fileID: 2593472836194151284}
+  walkSpeed: 5
+  runSpeed: 10
+  gravitySpeed: 0.1
+  dashSpeed: 60
+  dashDuration: 0.1
+  dashCooldown: 0.8
+  limitMovementToNavmesh: 0
+  cameraRotationSpeed: 0.12
+  weaponUser: {fileID: 8883602011328141010}
+  weapons:
+  - {fileID: 4335688936017390888, guid: 4f05eab3c98457f409aa4d798e9ae777, type: 3}
+  - {fileID: 6775412326175625343, guid: bc8acc7d8b71c6c44bb7e90dd63d45e6, type: 3}
+  equipedWeaponIndex: 0
+  characterController: {fileID: 0}
+  weaponController: {fileID: 0}
+  healthController: {fileID: 0}
+  shieldController: {fileID: 0}
+  itemSystem: {fileID: 0}
+--- !u!114 &8134169243092587801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6595957621760308155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b1f7e1a1b2d8ce4bacf68787e9072c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthController
+  maxHealth: 100
 --- !u!114 &1608805740135992940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -641,6 +624,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5710e84beea578a42bb5b5d29e0f6860, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerItemSystem
+--- !u!114 &8883602011328141010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6595957621760308155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d64be7f6b8dd01a478739bf8217314bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponUser
+  bulletSpawnTransform: {fileID: 2593472836194151284}
+  weaponController: {fileID: 0}
+  teamController: {fileID: 6100053061373365578}
+  OnShootNotify:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &6100053061373365578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6595957621760308155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b91a40ad39b6e904cbf8698a844de1c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EntityTeamController
+  Team: 1
 --- !u!1 &6735522987910781076
 GameObject:
   m_ObjectHideFlags: 0

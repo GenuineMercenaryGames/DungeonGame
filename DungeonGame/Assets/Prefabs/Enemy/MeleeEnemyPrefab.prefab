@@ -259,7 +259,7 @@ Transform:
   m_GameObject: {fileID: 5330260802839920069}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -15.03, y: 0.37813988, z: 6.5599995}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -630,14 +630,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 09e4c6a7d75923945afe43953ef58ad2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -788,16 +788,22 @@ PrefabInstance:
       addedObject: {fileID: 5544714314704067100}
     - targetCorrespondingSourceObject: {fileID: 8867960657160430145, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2686364476202997821}
-    - targetCorrespondingSourceObject: {fileID: 8867960657160430145, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 3749768189971706992}
     - targetCorrespondingSourceObject: {fileID: 8867960657160430145, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3708628368232453085}
     - targetCorrespondingSourceObject: {fileID: 8867960657160430145, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3532929374342619223}
+      addedObject: {fileID: 2686364476202997821}
+    - targetCorrespondingSourceObject: {fileID: 8867960657160430145, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6511556155735358013}
+    - targetCorrespondingSourceObject: {fileID: 8867960657160430145, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1403635811176983230}
+    - targetCorrespondingSourceObject: {fileID: 8867960657160430145, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -2887416189409340044}
   m_SourcePrefab: {fileID: 100100000, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
 --- !u!1 &559639843164309230 stripped
 GameObject:
@@ -814,13 +820,13 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 3
+  m_Speed: 5
+  m_Acceleration: 60
   avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_AngularSpeed: 240
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0
@@ -839,14 +845,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeleeEnemy
   playerScanningRange: 7
-  playerAttackRange: 2
-  moveSpeed: 3
+  playerFollowRange: 10
+  playerAttackRange: 2.5
+  attackFinished: 1
   currentStateDebug: 
   shotLine: {fileID: 0}
   agent: {fileID: 0}
   healthController: {fileID: 0}
   utilitySystem: {fileID: 0}
   enemyUIController: {fileID: 0}
+  target: {fileID: 0}
   animator: {fileID: 0}
 --- !u!114 &291797136239462352
 MonoBehaviour:
@@ -882,42 +890,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 2.525579, z: 2.305112}
   m_Center: {x: 0, y: 1.2627895, z: -0.7197137}
---- !u!114 &2686364476202997821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 559639843164309230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fd42b95aa3cf1a4595cf9615e272f99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WeaponController
-  bulletSpawnTransform: {fileID: 3895150806397610763}
-  OnShootPressed:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3532929374342619223}
-        m_TargetAssemblyTypeName: MeleeWeapon, Assembly-CSharp
-        m_MethodName: Attack
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnShootReleased:
-    m_PersistentCalls:
-      m_Calls: []
-  OnShootTick:
-    m_PersistentCalls:
-      m_Calls: []
-  Damage: 10
-  owner: {fileID: 559639843164309230}
 --- !u!114 &3749768189971706992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -948,7 +920,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 356cdce7fead64c44a82dc4b0a3cfaf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UtilitySystem
---- !u!114 &3532929374342619223
+--- !u!114 &2686364476202997821
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -957,12 +929,102 @@ MonoBehaviour:
   m_GameObject: {fileID: 559639843164309230}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b7c907af7a32af40b0a04a76e7888ed, type: 3}
+  m_Script: {fileID: 11500000, guid: 9fd42b95aa3cf1a4595cf9615e272f99, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MeleeWeapon
-  damage: 10
-  attackRadius: 3
-  timeBetweenAttacks: 1
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponController
+  weaponUser: {fileID: 6511556155735358013}
+  OnShootPressed:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -2887416189409340044}
+        m_TargetAssemblyTypeName: SingleProjectileWeapon, Assembly-CSharp
+        m_MethodName: Shoot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1669414763633783836}
+        m_TargetAssemblyTypeName: MeleeEnemy, Assembly-CSharp
+        m_MethodName: AttackVFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnShootReleased:
+    m_PersistentCalls:
+      m_Calls: []
+  OnShootTick:
+    m_PersistentCalls:
+      m_Calls: []
+  BaseDamage: 10
+--- !u!114 &6511556155735358013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559639843164309230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d64be7f6b8dd01a478739bf8217314bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponUser
+  bulletSpawnTransform: {fileID: 3895150806397610763}
+  weaponController: {fileID: 2686364476202997821}
+  teamController: {fileID: 0}
+  OnShootNotify:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1403635811176983230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559639843164309230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b91a40ad39b6e904cbf8698a844de1c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EntityTeamController
+  Team: 2
+--- !u!114 &-2887416189409340044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559639843164309230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0325f34249aa05441a3e761b11bc7025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SingleProjectileWeapon
+  projectilePrefab: {fileID: 8952445015834523657, guid: 77074c37e23dd5548b52f09f70b8bb61, type: 3}
+  timeBetweenShots: 0.35
+  spreadAngle: 0
 --- !u!4 &905203547048942676 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8095927965497407739, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}

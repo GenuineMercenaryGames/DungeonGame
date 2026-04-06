@@ -31,9 +31,9 @@ public class SingleProjectileWeapon : MonoBehaviour
     private void SpawnProjectile()
     {
         var bullet = pool.Get<BulletController>();
-        bullet.transform.position = weaponController.bulletSpawnTransform.position;
-        bullet.transform.rotation = Quaternion.LookRotation(GetRandomSpreadDirection(weaponController.bulletSpawnTransform.forward, spreadAngle));
-        bullet.Init();
+        bullet.transform.position = weaponController.weaponUser.bulletSpawnTransform.position;
+        bullet.transform.rotation = Quaternion.LookRotation(GetRandomSpreadDirection(weaponController.weaponUser.bulletSpawnTransform.forward, spreadAngle));
+        bullet.Init(weaponController.weaponUser);
     }
 
     public void Shoot()

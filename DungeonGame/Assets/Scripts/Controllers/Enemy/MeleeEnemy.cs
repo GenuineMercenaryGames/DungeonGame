@@ -10,6 +10,11 @@ using UnityHFSM;
 public class MeleeEnemy : Enemy
 {
 
+
+    public void AttackVFX()
+    {
+        VFXManager.Instance.InstantiateVFX("MeleeHit", transform.position + transform.forward * 0.5f + new Vector3(0, 1, 0)); // TODO: Generalizar el transform para el ataque.
+    }
     protected override StateMachine MainFSM()
     {
 
@@ -20,7 +25,6 @@ public class MeleeEnemy : Enemy
         sm.SetStartState("Wandering");
 
         sm.AddState("Combat", f.CreateMeleeCombatFSM());
-        sm.AddState("AttackPlayer", f.CreateStateAttack());
         sm.AddState("Flee", f.CreateStateFlee(10));
         sm.AddState("Dead", f.CreateStateDeath());
 

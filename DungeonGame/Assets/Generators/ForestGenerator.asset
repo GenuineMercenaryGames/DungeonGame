@@ -22,7 +22,7 @@ MonoBehaviour:
   - {fileID: -8135553595718028330, guid: 4471b1f7f824e4d44887e1364c6fc61a, type: 3}
   - {fileID: 7607211279866533359, guid: 83e8d2542718a2e49a73d71c3a5fc685, type: 3}
   floorPlane: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
-  floorMaterial: {fileID: 2100000, guid: 42408edba4996274e9929b98382b40aa, type: 2}
+  floorMaterial: {fileID: 2100000, guid: c05cfa4fb7a2ee54182ba974ab1031b3, type: 2}
   PrefabsToSpawn:
   - {fileID: 8903058273634794869, guid: f1fc5bb90ac285e4486771552d63bcb8, type: 3}
   - {fileID: 4263922822445002727, guid: 3cdafb3c2f54d434894928d72d282874, type: 3}
@@ -31,6 +31,7 @@ MonoBehaviour:
   - {fileID: 4385080170328260021, guid: ff62b58c5a9ea164fa8ddf8038e10cd1, type: 3}
   - {fileID: 5440707293445505367, guid: 494f6d43e170e9145bc7865d243ee00b, type: 3}
   - {fileID: 1493958779012120596, guid: b9de24523a11d714db3851b5f0f9d527, type: 3}
+  - {fileID: 559639843164309230, guid: 5119029b5e6ed7e4eb2464bcd07bacd6, type: 3}
   - {fileID: 559639843164309230, guid: 92d90e71346dedd4782a42f6979ddd46, type: 3}
   - {fileID: 778846711962324316, guid: db0cc6549cf2f43429a7537b3ec5a641, type: 3}
   PrefabsProbabilities:
@@ -41,6 +42,7 @@ MonoBehaviour:
   - 0.005
   - 0.005
   - 0.005
+  - 0.01
   - 0.01
   - 0.2
   ChestRoomProbability: 0.2

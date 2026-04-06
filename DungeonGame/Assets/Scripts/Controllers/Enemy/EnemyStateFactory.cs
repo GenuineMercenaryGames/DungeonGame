@@ -25,16 +25,45 @@ public class EnemyStateFactory
             onLogic: _ => enemy.Flee(dist)
         );
     }
-    public State CreateStateAttack()
+    public HybridStateMachine CreateStateAttack()
     {
-        return new State(
+        var sm = new HybridStateMachine();
+
+        sm.AddState("AttackBegin", new State(
+            onEnter: _ =>
+            {
+                enemy.attackFinished = false;
+                enemy.agent.ResetPath();
+
+                enemy.animator.ResetTrigger("MeleeAttack");
+                enemy.animator.SetTrigger("MeleeAttack");
+            },
             onLogic: _ =>
             {
-                enemy.Attack();
+                enemy.SmoothLookToPlayer();
+            },
+            onExit: _ =>
+            {
+                enemy.animator.ResetTrigger("MeleeAttack");
+                enemy.animator.SetTrigger("StopAttack");
             },
             canExit: _ => enemy.HasFinshedAttack(),
             needsExitTime: true
-        );
+        ));
+
+        sm.AddState("AttackEnd", new State(
+            onEnter: _ => {
+                enemy.GetComponent<WeaponController>().AttackPressed();
+                enemy.GetComponent<WeaponController>().AttackReleased();
+            }
+        ));
+
+        sm.AddTransition("AttackBegin", "AttackEnd");
+        sm.AddTransition("AttackEnd", "AttackBegin", _ => enemy.InAttackRange());
+        sm.AddExitTransition("AttackEnd", _ => !enemy.InAttackRange());
+
+        sm.SetStartState("AttackBegin");
+        return sm;
     }
     public State CreateStateLookPlayer()
     {
@@ -58,6 +87,7 @@ public class EnemyStateFactory
             {
                 enemy.StayStill();
                 enemy.enemyUIController.HideBar();
+                VFXManager.Instance.InstantiateVFX("DeathSkull", enemy.transform.position + new Vector3(0,2,0));
 
                 startRotation = enemy.transform.localRotation;
                 targetRotation = startRotation * Quaternion.Euler(0.0f, 0.0f, 90.0f);
@@ -73,6 +103,7 @@ public class EnemyStateFactory
                 if (!destroyed && state.timer.Elapsed >= fallTime)
                 {
                     destroyed = true;
+                    VFXManager.Instance.InstantiateVFX("DeathExplosion", enemy.transform.position);
                     Object.Destroy(enemy.gameObject);
                 }
             }
@@ -133,19 +164,31 @@ public class EnemyStateFactory
     {
 
         var sm = new HybridStateMachine(
-            beforeOnEnter: self =>
-            {
-                enemy.enemyUIController.ShowWarnSign();
-            }
+            
         );
+
+        sm.AddState("Warn", new State(
+            onEnter: _ =>
+            {
+                enemy.StayStill();
+                enemy.enemyUIController.ShowWarnSign();
+            },
+            onLogic: state =>
+            {
+                enemy.SmoothLookToPlayer();
+            },
+            canExit: state => state.timer.Elapsed > 0.5f,
+            needsExitTime: true
+        ));
 
         sm.AddState("FollowPlayer", CreateStateFollowPlayer());
         sm.AddState("Attack", CreateStateAttack());
 
+        sm.AddTransition("Warn", "FollowPlayer");
         sm.AddTransition("FollowPlayer", "Attack", transition => enemy.InAttackRange());
         sm.AddTransition("Attack", "FollowPlayer", transition => !enemy.InAttackRange());
 
-        sm.SetStartState("FollowPlayer");
+        sm.SetStartState("Warn");
         return sm;
     }
 
