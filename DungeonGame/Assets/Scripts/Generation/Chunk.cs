@@ -16,12 +16,13 @@ namespace Assets.Scripts.Generation
         // TODO: Change approach. This needs further talk as it depends
         // on how assets will be done, etc.
         private DungeonGenerator _currentGenerator;
-        private Matrix4x4[] _treeMatrices;
-        private int _treeCount;
 
         private bool _isPopulated;
 
         public Mesh WalkablePlane;
+        private Mesh FloorPlane;
+
+        private Mesh _decorationMesh;
 
         public Chunk(Vector3 worldPosition, int chunkCellSize, World world)
         {
@@ -29,19 +30,19 @@ namespace Assets.Scripts.Generation
             _grid = new Grid2D<ushort>(new Vector2Int(chunkCellSize, chunkCellSize), Vector2Int.zero);
             _worldPosition = worldPosition;
             
-            // Tree stuff
-            // TODO: Generalize (with a better approach) to handle different types of obstacles
-            _treeMatrices = new Matrix4x4[chunkCellSize * chunkCellSize];
-            _treeCount = 0;
 
             _isPopulated = false;
 
+            _decorationMesh = new Mesh();
+            _decorationMesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
             WalkablePlane = new Mesh();
+            FloorPlane = new Mesh();
         }
 
         public void PopulateChunk(DungeonGenerator generator)
         {
             _currentGenerator = generator;
+            List<CombineInstance> instances = new List<CombineInstance>();
             for (int x = 0; x < _grid.Size.x; x++) 
             {
                 for (int y = 0; y < _grid.Size.y; y++)
@@ -55,14 +56,34 @@ namespace Assets.Scripts.Generation
                         {
                             // Add tree
                             Vector3 offset = new Vector3(_world.GetRandom().Next(0, 50) / 100.0f, 0.0f, _world.GetRandom().Next(0, 50) / 100.0f);
-                            Matrix4x4 m = Matrix4x4.TRS(new Vector3(x, 0.0f, y) + offset + _worldPosition,
-                                Quaternion.identity, 
-                                Vector3.one);
-                            _treeMatrices[_treeCount++] = m;
+                            float randomYRotation = (float)_world.GetRandom().Next(0, 360);
+                            Quaternion rotation = Quaternion.Euler(0f, randomYRotation, 0f);
+
+                            float scaleFactor = 0.9f + (float)_world.GetRandom().NextDouble() * 0.2f;
+                            Vector3 scale = Vector3.one * scaleFactor;
+
+                            Matrix4x4 m = Matrix4x4.TRS(
+                                new Vector3(x, 0.0f, y) + offset + _worldPosition,
+                                rotation,
+                                scale
+                            );
+
+                            Mesh randomMesh = generator.DecorationPrefabs[_world.GetRandom().Next(0, generator.DecorationPrefabs.Length)];
+
+
+                            CombineInstance ci = new CombineInstance();
+                            ci.mesh = randomMesh;
+                            ci.transform = m;
+                            instances.Add(ci);
+
                         }
                     }
                 }
             }
+
+            _decorationMesh.CombineMeshes(instances.ToArray(), true, true);
+            _decorationMesh.RecalculateBounds();
+            _decorationMesh.RecalculateNormals();
 
             _isPopulated = true;
 
@@ -100,6 +121,36 @@ namespace Assets.Scripts.Generation
             WalkablePlane.SetVertices(vertices);
             WalkablePlane.SetIndices(indices, MeshTopology.Triangles, 0);
             WalkablePlane.RecalculateNormals();
+
+
+            vertices.Clear();
+            indices.Clear();
+            for (int x = 0; x < _grid.Size.x; x++)
+            {
+                for (int y = 0; y < _grid.Size.y; y++)
+                {
+                    Vector2Int pos = new Vector2Int(x, y);
+                    float xp = x + _worldPosition.x;
+                    float yp = _worldPosition.y;
+                    float zp = y + _worldPosition.z;
+                    int v = vertices.Count;
+                    vertices.Add(new Vector3(xp, yp, zp));
+                    vertices.Add(new Vector3(xp + 1.0f, yp, zp));
+                    vertices.Add(new Vector3(xp, yp, zp + 1.0f));
+                    vertices.Add(new Vector3(xp + 1.0f, yp, zp + 1.0f));
+
+                    indices.Add(v);
+                    indices.Add(v + 3);
+                    indices.Add(v + 1);
+                    indices.Add(v);
+                    indices.Add(v + 2);
+                    indices.Add(v + 3);
+                }
+            }
+
+            FloorPlane.SetVertices(vertices);
+            FloorPlane.SetIndices(indices, MeshTopology.Triangles, 0);
+            FloorPlane.RecalculateNormals();
 
 
             // Spawn stuff
@@ -141,13 +192,11 @@ namespace Assets.Scripts.Generation
         {
             if (!_isPopulated) return;
 
-            Vector3 size = new Vector3(_grid.Size.x, 0.25f, _grid.Size.y);
-            Vector3 position = Vector3.zero;// _worldPosition;// + new Vector3(size.x * 0.5f, size.y * 0.5f, size.z * 0.5f);
+            Vector3 position = Vector3.zero;
             Matrix4x4 floorMatrix = Matrix4x4.TRS(position, Quaternion.identity, Vector3.one);
-            Graphics.RenderMesh(in _currentGenerator.RParamsFloor, WalkablePlane, 0, floorMatrix);
+            Graphics.RenderMesh(in _currentGenerator.RParamsFloor, FloorPlane, 0, floorMatrix);
 
-            if (_treeCount == 0) return;
-            Graphics.RenderMeshInstanced(in _currentGenerator.RParamsTrees, _currentGenerator.TreeMesh, 0, _treeMatrices, _treeCount, 0);
+            Graphics.RenderMesh(in _currentGenerator.RParamsTrees, _decorationMesh, 0, Matrix4x4.identity);
         }
 
         public void SetCell(Vector2Int pos, ushort cell)

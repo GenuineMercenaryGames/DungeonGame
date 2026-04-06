@@ -16,12 +16,22 @@ namespace Assets.Scripts.Generation
         DESERT
     }
 
+    public enum RoomType
+    {
+        DEFAULT,
+        PLAYER_SPAWN,
+        BOSS,
+        CHEST
+    }
+
     public class Room
     {
         public int RectCount { get { return _rectCount; } }
         public Rect[] Rects;
         private int _rectCount;
         public List<GameObject> _instances = new List<GameObject>();
+
+        public RoomType RoomType;
 
         public bool HasSpawnedContents { get; set; }
 
@@ -30,6 +40,7 @@ namespace Assets.Scripts.Generation
             Rects = new Rect[maxRectCount];
             _rectCount = 0;
             HasSpawnedContents = false;
+            RoomType = RoomType.DEFAULT;
         }
 
         public void AddRect(Rect a)
@@ -74,8 +85,10 @@ namespace Assets.Scripts.Generation
         public event Action<Room> OnRoomExit;
 
         public Vector2Int MaxWorldSizeInCells { get { return maxWorldSizeInCells; } }
+        public Vector2Int MaxDungeonSizeInCells { get { return maxDungeonSizeInCells; } }
         public Vector3 PlayerSpawnPosition { get { return _playerSpawnPosition; } }
         [SerializeField] private Vector2Int maxWorldSizeInCells;
+        [SerializeField] private Vector2Int maxDungeonSizeInCells;
         [SerializeField] private int cellsPerChunk;
         [SerializeField] private DungeonGenerator[] dungeonGenerators;
         [SerializeField] private Transform player;
@@ -278,14 +291,12 @@ namespace Assets.Scripts.Generation
         {
             DungeonGenerator gen = dungeonGenerators[(int)type];
             _generator.Generate(gen);
-            for (int i = 0; i < _chunks.Length; i++)
-            {
-                _chunks[i].PopulateChunk(gen);
-            }
+            
 
             // Get player spawn position
 
             float maxDistSq = 0.0f;
+            int roomId = 0;
             for(int i = 0; i < _rooms.Count; i++) 
             {
                 for(int j = 0; j < _rooms[i].RectCount; j++)
@@ -296,8 +307,51 @@ namespace Assets.Scripts.Generation
                     {
                         maxDistSq = distSq;
                         _playerSpawnPosition = new Vector3(center.x, 0.0f, center.y);
+                        roomId = i;
                     }
                 }
+            }
+
+            _rooms[roomId].RoomType = RoomType.PLAYER_SPAWN;
+
+            // Get boss room
+            maxDistSq = 0.0f;
+            Vector2 playerSpawnPosVec2 = new Vector2(_playerSpawnPosition.x, _playerSpawnPosition.z);
+            roomId = 0;
+            for (int i = 0; i < _rooms.Count; i++)
+            {
+                for (int j = 0; j < _rooms[i].RectCount; j++)
+                {
+                    Vector2 center = _rooms[i].Rects[j].Center - playerSpawnPosVec2;
+                    float distSq = center.SqrMagnitude();
+                    if (distSq > maxDistSq)
+                    {
+                        maxDistSq = distSq;
+                        roomId = i;
+                    }
+                }
+            }
+            _rooms[roomId].RoomType = RoomType.BOSS;
+
+
+
+            // Choose room types
+            for (int i = 0; i < _rooms.Count; i++)
+            {
+                if (_rooms[i].RoomType != RoomType.DEFAULT)
+                    continue;
+
+                float r = GetRandom().Next(0, 100) / 100.0f;
+                if(r <= gen.ChestRoomProbability)
+                {
+                    _rooms[i].RoomType = RoomType.CHEST;
+                }
+            }
+
+            // Populate chunks
+            for (int i = 0; i < _chunks.Length; i++)
+            {
+                _chunks[i].PopulateChunk(gen);
             }
 
             navMeshController?.Regenerate(_chunks);
@@ -330,8 +384,24 @@ namespace Assets.Scripts.Generation
 
         private void OnDrawGizmosSelected()
         {
-            Gizmos.DrawSphere(_playerSpawnPosition, 10.0f);
             return;
+            // Draw room types
+            Gizmos.DrawSphere(_playerSpawnPosition, 10.0f);
+            for(int i =  0; i < _rooms.Count; ++i)
+            {
+                switch(_rooms[i].RoomType) 
+                {
+                    case RoomType.CHEST:
+                        Gizmos.color = Color.yellow; break;
+                    case RoomType.BOSS:
+                        Gizmos.color = Color.blue; break;
+                    case RoomType.PLAYER_SPAWN:
+                        Gizmos.color = Color.red; break;
+                    default:
+                        continue;
+                }
+                Gizmos.DrawSphere(new Vector3(_rooms[i].Rects[0].Center.x, 0.0f, _rooms[i].Rects[0].Center.y), 5.0f);
+            }
             if (_chunks == null) return;
             _chunks[0].DrawGizmos();
             _generator?.DrawGizmos();

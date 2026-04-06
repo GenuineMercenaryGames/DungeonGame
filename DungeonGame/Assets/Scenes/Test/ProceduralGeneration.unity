@@ -538,7 +538,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a93c18366b537b4ebfe728d52c0e7f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.Generation.World
-  maxWorldSizeInCells: {x: 640, y: 640}
+  maxWorldSizeInCells: {x: 768, y: 768}
+  maxDungeonSizeInCells: {x: 640, y: 640}
   cellsPerChunk: 32
   dungeonGenerators:
   - {fileID: 11400000, guid: 7b4fda7ae29cba34f90ab09d80877e4e, type: 2}

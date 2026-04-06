@@ -28,6 +28,8 @@ public class Generator2D {
     List<Vertex> vertices;
     List<Prim.Edge> edges;
 
+    private int _offset = 64;
+
     public Generator2D(World world, Random random, int maxRoomCount, DynamicArray<Room> rooms) {
         _roomRects = new DynamicArray<Rect>(maxRoomCount);
         vertices = new List<Vertex>();
@@ -64,8 +66,8 @@ public class Generator2D {
     void PlaceRooms() {
         for (int i = 0; i < _generator.roomCount; i++) {
             Vector2Int location = new Vector2Int(
-                _random.Next(0, _world.MaxWorldSizeInCells.x),
-                _random.Next(0, _world.MaxWorldSizeInCells.y)
+                _random.Next(0, _world.MaxDungeonSizeInCells.x) + _offset,
+                _random.Next(0, _world.MaxDungeonSizeInCells.y) + _offset
             );
 
             Vector2Int roomSize = new Vector2Int(
@@ -76,8 +78,8 @@ public class Generator2D {
             bool add = true;
             Rect newRoom = new Rect(location, roomSize, PARENT_ROOM_NULL);
 
-            if (newRoom.bounds.xMin < 0 || newRoom.bounds.xMax >= _world.MaxWorldSizeInCells.x
-                || newRoom.bounds.yMin < 0 || newRoom.bounds.yMax >= _world.MaxWorldSizeInCells.y) {
+            if (newRoom.bounds.xMin < 0 || newRoom.bounds.xMax >= _world.MaxDungeonSizeInCells.x
+                || newRoom.bounds.yMin < 0 || newRoom.bounds.yMax >= _world.MaxDungeonSizeInCells.y) {
                 add = false;
             }
 
@@ -184,7 +186,7 @@ public class Generator2D {
     }
 
     void PathfindHallways() {
-        DungeonPathfinder2D aStar = new DungeonPathfinder2D(_world.MaxWorldSizeInCells);
+        DungeonPathfinder2D aStar = new DungeonPathfinder2D(_world.MaxDungeonSizeInCells);
 
         foreach (var edge in selectedEdges) {
             var startRoom = (edge.U as Vertex<Rect>).Item;

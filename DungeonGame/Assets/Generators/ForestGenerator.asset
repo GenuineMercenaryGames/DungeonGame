@@ -16,8 +16,11 @@ MonoBehaviour:
   roomMaxSize: {x: 80, y: 80}
   roomMinSize: {x: 30, y: 30}
   TreeDensity: 20
-  TreeMesh: {fileID: -5773737330183453750, guid: 603970f97e50c56488ec3c5a6febd940, type: 3}
   TreeMaterial: {fileID: 2100000, guid: 93caadf4359ae8143aad35b3145d31af, type: 2}
+  DecorationPrefabs:
+  - {fileID: 811424468950150501, guid: 6c7eaede4efc960409fb9ef2dfb77f29, type: 3}
+  - {fileID: -8135553595718028330, guid: 4471b1f7f824e4d44887e1364c6fc61a, type: 3}
+  - {fileID: 7607211279866533359, guid: 83e8d2542718a2e49a73d71c3a5fc685, type: 3}
   floorPlane: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   floorMaterial: {fileID: 2100000, guid: 42408edba4996274e9929b98382b40aa, type: 2}
   PrefabsToSpawn:
@@ -40,3 +43,5 @@ MonoBehaviour:
   - 0.005
   - 0.01
   - 0.2
+  ChestRoomProbability: 0.2
+  ChestPrefab: {fileID: 0}

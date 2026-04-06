@@ -12,8 +12,8 @@ namespace Assets.Scripts.ScriptableObjects
         [Header("Tree")]
         [Tooltip("Set tree probability of spawning. [0, 100]")]
         public int TreeDensity;
-        public Mesh TreeMesh;
         public Material TreeMaterial;
+        public Mesh[] DecorationPrefabs;
 
         public RenderParams RParamsTrees;
 
@@ -28,6 +28,10 @@ namespace Assets.Scripts.ScriptableObjects
         [Header("Spawn")]
         public GameObject[] PrefabsToSpawn;
         public float[] PrefabsProbabilities;
+
+
+        public float ChestRoomProbability;
+        public GameObject ChestPrefab;
 
         private void OnValidate()
         {
