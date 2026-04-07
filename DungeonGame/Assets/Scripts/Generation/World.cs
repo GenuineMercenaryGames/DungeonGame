@@ -86,6 +86,8 @@ namespace Assets.Scripts.Generation
         public event Action<Room> OnRoomEnter;
         public event Action<Room> OnRoomExit;
 
+        public List<DoorSegment> Doors { get { return _doors; } }
+
         public Vector2Int MaxWorldSizeInCells { get { return maxWorldSizeInCells; } }
         public Vector2Int MaxDungeonSizeInCells { get { return maxDungeonSizeInCells; } }
         public Vector3 PlayerSpawnPosition { get { return _playerSpawnPosition; } }
@@ -248,8 +250,6 @@ namespace Assets.Scripts.Generation
 
             GenerateDungeon(DungeonType.FOREST);
 
-            
-
             OnRoomEnter += SpawnRoomContents;
             OnRoomEnter += EnableRoomContents;
             OnRoomExit += DisableRoomContents;
@@ -374,6 +374,7 @@ namespace Assets.Scripts.Generation
 
         private void OnDrawGizmos()
         {
+            /*
             if (_doors == null) return;
             foreach(DoorSegment d in _doors)
             {
@@ -395,7 +396,7 @@ namespace Assets.Scripts.Generation
                     }
                 }
             }
-
+            */
                     
         }
 
