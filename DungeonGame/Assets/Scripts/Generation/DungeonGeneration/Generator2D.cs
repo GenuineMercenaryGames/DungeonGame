@@ -9,6 +9,17 @@ using Assets.Scripts.ScriptableObjects;
 using Assets.Scripts.Generation;
 using Rect = Assets.Scripts.Generation.Rect;
 
+public struct DoorSegment
+{
+    public Vector3 Start;
+    public Vector3 End;
+
+    public DoorSegment(Vector3 start, Vector3 end)
+    {
+        Start = start;
+        End = end;
+    }
+}
 public class Generator2D {
 
     private DungeonGenerator _generator;
@@ -29,6 +40,7 @@ public class Generator2D {
     List<Prim.Edge> edges;
 
     private int _offset = 64;
+
 
     public Generator2D(World world, Random random, int maxRoomCount, DynamicArray<Room> rooms) {
         _roomRects = new DynamicArray<Rect>(maxRoomCount);
@@ -153,14 +165,42 @@ public class Generator2D {
         }
     }
 
+    Vector2 ComputeCentroid(Room room)
+    {
+        float totalArea = 0f;
+        Vector2 centroid = Vector2.zero;
+
+        for (int i = 0; i < room.RectCount; i++)
+        {
+            Rect r = room.Rects[i];
+
+            float area = r.bounds.size.x * r.bounds.size.y;
+            Vector2 center = r.bounds.center;
+
+            centroid += center * area;
+            totalArea += area;
+        }
+
+        if (totalArea > 0)
+            centroid /= totalArea;
+
+        return centroid;
+    }
+
     void Triangulate() {
         vertices.Clear();
 
+        for(int i = 0; i < _rooms.Count; i++)
+        {
+            Vector2 centroid = ComputeCentroid(_rooms[i]);
+            vertices.Add(new Vertex(centroid));
+        }
+        /*
         for (int i = 0; i < _roomRects.Count; i++) 
         {
             Rect rect = _roomRects.Get(i);
             vertices.Add(new Vertex<Rect>((Vector2)rect.bounds.position + ((Vector2)rect.bounds.size) / 2, rect));
-        }
+        }*/
 
         delaunay = Delaunay2D.Triangulate(vertices);
     }
@@ -189,11 +229,11 @@ public class Generator2D {
         DungeonPathfinder2D aStar = new DungeonPathfinder2D(_world.MaxDungeonSizeInCells);
 
         foreach (var edge in selectedEdges) {
-            var startRoom = (edge.U as Vertex<Rect>).Item;
-            var endRoom = (edge.V as Vertex<Rect>).Item;
+            var startRoom = edge.U.Position;
+            var endRoom = edge.V.Position;
 
-            Vector2 startPosf = startRoom.bounds.center;
-            Vector2 endPosf = endRoom.bounds.center;
+            Vector2 startPosf = startRoom;
+            Vector2 endPosf = endRoom;
             Vector2Int startPos = new Vector2Int((int)startPosf.x, (int)startPosf.y);
             Vector2Int endPos = new Vector2Int((int)endPosf.x, (int)endPosf.y);
 
@@ -232,5 +272,143 @@ public class Generator2D {
                 }
             }
         }
+    }
+
+    public List<DoorSegment> GetDoors()
+    {
+        List<DoorSegment> doors = new List<DoorSegment>();
+        HashSet<Vector2Int> visited = new HashSet<Vector2Int>();
+
+        Vector2Int size = _world.MaxDungeonSizeInCells;
+
+        for (int x = 0; x < size.x; x++)
+        {
+            for (int y = 0; y < size.y; y++)
+            {
+                Vector2Int pos = new Vector2Int(x, y);
+
+                if (visited.Contains(pos))
+                    continue;
+
+                if (!IsDoorCell(pos))
+                    continue;
+
+                // Flood fill contiguous door cells
+                List<Vector2Int> segment = FloodFillDoor(pos, visited);
+
+                if (segment.Count == 0)
+                    continue;
+
+                // Compute start/end
+                DoorSegment door = ComputeSegment(segment);
+                doors.Add(door);
+            }
+        }
+
+        return doors;
+    }
+
+    bool IsDoorCell(Vector2Int pos)
+    {
+        ushort cell = _world.GetCell(pos);
+
+        // Must be inside a room
+        if (cell < World.CELL_TYPE_ROOM)
+            return false;
+
+        // Must touch hallway
+        foreach (Vector2Int dir in Directions4)
+        {
+            Vector2Int n = pos + dir;
+
+            if (!IsInside(n)) continue;
+
+            if (_world.GetCell(n) == World.CELL_TYPE_HALLWAY)
+                return true;
+        }
+
+        return false;
+    }
+
+    List<Vector2Int> FloodFillDoor(Vector2Int start, HashSet<Vector2Int> visited)
+    {
+        List<Vector2Int> result = new List<Vector2Int>();
+        Queue<Vector2Int> queue = new Queue<Vector2Int>();
+
+        queue.Enqueue(start);
+        visited.Add(start);
+
+        while (queue.Count > 0)
+        {
+            var current = queue.Dequeue();
+            result.Add(current);
+
+            foreach (Vector2Int dir in Directions4)
+            {
+                Vector2Int next = current + dir;
+
+                if (visited.Contains(next)) continue;
+                if (!IsInside(next)) continue;
+                if (!IsDoorCell(next)) continue;
+
+                visited.Add(next);
+                queue.Enqueue(next);
+            }
+        }
+
+        return result;
+    }
+
+    DoorSegment ComputeSegment(List<Vector2Int> cells)
+    {
+        // Determine orientation
+        bool horizontal = true;
+
+        int firstY = cells[0].y;
+        foreach (var c in cells)
+        {
+            if (c.y != firstY)
+            {
+                horizontal = false;
+                break;
+            }
+        }
+
+        Vector2Int min = cells[0];
+        Vector2Int max = cells[0];
+
+        foreach (var c in cells)
+        {
+            if (horizontal)
+            {
+                if (c.x < min.x) min = c;
+                if (c.x > max.x) max = c;
+            }
+            else
+            {
+                if (c.y < min.y) min = c;
+                if (c.y > max.y) max = c;
+            }
+        }
+
+        return new DoorSegment(
+            new Vector3(min.x, 0, min.y),
+            new Vector3(max.x, 0, max.y)
+        );
+    }
+
+    static readonly Vector2Int[] Directions4 = new Vector2Int[]
+    {
+        Vector2Int.up,
+        Vector2Int.down,
+        Vector2Int.left,
+        Vector2Int.right
+    };
+
+    bool IsInside(Vector2Int p)
+    {
+        return p.x >= 0 && p.y >= 0 &&
+               p.x < _world.MaxDungeonSizeInCells.x &&
+               p.y < _world.MaxDungeonSizeInCells.y;
     }
 }

@@ -4,6 +4,8 @@ using System.Threading;
 using Assets.Scripts.Generation.DungeonGeneration.Utils;
 using Assets.Scripts.ScriptableObjects;
 using UnityEngine;
+using UnityEngine.Audio;
+
 //using UnityEngine.Rendering; Esto te lo quito porque me da name clash con el dynamic array de tu Utils. - kike
 using static UnityEditor.PlayerSettings;
 
@@ -108,6 +110,9 @@ namespace Assets.Scripts.Generation
 
         private Vector3 _playerSpawnPosition;
         private ushort _lastPlayerCell = 0;
+
+
+        List<DoorSegment> _doors;
 
 
         public void SetCell(Vector2Int pos, ushort cell)
@@ -243,6 +248,8 @@ namespace Assets.Scripts.Generation
 
             GenerateDungeon(DungeonType.FOREST);
 
+            
+
             OnRoomEnter += SpawnRoomContents;
             OnRoomEnter += EnableRoomContents;
             OnRoomExit += DisableRoomContents;
@@ -348,6 +355,9 @@ namespace Assets.Scripts.Generation
                 }
             }
 
+
+            _doors = _generator.GetDoors();
+
             // Populate chunks
             for (int i = 0; i < _chunks.Length; i++)
             {
@@ -364,6 +374,13 @@ namespace Assets.Scripts.Generation
 
         private void OnDrawGizmos()
         {
+            if (_doors == null) return;
+            foreach(DoorSegment d in _doors)
+            {
+                Gizmos.DrawLine(d.Start, d.End);
+                Gizmos.DrawSphere(d.Start, 2.0f);
+                Gizmos.DrawSphere(d.End, 2.0f);
+            }
             return;
             if (_chunks == null) return;
             for (int x = -playerChunkVisibleRange; x <= playerChunkVisibleRange; x++)
