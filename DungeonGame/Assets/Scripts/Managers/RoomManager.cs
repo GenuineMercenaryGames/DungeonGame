@@ -5,6 +5,7 @@ using Assets.Scripts.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
+using static UnityEditor.PlayerSettings;
 
 public class RoomManager : MonoBehaviour
 {
@@ -57,6 +58,7 @@ public class RoomManager : MonoBehaviour
 
         GameObject roomParentEmpty = new GameObject("Room Parent");
 
+
         for (int i = 0; i < room.RectCount; i++)
         {
             RectInt bounds = room.Rects[i].bounds;
@@ -87,6 +89,27 @@ public class RoomManager : MonoBehaviour
                     }
                 }
             }
+        }
+
+        // Ñapa que he hecho por ahora para spawnear el boss
+        if (room.RoomType == RoomType.BOSS)
+        {
+            GameObject boss = Instantiate(
+                gen.BossPrefab,
+                new Vector3(room.Rects[0].Center.x, 1, room.Rects[0].Center.y),
+                Quaternion.identity
+            );
+            room._instances.Add(boss);
+        }
+
+        if (room.RoomType == RoomType.CHEST)
+        {
+            GameObject boss = Instantiate(
+                gen.ChestPrefab,
+                new Vector3(room.Rects[0].Center.x, 1, room.Rects[0].Center.y),
+                Quaternion.identity
+            );
+            room._instances.Add(boss);
         }
 
         room.HasSpawnedContents = true;

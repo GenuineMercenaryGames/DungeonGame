@@ -24,7 +24,7 @@ public class MeleeEnemy : Enemy
         sm.AddState("Wandering", f.CreateWanderFSM(10, 5));
         sm.SetStartState("Wandering");
 
-        sm.AddState("Combat", f.CreateMeleeCombatFSM());
+        sm.AddState("Combat", f.CreateBossCombatFSM());
         sm.AddState("Flee", f.CreateStateFlee(10));
         sm.AddState("Dead", f.CreateStateDeath());
 

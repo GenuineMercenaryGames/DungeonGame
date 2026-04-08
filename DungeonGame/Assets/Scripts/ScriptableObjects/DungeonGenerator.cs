@@ -34,6 +34,7 @@ namespace Assets.Scripts.ScriptableObjects
         public GameObject ChestPrefab;
 
         public GameObject DoorPrefab;
+        public GameObject BossPrefab;
 
         private void OnValidate()
         {

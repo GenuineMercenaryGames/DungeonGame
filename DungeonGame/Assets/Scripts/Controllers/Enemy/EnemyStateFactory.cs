@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityHFSM;
 
@@ -8,6 +9,7 @@ public class EnemyStateFactory
 
 
     public EnemyStateFactory(Enemy enemy) {  this.enemy = enemy; }
+
 
     #region States
     public State CreateStateFollowPlayer()
@@ -65,6 +67,70 @@ public class EnemyStateFactory
         sm.SetStartState("AttackBegin");
         return sm;
     }
+
+    public HybridStateMachine CreateStateSpinShotAttack(float spinDuration, float totalRotation, float shootInterval)
+    {
+        var sm = new HybridStateMachine();
+
+        float shootTimer = 0f;
+        float startY = 0f;
+
+        sm.AddState("AttackBegin", new State(
+            onEnter: _ =>
+            {
+                enemy.attackFinished = false;
+                enemy.agent.ResetPath();
+
+                shootTimer = 0f;
+
+                enemy.SmoothLookToPlayer();
+                startY = enemy.transform.eulerAngles.y;
+
+                enemy.animator.ResetTrigger("MeleeAttack");
+                enemy.animator.SetTrigger("MeleeAttack");
+            },
+            onLogic: state =>
+            {
+                shootTimer += Time.deltaTime;
+
+                float normalizedTime = Mathf.Clamp01(state.timer.Elapsed / spinDuration);
+                float currentY = startY + totalRotation * normalizedTime;
+
+                enemy.transform.rotation = Quaternion.Euler(0f, currentY, 0f);
+
+                if (shootTimer >= shootInterval)
+                {
+                    shootTimer = 0f;
+
+                    var weaponController = enemy.GetComponent<WeaponController>();
+                    weaponController.AttackPressed();
+                    weaponController.AttackReleased();
+                }
+            },
+            onExit: _ =>
+            {
+                enemy.animator.ResetTrigger("MeleeAttack");
+                enemy.animator.SetTrigger("StopAttack");
+            },
+            canExit: state => state.timer.Elapsed >= spinDuration,
+            needsExitTime: true
+        ));
+
+        sm.AddState("AttackEnd", new State(
+            onEnter: _ =>
+            {
+                enemy.attackFinished = true;
+            }
+        ));
+
+        sm.AddTransition("AttackBegin", "AttackEnd");
+        sm.AddTransition("AttackEnd", "AttackBegin", _ => enemy.InAttackRange());
+        sm.AddExitTransition("AttackEnd", _ => !enemy.InAttackRange());
+
+        sm.SetStartState("AttackBegin");
+        return sm;
+    }
+
     public State CreateStateLookPlayer()
     {
         return new State(
@@ -104,7 +170,7 @@ public class EnemyStateFactory
                 {
                     destroyed = true;
                     VFXManager.Instance.InstantiateVFX("DeathExplosion", enemy.transform.position);
-                    Object.Destroy(enemy.gameObject);
+                    GameObject.Destroy(enemy.gameObject);
                 }
             }
         );
@@ -191,6 +257,23 @@ public class EnemyStateFactory
         sm.SetStartState("Warn");
         return sm;
     }
+
+    public HybridStateMachine CreateBossCombatFSM()
+    {
+        var sm = new HybridStateMachine();
+
+        sm.AddState("Wait", CreateStateWait(1));
+        sm.AddState("Attack", CreateStateAttack());
+        sm.AddState("SpinAttack", CreateStateSpinShotAttack(1.2f, 360f, 0.08f));
+
+        sm.AddTransition("Wait", "Attack");
+        sm.AddTransition(new TransitionAfter("Attack", "SpinAttack", 3f));
+        sm.AddTransition(new TransitionAfter("SpinAttack", "Wait", 1.2f));
+
+        sm.SetStartState("Wait");
+        return sm;
+    }
+
 
     public StateMachine CreateRangeCombatFSM(float attackDistance)
     {
