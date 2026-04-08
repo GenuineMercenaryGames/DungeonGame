@@ -42,8 +42,8 @@ MonoBehaviour:
   - 0.005
   - 0.005
   - 0.005
-  - 0
-  - 0
+  - 0.01
+  - 0.01
   - 0.2
   ChestRoomProbability: 0.2
   ChestPrefab: {fileID: 6043191992826200431, guid: 2766da762c00faf4c8be3727607c4520, type: 3}

@@ -1040,9 +1040,6 @@ PrefabInstance:
       addedObject: {fileID: 337276417265587997}
     - targetCorrespondingSourceObject: {fileID: 8867960657160430145, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1669414763633783836}
-    - targetCorrespondingSourceObject: {fileID: 8867960657160430145, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 291797136239462352}
     - targetCorrespondingSourceObject: {fileID: 8867960657160430145, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
       insertIndex: -1
@@ -1065,6 +1062,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8867960657160430145, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
       insertIndex: -1
       addedObject: {fileID: -2887416189409340044}
+    - targetCorrespondingSourceObject: {fileID: 8867960657160430145, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -2823834291742467851}
   m_SourcePrefab: {fileID: 100100000, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
 --- !u!1 &559639843164309230 stripped
 GameObject:
@@ -1093,30 +1093,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &1669414763633783836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 559639843164309230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66c372e435b5db940809867218e8f861, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MeleeEnemy
-  playerScanningRange: 17
-  playerFollowRange: 20
-  playerAttackRange: 15
-  attackFinished: 1
-  currentStateDebug: 
-  shotLine: {fileID: 0}
-  agent: {fileID: 0}
-  healthController: {fileID: 0}
-  utilitySystem: {fileID: 0}
-  enemyUIController: {fileID: 0}
-  target: {fileID: 0}
-  animator: {fileID: 0}
 --- !u!114 &291797136239462352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1274,6 +1250,30 @@ MonoBehaviour:
   projectilePrefab: {fileID: 7759707805804090412, guid: 00bf45571e4f00648bc12bac90267061, type: 3}
   timeBetweenShots: 0
   spreadAngle: 0
+--- !u!114 &-2823834291742467851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559639843164309230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 164758fc806dc5143a99a361a1a1c023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MeleeEnemy
+  playerScanningRange: 17
+  playerFollowRange: 15
+  playerAttackRange: 20
+  attackFinished: 1
+  currentStateDebug: 
+  shotLine: {fileID: 0}
+  agent: {fileID: 0}
+  healthController: {fileID: 0}
+  utilitySystem: {fileID: 0}
+  enemyUIController: {fileID: 0}
+  target: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!4 &905203547048942676 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8095927965497407739, guid: 2c201f6401314d44d8ae94ca75376bab, type: 3}
