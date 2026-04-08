@@ -1105,9 +1105,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66c372e435b5db940809867218e8f861, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeleeEnemy
-  playerScanningRange: 8
+  playerScanningRange: 17
   playerFollowRange: 20
-  playerAttackRange: 7
+  playerAttackRange: 15
   attackFinished: 1
   currentStateDebug: 
   shotLine: {fileID: 0}
@@ -1115,6 +1115,7 @@ MonoBehaviour:
   healthController: {fileID: 0}
   utilitySystem: {fileID: 0}
   enemyUIController: {fileID: 0}
+  target: {fileID: 0}
   animator: {fileID: 0}
 --- !u!114 &291797136239462352
 MonoBehaviour:

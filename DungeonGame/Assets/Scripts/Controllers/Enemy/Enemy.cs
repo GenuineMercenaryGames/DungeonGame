@@ -310,6 +310,8 @@ public abstract class Enemy : MonoBehaviour
 
     void Update()
     {
+        UpdateRage();
+
         EnemyStates bestState = utilitySystem.GetBestState();
 
         if (bestState != currentRequestedState)
@@ -334,8 +336,6 @@ public abstract class Enemy : MonoBehaviour
         {
             Debug.DrawLine(corners[i], corners[i + 1], Color.green);
         }
-
-        UpdateRage();
     }
 
     // Implementación base del score, las clases derivadas deberían sobreescribir el score si se quiere cambiar el comportamiento.
