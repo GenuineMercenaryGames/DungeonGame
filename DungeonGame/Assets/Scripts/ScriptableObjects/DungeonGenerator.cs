@@ -33,6 +33,8 @@ namespace Assets.Scripts.ScriptableObjects
         public float ChestRoomProbability;
         public GameObject ChestPrefab;
 
+        public GameObject DoorPrefab;
+
         private void OnValidate()
         {
             RParamsTrees = new RenderParams(TreeMaterial);
