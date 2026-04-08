@@ -1,10 +1,12 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts.Generation;
 using Assets.Scripts.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
+using static UnityEditor.PlayerSettings;
 
 public class RoomManager : MonoBehaviour
 {
@@ -57,6 +59,7 @@ public class RoomManager : MonoBehaviour
 
         GameObject roomParentEmpty = new GameObject("Room Parent");
 
+
         for (int i = 0; i < room.RectCount; i++)
         {
             RectInt bounds = room.Rects[i].bounds;
@@ -89,6 +92,27 @@ public class RoomManager : MonoBehaviour
             }
         }
 
+        // Ñapa que he hecho por ahora para spawnear el boss
+        if (room.RoomType == RoomType.BOSS)
+        {
+            GameObject boss = Instantiate(
+                gen.BossPrefab,
+                new Vector3(room.Rects[0].Center.x, 1, room.Rects[0].Center.y),
+                Quaternion.identity
+            );
+            room._instances.Add(boss);
+        }
+
+        if (room.RoomType == RoomType.CHEST)
+        {
+            GameObject boss = Instantiate(
+                gen.ChestPrefab,
+                new Vector3(room.Rects[0].Center.x, 1, room.Rects[0].Center.y),
+                Quaternion.identity
+            );
+            room._instances.Add(boss);
+        }
+
         room.HasSpawnedContents = true;
     }
 
@@ -110,13 +134,54 @@ public class RoomManager : MonoBehaviour
         }
     }
 
+
+    private Coroutine _enable_doors_coroutine;
+    private Room _pending_room;
+
+    private IEnumerator EnableDoorsDelayed(Room room)
+    {
+        yield return new WaitForSeconds(1.0f);
+
+        if (_pending_room == room)
+        {
+            EnableDoors(room);
+            _enable_doors_coroutine = null;
+            _pending_room = null;
+        }
+    }
+
+    private void StartEnableDoorsTimer(Room room)
+    {
+        if (_enable_doors_coroutine != null)
+        {
+            StopCoroutine(_enable_doors_coroutine);
+        }
+
+        _pending_room = room;
+        _enable_doors_coroutine = StartCoroutine(EnableDoorsDelayed(room));
+    }
+
+    private void CancelEnableDoorsTimer(Room room)
+    {
+        if (_pending_room == room && _enable_doors_coroutine != null)
+        {
+            StopCoroutine(_enable_doors_coroutine);
+            _enable_doors_coroutine = null;
+            _pending_room = null;
+        }
+
+        DisableDoors(room);
+    }
+
     private void Awake()
     {
         _world.OnRoomEnter += SpawnRoomContents;
         _world.OnRoomEnter += EnableRoomContents;
         _world.OnRoomExit += DisableRoomContents;
-        _world.OnRoomEnter += EnableDoors;
-        
+
+        _world.OnRoomEnter += StartEnableDoorsTimer;
+        _world.OnRoomExit += CancelEnableDoorsTimer;
+
     }
 
     void Start()
@@ -127,15 +192,19 @@ public class RoomManager : MonoBehaviour
             Vector3 dir = door.End - door.Start;
             float length = dir.magnitude;
             Vector3 center = (door.Start + door.End) * 0.5f;
+
             Quaternion rotation = Quaternion.FromToRotation(Vector3.right, dir.normalized);
 
-            GameObject doorGo = Instantiate(gen.DoorPrefab, center, rotation);
+            Vector3 forward = rotation * Vector3.forward;
+            center += forward * 1.0f;
 
-            Vector3 scale = doorGo.transform.localScale;
-            scale.x = length;
-            doorGo.transform.localScale = scale;
+            GameObject door_go = Instantiate(gen.DoorPrefab, center, rotation);
 
-            _goDoors.Add(doorGo);
+            Vector3 scale = door_go.transform.localScale;
+            scale.x = length+1f;
+            door_go.transform.localScale = scale;
+
+            _goDoors.Add(door_go);
         }
     }
 

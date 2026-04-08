@@ -7,13 +7,9 @@ using UnityHFSM;
 // Diagrama de la máquina de estados:
 // https://drive.google.com/file/d/14AdsVPKWjIdQPbeXotiFKwIEhfFmiZsU/view?usp=sharing
 
-public class MeleeEnemy : Enemy
+public class BossEnemy : Enemy
 {
 
-    public void AttackVFX()
-    {
-        VFXManager.Instance.InstantiateVFX("MeleeHit", transform.position + transform.forward * 0.5f + new Vector3(0, 1, 0)); // TODO: Generalizar el transform para el ataque.
-    }
     protected override StateMachine MainFSM()
     {
 
@@ -23,7 +19,7 @@ public class MeleeEnemy : Enemy
         sm.AddState("Wandering", f.CreateWanderFSM(10, 5));
         sm.SetStartState("Wandering");
 
-        sm.AddState("Combat", f.CreateMeleeCombatFSM());
+        sm.AddState("Combat", f.CreateBossCombatFSM());
         sm.AddState("Flee", f.CreateStateFlee(10));
         sm.AddState("Dead", f.CreateStateDeath());
 

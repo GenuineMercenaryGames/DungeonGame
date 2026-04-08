@@ -60,7 +60,7 @@ public class BulletController : PooledObject
         if (collision.gameObject.TryGetComponent<HealthController>(out var health))
         {
             bool canDamage = true;
-            if (collision.gameObject.TryGetComponent<EntityTeamController>(out var teamOther) && Owner.TryGetComponent<EntityTeamController>(out var teamOwner))
+            if (collision.gameObject.TryGetComponent<EntityTeamController>(out var teamOther) && Owner.TryGetComponent<EntityTeamController>(out var teamOwner)) // TODO: nullptr check.
                 if(teamOther.Team == teamOwner.Team)
                     canDamage = false;
 
