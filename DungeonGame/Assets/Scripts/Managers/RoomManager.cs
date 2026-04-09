@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts.Generation;
 using Assets.Scripts.ScriptableObjects;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
@@ -16,11 +17,14 @@ public class RoomManager : MonoBehaviour
     public DungeonGenerator gen;
 
     private System.Random _random = new System.Random((int)DateTime.Now.Ticks);
-    private List<GameObject> _goDoors = new List<GameObject>();
 
     public void EnableDoors(Room room)
     {
-        foreach (GameObject go in _goDoors)
+        if(room.AlreadyCleared)
+        {
+            return;
+        }
+        foreach (GameObject go in room.GetDoors())
         {
             if (go != null)
                 go.SetActive(true);
@@ -29,7 +33,7 @@ public class RoomManager : MonoBehaviour
 
     public void DisableDoors(Room room)
     {
-        foreach (GameObject go in _goDoors)
+        foreach (GameObject go in room.GetDoors())
         {
             if (go != null)
                 go.SetActive(false);
@@ -86,7 +90,13 @@ public class RoomManager : MonoBehaviour
                         //    NavMeshObstacle obstacle = gameObject.AddComponent<NavMeshObstacle>();
                         //    obstacle.carving = true;
                         //}
-                        room._instances.Add(gameObject);
+
+                        // TODO: should be properly done
+                        Enemy enemy = gameObject.GetComponent<Enemy>();
+                        if (enemy != null)
+                            room.AddEnemy(gameObject.GetComponent<Enemy>());
+                        else 
+                         room._decorationInstances.Add(gameObject);
                     }
                 }
             }
@@ -100,7 +110,10 @@ public class RoomManager : MonoBehaviour
                 new Vector3(room.Rects[0].Center.x, 1, room.Rects[0].Center.y),
                 Quaternion.identity
             );
-            room._instances.Add(boss);
+            Enemy enemy = boss.GetComponent<Enemy>();
+            if (enemy != null)
+                room.AddEnemy(boss.GetComponent<Enemy>());
+            else Debug.LogError("Boss game object does not contain an enemy component");
         }
 
         if (room.RoomType == RoomType.CHEST)
@@ -110,7 +123,7 @@ public class RoomManager : MonoBehaviour
                 new Vector3(room.Rects[0].Center.x, 1, room.Rects[0].Center.y),
                 Quaternion.identity
             );
-            room._instances.Add(boss);
+            room._decorationInstances.Add(boss);
         }
 
         room.HasSpawnedContents = true;
@@ -118,19 +131,19 @@ public class RoomManager : MonoBehaviour
 
     private void EnableRoomContents(Room room)
     {
-        foreach (GameObject go in room._instances)
+        foreach (Enemy go in room._enemies)
         {
-            if (go != null)
-                go.SetActive(true);
+            if (go.gameObject != null)
+                go.gameObject.SetActive(true);
         }
     }
 
     private void DisableRoomContents(Room room)
     {
-        foreach (GameObject go in room._instances)
+        foreach (Enemy go in room._enemies)
         {
-            if (go != null)
-                go.SetActive(false);
+            if (go.gameObject != null)
+                go.gameObject.SetActive(false);
         }
     }
 
@@ -156,7 +169,6 @@ public class RoomManager : MonoBehaviour
         {
             StopCoroutine(_enable_doors_coroutine);
         }
-
         _pending_room = room;
         _enable_doors_coroutine = StartCoroutine(EnableDoorsDelayed(room));
     }
@@ -181,7 +193,12 @@ public class RoomManager : MonoBehaviour
 
         _world.OnRoomEnter += StartEnableDoorsTimer;
         _world.OnRoomExit += CancelEnableDoorsTimer;
+        _world.OnRoomCleared += OnRoomCleared;
+    }
 
+    private void OnRoomCleared(Room room)
+    {
+        DisableDoors(room);
     }
 
     void Start()
@@ -204,7 +221,13 @@ public class RoomManager : MonoBehaviour
             scale.x = length+1f;
             door_go.transform.localScale = scale;
 
-            _goDoors.Add(door_go);
+            Room room = _world.GetRoomAtCell(new Vector2Int((int)door.Start.x, (int)door.Start.z));
+            if (room == null)
+            {
+                room = _world.GetRoomAtCell(new Vector2Int((int)door.End.x, (int)door.End.z));
+            }
+            door_go.SetActive(false);
+            room.AddDoor(door_go);
         }
     }
 

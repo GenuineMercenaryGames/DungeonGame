@@ -31,23 +31,60 @@ namespace Assets.Scripts.Generation
         public int RectCount { get { return _rectCount; } }
         public Rect[] Rects;
         private int _rectCount;
-        public List<GameObject> _instances = new List<GameObject>();
+        private World _world;
+        public bool AlreadyCleared;
+        // TODO: make private with a proper getter method
+        public List<Enemy> _enemies = new List<Enemy>();
+        // TODO: make private with a proper adder method
+        public List<GameObject> _decorationInstances = new List<GameObject>();
+        private List<GameObject> _doors = new List<GameObject>();
 
         public RoomType RoomType;
 
         public bool HasSpawnedContents { get; set; }
 
-        public Room(int maxRectCount)
+        public int EnemyCount;
+
+        public Room(int maxRectCount, World world)
         {
             Rects = new Rect[maxRectCount];
             _rectCount = 0;
             HasSpawnedContents = false;
             RoomType = RoomType.DEFAULT;
+            EnemyCount = 0;
+            _world = world;
+            AlreadyCleared = false;
+        }
+
+        public void AddDoor(GameObject door)
+        {
+            _doors.Add(door);
+        }
+
+        public List<GameObject> GetDoors()
+        {
+            return _doors;
+        }
+
+        public void AddEnemy(Enemy enemy)
+        {
+            EnemyCount++;
+            enemy.OnDie += EnemyDied;
         }
 
         public void AddRect(Rect a)
         {
             Rects[_rectCount++] = a;
+        }
+
+        private void EnemyDied(Enemy enemy)
+        {
+            EnemyCount--;
+            if(EnemyCount <= 0)
+            {
+                _world.RoomCleared(this);
+                AlreadyCleared = true;
+            }
         }
     }
     public struct Rect
@@ -85,6 +122,7 @@ namespace Assets.Scripts.Generation
 
         public event Action<Room> OnRoomEnter;
         public event Action<Room> OnRoomExit;
+        public event Action<Room> OnRoomCleared;
 
         public List<DoorSegment> Doors { get { return _doors; } }
 
@@ -117,6 +155,11 @@ namespace Assets.Scripts.Generation
         List<DoorSegment> _doors;
 
 
+        public void RoomCleared(Room room)
+        {
+            OnRoomCleared?.Invoke(room);
+        }
+
         public void SetCell(Vector2Int pos, ushort cell)
         {
             GetChunk(pos).SetCell(GetLocalPos(pos), cell);
@@ -125,6 +168,18 @@ namespace Assets.Scripts.Generation
         public ushort GetCell(Vector2Int pos) 
         {
             return GetChunk(pos).GetCell(GetLocalPos(pos));
+        }
+
+        public Room GetRoomAtCell(Vector2Int cell)
+        {
+            ushort cid = GetCell(cell);
+            if (cid >= CELL_TYPE_ROOM)
+            {
+                return _rooms[cid - CELL_TYPE_ROOM];
+            } else
+            {
+                return null;
+            }
         }
 
         public Chunk GetChunk(Vector2Int pos)

@@ -1,3 +1,5 @@
+using Assets.Scripts.Generation;
+using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
@@ -39,6 +41,8 @@ public abstract class Enemy : MonoBehaviour
     private EnemyStates currentRequestedState;
     private float rage = 0.0f;
     public float vfxScale = 1.0f;
+
+    public event Action<Enemy> OnDie;
 
     protected abstract StateMachine MainFSM();
 
@@ -194,7 +198,7 @@ public abstract class Enemy : MonoBehaviour
     {
         for (int i = 0; i < maxPoints; i++)
         {
-            Vector3 randomOffset = Random.insideUnitSphere * radius;
+            Vector3 randomOffset = UnityEngine.Random.insideUnitSphere * radius;
             randomOffset.y = 0f;
 
             Vector3 candidate = position + randomOffset;
@@ -216,7 +220,7 @@ public abstract class Enemy : MonoBehaviour
 
         for (int i = 0; i < maxPoints; i++)
         {
-            Vector3 randomOffset = Random.insideUnitSphere * radius;
+            Vector3 randomOffset = UnityEngine.Random.insideUnitSphere * radius;
             randomOffset.y = 0f;
 
             Vector3 candidate = target.position + randomOffset;
@@ -262,6 +266,10 @@ public abstract class Enemy : MonoBehaviour
 
     #endregion
 
+    public void Die()
+    {
+        OnDie?.Invoke(this);
+    }
 
     private void Awake()
     {

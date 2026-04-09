@@ -1,3 +1,4 @@
+using Assets.Scripts.Generation;
 using System;
 using UnityEngine;
 using UnityHFSM;
@@ -170,6 +171,7 @@ public class EnemyStateFactory
                 {
                     destroyed = true;
                     VFXManager.Instance.InstantiateVFX("DeathExplosion", enemy.transform.position, enemy.vfxScale);
+                    enemy.Die();
                     GameObject.Destroy(enemy.gameObject);
                 }
             }

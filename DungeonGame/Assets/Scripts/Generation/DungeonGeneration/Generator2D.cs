@@ -138,7 +138,7 @@ public class Generator2D {
             if (!rootToRoom.TryGetValue(root, out int roomIndex))
             {
                 roomIndex = _rooms.Count;
-                _rooms.Add(new Room(MAX_RECT_PER_ROOM_COUNT));
+                _rooms.Add(new Room(MAX_RECT_PER_ROOM_COUNT, _world));
                 rootToRoom[root] = roomIndex;
             }
             _rooms[roomIndex].AddRect(_roomRects[i]);
