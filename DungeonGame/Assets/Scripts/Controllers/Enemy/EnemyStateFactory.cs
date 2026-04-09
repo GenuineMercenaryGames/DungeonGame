@@ -86,8 +86,8 @@ public class EnemyStateFactory
                 enemy.SmoothLookToPlayer();
                 startY = enemy.transform.eulerAngles.y;
 
-                enemy.animator.ResetTrigger("MeleeAttack");
-                enemy.animator.SetTrigger("MeleeAttack");
+                //enemy.animator.ResetTrigger("MeleeAttack");
+                //enemy.animator.SetTrigger("MeleeAttack");
             },
             onLogic: state =>
             {
@@ -109,8 +109,8 @@ public class EnemyStateFactory
             },
             onExit: _ =>
             {
-                enemy.animator.ResetTrigger("MeleeAttack");
-                enemy.animator.SetTrigger("StopAttack");
+                //enemy.animator.ResetTrigger("MeleeAttack");
+                //enemy.animator.SetTrigger("StopAttack");
             },
             canExit: state => state.timer.Elapsed >= spinDuration,
             needsExitTime: true
@@ -153,7 +153,7 @@ public class EnemyStateFactory
             {
                 enemy.StayStill();
                 enemy.enemyUIController.HideBar();
-                VFXManager.Instance.InstantiateVFX("DeathSkull", enemy.transform.position + new Vector3(0,2,0));
+                VFXManager.Instance.InstantiateVFX("DeathSkull", enemy.transform.position + new Vector3(0,2 * enemy.vfxScale, 0), enemy.vfxScale);
 
                 startRotation = enemy.transform.localRotation;
                 targetRotation = startRotation * Quaternion.Euler(0.0f, 0.0f, 90.0f);
@@ -169,7 +169,7 @@ public class EnemyStateFactory
                 if (!destroyed && state.timer.Elapsed >= fallTime)
                 {
                     destroyed = true;
-                    VFXManager.Instance.InstantiateVFX("DeathExplosion", enemy.transform.position);
+                    VFXManager.Instance.InstantiateVFX("DeathExplosion", enemy.transform.position, enemy.vfxScale);
                     GameObject.Destroy(enemy.gameObject);
                 }
             }

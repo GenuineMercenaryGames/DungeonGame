@@ -12,7 +12,7 @@ public class MeleeEnemy : Enemy
 
     public void AttackVFX()
     {
-        VFXManager.Instance.InstantiateVFX("MeleeHit", transform.position + transform.forward * 0.5f + new Vector3(0, 1, 0)); // TODO: Generalizar el transform para el ataque.
+        VFXManager.Instance.InstantiateVFX("MeleeHit", transform.position + transform.forward * 0.5f + new Vector3(0, 1, 0), vfxScale); // TODO: Generalizar el transform para el ataque.
     }
     protected override StateMachine MainFSM()
     {

@@ -38,6 +38,7 @@ public abstract class Enemy : MonoBehaviour
     public Animator animator;
     private EnemyStates currentRequestedState;
     private float rage = 0.0f;
+    public float vfxScale = 1.0f;
 
     protected abstract StateMachine MainFSM();
 
@@ -276,7 +277,7 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
-    void Start()
+    protected virtual void Start()
     {
         target = PlayerManager.Instance.Player.transform;
         fsm = MainFSM();

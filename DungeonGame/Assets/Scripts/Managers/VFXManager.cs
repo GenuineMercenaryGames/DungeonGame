@@ -38,7 +38,7 @@ public class VFXManager : MonoBehaviour
         }
     }
 
-    public void InstantiateVFX(string vfx_name, Vector3 position)
+    public void InstantiateVFX(string vfx_name, Vector3 position, float scale)
     {
         if (!vfx_dict.TryGetValue(vfx_name, out PooledObject prefab))
         {
@@ -46,7 +46,8 @@ public class VFXManager : MonoBehaviour
             return;
         }
 
-        Instantiate(prefab, position, prefab.transform.rotation);
+        PooledObject instance = Instantiate(prefab, position, prefab.transform.rotation);
+        instance.transform.localScale = prefab.transform.localScale * scale;
     }
 
 }

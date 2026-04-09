@@ -9,6 +9,16 @@ using UnityHFSM;
 
 public class BossEnemy : Enemy
 {
+    // La base del boss la queremos por separado y estática porque si no gira con el boss.
+    public GameObject basePrefab;
+
+    protected override void Start()
+    {
+        base.Start();
+        GameObject enemyBase = Instantiate(basePrefab);
+        enemyBase.transform.position = transform.position + enemyBase.transform.position;
+        vfxScale = 3f;
+    }
 
     protected override StateMachine MainFSM()
     {
