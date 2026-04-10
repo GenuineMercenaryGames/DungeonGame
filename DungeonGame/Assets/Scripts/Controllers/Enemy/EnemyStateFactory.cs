@@ -56,6 +56,7 @@ public class EnemyStateFactory
 
         sm.AddState("AttackEnd", new State(
             onEnter: _ => {
+                SfxManager.Instance.PlaySfx("EnemyAttack");
                 enemy.GetComponent<WeaponController>().AttackPressed();
                 enemy.GetComponent<WeaponController>().AttackReleased();
             }
@@ -155,6 +156,7 @@ public class EnemyStateFactory
                 enemy.StayStill();
                 enemy.enemyUIController.HideBar();
                 VFXManager.Instance.InstantiateVFX("DeathSkull", enemy.transform.position + new Vector3(0,2 * enemy.vfxScale, 0), enemy.vfxScale);
+                SfxManager.Instance.PlaySfx("EnemyDeath");
 
                 startRotation = enemy.transform.localRotation;
                 targetRotation = startRotation * Quaternion.Euler(0.0f, 0.0f, 90.0f);
@@ -239,6 +241,7 @@ public class EnemyStateFactory
             {
                 enemy.StayStill();
                 enemy.enemyUIController.ShowWarnSign();
+                SfxManager.Instance.PlaySfx("EnemyDetected");
             },
             onLogic: state =>
             {

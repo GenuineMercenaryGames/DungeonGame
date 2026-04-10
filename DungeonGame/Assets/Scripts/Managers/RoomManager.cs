@@ -198,6 +198,7 @@ public class RoomManager : MonoBehaviour
 
     private void OnRoomCleared(Room room)
     {
+        SfxManager.Instance.PlaySfx("RoomCleared");
         DisableDoors(room);
     }
 

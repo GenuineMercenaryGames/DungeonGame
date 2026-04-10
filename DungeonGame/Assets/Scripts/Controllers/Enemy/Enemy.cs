@@ -302,6 +302,7 @@ public abstract class Enemy : MonoBehaviour
             if(newHealth < oldHealth)
             {
                 rage += 10f;
+                SfxManager.Instance.PlaySfx("EnemyHurt");
             }
         };
 
