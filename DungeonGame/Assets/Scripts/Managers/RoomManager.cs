@@ -219,7 +219,7 @@ public class RoomManager : MonoBehaviour
 
             Vector3 scale = door_go.transform.localScale;
             scale.x = length+1f;
-            scale.z = 0.1f;
+            //scale.z = 0.1f;
             door_go.transform.localScale = scale;
 
             Room room = _world.GetRoomAtCell(new Vector2Int((int)door.Start.x, (int)door.Start.z));

@@ -1,10 +1,11 @@
-using Assets.Scripts.Generation;
 using System;
+using Assets.Scripts.Generation;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
 using UnityHFSM;
+using static UnityEngine.EventSystems.EventTrigger;
 using static UnityEngine.UI.Image;
 
 public enum EnemyStates
@@ -266,10 +267,6 @@ public abstract class Enemy : MonoBehaviour
 
     #endregion
 
-    public void Die()
-    {
-        OnDie?.Invoke(this);
-    }
 
     private void Awake()
     {
@@ -283,6 +280,15 @@ public abstract class Enemy : MonoBehaviour
             shotLine.positionCount = 2;
             shotLine.enabled = false;
         }
+        ObservableVariable<float>.FuncIn2<float> callback = (oldHealth, newHealth) =>
+        {
+            if (newHealth <= 0.0f)
+            {
+                Debug.Log("dead");
+                OnDie?.Invoke(this);
+            }
+        };
+        healthController.Health.AddListener(callback);
     }
 
     protected virtual void Start()
