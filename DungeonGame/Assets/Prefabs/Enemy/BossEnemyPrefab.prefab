@@ -1003,7 +1003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b1f7e1a1b2d8ce4bacf68787e9072c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthController
-  maxHealth: 100
+  maxHealth: 500
 --- !u!65 &5544714314704067100
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1172,6 +1172,7 @@ MonoBehaviour:
   enemyUIController: {fileID: 0}
   target: {fileID: 0}
   animator: {fileID: 0}
+  vfxScale: 1
   basePrefab: {fileID: 7704543149121602882, guid: f8cd23acb947b694cbe496d335d4e943, type: 3}
 --- !u!4 &905203547048942676 stripped
 Transform:

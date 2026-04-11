@@ -264,17 +264,54 @@ public class EnemyStateFactory
 
     public HybridStateMachine CreateBossCombatFSM()
     {
-        var sm = new HybridStateMachine();
+        HybridStateMachine sm = new HybridStateMachine();
 
-        sm.AddState("Wait", CreateStateWait(1));
-        sm.AddState("Attack", CreateStateAttack());
-        sm.AddState("SpinAttack", CreateStateSpinShotAttack(1.2f, 360f, 0.08f));
+        int attackCycles = 0;
+        int attackCyclesToCover = 2;
 
-        sm.AddTransition("Wait", "Attack");
-        sm.AddTransition(new TransitionAfter("Attack", "SpinAttack", 3f));
-        sm.AddTransition(new TransitionAfter("SpinAttack", "Wait", 1.2f));
+        sm.AddState("Cover", new State(
+        onEnter: _ =>
+        {
+            attackCycles = 0;
+            enemy.animator.SetBool("Cover", true);
+            enemy.GetComponent<BoxCollider>().enabled = false;
+        }));
+        sm.AddState("Uncover", new State(
+            onEnter: _ =>
+            {
+                enemy.animator.SetBool("Cover", false);
+                enemy.GetComponent<BoxCollider>().enabled = true;
+            },
+            onLogic: _ =>
+            {
+                enemy.SmoothLookToPlayer();
+            }));
 
-        sm.SetStartState("Wait");
+        HybridStateMachine attackCycle = new HybridStateMachine();
+
+        attackCycle.AddState("StartAttackCycle", new State(
+            onEnter: _ => {
+                attackCycles++;
+            }
+        ));
+        attackCycle.AddState("Attack", CreateStateAttack());
+        attackCycle.AddState("SpinAttack", CreateStateSpinShotAttack(1.2f, 360f, 0.08f));
+        attackCycle.AddState("Wait", CreateStateWait(0.5f));
+
+        attackCycle.AddTransition("StartAttackCycle", "Attack");
+        attackCycle.AddTransition(new TransitionAfter("Attack", "SpinAttack", 3f));
+        attackCycle.AddTransition(new TransitionAfter("SpinAttack", "Wait", 1.2f));
+        attackCycle.AddTransition("Wait", "StartAttackCycle");
+        attackCycle.SetStartState("StartAttackCycle");
+
+        sm.AddState("AttackCycle", attackCycle);
+
+        sm.AddTransition(new TransitionAfter("Cover", "Uncover", 2f));
+        sm.AddTransition(new TransitionAfter("Uncover", "AttackCycle", 2f));
+        sm.AddTransition("AttackCycle", "Cover", transition => attackCycles >= attackCyclesToCover + 1);
+        sm.AddTransition(new TransitionAfter("Cover", "Hidden", 3.2f));
+
+        sm.SetStartState("Cover");
         return sm;
     }
 
