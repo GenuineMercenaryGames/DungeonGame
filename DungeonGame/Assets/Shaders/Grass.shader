@@ -23,6 +23,11 @@ Shader "Custom/Grass_URP_Windows"
         _WindDistortionMap("Wind Distortion Map", 2D) = "white" {}
         _WindStrength("Wind Strength", Float) = 1
         _WindFrequency("Wind Frequency", Vector) = (0.05, 0.05, 0, 0)
+
+        _OutlineColor("Outline Color", Color) = (0,0,0,1)
+        _OutlineWidth("Outline Width", Range(0,4)) = 0.2
+
+
     }
 
     SubShader
@@ -77,6 +82,10 @@ Shader "Custom/Grass_URP_Windows"
                 float _WindStrength;
                 float4 _WindFrequency;
                 float4 _WindDistortionMap_ST;
+
+                half4 _OutlineColor;
+                float _OutlineWidth;
+                float _OutlineDistFade;
             CBUFFER_END
 
             TEXTURE2D(_WindDistortionMap);
@@ -118,6 +127,7 @@ Shader "Custom/Grass_URP_Windows"
                 float3 positionWS : TEXCOORD0;
                 float3 normalWS : TEXCOORD1;
                 float2 uv : TEXCOORD2;
+                float3 viewDirWS : TEXCOORD3;
             };
 
             float rand(float3 co)
@@ -215,6 +225,7 @@ Shader "Custom/Grass_URP_Windows"
                 o.positionWS = pos_inputs.positionWS;
                 o.normalWS = TransformObjectToWorldNormal(normalOS);
                 o.uv = uv;
+                o.viewDirWS = GetWorldSpaceViewDir(pos_inputs.positionWS);
                 return o;
             }
 
@@ -339,22 +350,44 @@ Shader "Custom/Grass_URP_Windows"
                 );
             }
 
-            half4 frag(GeometryOutput i, half facing : VFACE) : SV_Target
-            {
-                float3 normalWS = normalize(facing > 0.0 ? i.normalWS : -i.normalWS);
 
-                float4 shadow_coord = TransformWorldToShadowCoord(i.positionWS);
-                Light main_light = GetMainLight(shadow_coord);
+        half4 frag(GeometryOutput i, half facing : VFACE) : SV_Target
+        {
+            float3 normal_ws = normalize(facing > 0.0 ? i.normalWS : -i.normalWS);
 
-                half ndotl = saturate(dot(normalWS, main_light.direction) + _TranslucentGain);
-                half shadow = main_light.distanceAttenuation * main_light.shadowAttenuation;
+            float4 shadow_coord = TransformWorldToShadowCoord(i.positionWS);
+            Light main_light = GetMainLight(shadow_coord);
 
-                half3 ambient = SampleSH(normalWS);
-                half3 top_light_intensity = ambient + shadow * main_light.color;
+            float shadow = main_light.distanceAttenuation * main_light.shadowAttenuation;
+            float3 ambient = SampleSH(normal_ws);
+            float3 light_intensity = ambient + shadow * main_light.color;
 
-                half3 col = lerp(_BottomColor.rgb * top_light_intensity, _TopColor.rgb * top_light_intensity, i.uv.y);
-                return half4(col, 1.0);
-            }
+            float3 col = lerp(_BottomColor.rgb * light_intensity, _TopColor.rgb * light_intensity, i.uv.y);
+
+
+
+            float uv_dx = max(fwidth(i.uv.x), 1e-6);
+            float dist_px = min(i.uv.x, 1.0 - i.uv.x) / uv_dx;
+
+            float object_width_px = 1.0 / uv_dx;
+            float half_object_width_px = 0.5 * object_width_px;
+
+            float aa_px = 1.0;
+            float outline_px = _OutlineWidth;
+
+            outline_px = min(outline_px, max(half_object_width_px - 0.5 * aa_px, 0.0));
+
+            float subpixel_factor = saturate(outline_px);
+
+            float side_mask = 1.0 - smoothstep(outline_px - 0.5 * aa_px,
+                                                outline_px + 0.5 * aa_px,
+                                                dist_px);
+
+            side_mask *= subpixel_factor;
+
+            float3 final_col = lerp(col, _OutlineColor.rgb, side_mask);
+            return float4(final_col, 1.0);
+        }
             ENDHLSL
         }
     }
