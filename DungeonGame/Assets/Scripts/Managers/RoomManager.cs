@@ -121,7 +121,7 @@ public class RoomManager : MonoBehaviour
             GameObject boss = Instantiate(
                 gen.ChestPrefab,
                 new Vector3(room.Rects[0].Center.x, 1, room.Rects[0].Center.y),
-                Quaternion.identity
+                Quaternion.Euler(0f, 180f, 0f)
             );
             room._decorationInstances.Add(boss);
         }
@@ -142,11 +142,22 @@ public class RoomManager : MonoBehaviour
             if (go.gameObject != null)
                 go.gameObject.SetActive(true);
         }
+        foreach (GameObject go in room._decorationInstances)
+        {
+            if (go.gameObject != null)
+                go.gameObject.SetActive(true);
+        }
     }
 
     private void DisableRoomContents(Room room)
     {
         foreach (Enemy go in room._enemies)
+        {
+            if (go.gameObject != null)
+                go.gameObject.SetActive(false);
+        }
+
+        foreach (GameObject go in room._decorationInstances)
         {
             if (go.gameObject != null)
                 go.gameObject.SetActive(false);
