@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Gold chest
+  m_Name: Paladin_MAT
   m_Shader: {fileID: -6465566751694194690, guid: 820c71c67f67c1046b1bc28a2ece8ab5, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -73,7 +73,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture:
-        m_Texture: {fileID: 2800000, guid: 57e8cc38efe5d7949b33e76ae6433d71, type: 3}
+        m_Texture: {fileID: 2800000, guid: bd37393e2ce02864ab2991988aba4807, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -95,6 +95,7 @@ Material:
     - _AlphaToMask: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
+    - _BlendOp: 0
     - _Brightness: 1.82
     - _BumpScale: 1
     - _ClearCoatMask: 0
@@ -109,15 +110,20 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.4472136
     - _GlossyReflections: 1
+    - _Max: 7.7
     - _Metallic: 0.104
+    - _Min: 0.1
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _PosterizeSteps: 6.22
     - _QueueControl: 1
     - _QueueOffset: 0
     - _Range: 0.12
     - _ReceiveShadows: 1
     - _RimAmount: 0.5
+    - _SampleGI: 0
+    - _Shades: -0.18
     - _Smoothness: 0.07
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -137,13 +143,15 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Offset: {r: 0, g: 0, b: 0, a: 0}
     - _RimColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Specular: {r: 1, g: 0, b: 0.22349358, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Tiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &4720987736483684795
+--- !u!114 &8736074585276996056
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
