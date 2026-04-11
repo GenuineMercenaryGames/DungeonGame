@@ -23,7 +23,7 @@ public class SfxManager : Singleton<SfxManager>
         for (int i = 0; i < sfxAudioVector.Length; i++)
         {
             m_sfxSoundDictionary.Add(sfxAudioVector[i].name, sfxAudioVector[i]);
-            Debug.Log(sfxAudioVector[i].name);
+            //Debug.Log(sfxAudioVector[i].name);
         }
     }
 
@@ -51,7 +51,7 @@ public class SfxManager : Singleton<SfxManager>
             //m_sfxMusic.clip = clip;
             //m_sfxMusic.volume = m_sfxVolume;
             m_sfxMusic.PlayOneShot(clip, m_sfxVolume);
-            Debug.Log("Sfx music");
+            //Debug.Log("Sfx music");
         }
         else
         {

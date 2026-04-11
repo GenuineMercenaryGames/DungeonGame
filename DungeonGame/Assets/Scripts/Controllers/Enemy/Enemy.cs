@@ -284,7 +284,6 @@ public abstract class Enemy : MonoBehaviour
         {
             if (newHealth <= 0.0f)
             {
-                Debug.Log("dead");
                 OnDie?.Invoke(this);
             }
         };
