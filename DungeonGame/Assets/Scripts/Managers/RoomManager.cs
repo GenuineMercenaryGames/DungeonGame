@@ -126,6 +126,12 @@ public class RoomManager : MonoBehaviour
             room._decorationInstances.Add(boss);
         }
 
+        // Si no se spawnean enemigos, que se quiten las puertas.
+        if (room.EnemyCount <= 0)
+        {
+            room.AlreadyCleared = true;
+        }
+
         room.HasSpawnedContents = true;
     }
 
