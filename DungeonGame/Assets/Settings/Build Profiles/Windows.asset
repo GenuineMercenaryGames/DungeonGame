@@ -23,7 +23,7 @@ MonoBehaviour:
   - m_enabled: 1
     m_path: Assets/Scenes/Menu/MainMenuScene.unity
   - m_enabled: 1
-    m_path: Assets/Scenes/Test/DemoScene.unity
+    m_path: Assets/Scenes/Test/ProceduralIntegration.unity
   m_HasScriptingDefines: 0
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:

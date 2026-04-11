@@ -868,7 +868,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7ab74e659e1f0a34d9cfec21c478fc12, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e524dc995cb1b140841d1d067f36f86, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1117,6 +1117,7 @@ MonoBehaviour:
   enemyUIController: {fileID: 0}
   target: {fileID: 0}
   animator: {fileID: 0}
+  vfxScale: 1
 --- !u!114 &291797136239462352
 MonoBehaviour:
   m_ObjectHideFlags: 0
