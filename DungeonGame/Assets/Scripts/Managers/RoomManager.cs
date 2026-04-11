@@ -205,6 +205,12 @@ public class RoomManager : MonoBehaviour
     private void OnRoomCleared(Room room)
     {
         SfxManager.Instance.PlaySfx("RoomCleared");
+
+        if(room.RoomType == RoomType.BOSS)
+        {
+            UIManager.Instance.GameOverUI.ShowGameOver(true);
+        }
+
         DisableDoors(room);
     }
 
