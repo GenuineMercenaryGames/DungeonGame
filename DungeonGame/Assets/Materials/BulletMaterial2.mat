@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BulletMaterial
+  m_Name: BulletMaterial2
   m_Shader: {fileID: -6465566751694194690, guid: 1b97fe54a00c7634c942e7c0b639c6e7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -41,7 +41,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _Color: {r: 47.937256, g: 23.026182, b: 0, a: 1}
+    - _Color: {r: 766.99603, g: 38.345142, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &8676348845203009921
