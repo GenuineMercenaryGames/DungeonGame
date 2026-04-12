@@ -81,7 +81,8 @@ MonoBehaviour:
   OnShootTick:
     m_PersistentCalls:
       m_Calls: []
-  BaseDamage: 10
+  BaseDamage: 100
+  BaseVibration: 0.1
 --- !u!114 &2117869973036512709
 MonoBehaviour:
   m_ObjectHideFlags: 0

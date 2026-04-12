@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01caece4455709246960002c27426509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShotgunProjectileWeapon
-  pelletCount: 5
+  pelletCount: 30
 --- !u!1001 &7094246678626813892
 PrefabInstance:
   m_ObjectHideFlags: 0

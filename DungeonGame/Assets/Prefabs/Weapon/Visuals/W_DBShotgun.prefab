@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0325f34249aa05441a3e761b11bc7025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SingleProjectileWeapon
-  projectilePrefab: {fileID: 7759707805804090412, guid: 431f391e3665cf34d97e5424be6a4b1c, type: 3}
+  projectilePrefab: {fileID: 7759707805804090412, guid: 94a929106d4c8124ea6d386b8ca37fef, type: 3}
   timeBetweenShots: 0.8
   spreadAngle: 15
 --- !u!114 &6765699958734475859
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01caece4455709246960002c27426509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShotgunProjectileWeapon
-  pelletCount: 5
+  pelletCount: 15
 --- !u!1001 &3202311516759177411
 PrefabInstance:
   m_ObjectHideFlags: 0
