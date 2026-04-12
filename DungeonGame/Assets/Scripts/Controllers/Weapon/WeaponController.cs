@@ -14,7 +14,8 @@ public class WeaponController : MonoBehaviour
     [SerializeField] public UnityEvent OnShootTick;
 
     [Header("Settings")]
-    [SerializeField] public float BaseDamage;
+    [SerializeField] public float BaseDamage = 10.0f;
+    [SerializeField] public float BaseVibration = 4.0f;
     
     public bool IsShooting { get; private set; }
 
