@@ -452,4 +452,15 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 
+    #region OnShootEvents
+
+    public void RunOnShootEvents()
+    {
+        float vibration = weaponUser.weaponController.BaseVibration;
+        CameraManager.Instance.AddCameraVibration(vibration);
+        animator.SetTrigger("TriggerShoot");
+    }
+
+    #endregion
+
 }
