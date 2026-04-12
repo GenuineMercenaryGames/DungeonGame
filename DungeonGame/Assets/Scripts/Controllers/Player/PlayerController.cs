@@ -77,8 +77,14 @@ public class PlayerController : MonoBehaviour
     {
         if (MatchManager.Instance != null)
         {
-            weapons[0] = MatchManager.Instance.selectedWeaponPrimary;
-            weapons[1] = MatchManager.Instance.selectedWeaponSecondary;
+            if(MatchManager.Instance.selectedWeaponPrimary != null)
+            { 
+                weapons[0] = MatchManager.Instance.selectedWeaponPrimary;
+            }
+            if (MatchManager.Instance.selectedWeaponSecondary != null)
+            {
+                weapons[1] = MatchManager.Instance.selectedWeaponSecondary;
+            }
         }
         EquipPrimary();
     }
