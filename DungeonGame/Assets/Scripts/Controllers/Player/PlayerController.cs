@@ -75,6 +75,11 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        if (MatchManager.Instance != null)
+        {
+            weapons[0] = MatchManager.Instance.selectedWeaponPrimary;
+            weapons[1] = MatchManager.Instance.selectedWeaponSecondary;
+        }
         EquipPrimary();
     }
 
