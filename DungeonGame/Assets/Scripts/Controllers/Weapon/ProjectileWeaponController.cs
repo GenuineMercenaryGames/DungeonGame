@@ -42,6 +42,7 @@ public class SingleProjectileWeapon : MonoBehaviour
             return;
         elapsedTime = 0.0f;
         SpawnProjectile();
+        weaponController.weaponUser.ShootNotify();
     }
 
     public void Shoot(int count)
@@ -51,6 +52,7 @@ public class SingleProjectileWeapon : MonoBehaviour
         elapsedTime = 0.0f;
         for (int i = 0; i < count; ++i)
             SpawnProjectile();
+        weaponController.weaponUser.ShootNotify();
     }
 
     private Vector3 GetRandomSpreadDirection(Vector3 forward, float angle)

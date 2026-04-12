@@ -52,6 +52,8 @@ public class BeamWeapon : MonoBehaviour
                 health.Health.Value -= wc.BaseDamage * Time.deltaTime;
             }
         }
+
+        wc.weaponUser.ShootNotify();
     }
 
     private void SetLinePoints(Vector3 start, Vector3 end)
