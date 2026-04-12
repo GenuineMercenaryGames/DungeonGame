@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 using Assets.Scripts.Generation.DungeonGeneration.Utils;
 using Assets.Scripts.ScriptableObjects;
 using UnityEngine;
-using UnityEngine.Audio;
 
 //using UnityEngine.Rendering; Esto te lo quito porque me da name clash con el dynamic array de tu Utils. - kike
-using static UnityEditor.PlayerSettings;
+// using static UnityEditor.PlayerSettings;
 
 
 namespace Assets.Scripts.Generation

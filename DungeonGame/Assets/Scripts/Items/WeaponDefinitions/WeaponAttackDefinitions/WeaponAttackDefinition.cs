@@ -1,9 +1,6 @@
 using System;
 
 using UnityEngine;
-using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
-using UnityEngine.UIElements;
-using static UnityEngine.InputManagerEntry;
 
 /// <summary>
 /// Necessary runtime parameters to build an attack. Photo of the moment of the attack.

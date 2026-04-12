@@ -1,5 +1,4 @@
 using UnityEngine;
-using static UnityEngine.InputManagerEntry;
 
 [CreateAssetMenu(menuName = "Roguelike/Weapons/Attacks/Melee Attack")]
 public class MeleeAttackDefinition : WeaponAttackDefinition

@@ -4,7 +4,6 @@ using Random = System.Random;
 using Graphs;
 using System;
 using Assets.Scripts.Generation.DungeonGeneration.Utils;
-using static UnityEditor.FilePathAttribute;
 using Assets.Scripts.ScriptableObjects;
 using Assets.Scripts.Generation;
 using Rect = Assets.Scripts.Generation.Rect;

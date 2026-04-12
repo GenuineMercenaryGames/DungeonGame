@@ -1,13 +1,8 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using Assets.Scripts.Generation;
 using Assets.Scripts.ScriptableObjects;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.InputSystem;
-using static UnityEditor.PlayerSettings;
 
 public class RoomManager : MonoBehaviour
 {
