@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class MatchManager : SingletonPersistent<MatchManager>
 {
+    public GameObject selectedWeaponPrimary;
+    public GameObject selectedWeaponSecondary;
+
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     static void SpawnMatchManagerInstance()
     {

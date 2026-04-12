@@ -84,6 +84,20 @@ public class MainMenuController : MonoBehaviour
 
     #endregion
 
+    #region PublicMethods - Select Loadout
+
+    public void SelectWeaponPrimary(GameObject prefab)
+    {
+        MatchManager.Instance.selectedWeaponPrimary = prefab;
+    }
+
+    public void SelectWeaponSecondary(GameObject prefab)
+    {
+        MatchManager.Instance.selectedWeaponSecondary = prefab;
+    }
+
+    #endregion
+
     #region PrivateMethods
 
     private void UnloadAllMenus()
