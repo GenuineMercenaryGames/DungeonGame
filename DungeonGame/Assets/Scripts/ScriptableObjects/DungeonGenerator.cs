@@ -36,15 +36,38 @@ namespace Assets.Scripts.ScriptableObjects
         public GameObject DoorPrefab;
         public GameObject BossPrefab;
 
+        public void EnsureRuntimeData()
+        {
+            if (TreeMaterial == null)
+            {
+                Debug.LogError($"DungeonGenerator '{name}' is missing TreeMaterial.");
+            }
+            else
+            {
+                RParamsTrees = new RenderParams(TreeMaterial)
+                {
+                    shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On,
+                    receiveShadows = true
+                };
+            }
+
+            if (floorMaterial == null)
+            {
+                Debug.LogError($"DungeonGenerator '{name}' is missing floorMaterial.");
+            }
+            else
+            {
+                RParamsFloor = new RenderParams(floorMaterial)
+                {
+                    shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off,
+                    receiveShadows = true
+                };
+            }
+        }
+
         private void OnValidate()
         {
-            RParamsTrees = new RenderParams(TreeMaterial);
-            RParamsTrees.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.On;
-            RParamsTrees.receiveShadows = true;
-
-            RParamsFloor = new RenderParams(floorMaterial);
-            RParamsFloor.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-            RParamsFloor.receiveShadows = true;
+            EnsureRuntimeData();
         }
     }
 }

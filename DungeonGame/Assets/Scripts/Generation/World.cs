@@ -274,6 +274,7 @@ namespace Assets.Scripts.Generation
         public void GenerateDungeon(DungeonType type) 
         {
             DungeonGenerator gen = dungeonGenerators[(int)type];
+            gen.EnsureRuntimeData();
             _generator.Generate(gen);
             
 
