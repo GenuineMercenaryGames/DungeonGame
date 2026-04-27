@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Assets.Scripts.Generation;
 using UnityEditor;
 using UnityEngine;
@@ -23,6 +24,7 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected float playerScanningRange = 10.0f;
     [SerializeField] protected float playerFollowRange = 20.0f;
     [SerializeField] protected float playerAttackRange = 5.0f;
+    [SerializeField] protected Material hurtMaterial;
 
     public bool attackFinished = true;
 
@@ -44,6 +46,9 @@ public abstract class Enemy : MonoBehaviour
     public float vfxScale = 1.0f;
 
     public event Action<Enemy> OnDie;
+    private Coroutine flashCoroutine;
+    private SkinnedMeshRenderer meshRenderer;
+    private Material originalMaterial;
 
     protected abstract StateMachine MainFSM();
 
@@ -275,6 +280,8 @@ public abstract class Enemy : MonoBehaviour
         healthController = GetComponent<HealthController>();
         utilitySystem = GetComponent<UtilitySystem>();
         enemyUIController = GetComponent<EnemyUIController>();
+        meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        originalMaterial = meshRenderer.material;
         if (shotLine != null)
         {
             shotLine.positionCount = 2;
@@ -290,6 +297,16 @@ public abstract class Enemy : MonoBehaviour
         healthController.Health.AddListener(callback);
     }
 
+    private IEnumerator FlashCoroutine()
+    {
+        meshRenderer.material = hurtMaterial;
+
+        yield return new WaitForSeconds(0.1f);
+
+        meshRenderer.material = originalMaterial;
+        flashCoroutine = null;
+    }
+
     protected virtual void Start()
     {
         target = PlayerManager.Instance.Player.transform;
@@ -302,6 +319,12 @@ public abstract class Enemy : MonoBehaviour
             {
                 rage += 10f;
                 SfxManager.Instance.PlaySfx("EnemyHurt");
+                if (flashCoroutine != null)
+                {
+                    StopCoroutine(flashCoroutine);
+                }
+
+                flashCoroutine = StartCoroutine(FlashCoroutine());
             }
         };
 

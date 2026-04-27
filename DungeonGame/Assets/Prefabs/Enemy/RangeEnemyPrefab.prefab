@@ -1108,6 +1108,7 @@ MonoBehaviour:
   playerScanningRange: 17
   playerFollowRange: 20
   playerAttackRange: 15
+  hurtMaterial: {fileID: 2100000, guid: f03ad4e91a83327438e1b6010ee094de, type: 2}
   attackFinished: 1
   currentStateDebug: 
   shotLine: {fileID: 0}
@@ -1217,6 +1218,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   BaseDamage: 10
+  BaseVibration: 4
 --- !u!114 &6511556155735358013
 MonoBehaviour:
   m_ObjectHideFlags: 0
