@@ -72,6 +72,10 @@ public class RoomManager : MonoBehaviour
                     int p = _random.Next(0, prefabCount);
                     float r = _random.Next(0, 100000) / 100000.0f;
 
+                    // No spawneamos enemigos en la bossroom
+                    if (room.RoomType == RoomType.BOSS && gen.PrefabsToSpawn[p].TryGetComponent<Enemy>(out _))
+                        continue;
+
                     if (r <= gen.PrefabsProbabilities[p])
                     {
                         GameObject gameObject = Instantiate(
