@@ -282,7 +282,7 @@ public abstract class Enemy : MonoBehaviour
         }
         ObservableVariable<float>.FuncIn2<float> callback = (oldHealth, newHealth) =>
         {
-            if (newHealth <= 0.0f)
+            if (newHealth <= 0.0f && oldHealth > 0.0f)
             {
                 OnDie?.Invoke(this);
             }
