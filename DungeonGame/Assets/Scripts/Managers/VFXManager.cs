@@ -38,7 +38,7 @@ public class VFXManager : MonoBehaviour
         }
     }
 
-    public void InstantiateVFX(string vfx_name, Vector3 position, float scale)
+    public void InstantiateVFX(string vfx_name, Vector3 position, float scale = 1.0f)
     {
         if (!vfx_dict.TryGetValue(vfx_name, out PooledObject prefab))
         {

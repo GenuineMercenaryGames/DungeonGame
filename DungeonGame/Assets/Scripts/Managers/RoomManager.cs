@@ -93,9 +93,12 @@ public class RoomManager : MonoBehaviour
                         // TODO: should be properly done
                         Enemy enemy = gameObject.GetComponent<Enemy>();
                         if (enemy != null)
+                        {
+                            gameObject.AddComponent<FadeController>();
                             room.AddEnemy(gameObject.GetComponent<Enemy>());
-                        else 
-                         room._decorationInstances.Add(gameObject);
+                        }
+                        else
+                            room._decorationInstances.Add(gameObject);
                     }
                 }
             }
@@ -136,30 +139,39 @@ public class RoomManager : MonoBehaviour
 
     private void EnableRoomContents(Room room)
     {
-        foreach (Enemy go in room._enemies)
+        foreach (Enemy enemy in room._enemies)
         {
-            if (go.gameObject != null)
-                go.gameObject.SetActive(true);
+            if (enemy.gameObject != null)
+            {
+                enemy.gameObject.SetActive(true);
+                enemy.GetComponent<FadeController>().PlayFadeIn();
+            }
         }
         foreach (GameObject go in room._decorationInstances)
         {
-            if (go.gameObject != null)
-                go.gameObject.SetActive(true);
+            if (go != null)
+            {
+                go.SetActive(true);
+                //go.GetComponent<FadeController>().PlayFadeIn();
+            }
         }
     }
 
     private void DisableRoomContents(Room room)
     {
-        foreach (Enemy go in room._enemies)
+        foreach (Enemy enemy in room._enemies)
         {
-            if (go.gameObject != null)
-                go.gameObject.SetActive(false);
+            if (enemy.gameObject != null)
+                enemy.gameObject.GetComponent<FadeController>().PlayFadeOutAndDisable();
         }
 
         foreach (GameObject go in room._decorationInstances)
         {
-            if (go.gameObject != null)
-                go.gameObject.SetActive(false);
+            if (go != null)
+            {
+                go.SetActive(false);
+                //go.gameObject.GetComponent<FadeController>().PlayFadeOutAndDisable();
+            }
         }
     }
 
