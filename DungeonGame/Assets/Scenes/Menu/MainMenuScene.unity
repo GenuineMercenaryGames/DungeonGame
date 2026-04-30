@@ -2311,7 +2311,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -71}
-  m_SizeDelta: {x: 200, y: 29.2634}
+  m_SizeDelta: {x: 411.6901, y: 29.2634}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &278629339
 MonoBehaviour:
@@ -2325,7 +2325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9960260aea9575b47a71e2354ba0a92c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  localizationString: loc_settings
+  localizationString: loc_audio_settings
 --- !u!114 &278629340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2346,7 +2346,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Settings
+  m_text: Audio Settings
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fe454aa3531e1a14d9636cb8ae793a04, type: 2}
   m_sharedMaterial: {fileID: 5707439722441930252, guid: fe454aa3531e1a14d9636cb8ae793a04, type: 2}
@@ -5775,7 +5775,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -71}
-  m_SizeDelta: {x: 200, y: 29.2634}
+  m_SizeDelta: {x: 452.3407, y: 29.2634}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &779909644
 MonoBehaviour:
@@ -5789,7 +5789,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9960260aea9575b47a71e2354ba0a92c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalizedText
-  localizationString: loc_settings
+  localizationString: loc_graphics_settings
 --- !u!114 &779909645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5810,7 +5810,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Settings
+  m_text: Graphics Settings
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fe454aa3531e1a14d9636cb8ae793a04, type: 2}
   m_sharedMaterial: {fileID: 5707439722441930252, guid: fe454aa3531e1a14d9636cb8ae793a04, type: 2}
@@ -7274,7 +7274,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 194239061}
         m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: LoadMainMenu
+        m_MethodName: LoadSettingsMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8910,7 +8910,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 194239061}
         m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: LoadMainMenu
+        m_MethodName: LoadSettingsMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
