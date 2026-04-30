@@ -25,6 +25,10 @@ public static class LanguageManager
                 { "loc_level_selection", "Level Selection" },
                 { "loc_level_the_forest", "The Forest" },
 
+                { "loc_language", "Language" },
+                { "loc_graphics", "Graphics" },
+                { "loc_audio", "Audio" },
+
                 { "loc_achievements_placeholder", "You haven't earned any achievements yet..." },
             }
         },
@@ -45,6 +49,10 @@ public static class LanguageManager
 
                 { "loc_level_selection", "Selection de Nivel" },
                 { "loc_level_the_forest", "El Bosque" },
+
+                { "loc_language", "Idioma" },
+                { "loc_graphics", "Gráficos" },
+                { "loc_audio", "Audio" },
 
                 { "loc_achievements_placeholder", "Todavía no has conseguido ningún logro..." },
             }
@@ -67,6 +75,10 @@ public static class LanguageManager
                 { "loc_level_selection", "Sélection du niveau" },
                 { "loc_level_the_forest", "La Forêt" },
 
+                { "loc_language", "Langue" },
+                { "loc_graphics", "Graphique" },
+                { "loc_audio", "Audio" },
+
                 { "loc_achievements_placeholder", "Vous n'avez encore débloqué aucun succès..." },
             }
         },
@@ -87,6 +99,10 @@ public static class LanguageManager
 
                 { "loc_level_selection", "Levelauswahl" },
                 { "loc_level_the_forest", "Der Wald" },
+
+                { "loc_language", "Sprache" },
+                { "loc_graphics", "Grafik" },
+                { "loc_audio", "Audio" },
 
                 { "loc_achievements_placeholder", "Du hast noch keine Erfolge erzielt..." },
             }
