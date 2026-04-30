@@ -32,6 +32,13 @@ public static class LanguageManager
                 { "loc_graphics_settings", "Graphics Settings" },
                 { "loc_audio_settings", "Audio Settings" },
 
+                { "loc_very_low", "Very Low" },
+                { "loc_low", "Low" },
+                { "loc_medium", "Medium" },
+                { "loc_high", "High" },
+                { "loc_very_high", "Very High" },
+                { "loc_ultra", "Ultra" },
+
                 { "loc_achievements_placeholder", "You haven't earned any achievements yet..." },
             }
         },
@@ -59,6 +66,13 @@ public static class LanguageManager
                 { "loc_language_settings", "Ajustes de Idioma" },
                 { "loc_graphics_settings", "Ajustes de Gráficos" },
                 { "loc_audio_settings", "Ajustes de Audio" },
+
+                { "loc_very_low", "Muy Bajo" },
+                { "loc_low", "Bajo" },
+                { "loc_medium", "Medio" },
+                { "loc_high", "Alto" },
+                { "loc_very_high", "Muy Alto" },
+                { "loc_ultra", "Ultra" },
 
                 { "loc_achievements_placeholder", "Todavía no has conseguido ningún logro..." },
             }
@@ -88,6 +102,13 @@ public static class LanguageManager
                 { "loc_graphics_settings", "Paramètres Graphiques" },
                 { "loc_audio_settings", "Paramètres Audio" },
 
+                { "loc_very_low", "Très Faible" },
+                { "loc_low", "Faible" },
+                { "loc_medium", "Moyen" },
+                { "loc_high", "Élevé" },
+                { "loc_very_high", "Très Élevé" },
+                { "loc_ultra", "Ultra" },
+
                 { "loc_achievements_placeholder", "Vous n'avez encore débloqué aucun succès..." },
             }
         },
@@ -115,6 +136,13 @@ public static class LanguageManager
                 { "loc_language_settings", "Spracheinstellungen" },
                 { "loc_graphics_settings", "Grafikeinstellungen" },
                 { "loc_audio_settings", "Audioeinstellungen" },
+
+                { "loc_very_low", "Sehr niedrig" },
+                { "loc_low", "Niedrig" },
+                { "loc_medium", "Mittel" },
+                { "loc_high", "Hoch" },
+                { "loc_very_high", "Sehr hoch" },
+                { "loc_ultra", "Ultra" },
 
                 { "loc_achievements_placeholder", "Du hast noch keine Erfolge erzielt..." },
             }

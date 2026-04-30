@@ -103,6 +103,22 @@ public class MainMenuController : MonoBehaviour
 
     #endregion
 
+    #region PublicMethods - Graphics
+
+    public void SetGraphicsQuality(int level)
+    {
+        QualitySettings.SetQualityLevel(level);
+    }
+
+    public void SetQualityVeryLow() { SetGraphicsQuality(0); }
+    public void SetQualityLow() { SetGraphicsQuality(1); }
+    public void SetQualityMedium() { SetGraphicsQuality(2); }
+    public void SetQualityHigh() { SetGraphicsQuality(3); }
+    public void SetQualityVeryHigh() { SetGraphicsQuality(4); }
+    public void SetQualityUltra() { SetGraphicsQuality(5); }
+
+    #endregion
+
     #region PrivateMethods
 
     private void UnloadAllMenus()
