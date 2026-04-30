@@ -28,6 +28,9 @@ public static class LanguageManager
                 { "loc_language", "Language" },
                 { "loc_graphics", "Graphics" },
                 { "loc_audio", "Audio" },
+                { "loc_language_settings", "Language Settings" },
+                { "loc_graphics_settings", "Graphics Settings" },
+                { "loc_audio_settings", "Audio Settings" },
 
                 { "loc_achievements_placeholder", "You haven't earned any achievements yet..." },
             }
@@ -53,6 +56,9 @@ public static class LanguageManager
                 { "loc_language", "Idioma" },
                 { "loc_graphics", "Gráficos" },
                 { "loc_audio", "Audio" },
+                { "loc_language_settings", "Ajustes de Idioma" },
+                { "loc_graphics_settings", "Ajustes de Gráficos" },
+                { "loc_audio_settings", "Ajustes de Audio" },
 
                 { "loc_achievements_placeholder", "Todavía no has conseguido ningún logro..." },
             }
@@ -78,6 +84,9 @@ public static class LanguageManager
                 { "loc_language", "Langue" },
                 { "loc_graphics", "Graphique" },
                 { "loc_audio", "Audio" },
+                { "loc_language_settings", "Paramètres de langue" },
+                { "loc_graphics_settings", "Paramètres Graphiques" },
+                { "loc_audio_settings", "Paramètres Audio" },
 
                 { "loc_achievements_placeholder", "Vous n'avez encore débloqué aucun succès..." },
             }
@@ -103,6 +112,9 @@ public static class LanguageManager
                 { "loc_language", "Sprache" },
                 { "loc_graphics", "Grafik" },
                 { "loc_audio", "Audio" },
+                { "loc_language_settings", "Spracheinstellungen" },
+                { "loc_graphics_settings", "Grafikeinstellungen" },
+                { "loc_audio_settings", "Audioeinstellungen" },
 
                 { "loc_achievements_placeholder", "Du hast noch keine Erfolge erzielt..." },
             }
