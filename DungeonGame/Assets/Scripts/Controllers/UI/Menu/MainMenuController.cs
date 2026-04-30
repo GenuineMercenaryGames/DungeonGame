@@ -24,6 +24,7 @@ public class MainMenuController : MonoBehaviour
 
     void Start()
     {
+        AdjustInitialSettings();
         LoadMainMenu();
     }
 
@@ -147,6 +148,31 @@ public class MainMenuController : MonoBehaviour
     private void OpenURL(string url)
     {
         Application.OpenURL(url);
+    }
+
+    private void AdjustInitialSettings()
+    {
+        // TODO : Add some logic to save this stuff later on with user settings files and whatnot, but for now, we always do this logic no matter what.
+        SystemLanguage syslang = Application.systemLanguage;
+        Language lang;
+        switch (syslang)
+        {
+            default:
+            case SystemLanguage.English:
+                lang = Language.English;
+                break;
+            case SystemLanguage.Catalan:
+            case SystemLanguage.Spanish:
+                lang = Language.Spanish;
+                break;
+            case SystemLanguage.French:
+                lang = Language.French;
+                break;
+            case SystemLanguage.German:
+                lang = Language.German;
+                break;
+        }
+        LanguageManager.SetLanguage(lang);
     }
 
     #endregion
