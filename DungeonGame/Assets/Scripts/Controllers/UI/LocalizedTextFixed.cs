@@ -25,7 +25,7 @@ public class LocalizedTextFixed : MonoBehaviour
     {
         if (TryGetComponent<TMP_Text>(out var text))
         {
-            text.text = LanguageManager.GetString(localizationString);
+            text.text = LanguageManager.GetString(language, localizationString);
         }
     }
 }
