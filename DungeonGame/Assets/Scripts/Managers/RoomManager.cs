@@ -80,7 +80,7 @@ public class RoomManager : MonoBehaviour
                     {
                         GameObject gameObject = Instantiate(
                             gen.PrefabsToSpawn[p],
-                            new Vector3(pos.x, 0.0f, pos.y),
+                            new Vector3(pos.x + 0.5f, 0.0f, pos.y + 0.5f),
                             Quaternion.identity
                         );
                         gameObject.transform.parent = roomParentEmpty.transform;
@@ -247,21 +247,14 @@ public class RoomManager : MonoBehaviour
 
             Quaternion rotation = Quaternion.FromToRotation(Vector3.right, dir.normalized);
 
-            Vector3 forward = rotation * Vector3.forward;
-            center += forward * 1.0f;
+            //Vector3 forward = rotation * Vector3.forward;
 
             GameObject door_go = Instantiate(gen.DoorPrefab, center, rotation);
 
             Vector3 scale = door_go.transform.localScale;
-            scale.x = length+1f;
-            //scale.z = 0.1f;
+            scale.x = length + 1f;
             door_go.transform.localScale = scale;
-
-            Room room = _world.GetRoomAtCell(new Vector2Int((int)door.Start.x, (int)door.Start.z));
-            if (room == null)
-            {
-                room = _world.GetRoomAtCell(new Vector2Int((int)door.End.x, (int)door.End.z));
-            }
+            Room room = _world.GetRoom(door.RoomId);
             door_go.SetActive(false);
             room.AddDoor(door_go);
         }

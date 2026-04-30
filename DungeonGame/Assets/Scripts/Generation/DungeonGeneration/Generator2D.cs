@@ -7,16 +7,20 @@ using Assets.Scripts.Generation.DungeonGeneration.Utils;
 using Assets.Scripts.ScriptableObjects;
 using Assets.Scripts.Generation;
 using Rect = Assets.Scripts.Generation.Rect;
+using UnityEngine.LightTransport;
 
 public struct DoorSegment
 {
     public Vector3 Start;
     public Vector3 End;
 
+    public ushort RoomId;
+
     public DoorSegment(Vector3 start, Vector3 end)
     {
         Start = start;
         End = end;
+        RoomId = 0;
     }
 }
 public class Generator2D {
@@ -145,7 +149,7 @@ public class Generator2D {
         }
     }
 
-    public void DrawGizmos()
+    public void DrawRoomRectsGizmos()
     {
         if(!Application.isPlaying || _rooms == null || _rooms.Count == 0)
         {
@@ -288,8 +292,9 @@ public class Generator2D {
 
                 if (visited.Contains(pos))
                     continue;
+                ushort roomId = 0;
 
-                if (!IsDoorCell(pos))
+                if (!IsDoorCell(pos, out roomId))
                     continue;
 
                 // Flood fill contiguous door cells
@@ -300,6 +305,13 @@ public class Generator2D {
 
                 // Compute start/end
                 DoorSegment door = ComputeSegment(segment);
+                
+                // Discard door if it's too small
+                if(Vector3.SqrMagnitude(door.Start - door.End) <= 1.5f * 1.5f)
+                {
+                    continue;
+                }
+                door.RoomId = roomId;
                 doors.Add(door);
             }
         }
@@ -307,25 +319,30 @@ public class Generator2D {
         return doors;
     }
 
-    bool IsDoorCell(Vector2Int pos)
+    bool IsDoorCell(Vector2Int pos, out ushort roomId)
     {
         ushort cell = _world.GetCell(pos);
 
-        // Must be inside a room
-        if (cell < World.CELL_TYPE_ROOM)
+        // Must be inside a hallway
+        if (cell != World.CELL_TYPE_HALLWAY)
+        {
+            roomId = 0;
             return false;
-
-        // Must touch hallway
+        }
+        // Must touch room
         foreach (Vector2Int dir in Directions4)
         {
             Vector2Int n = pos + dir;
-
             if (!IsInside(n)) continue;
 
-            if (_world.GetCell(n) == World.CELL_TYPE_HALLWAY)
+            ushort cellId = _world.GetCell(n);
+            if (cellId >= World.CELL_TYPE_ROOM)
+            {
+                roomId = cellId;
                 return true;
+            }
         }
-
+        roomId = 0;
         return false;
     }
 
@@ -337,22 +354,40 @@ public class Generator2D {
         queue.Enqueue(start);
         visited.Add(start);
 
+        Vector2Int doorDir = Vector2Int.zero;
         while (queue.Count > 0)
         {
             var current = queue.Dequeue();
             result.Add(current);
 
-            foreach (Vector2Int dir in Directions4)
+            if(doorDir == Vector2Int.zero)
             {
-                Vector2Int next = current + dir;
+                foreach (Vector2Int dir in Directions4)
+                {
+                    Vector2Int next = current + dir;
+
+                    if (visited.Contains(next)) continue;
+                    if (!IsInside(next)) continue;
+                    ushort rid = 0;
+                    if (!IsDoorCell(next, out rid)) continue;
+                    doorDir = dir;
+                    visited.Add(next);
+                    queue.Enqueue(next);
+                    break;
+                }
+            } else
+            {
+                Vector2Int next = current + doorDir;
 
                 if (visited.Contains(next)) continue;
                 if (!IsInside(next)) continue;
-                if (!IsDoorCell(next)) continue;
+                ushort rid = 0;
+                if (!IsDoorCell(next, out rid)) continue;
 
                 visited.Add(next);
                 queue.Enqueue(next);
             }
+            
         }
 
         return result;
@@ -391,8 +426,8 @@ public class Generator2D {
         }
 
         return new DoorSegment(
-            new Vector3(min.x, 0, min.y),
-            new Vector3(max.x, 0, max.y)
+            new Vector3(min.x - 0.5f, 0, min.y - 0.5f),
+            new Vector3(max.x - 0.5f, 0, max.y - 0.5f)
         );
     }
 

@@ -29,12 +29,12 @@ public class NavMeshController : MonoBehaviour
             {
                 continue;
             }
-
+            Matrix4x4 transf = transform.worldToLocalMatrix * Matrix4x4.Translate(new Vector3(-1, 0, -1));
             combine.Add(new CombineInstance
             {
                 mesh = walkableMesh,
                 subMeshIndex = 0,
-                transform = transform.worldToLocalMatrix
+                transform = transf
             });
         }
 

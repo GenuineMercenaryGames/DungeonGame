@@ -107,6 +107,15 @@ namespace Assets.Scripts.Generation
         }
     }
 
+    [Serializable]
+    public struct GizmosInfo
+    {
+        public bool RoomTypes;
+        public bool CellTypes;
+        public bool RoomRects;
+        public bool Doors;
+    }
+
     public class World : MonoBehaviour
     {
         // Constants
@@ -127,6 +136,8 @@ namespace Assets.Scripts.Generation
         public Vector2Int MaxWorldSizeInCells { get { return maxWorldSizeInCells; } }
         public Vector2Int MaxDungeonSizeInCells { get { return maxDungeonSizeInCells; } }
         public Vector3 PlayerSpawnPosition { get { return _playerSpawnPosition; } }
+
+        [SerializeField] private int seed = 0;
         [SerializeField] private Vector2Int maxWorldSizeInCells;
         [SerializeField] private Vector2Int maxDungeonSizeInCells;
         [SerializeField] private int cellsPerChunk;
@@ -134,6 +145,8 @@ namespace Assets.Scripts.Generation
         [SerializeField] private Transform player;
         [SerializeField] private int playerChunkVisibleRange;
         [SerializeField] private NavMeshController navMeshController;
+
+
 
         private Generator2D _generator;
 
@@ -151,6 +164,8 @@ namespace Assets.Scripts.Generation
 
 
         List<DoorSegment> _doors;
+
+        [SerializeField] private GizmosInfo gizmosInfo;
 
 
         public void RoomCleared(Room room)
@@ -175,6 +190,18 @@ namespace Assets.Scripts.Generation
             {
                 return _rooms[cid - CELL_TYPE_ROOM];
             } else
+            {
+                return null;
+            }
+        }
+
+        public Room GetRoom(ushort roomId)
+        {
+            if (roomId >= CELL_TYPE_ROOM)
+            {
+                return _rooms[roomId - CELL_TYPE_ROOM];
+            }
+            else
             {
                 return null;
             }
@@ -219,7 +246,12 @@ namespace Assets.Scripts.Generation
 
         void Awake()
         {
-            _random = new System.Random((int)DateTime.Now.Ticks);
+            if(seed == 0)
+            {
+                seed = (int)DateTime.Now.Ticks;
+            }
+            Debug.Log("Seed: " + seed);
+            _random = new System.Random(seed);
             _chunksPerAxis = MaxWorldSizeInCells / cellsPerChunk;
             _chunks = new Chunk[_chunksPerAxis.x * _chunksPerAxis.y];
             for(int i = 0; i < _chunks.Length; i++) 
@@ -240,7 +272,8 @@ namespace Assets.Scripts.Generation
         private void LateUpdate()
         {
             // Check if player changed room
-            ushort currentPlayerCell = GetCell(new Vector2Int((int)player.transform.position.x, (int)player.transform.position.z));
+            ushort currentPlayerCell = GetCell(new Vector2Int((int)Math.Floor(player.transform.position.x + 0.5f),
+                (int)Math.Floor(player.transform.position.z + 0.5f)));
             if(currentPlayerCell != _lastPlayerCell)
             {
                 if (_lastPlayerCell >= CELL_TYPE_ROOM)
@@ -352,58 +385,56 @@ namespace Assets.Scripts.Generation
 
         private void OnDrawGizmos()
         {
-            /*
-            if (_doors == null) return;
-            foreach(DoorSegment d in _doors)
+            
+            if (_doors != null && gizmosInfo.Doors)
             {
-                Gizmos.DrawLine(d.Start, d.End);
-                Gizmos.DrawSphere(d.Start, 2.0f);
-                Gizmos.DrawSphere(d.End, 2.0f);
-            }
-            return;
-            if (_chunks == null) return;
-            for (int x = -playerChunkVisibleRange; x <= playerChunkVisibleRange; x++)
-            {
-                for (int y = -playerChunkVisibleRange; y <= playerChunkVisibleRange; y++)
+                foreach (DoorSegment d in _doors)
                 {
-                    Vector2Int playerChunkCoord = GetChunkCoord(player.transform.position);
-                    Vector2Int pos = new Vector2Int(x, y) + playerChunkCoord;
-                    if (IsChunkCoordInWorldBounds(pos))
+                    Gizmos.DrawLine(d.Start, d.End);
+                    Gizmos.DrawSphere(d.Start, 0.75f);
+                    Gizmos.DrawSphere(d.End, 0.75f);
+                }
+            }
+            
+            if (_chunks != null && gizmosInfo.CellTypes)
+            {
+                for (int x = -playerChunkVisibleRange; x <= playerChunkVisibleRange; x++)
+                {
+                    for (int y = -playerChunkVisibleRange; y <= playerChunkVisibleRange; y++)
                     {
-                        _chunks[GetIndexFromChunkCoord(pos)].DrawGizmos();
+                        Vector2Int playerChunkCoord = GetChunkCoord(player.transform.position);
+                        Vector2Int pos = new Vector2Int(x, y) + playerChunkCoord;
+                        if (IsChunkCoordInWorldBounds(pos))
+                        {
+                            _chunks[GetIndexFromChunkCoord(pos)].DrawGizmosCellTypes();
+                        }
                     }
                 }
-            }*/
+            }  
             
-                    
-        }
-
-        private void OnDrawGizmosSelected()
-        {
-            return;
-            // Draw room types
-            Gizmos.DrawSphere(_playerSpawnPosition, 10.0f);
-            for(int i =  0; i < _rooms.Count; ++i)
+            if(_chunks != null && gizmosInfo.RoomTypes)
             {
-                switch(_rooms[i].RoomType) 
+                Gizmos.DrawSphere(_playerSpawnPosition, 10.0f);
+                for (int i = 0; i < _rooms.Count; ++i)
                 {
-                    case RoomType.CHEST:
-                        Gizmos.color = Color.yellow; break;
-                    case RoomType.BOSS:
-                        Gizmos.color = Color.blue; break;
-                    case RoomType.PLAYER_SPAWN:
-                        Gizmos.color = Color.red; break;
-                    default:
-                        continue;
+                    switch (_rooms[i].RoomType)
+                    {
+                        case RoomType.CHEST:
+                            Gizmos.color = Color.yellow; break;
+                        case RoomType.BOSS:
+                            Gizmos.color = Color.blue; break;
+                        case RoomType.PLAYER_SPAWN:
+                            Gizmos.color = Color.red; break;
+                        default:
+                            continue;
+                    }
+                    Gizmos.DrawSphere(new Vector3(_rooms[i].Rects[0].Center.x, 0.0f, _rooms[i].Rects[0].Center.y), 5.0f);
                 }
-                Gizmos.DrawSphere(new Vector3(_rooms[i].Rects[0].Center.x, 0.0f, _rooms[i].Rects[0].Center.y), 5.0f);
             }
-            if (_chunks == null) return;
-            _chunks[0].DrawGizmos();
-            _generator?.DrawGizmos();
-            for (int i = 0; i < _chunks.Length; i++)
+
+            if(_chunks != null && gizmosInfo.RoomRects)
             {
-                //_chunks[i].DrawGizmos();
+                _generator?.DrawRoomRectsGizmos();
             }
         }
     }

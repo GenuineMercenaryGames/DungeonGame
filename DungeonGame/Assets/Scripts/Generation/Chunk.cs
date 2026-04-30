@@ -209,7 +209,7 @@ namespace Assets.Scripts.Generation
             return _grid[pos];
         }
 
-        public void DrawGizmos()
+        public void DrawGizmosCellTypes()
         {
             for(int x = 0; x < _grid.Size.x; x++)
             {
