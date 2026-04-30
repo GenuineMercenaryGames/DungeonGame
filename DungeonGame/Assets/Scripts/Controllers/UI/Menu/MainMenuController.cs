@@ -31,40 +31,27 @@ public class MainMenuController : MonoBehaviour
 
     #region PublicMethods - Buttons
 
+    public void QuitGame()
+    {
+        // TODO : Add logic to display an "are you sure mf???" pop up before quitting for real.
+        Application.Quit(); // This does not work in the editor, but it does work on buils.
+    }
+
     public void PlayGame()
     {
         SceneManager.LoadScene(gameplaySceneIndex);
     }
 
-    public void LoadMainMenu()
-    {
-        LoadMenu(mainMenu);
-    }
 
-    public void LoadPlayMenu()
-    {
-        LoadMenu(playMenu);
-    }
 
-    public void LoadSettingsMenu()
-    {
-        LoadMenu(settingsMenu);
-    }
-
-    public void LoadAchievementsMenu()
-    {
-        LoadMenu(achievementsMenu);
-    }
-
-    public void LoadCreditsMenu()
-    {
-        LoadMenu(creditsMenu);
-    }
-
-    public void QuitGame()
-    {
-        Application.Quit(); // This does not work in the editor, but it does work on buils.
-    }
+    public void LoadMainMenu() { LoadMenu(mainMenu); }
+    public void LoadPlayMenu() { LoadMenu(playMenu); }
+    public void LoadSettingsMenu() { LoadMenu(settingsMenu); }
+    public void LoadAchievementsMenu() { LoadMenu(achievementsMenu); }
+    public void LoadCreditsMenu() { LoadMenu(creditsMenu); }
+    public void LoadLanguageSettingsMenu() { LoadMenu(languageSettingsMenu); }
+    public void LoadGraphicsSettingsMenu() { LoadMenu(graphicsSettingsMenu); }
+    public void LoadAudioSettingsMenu() { LoadAudioSettingsMenu(); }
 
     #endregion
 
@@ -81,7 +68,7 @@ public class MainMenuController : MonoBehaviour
     }
 
     public void OpenYoutube()
-    { 
+    {
         OpenURL("https://www.youtube.com/@GenuineMercenaryGames");
     }
 
@@ -101,6 +88,21 @@ public class MainMenuController : MonoBehaviour
 
     #endregion
 
+    #region PublicMethods - Language
+
+    public void SetLanguage(Language language)
+    {
+        LanguageManager.SetLanguage(language);
+        LoadLanguageSettingsMenu();
+    }
+
+    public void SetLanguageEnglish() { SetLanguage(Language.English); }
+    public void SetLanguageSpanish() { SetLanguage(Language.Spanish); }
+    public void SetLanguageFrench() { SetLanguage(Language.French); }
+    public void SetLanguageGerman() { SetLanguage(Language.German); }
+
+    #endregion
+
     #region PrivateMethods
 
     private void UnloadAllMenus()
@@ -110,6 +112,9 @@ public class MainMenuController : MonoBehaviour
         SetMenuLoaded(settingsMenu, false);
         SetMenuLoaded(achievementsMenu, false);
         SetMenuLoaded(creditsMenu, false);
+        SetMenuLoaded(languageSettingsMenu, false);
+        SetMenuLoaded(graphicsSettingsMenu, false);
+        SetMenuLoaded(audioSettingsMenu, false);
     }
 
     private void SetMenuLoaded(Transform menu, bool loaded)
