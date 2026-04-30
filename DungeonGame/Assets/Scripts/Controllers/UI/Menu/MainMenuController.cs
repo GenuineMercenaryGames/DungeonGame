@@ -11,6 +11,9 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private Transform settingsMenu;
     [SerializeField] private Transform achievementsMenu;
     [SerializeField] private Transform creditsMenu;
+    [SerializeField] private Transform languageSettingsMenu;
+    [SerializeField] private Transform graphicsSettingsMenu;
+    [SerializeField] private Transform audioSettingsMenu;
 
     [Header("Menu Settings")]
     [SerializeField] private int gameplaySceneIndex = 1; // TODO : Change to be a string for easier handling later on.
