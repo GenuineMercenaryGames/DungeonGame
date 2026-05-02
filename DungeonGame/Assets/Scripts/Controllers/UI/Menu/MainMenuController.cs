@@ -52,7 +52,7 @@ public class MainMenuController : MonoBehaviour
     public void LoadCreditsMenu() { LoadMenu(creditsMenu); }
     public void LoadLanguageSettingsMenu() { LoadMenu(languageSettingsMenu); }
     public void LoadGraphicsSettingsMenu() { LoadMenu(graphicsSettingsMenu); }
-    public void LoadAudioSettingsMenu() { LoadAudioSettingsMenu(); }
+    public void LoadAudioSettingsMenu() { LoadMenu(audioSettingsMenu); }
 
     #endregion
 
