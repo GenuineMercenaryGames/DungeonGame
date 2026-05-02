@@ -12,6 +12,7 @@ public static class LanguageManager
             {
                 { "loc_language_name", "English" },
 
+                { "loc_start", "Start" },
                 { "loc_play", "Play" },
                 { "loc_settings", "Settings" },
                 { "loc_achievements", "Achievements" },
@@ -47,6 +48,7 @@ public static class LanguageManager
             {
                 { "loc_language_name", "Español" },
 
+                { "loc_start", "Comenzar" },
                 { "loc_play", "Jugar" },
                 { "loc_settings", "Ajustes" },
                 { "loc_achievements", "Logros" },
@@ -82,6 +84,7 @@ public static class LanguageManager
             {
                 { "loc_language_name", "Français" },
 
+                { "loc_start", "Commencer" },
                 { "loc_play", "Jouer" },
                 { "loc_settings", "Paramètres" },
                 { "loc_achievements", "Réalisations" },
@@ -117,6 +120,7 @@ public static class LanguageManager
             {
                 { "loc_language_name", "Deutsche" },
 
+                { "loc_start", "Starten" },
                 { "loc_play", "Spielen" },
                 { "loc_settings", "Einstellungen" },
                 { "loc_achievements", "Erfolge" },
