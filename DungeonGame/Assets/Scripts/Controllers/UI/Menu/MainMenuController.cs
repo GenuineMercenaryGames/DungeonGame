@@ -6,6 +6,7 @@ public class MainMenuController : MonoBehaviour
     #region Variables
 
     [Header("Menu References")]
+    [SerializeField] private Transform titleMenu;
     [SerializeField] private Transform mainMenu;
     [SerializeField] private Transform playMenu;
     [SerializeField] private Transform settingsMenu;
@@ -25,7 +26,7 @@ public class MainMenuController : MonoBehaviour
     void Start()
     {
         AdjustInitialSettings();
-        LoadMainMenu();
+        LoadTitleMenu();
     }
 
     #endregion
@@ -44,7 +45,7 @@ public class MainMenuController : MonoBehaviour
     }
 
 
-
+    public void LoadTitleMenu() { LoadMenu(titleMenu); }
     public void LoadMainMenu() { LoadMenu(mainMenu); }
     public void LoadPlayMenu() { LoadMenu(playMenu); }
     public void LoadSettingsMenu() { LoadMenu(settingsMenu); }
@@ -124,6 +125,7 @@ public class MainMenuController : MonoBehaviour
 
     private void UnloadAllMenus()
     {
+        SetMenuLoaded(titleMenu, false);
         SetMenuLoaded(mainMenu, false);
         SetMenuLoaded(playMenu, false);
         SetMenuLoaded(settingsMenu, false);
