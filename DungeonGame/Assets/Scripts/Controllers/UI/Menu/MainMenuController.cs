@@ -38,14 +38,14 @@ public class MainMenuController : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(TransitionCoroutine(0.5f, 0.0f));
+        StartCoroutine(TransitionCoroutine(0.5f, 0.0f, false));
         LoadTitleMenu();
     }
 
-    public IEnumerator TransitionCoroutine(float transitionSpeed, float targetOpacity)
+    public IEnumerator TransitionCoroutine(float transitionSpeed, float targetOpacity, bool disableClickDuringTransition)
     {
         targetOpacity = Mathf.Clamp01(Mathf.Abs(targetOpacity));
-        transitionScreen.raycastTarget = true; // Disable clicking during transition
+        transitionScreen.raycastTarget = disableClickDuringTransition; // Disable clicking during transition
 
         float sign = 1.0f;
         if (targetOpacity < transitionScreen.color.a) sign = -1.0f;
