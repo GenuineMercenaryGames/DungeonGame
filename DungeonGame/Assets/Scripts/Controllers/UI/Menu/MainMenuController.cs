@@ -5,16 +5,24 @@ public class MainMenuController : MonoBehaviour
 {
     #region Variables
 
-    [Header("Menu References")]
+    [Header("Menu References - Other")]
     [SerializeField] private Transform titleMenu;
     [SerializeField] private Transform mainMenu;
+
+    [Header("Menu References - Subcategories")]
     [SerializeField] private Transform playMenu;
     [SerializeField] private Transform settingsMenu;
     [SerializeField] private Transform achievementsMenu;
     [SerializeField] private Transform creditsMenu;
+
+    [Header("Menu References - Settings")]
     [SerializeField] private Transform languageSettingsMenu;
     [SerializeField] private Transform graphicsSettingsMenu;
     [SerializeField] private Transform audioSettingsMenu;
+
+    [Header("Menu References - Gameplay")]
+    [SerializeField] private Transform playerLoadoutMenu;
+    [SerializeField] private Transform levelSelectMenu;
 
     [Header("Menu Settings")]
     [SerializeField] private int gameplaySceneIndex = 1; // TODO : Change to be a string for easier handling later on.
@@ -54,6 +62,8 @@ public class MainMenuController : MonoBehaviour
     public void LoadLanguageSettingsMenu() { LoadMenu(languageSettingsMenu); }
     public void LoadGraphicsSettingsMenu() { LoadMenu(graphicsSettingsMenu); }
     public void LoadAudioSettingsMenu() { LoadMenu(audioSettingsMenu); }
+    public void LoadPlayerLoadoutMenu() { LoadMenu(playerLoadoutMenu); }
+    public void LoadLevelSelectMenu() { LoadMenu(levelSelectMenu); }
 
     #endregion
 
@@ -134,6 +144,8 @@ public class MainMenuController : MonoBehaviour
         SetMenuLoaded(languageSettingsMenu, false);
         SetMenuLoaded(graphicsSettingsMenu, false);
         SetMenuLoaded(audioSettingsMenu, false);
+        SetMenuLoaded(playerLoadoutMenu, false);
+        SetMenuLoaded(levelSelectMenu, false);
     }
 
     private void SetMenuLoaded(Transform menu, bool loaded)
