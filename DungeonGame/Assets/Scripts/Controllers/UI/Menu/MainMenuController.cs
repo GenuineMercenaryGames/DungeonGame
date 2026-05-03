@@ -1,9 +1,14 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuController : MonoBehaviour
 {
     #region Variables
+
+    [Header("Image References")]
+    [SerializeField] private Image transitionScreen;
 
     [Header("Menu References - Other")]
     [SerializeField] private Transform titleMenu;
@@ -33,7 +38,27 @@ public class MainMenuController : MonoBehaviour
 
     void Start()
     {
+        StartCoroutine(TransitionCoroutine(0.5f, 0.0f));
         LoadTitleMenu();
+    }
+
+    public IEnumerator TransitionCoroutine(float transitionSpeed, float targetOpacity)
+    {
+        targetOpacity = Mathf.Clamp01(Mathf.Abs(targetOpacity));
+        transitionScreen.raycastTarget = true; // Disable clicking during transition
+
+        float sign = 1.0f;
+        if (targetOpacity < transitionScreen.color.a) sign = -1.0f;
+
+        while (Mathf.Abs(transitionScreen.color.a - targetOpacity) > 0.001f)
+        {
+            float opacity = transitionScreen.color.a + sign * transitionSpeed * Time.deltaTime;
+            transitionScreen.color = new Color(transitionScreen.color.r, transitionScreen.color.g, transitionScreen.color.b, opacity);
+            yield return null;
+        }
+
+        transitionScreen.color = new Color(transitionScreen.color.r, transitionScreen.color.g, transitionScreen.color.b, targetOpacity);
+        transitionScreen.raycastTarget = false; // Enable clicking at the end of the transition
     }
 
     #endregion

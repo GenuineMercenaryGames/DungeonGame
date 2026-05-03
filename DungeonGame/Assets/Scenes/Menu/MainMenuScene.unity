@@ -3341,6 +3341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01aba7ba478589c4fb41d698546f31e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  transitionScreen: {fileID: 1158633196}
   titleMenu: {fileID: 770555255}
   mainMenu: {fileID: 82908531}
   contractMenu: {fileID: 455992916}
