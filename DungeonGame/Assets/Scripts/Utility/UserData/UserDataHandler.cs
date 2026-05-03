@@ -6,16 +6,24 @@ public static class UserDataHandler
     #region Variables
 
     private static string pathBase = Application.persistentDataPath;
+    private static string pathAuxData = Path.Combine(pathBase, "auxdata.json");
     private static string pathSettings = Path.Combine(pathBase, "settings.json");
     private static string pathSaveData = Path.Combine(pathBase, "savedata.json");
 
-    private static bool isFirstTime = false;
+    public static bool isFirstTimeBoot = false;
+    public static bool isFirstTimePlay = false;
 
     #endregion
 
     #region PublicMethods
 
-    public static bool IsFirstLaunch() { return isFirstTime; }
+    public static void SaveUserAuxData()
+    {
+        UserAuxData aux = new();
+        aux.boot = !isFirstTimeBoot;
+        aux.play = !isFirstTimePlay;
+        StructWrite(pathAuxData, aux);
+    }
 
     public static void SaveUserSettings()
     {
@@ -37,18 +45,23 @@ public static class UserDataHandler
 
     public static void SaveAllData()
     {
+        SaveUserAuxData();
         SaveUserSettings();
         SaveUserSaveData();
+    }
+
+    public static void LoadUserAuxData()
+    {
+        UserAuxData aux = new();
+        StructRead(pathAuxData, out aux);
+        isFirstTimeBoot = !aux.boot;
+        isFirstTimePlay = !aux.play;
     }
 
     public static void LoadUserSettings()
     {
         UserSettings config = new();
-        if (!StructRead(pathSettings, out config))
-        {
-            isFirstTime = true;
-            config = UserSettings.Default();
-        }
+        StructRead(pathSettings, out config);
         LanguageManager.SetLanguage(config.language);
         QualitySettings.SetQualityLevel(config.quality);
     }
@@ -56,16 +69,13 @@ public static class UserDataHandler
     public static void LoadUserSaveData()
     {
         UserSaveData save = new();
-        if (!StructRead(pathSaveData, out save))
-        {
-            isFirstTime = true;
-            save = UserSaveData.Default();
-        }
+        StructRead(pathSaveData, out save);
         // TODO : Implement these systems so that we can actually load the data somewhere lol
     }
 
     public static void LoadAllData()
     {
+        LoadUserAuxData();
         LoadUserSettings();
         LoadUserSaveData();
     }
@@ -74,7 +84,7 @@ public static class UserDataHandler
 
     #region PrivateMethods
 
-    private static bool StructWrite<T>(string path, T data) where T : struct
+    private static bool StructWrite<T>(string path, T data) where T : IUserData
     {
         try
         {
@@ -88,7 +98,7 @@ public static class UserDataHandler
         }
     }
 
-    private static bool StructRead<T>(string path, out T data) where T : struct
+    private static bool StructRead<T>(string path, out T data) where T : IUserData
     {
         try
         {
@@ -98,7 +108,9 @@ public static class UserDataHandler
         }
         catch
         {
-            data = default(T);
+            T t = default(T);
+            t.SetDefault();
+            data = t;
             return false;
         }
     }
