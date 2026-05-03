@@ -99,25 +99,6 @@ public class MainMenuController : MonoBehaviour
 
     #endregion
 
-    #region PublicMethods - OpenURL
-
-    public void OpenGitHub()
-    {
-        OpenURL("https://github.com/GenuineMercenaryGames/genuinemercenarygames.github.io.git");
-    }
-
-    public void OpenX()
-    {
-        OpenURL("https://twitter.com/GenuineMercenaryGames");
-    }
-
-    public void OpenYoutube()
-    {
-        OpenURL("https://www.youtube.com/@GenuineMercenaryGames");
-    }
-
-    #endregion
-
     #region PublicMethods - Select Loadout
 
     public void SelectWeaponPrimary(GameObject prefab)
