@@ -55,12 +55,12 @@ public struct UserSaveData : IUserData
 [System.Serializable]
 public struct UserAuxData : IUserData
 {
-    public bool boot;
-    public bool play;
+    public bool hasBootedOnce;
+    public bool hasPlayedOnce;
 
     public void SetDefault()
     {
-        boot = true;
-        play = true;
+        hasBootedOnce = false;
+        hasPlayedOnce = false;
     }
 }

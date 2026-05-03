@@ -20,8 +20,8 @@ public static class UserDataHandler
     public static void SaveUserAuxData()
     {
         UserAuxData aux = new();
-        aux.boot = !isFirstTimeBoot;
-        aux.play = !isFirstTimePlay;
+        aux.hasBootedOnce = !isFirstTimeBoot;
+        aux.hasPlayedOnce = !isFirstTimePlay;
         StructWrite(pathAuxData, aux);
     }
 
@@ -54,8 +54,8 @@ public static class UserDataHandler
     {
         UserAuxData aux = new();
         StructRead(pathAuxData, out aux);
-        isFirstTimeBoot = !aux.boot;
-        isFirstTimePlay = !aux.play;
+        isFirstTimeBoot = !aux.hasBootedOnce;
+        isFirstTimePlay = !aux.hasPlayedOnce;
     }
 
     public static void LoadUserSettings()
