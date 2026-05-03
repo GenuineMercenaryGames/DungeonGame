@@ -76,11 +76,6 @@ public class MainMenuController : MonoBehaviour
         SceneManager.LoadScene(id);
     }
 
-    public void PlayGame()
-    {
-        PlayGame(2);
-    }
-
     public void LoadTitleMenu() { LoadMenu(titleMenu); }
     public void LoadMainMenu() { LoadMenu(mainMenu); }
     public void LoadPlayMenu() { LoadMenu(playMenu); }
