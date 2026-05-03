@@ -9,6 +9,7 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private Transform titleMenu;
     [SerializeField] private Transform mainMenu;
     [SerializeField] private Transform contractMenu;
+    [SerializeField] private Transform quitPopUpMenu;
 
     [Header("Menu References - Subcategories")]
     [SerializeField] private Transform playMenu;
@@ -66,6 +67,7 @@ public class MainMenuController : MonoBehaviour
     public void LoadPlayerLoadoutMenu() { LoadMenu(playerLoadoutMenu); }
     public void LoadLevelSelectMenu() { LoadMenu(levelSelectMenu); }
     public void LoadContractMenu() { LoadMenu(contractMenu); }
+    public void LoadQuitPopUpMenu() { LoadMenu(quitPopUpMenu); }
     public void LoadMainMenuConditional()
     {
         if (UserDataHandler.IsFirstLaunch())
@@ -161,6 +163,7 @@ public class MainMenuController : MonoBehaviour
         SetMenuLoaded(playerLoadoutMenu, false);
         SetMenuLoaded(levelSelectMenu, false);
         SetMenuLoaded(contractMenu, false);
+        SetMenuLoaded(quitPopUpMenu, false);
     }
 
     private void SetMenuLoaded(Transform menu, bool loaded)

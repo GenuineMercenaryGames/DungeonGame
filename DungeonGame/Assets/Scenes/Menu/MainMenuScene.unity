@@ -2355,7 +2355,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 194239061}
         m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: QuitGame
+        m_MethodName: LoadQuitPopUpMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3332,6 +3332,7 @@ MonoBehaviour:
   titleMenu: {fileID: 770555255}
   mainMenu: {fileID: 82908531}
   contractMenu: {fileID: 455992916}
+  quitPopUpMenu: {fileID: 1056287719}
   playMenu: {fileID: 2089664501}
   settingsMenu: {fileID: 2048060716}
   achievementsMenu: {fileID: 1595629314}
@@ -16095,7 +16096,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 194239061}
         m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
-        m_MethodName: LoadMainMenu
+        m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
