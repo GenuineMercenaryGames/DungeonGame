@@ -5,12 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 0
-    path: Assets/Scenes/Test/UIControllerTest.unity
-    guid: 71c9f3ea6c35cde4fa37b374bbd55bab
+  - enabled: 1
+    path: Assets/Scenes/Menu/InitScene.unity
+    guid: 4598116a0798a2f4194378e2ed73a8b1
   - enabled: 1
     path: Assets/Scenes/Menu/MainMenuScene.unity
     guid: 860e3a942926c3046979eede1622060c
