@@ -98,7 +98,9 @@ public class RoomManager : MonoBehaviour
                             room.AddEnemy(gameObject.GetComponent<Enemy>());
                         }
                         else
-                            room._decorationInstances.Add(gameObject);
+                        {
+                            _world.AddGameObjectAtChunk(gameObject.transform.position, gameObject);
+                        }
                     }
                 }
             }
@@ -120,12 +122,12 @@ public class RoomManager : MonoBehaviour
 
         if (room.RoomType == RoomType.CHEST)
         {
-            GameObject boss = Instantiate(
+            GameObject chest = Instantiate(
                 gen.ChestPrefab,
                 new Vector3(room.Rects[0].Center.x, 1, room.Rects[0].Center.y),
                 Quaternion.Euler(0f, 180f, 0f)
             );
-            room._decorationInstances.Add(boss);
+            _world.AddGameObjectAtChunk(chest.transform.position, chest);
         }
 
         // Si no se spawnean enemigos, que se quiten las puertas.
@@ -147,14 +149,6 @@ public class RoomManager : MonoBehaviour
                 enemy.GetComponent<FadeController>().PlayFadeIn();
             }
         }
-        foreach (GameObject go in room._decorationInstances)
-        {
-            if (go != null)
-            {
-                go.SetActive(true);
-                //go.GetComponent<FadeController>().PlayFadeIn();
-            }
-        }
     }
 
     private void DisableRoomContents(Room room)
@@ -163,15 +157,6 @@ public class RoomManager : MonoBehaviour
         {
             if (enemy.gameObject != null)
                 enemy.gameObject.GetComponent<FadeController>().PlayFadeOutAndDisable();
-        }
-
-        foreach (GameObject go in room._decorationInstances)
-        {
-            if (go != null)
-            {
-                go.SetActive(false);
-                //go.gameObject.GetComponent<FadeController>().PlayFadeOutAndDisable();
-            }
         }
     }
 

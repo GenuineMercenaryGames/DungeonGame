@@ -33,8 +33,6 @@ namespace Assets.Scripts.Generation
         public bool AlreadyCleared;
         // TODO: make private with a proper getter method
         public List<Enemy> _enemies = new List<Enemy>();
-        // TODO: make private with a proper adder method
-        public List<GameObject> _decorationInstances = new List<GameObject>();
         private List<GameObject> _doors = new List<GameObject>();
 
         public RoomType RoomType;
@@ -165,6 +163,8 @@ namespace Assets.Scripts.Generation
 
         List<DoorSegment> _doors;
 
+        private Vector2Int _lastPlayerChunkCoord = Vector2Int.zero;
+
         [SerializeField] private GizmosInfo gizmosInfo;
 
 
@@ -210,6 +210,11 @@ namespace Assets.Scripts.Generation
         public Chunk GetChunk(Vector2Int pos)
         {
             return _chunks[GetIndexFromPos(pos)];
+        }
+
+        public void AddGameObjectAtChunk(Vector3 pos, GameObject go)
+        {
+            GetChunk(new Vector2Int((int)pos.x, (int)pos.z)).AddGameObject(go);
         }
 
         private Vector2Int GetLocalPos(Vector2Int pos)
@@ -267,6 +272,62 @@ namespace Assets.Scripts.Generation
         private void Start()
         {
 
+        }
+
+        private void Update()
+        {
+            Vector2Int playerChunkCoord = GetChunkCoord(player.transform.position);
+            if (_lastPlayerChunkCoord == playerChunkCoord) return;
+
+
+            // Previously loaded
+            int l = 0;
+            int size = (2 * playerChunkVisibleRange + 1);
+            Span<int> previouslyLoaded = stackalloc int[size * size];
+
+            for (int x = -playerChunkVisibleRange; x <= playerChunkVisibleRange; x++)
+            {
+                for (int y = -playerChunkVisibleRange; y <= playerChunkVisibleRange; y++)
+                {
+                    Vector2Int pos = new Vector2Int(x, y) + _lastPlayerChunkCoord;
+
+                    if (IsChunkCoordInWorldBounds(pos))
+                    {
+                        int id = GetIndexFromChunkCoord(pos);
+                        previouslyLoaded[l++] = id;
+                        _chunks[id].MarkToUnload = true;
+                    }
+                }
+            }
+            // To keep or set to load
+            _lastPlayerChunkCoord = playerChunkCoord;
+            for (int x = -playerChunkVisibleRange; x <= playerChunkVisibleRange; x++)
+            {
+                for (int y = -playerChunkVisibleRange; y <= playerChunkVisibleRange; y++)
+                {
+                    Vector2Int pos = new Vector2Int(x, y) + _lastPlayerChunkCoord;
+
+                    if (IsChunkCoordInWorldBounds(pos))
+                    {
+                        int id = GetIndexFromChunkCoord(pos);
+                        _chunks[id].MarkToUnload = false;
+                        if (!_chunks[id].IsLoaded)
+                        {
+                            _chunks[id].LoadChunk();
+                        }
+                    }
+                }
+            }
+
+            // Unload remaining ones
+            for(int i = 0; i < l; i++) 
+            {
+                Chunk c = _chunks[previouslyLoaded[i]];
+                if(c.MarkToUnload)
+                {
+                    c.UnloadChunk();
+                }
+            }
         }
 
         private void LateUpdate()
