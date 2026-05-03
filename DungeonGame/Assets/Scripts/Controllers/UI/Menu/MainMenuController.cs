@@ -20,6 +20,7 @@ public class MainMenuController : MonoBehaviour
     [Header("Menu References - Subcategories")]
     [SerializeField] private Transform playMenu;
     [SerializeField] private Transform settingsMenu;
+    [SerializeField] private Transform controlsMenu;
     [SerializeField] private Transform achievementsMenu;
     [SerializeField] private Transform creditsMenu;
 
@@ -90,6 +91,7 @@ public class MainMenuController : MonoBehaviour
     public void LoadContractMenu() { LoadMenu(contractMenu); }
     public void LoadQuitPopUpMenu() { LoadMenu(quitPopUpMenu); }
     public void LoadTutorialPopUpMenu() { LoadMenu(tutorialPopUpMenu); }
+    public void LoadControlsMenu() { LoadMenu(controlsMenu); }
     public void LoadMainMenuConditional()
     {
         if (UserDataHandler.isFirstTimeBoot)
@@ -197,6 +199,7 @@ public class MainMenuController : MonoBehaviour
         SetMenuLoaded(contractMenu, false);
         SetMenuLoaded(quitPopUpMenu, false);
         SetMenuLoaded(tutorialPopUpMenu, false);
+        SetMenuLoaded(controlsMenu, false);
     }
 
     private void SetMenuLoaded(Transform menu, bool loaded)

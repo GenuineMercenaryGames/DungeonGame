@@ -48,6 +48,9 @@ public static class LanguageManager
                 { "loc_tutorial", "Tutorial" },
                 { "loc_loadout", "Loadout" },
 
+                { "loc_control_scheme", "Control Scheme" },
+                { "loc_control", "Control" },
+
                 { "loc_popup_quit", "Are you sure you want to quit the program?" },
                 { "loc_popup_tutorial", "If this is your first time playing The Sweeper, we highly recommend you undergo some basic training and check out the tutorial!" },
                 { "loc_achievements_placeholder", "You haven't earned any achievements yet..." },
@@ -93,6 +96,9 @@ public static class LanguageManager
 
                 { "loc_tutorial", "Tutorial" },
                 { "loc_loadout", "Equipamiento" },
+
+                { "loc_control_scheme", "Esquema de controles" },
+                { "loc_control", "Control" },
 
                 { "loc_popup_quit", "¿Estás seguro de que quieres salir del programa?" },
                 { "loc_popup_tutorial", "¡Si esta es tu primera vez jugando a The Sweeper, recomendamos que tomes un entrenamiento básico y le eches un vistazo al tutorial!" },
@@ -140,6 +146,9 @@ public static class LanguageManager
                 { "loc_tutorial", "Tutoriel" },
                 { "loc_loadout", "Équipement" },
 
+                { "loc_control_scheme", "Schéma de contrôle" },
+                { "loc_control", "Contrôle" },
+
                 { "loc_popup_quit", "Êtes-vous sûr de vouloir quitter le programme?" },
                 { "loc_popup_tutorial", "Si c'est la première fois que vous jouez à The Sweeper, nous vous recommandons fortement de suivre une formation de base et de consulter le tutoriel!" },
                 { "loc_achievements_placeholder", "Vous n'avez encore débloqué aucun succès..." },
@@ -185,6 +194,9 @@ public static class LanguageManager
 
                 { "loc_tutorial", "Tutorial" },
                 { "loc_loadout", "Ausrüstung" },
+
+                { "loc_control_scheme", "Steuerungsschema" },
+                { "loc_control", "Steuerung" },
 
                 { "loc_popup_quit", "Sind Sie sicher, dass Sie das Programm abbrechen möchten?" },
                 { "loc_popup_tutorial", "Wenn Sie The Sweeper zum ersten Mal spielen, empfehlen wir Ihnen dringend, ein grundlegendes Training zu absolvieren und sich das Tutorial anzusehen!" },
