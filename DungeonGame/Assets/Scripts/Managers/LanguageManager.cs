@@ -13,6 +13,11 @@ public static class LanguageManager
                 { "loc_language_name", "English" },
 
                 { "loc_start", "Start" },
+                { "loc_continue", "Continue" },
+
+                { "loc_yes", "Yes" },
+                { "loc_no", "No" },
+
                 { "loc_play", "Play" },
                 { "loc_settings", "Settings" },
                 { "loc_achievements", "Achievements" },
@@ -40,6 +45,7 @@ public static class LanguageManager
                 { "loc_very_high", "Very High" },
                 { "loc_ultra", "Ultra" },
 
+                { "loc_popup_quit", "Are you sure you want to quit the program?" },
                 { "loc_achievements_placeholder", "You haven't earned any achievements yet..." },
             }
         },
@@ -49,6 +55,11 @@ public static class LanguageManager
                 { "loc_language_name", "Español" },
 
                 { "loc_start", "Comenzar" },
+                { "loc_continue", "Continuar" },
+
+                { "loc_yes", "Si" },
+                { "loc_no", "No" },
+
                 { "loc_play", "Jugar" },
                 { "loc_settings", "Ajustes" },
                 { "loc_achievements", "Logros" },
@@ -76,6 +87,7 @@ public static class LanguageManager
                 { "loc_very_high", "Muy Alto" },
                 { "loc_ultra", "Ultra" },
 
+                { "loc_popup_quit", "¿Estás seguro de que quieres salir del programa?" },
                 { "loc_achievements_placeholder", "Todavía no has conseguido ningún logro..." },
             }
         },
@@ -85,6 +97,11 @@ public static class LanguageManager
                 { "loc_language_name", "Français" },
 
                 { "loc_start", "Commencer" },
+                { "loc_continue", "Continuer" },
+
+                { "loc_yes", "Oui" },
+                { "loc_no", "Non" },
+
                 { "loc_play", "Jouer" },
                 { "loc_settings", "Paramètres" },
                 { "loc_achievements", "Réalisations" },
@@ -112,6 +129,7 @@ public static class LanguageManager
                 { "loc_very_high", "Très Élevé" },
                 { "loc_ultra", "Ultra" },
 
+                { "loc_popup_quit", "Êtes-vous sûr de vouloir quitter le programme?" },
                 { "loc_achievements_placeholder", "Vous n'avez encore débloqué aucun succès..." },
             }
         },
@@ -121,6 +139,11 @@ public static class LanguageManager
                 { "loc_language_name", "Deutsche" },
 
                 { "loc_start", "Starten" },
+                { "loc_continue", "Weitermachen" },
+
+                { "loc_yes", "Ja" },
+                { "loc_no", "Nein" },
+
                 { "loc_play", "Spielen" },
                 { "loc_settings", "Einstellungen" },
                 { "loc_achievements", "Erfolge" },
@@ -148,6 +171,7 @@ public static class LanguageManager
                 { "loc_very_high", "Sehr hoch" },
                 { "loc_ultra", "Ultra" },
 
+                { "loc_popup_quit", "Sind Sie sicher, dass Sie das Programm abbrechen möchten?" },
                 { "loc_achievements_placeholder", "Du hast noch keine Erfolge erzielt..." },
             }
         }
