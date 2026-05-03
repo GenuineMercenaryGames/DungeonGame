@@ -10,6 +10,7 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private Transform mainMenu;
     [SerializeField] private Transform contractMenu;
     [SerializeField] private Transform quitPopUpMenu;
+    [SerializeField] private Transform tutorialPopUpMenu;
 
     [Header("Menu References - Subcategories")]
     [SerializeField] private Transform playMenu;
@@ -68,15 +69,31 @@ public class MainMenuController : MonoBehaviour
     public void LoadLevelSelectMenu() { LoadMenu(levelSelectMenu); }
     public void LoadContractMenu() { LoadMenu(contractMenu); }
     public void LoadQuitPopUpMenu() { LoadMenu(quitPopUpMenu); }
+    public void LoadTutorialPopUpMenu() { LoadMenu(tutorialPopUpMenu); }
     public void LoadMainMenuConditional()
     {
-        if (UserDataHandler.IsFirstLaunch())
+        if (UserDataHandler.isFirstTimeBoot)
         {
+            UserDataHandler.isFirstTimeBoot = false;
+            UserDataHandler.SaveUserAuxData();
             LoadContractMenu();
         }
         else
         {
             LoadMainMenu();
+        }
+    }
+    public void LoadPlayMenuConditional()
+    {
+        if (UserDataHandler.isFirstTimePlay)
+        {
+            UserDataHandler.isFirstTimePlay = false;
+            UserDataHandler.SaveUserAuxData();
+            LoadTutorialPopUpMenu();
+        }
+        else
+        {
+            LoadPlayMenu();
         }
     }
 
@@ -146,6 +163,20 @@ public class MainMenuController : MonoBehaviour
 
     #endregion
 
+    #region PublicMethods - Save
+
+    public void SaveSettings()
+    {
+        UserDataHandler.SaveUserSettings();
+    }
+
+    public void SaveGame()
+    {
+        UserDataHandler.SaveUserSaveData();
+    }
+
+    #endregion
+
     #region PrivateMethods
 
     private void UnloadAllMenus()
@@ -164,6 +195,7 @@ public class MainMenuController : MonoBehaviour
         SetMenuLoaded(levelSelectMenu, false);
         SetMenuLoaded(contractMenu, false);
         SetMenuLoaded(quitPopUpMenu, false);
+        SetMenuLoaded(tutorialPopUpMenu, false);
     }
 
     private void SetMenuLoaded(Transform menu, bool loaded)
