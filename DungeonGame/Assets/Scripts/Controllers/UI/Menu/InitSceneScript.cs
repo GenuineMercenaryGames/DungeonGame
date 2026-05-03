@@ -11,7 +11,7 @@ public class InitSceneScript : MonoBehaviour
 
     private void Init()
     {
-        // TODO : Implement logic to load settings and user data from disk
+        UserDataHandler.LoadAllData();
     }
 
     private void LoadMainMenu()
