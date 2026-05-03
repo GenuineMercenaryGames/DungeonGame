@@ -8,6 +8,7 @@ public class MainMenuController : MonoBehaviour
     [Header("Menu References - Other")]
     [SerializeField] private Transform titleMenu;
     [SerializeField] private Transform mainMenu;
+    [SerializeField] private Transform contractMenu;
 
     [Header("Menu References - Subcategories")]
     [SerializeField] private Transform playMenu;
@@ -30,7 +31,6 @@ public class MainMenuController : MonoBehaviour
 
     void Start()
     {
-        AdjustInitialSettings();
         LoadTitleMenu();
     }
 
@@ -65,6 +65,18 @@ public class MainMenuController : MonoBehaviour
     public void LoadAudioSettingsMenu() { LoadMenu(audioSettingsMenu); }
     public void LoadPlayerLoadoutMenu() { LoadMenu(playerLoadoutMenu); }
     public void LoadLevelSelectMenu() { LoadMenu(levelSelectMenu); }
+    public void LoadContractMenu() { LoadMenu(contractMenu); }
+    public void LoadMainMenuConditional()
+    {
+        if (UserDataHandler.IsFirstLaunch())
+        {
+            LoadContractMenu();
+        }
+        else
+        {
+            LoadMainMenu();
+        }
+    }
 
     #endregion
 
@@ -136,6 +148,7 @@ public class MainMenuController : MonoBehaviour
 
     private void UnloadAllMenus()
     {
+        // The absolute most ugliest fucking hack ever made. This grew out of control the more menus we had, but we had to commit because there's no more time to clean this up and make a proper menu loading stack system now.
         SetMenuLoaded(titleMenu, false);
         SetMenuLoaded(mainMenu, false);
         SetMenuLoaded(playMenu, false);
@@ -147,6 +160,7 @@ public class MainMenuController : MonoBehaviour
         SetMenuLoaded(audioSettingsMenu, false);
         SetMenuLoaded(playerLoadoutMenu, false);
         SetMenuLoaded(levelSelectMenu, false);
+        SetMenuLoaded(contractMenu, false);
     }
 
     private void SetMenuLoaded(Transform menu, bool loaded)
@@ -163,31 +177,6 @@ public class MainMenuController : MonoBehaviour
     private void OpenURL(string url)
     {
         Application.OpenURL(url);
-    }
-
-    private void AdjustInitialSettings()
-    {
-        // TODO : Add some logic to save this stuff later on with user settings files and whatnot, but for now, we always do this logic no matter what.
-        SystemLanguage syslang = Application.systemLanguage;
-        Language lang;
-        switch (syslang)
-        {
-            default:
-            case SystemLanguage.English:
-                lang = Language.English;
-                break;
-            case SystemLanguage.Catalan:
-            case SystemLanguage.Spanish:
-                lang = Language.Spanish;
-                break;
-            case SystemLanguage.French:
-                lang = Language.French;
-                break;
-            case SystemLanguage.German:
-                lang = Language.German;
-                break;
-        }
-        LanguageManager.SetLanguage(lang);
     }
 
     #endregion
