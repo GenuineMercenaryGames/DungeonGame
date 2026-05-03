@@ -32,6 +32,7 @@ public static class UserDataHandler
         save.money = 0;
         save.level = 0;
         save.xp = 0;
+        StructWrite(pathSaveData, save);
     }
 
     public static void SaveAllData()
@@ -55,7 +56,7 @@ public static class UserDataHandler
     public static void LoadUserSaveData()
     {
         UserSaveData save = new();
-        if (!StructRead(pathSettings, out save))
+        if (!StructRead(pathSaveData, out save))
         {
             isFirstTime = true;
             save = UserSaveData.Default();
