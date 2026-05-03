@@ -1,14 +1,18 @@
 using UnityEngine;
 
+public interface IUserData
+{
+    public void SetDefault();
+}
+
 [System.Serializable]
-public struct UserSettings
+public struct UserSettings : IUserData
 {
     public int language;
     public int quality;
 
-    public static UserSettings Default()
+    public void SetDefault()
     {
-        UserSettings config = new();
         SystemLanguage syslang = Application.systemLanguage;
         Language lang;
         switch (syslang)
@@ -28,25 +32,35 @@ public struct UserSettings
                 lang = Language.German;
                 break;
         }
-        config.language = (int)lang;
-        config.quality = (int)QualitySettings.GetQualityLevel();
-        return config;
+        language = (int)lang;
+        quality = (int)QualitySettings.GetQualityLevel();
     }
 }
 
 [System.Serializable]
-public struct UserSaveData
+public struct UserSaveData : IUserData
 {
     public int money;
     public int level;
     public int xp;
 
-    public static UserSaveData Default()
+    public void SetDefault()
     {
-        UserSaveData save = new();
-        save.money = 0;
-        save.level = 0;
-        save.xp = 0;
-        return save;
+        money = 0;
+        level = 0;
+        xp = 0;
+    }
+}
+
+[System.Serializable]
+public struct UserAuxData : IUserData
+{
+    public bool boot;
+    public bool play;
+
+    public void SetDefault()
+    {
+        boot = true;
+        play = true;
     }
 }
