@@ -64,6 +64,7 @@ namespace Assets.Scripts.Generation
 
         public void AddEnemy(Enemy enemy)
         {
+            _enemies.Add(enemy);
             EnemyCount++;
             enemy.OnDie += EnemyDied;
         }
@@ -75,6 +76,7 @@ namespace Assets.Scripts.Generation
 
         private void EnemyDied(Enemy enemy)
         {
+            _enemies.Remove(enemy);
             EnemyCount--;
             if(EnemyCount <= 0)
             {
@@ -154,6 +156,7 @@ namespace Assets.Scripts.Generation
         private System.Random _random;
 
         DynamicArray<Room> _rooms;
+        public DynamicArray<Room> Rooms { get { return _rooms; } }
 
         private const int MAX_ROOM_COUNT = 256;
 

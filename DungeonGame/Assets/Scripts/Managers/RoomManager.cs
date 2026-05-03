@@ -96,6 +96,7 @@ public class RoomManager : MonoBehaviour
                         {
                             gameObject.AddComponent<FadeController>();
                             room.AddEnemy(gameObject.GetComponent<Enemy>());
+                            gameObject.SetActive(false);
                         }
                         else
                         {
@@ -139,7 +140,7 @@ public class RoomManager : MonoBehaviour
         room.HasSpawnedContents = true;
     }
 
-    private void EnableRoomContents(Room room)
+    private void EnableRoomEnemies(Room room)
     {
         foreach (Enemy enemy in room._enemies)
         {
@@ -151,7 +152,7 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-    private void DisableRoomContents(Room room)
+    private void DisableRoomEnemies(Room room)
     {
         foreach (Enemy enemy in room._enemies)
         {
@@ -200,13 +201,13 @@ public class RoomManager : MonoBehaviour
 
     private void Awake()
     {
-        _world.OnRoomEnter += SpawnRoomContents;
-        _world.OnRoomEnter += EnableRoomContents;
-        _world.OnRoomExit += DisableRoomContents;
+        _world.OnRoomEnter += EnableRoomEnemies;
+        _world.OnRoomExit += DisableRoomEnemies;
 
         _world.OnRoomEnter += StartEnableDoorsTimer;
         _world.OnRoomExit += CancelEnableDoorsTimer;
         _world.OnRoomCleared += OnRoomCleared;
+
     }
 
     private void OnRoomCleared(Room room)
@@ -242,6 +243,12 @@ public class RoomManager : MonoBehaviour
             Room room = _world.GetRoom(door.RoomId);
             door_go.SetActive(false);
             room.AddDoor(door_go);
+        }
+
+        for (int i = 0; i < _world.Rooms.Count; ++i)
+        {
+            Room room = _world.Rooms[i];
+            SpawnRoomContents(room);
         }
     }
 
