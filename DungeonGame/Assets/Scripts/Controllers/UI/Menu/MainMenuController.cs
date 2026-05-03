@@ -24,9 +24,6 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private Transform playerLoadoutMenu;
     [SerializeField] private Transform levelSelectMenu;
 
-    [Header("Menu Settings")]
-    [SerializeField] private int gameplaySceneIndex = 1; // TODO : Change to be a string for easier handling later on.
-
     #endregion
 
     #region MonoBehaviour
@@ -44,14 +41,18 @@ public class MainMenuController : MonoBehaviour
     public void QuitGame()
     {
         // TODO : Add logic to display an "are you sure mf???" pop up before quitting for real.
-        Application.Quit(); // This does not work in the editor, but it does work on buils.
+        Application.Quit(); // NOTE : Do not panic, this does not work in the editor (for obvious reasons), but it does work on release buils.
+    }
+
+    public void PlayGame(int id)
+    {
+        SceneManager.LoadScene(id);
     }
 
     public void PlayGame()
     {
-        SceneManager.LoadScene(gameplaySceneIndex);
+        PlayGame(2);
     }
-
 
     public void LoadTitleMenu() { LoadMenu(titleMenu); }
     public void LoadMainMenu() { LoadMenu(mainMenu); }
