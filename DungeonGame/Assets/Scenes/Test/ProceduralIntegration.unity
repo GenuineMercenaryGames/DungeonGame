@@ -542,7 +542,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -563,6 +563,63 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!1001 &740907620
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 134840081222930231, guid: c24b468a84ec9904f8c83c4f553da200, type: 3}
+      propertyPath: m_Name
+      value: PostProcessVolume
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111128969975284789, guid: c24b468a84ec9904f8c83c4f553da200, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 540.0843
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111128969975284789, guid: c24b468a84ec9904f8c83c4f553da200, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111128969975284789, guid: c24b468a84ec9904f8c83c4f553da200, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 365.60635
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111128969975284789, guid: c24b468a84ec9904f8c83c4f553da200, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111128969975284789, guid: c24b468a84ec9904f8c83c4f553da200, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111128969975284789, guid: c24b468a84ec9904f8c83c4f553da200, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111128969975284789, guid: c24b468a84ec9904f8c83c4f553da200, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111128969975284789, guid: c24b468a84ec9904f8c83c4f553da200, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111128969975284789, guid: c24b468a84ec9904f8c83c4f553da200, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1111128969975284789, guid: c24b468a84ec9904f8c83c4f553da200, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c24b468a84ec9904f8c83c4f553da200, type: 3}
 --- !u!1 &788648255
 GameObject:
   m_ObjectHideFlags: 0
@@ -1189,6 +1246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a93c18366b537b4ebfe728d52c0e7f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.Generation.World
+  seed: 0
   maxWorldSizeInCells: {x: 768, y: 768}
   maxDungeonSizeInCells: {x: 640, y: 640}
   cellsPerChunk: 32
@@ -1197,6 +1255,11 @@ MonoBehaviour:
   player: {fileID: 408287098}
   playerChunkVisibleRange: 2
   navMeshController: {fileID: 190765990}
+  gizmosInfo:
+    RoomTypes: 0
+    CellTypes: 0
+    RoomRects: 0
+    Doors: 0
 --- !u!65 &1939618692
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1228,3 +1291,4 @@ SceneRoots:
   - {fileID: 1284394034}
   - {fileID: 200898711}
   - {fileID: 178588386}
+  - {fileID: 740907620}
