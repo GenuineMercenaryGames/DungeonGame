@@ -3,25 +3,16 @@ using UnityEngine;
 
 // NOTE : The current implementation is a temporary workaround to get things going for the deadline.
 // We will be improving upon this system later on.
-// For now, all this does is end the game with victory when all the enemies die. Yeah, it is what it is.
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    [SerializeField] private HealthController[] enemies;
     [SerializeField] private GameObject player;
     [SerializeField] private World worldGenerator;
 
-    int deaths;
-    int numEnemies;
+    public bool GameHasEnded {  get; private set; }
 
     void Start()
     {
-        deaths = 0;
-        numEnemies = enemies.Length;
-        foreach (var enemy in enemies)
-        {
-            enemy.Health.AddListener(EnemyKilled);
-        }
-
+        GameHasEnded = false;
         if(worldGenerator != null)
         {
             var characterController = player.GetComponent<CharacterController>();
@@ -33,16 +24,17 @@ public class GameManager : MonoBehaviour
         BackgroundMusicManager.Instance.PlayBackgroundMusicWithFade(AudioNames.BackgroundMusic, 2.5f);
     }
 
-    void EnemyKilled(float oldValue, float newValue)
+    public void StartDefeat()
     {
-        if (newValue <= 0.0f && oldValue > 0.0f)
-        {
-            ++deaths;
-            if (deaths >= numEnemies)
-            {
-                UIManager.Instance.GameOverUI.ShowGameOver(true);
-            }
-        }
+        if (GameHasEnded) return; // Disallow starting victory after death
+        GameHasEnded = true;
+        UIManager.Instance.VictoryUI.gameObject.SetActive(true); // TODO : This is a temporary hack, use the start animation stuff
     }
 
+    public void StartVictory()
+    {
+        if (GameHasEnded) return; // Disallow starting defeat in the event that player dies after victory
+        GameHasEnded = true;
+        UIManager.Instance.VictoryUI.gameObject.SetActive(true); // TODO : This is a temporary hack, use the start animation stuff
+    }
 }
