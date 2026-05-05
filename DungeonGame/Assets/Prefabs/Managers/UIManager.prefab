@@ -810,7 +810,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 249.48697, y: -56.99997}
+  m_AnchoredPosition: {x: 416.1869, y: -60.49997}
   m_SizeDelta: {x: 283.2115, y: 43.962585}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &786160700422402534
@@ -1074,9 +1074,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerUIController
   lerpSpeed: 20
-  imageHealth: {fileID: 0}
+  imageHealth: {fileID: 8628430350255291320}
   textCoins: {fileID: 8807614703759448922}
   textAmmo: {fileID: 2178870242130183652}
+  facePortraitImage: {fileID: 5521396544916040548}
+  facePortraitSprites:
+  - {fileID: 21300000, guid: 37e516fdec5db7f4897e14d852eb7406, type: 3}
+  - {fileID: 21300000, guid: f5894e8bb433c504a81b528e4c40b89c, type: 3}
+  - {fileID: 21300000, guid: 723d968678cc2054db5598b7db672043, type: 3}
+  - {fileID: 21300000, guid: 6c24ff47bbfed4f4789f5cca54872496, type: 3}
+  - {fileID: 21300000, guid: f3958f5eda1ea4548925b6a4735e9752, type: 3}
+  - {fileID: 21300000, guid: 654329e538091474786beebf36be83bd, type: 3}
 --- !u!1 &2537997983811393669
 GameObject:
   m_ObjectHideFlags: 0
@@ -1111,7 +1119,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 249.48499, y: -128}
+  m_AnchoredPosition: {x: 416.18494, y: -131.5}
   m_SizeDelta: {x: 283.2077, y: 61.520996}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4961394526647843431
@@ -1484,7 +1492,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 64.5, y: -57}
+  m_AnchoredPosition: {x: 231.2, y: -60.5}
   m_SizeDelta: {x: 61.521, y: 61.521}
   m_Pivot: {x: 0.49999997, y: 0.5}
 --- !u!222 &8200904668472819851
@@ -2578,7 +2586,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 64.5, y: -128}
+  m_AnchoredPosition: {x: 231.19995, y: -131.5}
   m_SizeDelta: {x: 61.520996, y: 61.520996}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6087867138701250307
@@ -3205,7 +3213,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -343, y: -75}
+  m_AnchoredPosition: {x: -870.6, y: 439.4}
   m_SizeDelta: {x: 140.64099, y: 173.98589}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7045146434212903615
@@ -4222,7 +4230,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 249.48697, y: -56.99997}
+  m_AnchoredPosition: {x: 416.1869, y: -60.49997}
   m_SizeDelta: {x: 283.2115, y: 43.962585}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4710609859706855931
@@ -4617,10 +4625,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
