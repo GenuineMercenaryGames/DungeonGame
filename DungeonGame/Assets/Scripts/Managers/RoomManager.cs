@@ -72,8 +72,8 @@ public class RoomManager : MonoBehaviour
                     int p = _random.Next(0, prefabCount);
                     float r = _random.Next(0, 100000) / 100000.0f;
 
-                    // No spawneamos enemigos en la bossroom
-                    if (room.RoomType == RoomType.BOSS && gen.PrefabsToSpawn[p].TryGetComponent<Enemy>(out _))
+                    // No spawneamos enemigos en la bossroom o en el spawn
+                    if ((room.RoomType == RoomType.BOSS || room.RoomType == RoomType.PLAYER_SPAWN) && gen.PrefabsToSpawn[p].TryGetComponent<Enemy>(out _))
                         continue;
 
                     if (r <= gen.PrefabsProbabilities[p])
@@ -96,9 +96,12 @@ public class RoomManager : MonoBehaviour
                         {
                             gameObject.AddComponent<FadeController>();
                             room.AddEnemy(gameObject.GetComponent<Enemy>());
+                            gameObject.SetActive(false);
                         }
                         else
-                            room._decorationInstances.Add(gameObject);
+                        {
+                            _world.AddGameObjectAtChunk(gameObject.transform.position, gameObject);
+                        }
                     }
                 }
             }
@@ -120,12 +123,12 @@ public class RoomManager : MonoBehaviour
 
         if (room.RoomType == RoomType.CHEST)
         {
-            GameObject boss = Instantiate(
+            GameObject chest = Instantiate(
                 gen.ChestPrefab,
                 new Vector3(room.Rects[0].Center.x, 1, room.Rects[0].Center.y),
                 Quaternion.Euler(0f, 180f, 0f)
             );
-            room._decorationInstances.Add(boss);
+            _world.AddGameObjectAtChunk(chest.transform.position, chest);
         }
 
         // Si no se spawnean enemigos, que se quiten las puertas.
@@ -137,7 +140,7 @@ public class RoomManager : MonoBehaviour
         room.HasSpawnedContents = true;
     }
 
-    private void EnableRoomContents(Room room)
+    private void EnableRoomEnemies(Room room)
     {
         foreach (Enemy enemy in room._enemies)
         {
@@ -147,31 +150,14 @@ public class RoomManager : MonoBehaviour
                 enemy.GetComponent<FadeController>().PlayFadeIn();
             }
         }
-        foreach (GameObject go in room._decorationInstances)
-        {
-            if (go != null)
-            {
-                go.SetActive(true);
-                //go.GetComponent<FadeController>().PlayFadeIn();
-            }
-        }
     }
 
-    private void DisableRoomContents(Room room)
+    private void DisableRoomEnemies(Room room)
     {
         foreach (Enemy enemy in room._enemies)
         {
             if (enemy.gameObject != null)
                 enemy.gameObject.GetComponent<FadeController>().PlayFadeOutAndDisable();
-        }
-
-        foreach (GameObject go in room._decorationInstances)
-        {
-            if (go != null)
-            {
-                go.SetActive(false);
-                //go.gameObject.GetComponent<FadeController>().PlayFadeOutAndDisable();
-            }
         }
     }
 
@@ -215,13 +201,13 @@ public class RoomManager : MonoBehaviour
 
     private void Awake()
     {
-        _world.OnRoomEnter += SpawnRoomContents;
-        _world.OnRoomEnter += EnableRoomContents;
-        _world.OnRoomExit += DisableRoomContents;
+        _world.OnRoomEnter += EnableRoomEnemies;
+        _world.OnRoomExit += DisableRoomEnemies;
 
         _world.OnRoomEnter += StartEnableDoorsTimer;
         _world.OnRoomExit += CancelEnableDoorsTimer;
         _world.OnRoomCleared += OnRoomCleared;
+
     }
 
     private void OnRoomCleared(Room room)
@@ -257,6 +243,12 @@ public class RoomManager : MonoBehaviour
             Room room = _world.GetRoom(door.RoomId);
             door_go.SetActive(false);
             room.AddDoor(door_go);
+        }
+
+        for (int i = 0; i < _world.Rooms.Count; ++i)
+        {
+            Room room = _world.Rooms[i];
+            SpawnRoomContents(room);
         }
     }
 

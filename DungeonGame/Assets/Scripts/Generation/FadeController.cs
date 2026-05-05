@@ -23,15 +23,7 @@ public sealed class FadeController : MonoBehaviour
 
     private void PlayVFX()
     {
-        float height = 1f;
-        Renderer targetRenderer = GetComponentInChildren<Renderer>();
-
-        if (targetRenderer != null)
-        {
-            height = targetRenderer.bounds.size.y;
-        }
-
-        VFXManager.Instance.InstantiateVFX("SpawnAsset", transform.position, height * 0.2f);
+        VFXManager.Instance.InstantiateVFX("SpawnAsset", transform.position, 0.8f);
     }
 
     public void PlayFadeIn()

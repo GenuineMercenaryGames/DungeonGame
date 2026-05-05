@@ -7,6 +7,7 @@ namespace Assets.Scripts.Generation
     public class Chunk
     {
         public bool IsLoaded { get; private set; }
+        public bool MarkToUnload { get; set; }
 
         private World _world;
         private Vector3 _worldPosition;
@@ -24,8 +25,11 @@ namespace Assets.Scripts.Generation
 
         private Mesh _decorationMesh;
 
+        private List<GameObject> _gameObjects;
+
         public Chunk(Vector3 worldPosition, int chunkCellSize, World world)
         {
+            IsLoaded = false;
             _world = world;
             _grid = new Grid2D<ushort>(new Vector2Int(chunkCellSize, chunkCellSize), Vector2Int.zero);
             _worldPosition = worldPosition;
@@ -37,6 +41,7 @@ namespace Assets.Scripts.Generation
             _decorationMesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
             WalkablePlane = new Mesh();
             FloorPlane = new Mesh();
+            _gameObjects = new List<GameObject>();
         }
 
         public void PopulateChunk(DungeonGenerator generator)
@@ -181,11 +186,21 @@ namespace Assets.Scripts.Generation
         public void LoadChunk()
         {
             IsLoaded = true;
+            foreach (GameObject go in _gameObjects)
+            {
+                if (go != null)
+                    go.SetActive(true);
+            }
         }
 
         public void UnloadChunk()
         {
             IsLoaded = false;
+            foreach(GameObject go in _gameObjects)
+            {
+                if(go != null)
+                    go.SetActive(false);
+            }
         }
 
         public void RenderChunk()
@@ -209,6 +224,11 @@ namespace Assets.Scripts.Generation
             return _grid[pos];
         }
 
+        public void AddGameObject(GameObject go)
+        {
+            go.SetActive(IsLoaded);
+            _gameObjects.Add(go);
+        }
         public void DrawGizmosCellTypes()
         {
             for(int x = 0; x < _grid.Size.x; x++)
