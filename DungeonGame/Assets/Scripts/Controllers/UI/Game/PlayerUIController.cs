@@ -13,7 +13,8 @@ public class PlayerUIController : MonoBehaviour
     [SerializeField] private TMP_Text textAmmo;
 
     [Header("Portrait")]
-    [SerializeField] private Image[] facePortraitStates;
+    [SerializeField] private Image facePortraitImage;
+    [SerializeField] private Sprite[] facePortraitSprites;
 
     void Start()
     {
@@ -42,11 +43,9 @@ public class PlayerUIController : MonoBehaviour
     {
         float health = GetPlayerHealth();
         float maxHealth = GetPlayerMaxHealth();
-        float fraction = health / maxHealth;
-        int index = (int)(fraction * facePortraitStates.Length);
-        for (int i = 0; i < facePortraitStates.Length; ++i)
-            facePortraitStates[i].enabled = false;
-        facePortraitStates[index].enabled = true;
+        float fraction = 1.0f - health / maxHealth;
+        int index = (int)Mathf.Max(0.0f, fraction * (facePortraitSprites.Length - 1));
+        facePortraitImage.sprite = facePortraitSprites[index];
     }
 
     private void UpdateCoins(int coins)
