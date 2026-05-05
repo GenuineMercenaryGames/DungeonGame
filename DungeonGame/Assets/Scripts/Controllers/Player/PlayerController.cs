@@ -428,10 +428,8 @@ public class PlayerController : MonoBehaviour
     {
         if (newValue <= 0f)
         {
-            UIManager.Instance.GameOverUI.ShowGameOver(false);
-            GameTime.IsPaused = true; // Temporary hack until control disabling is added.
+            GameManager.Instance.StartDefeat();
             GameTime.CanPause = false;
-
             // TODO : Play death animation and disable controls.
         }
     }
