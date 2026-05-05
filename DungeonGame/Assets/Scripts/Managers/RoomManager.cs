@@ -216,7 +216,7 @@ public class RoomManager : MonoBehaviour
 
         if(room.RoomType == RoomType.BOSS)
         {
-            UIManager.Instance.GameOverUI.ShowGameOver(true);
+            GameManager.Instance.StartVictory();
         }
 
         DisableDoors(room);
