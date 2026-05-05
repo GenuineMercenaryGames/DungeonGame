@@ -21,14 +21,14 @@ public class GameManager : Singleton<GameManager>
             characterController.enabled = true;
             
         }
-        BackgroundMusicManager.Instance.PlayBackgroundMusicWithFade(AudioNames.BackgroundMusic, 2.5f);
+        BackgroundMusicManager.Instance?.PlayBackgroundMusicWithFade(AudioNames.BackgroundMusic, 2.5f);
     }
 
     public void StartDefeat()
     {
         if (GameHasEnded) return; // Disallow starting victory after death
         GameHasEnded = true;
-        UIManager.Instance.VictoryUI.gameObject.SetActive(true); // TODO : This is a temporary hack, use the start animation stuff
+        UIManager.Instance.DefeatUI.gameObject.SetActive(true); // TODO : This is a temporary hack, use the start animation stuff
     }
 
     public void StartVictory()
@@ -36,5 +36,13 @@ public class GameManager : Singleton<GameManager>
         if (GameHasEnded) return; // Disallow starting defeat in the event that player dies after victory
         GameHasEnded = true;
         UIManager.Instance.VictoryUI.gameObject.SetActive(true); // TODO : This is a temporary hack, use the start animation stuff
+    }
+
+    public void StartGameOver(bool victory)
+    {
+        if (victory)
+            StartVictory();
+        else
+            StartDefeat();
     }
 }
