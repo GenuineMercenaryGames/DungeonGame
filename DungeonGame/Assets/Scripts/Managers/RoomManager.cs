@@ -115,6 +115,7 @@ public class RoomManager : MonoBehaviour
                 new Vector3(room.Rects[0].Center.x, 1, room.Rects[0].Center.y),
                 Quaternion.identity
             );
+            boss.AddComponent<FadeController>();
             Enemy enemy = boss.GetComponent<Enemy>();
             if (enemy != null)
                 room.AddEnemy(boss.GetComponent<Enemy>());
