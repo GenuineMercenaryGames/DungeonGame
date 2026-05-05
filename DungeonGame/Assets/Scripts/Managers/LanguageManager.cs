@@ -57,6 +57,11 @@ public static class LanguageManager
                 { "loc_quit_to_menu", "Quit to Menu" },
                 { "loc_quit_to_desktop", "Quit to Desktop" },
 
+                { "loc_victory", "Victory" },
+                { "loc_defeat", "Defeat" },
+                { "loc_victory2", "You have successfully fulfilled your contract" },
+                { "loc_defeat2", "You have failed to fulfill the contract" },
+
                 { "loc_popup_quit", "Are you sure you want to quit the program?" },
                 { "loc_popup_tutorial", "If this is your first time playing The Sweeper, we highly recommend you undergo some basic training and check out the tutorial!" },
                 { "loc_achievements_placeholder", "You haven't earned any achievements yet..." },
@@ -111,6 +116,11 @@ public static class LanguageManager
                 { "loc_restart", "Reiniciar" },
                 { "loc_quit_to_menu", "Salir al Menú" },
                 { "loc_quit_to_desktop", "Salir al Escritorio" },
+
+                { "loc_victory", "Victoria" },
+                { "loc_defeat", "Derrota" },
+                { "loc_victory2", "Has cumplido tu contrato con éxito" },
+                { "loc_defeat2", "No has logrado completar el contrato" },
 
                 { "loc_popup_quit", "¿Estás seguro de que quieres salir del programa?" },
                 { "loc_popup_tutorial", "¡Si esta es tu primera vez jugando a The Sweeper, recomendamos que tomes un entrenamiento básico y le eches un vistazo al tutorial!" },
@@ -167,6 +177,11 @@ public static class LanguageManager
                 { "loc_quit_to_menu", "Retour au Menu" },
                 { "loc_quit_to_desktop", "Retour au Bureau" },
 
+                { "loc_victory", "Victoire" },
+                { "loc_defeat", "Défaite" },
+                { "loc_victory2", "Vous avez rempli votre contrat avec succès" },
+                { "loc_defeat2", "Vous n'avez pas rempli votre contrat" },
+
                 { "loc_popup_quit", "Êtes-vous sûr de vouloir quitter le programme?" },
                 { "loc_popup_tutorial", "Si c'est la première fois que vous jouez à The Sweeper, nous vous recommandons fortement de suivre une formation de base et de consulter le tutoriel!" },
                 { "loc_achievements_placeholder", "Vous n'avez encore débloqué aucun succès..." },
@@ -221,6 +236,11 @@ public static class LanguageManager
                 { "loc_restart", "Neustart" },
                 { "loc_quit_to_menu", "Zum Menü zurückkehren" },
                 { "loc_quit_to_desktop", "Zum Desktop zurückkehren" },
+
+                { "loc_victory", "Sieg" },
+                { "loc_defeat", "Niederlage" },
+                { "loc_victory2", "Sie haben Ihren Vertrag erfolgreich erfüllt" },
+                { "loc_defeat2", "Sie konnten den Vertrag nicht erfüllen" },
 
                 { "loc_popup_quit", "Sind Sie sicher, dass Sie das Programm abbrechen möchten?" },
                 { "loc_popup_tutorial", "Wenn Sie The Sweeper zum ersten Mal spielen, empfehlen wir Ihnen dringend, ein grundlegendes Training zu absolvieren und sich das Tutorial anzusehen!" },
