@@ -1156,7 +1156,7 @@ GameObject:
   - component: {fileID: 1510801672574804919}
   - component: {fileID: 2425047199449604995}
   m_Layer: 0
-  m_Name: GameOverUI_Defeat
+  m_Name: DefeatUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2651,8 +2651,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
   playerUI: {fileID: 4399150790285681891}
   pauseUI: {fileID: 5263638689025865465}
-  defeatUI: {fileID: 0}
-  victoryUI: {fileID: 0}
+  defeatUI: {fileID: 2425047199449604995}
+  victoryUI: {fileID: 1756581519503581406}
 --- !u!1 &4706511557489671096
 GameObject:
   m_ObjectHideFlags: 0
@@ -3921,9 +3921,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 65750615132490195}
-  - component: {fileID: 8846706522488550803}
+  - component: {fileID: 1756581519503581406}
   m_Layer: 0
-  m_Name: GameOverUI_Victory
+  m_Name: VictoryUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3945,7 +3945,7 @@ Transform:
   - {fileID: 2961917816008954642}
   m_Father: {fileID: 3141657113430497087}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8846706522488550803
+--- !u!114 &1756581519503581406
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3954,9 +3954,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6090152713368300413}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12adf4d14921f304db8aa26a46b06bfc, type: 3}
+  m_Script: {fileID: 11500000, guid: 096afc14cb3461c489eb5faca564a96b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameOverUIController
+  m_EditorClassIdentifier: Assembly-CSharp::VictoryUIController
 --- !u!1 &6145168284895810795
 GameObject:
   m_ObjectHideFlags: 0
