@@ -65,6 +65,23 @@ public static class LanguageManager
                 { "loc_popup_quit", "Are you sure you want to quit the program?" },
                 { "loc_popup_tutorial", "If this is your first time playing The Sweeper, we highly recommend you undergo some basic training and check out the tutorial!" },
                 { "loc_achievements_placeholder", "You haven't earned any achievements yet..." },
+
+                { "loc_achievement_name_0", "Game On!" },
+                { "loc_achievement_desc_0", "Start your first contract." },
+                { "loc_achievement_name_1", "Getting started" },
+                { "loc_achievement_desc_1", "Kill 5 enemies." },
+                { "loc_achievement_name_2", "Double Digits" },
+                { "loc_achievement_desc_2", "Kill 10 enemies." },
+                { "loc_achievement_name_3", "Junior Sweeper" },
+                { "loc_achievement_desc_3", "Kill 50 enemies." },
+                { "loc_achievement_name_4", "True Sweeper" },
+                { "loc_achievement_desc_4", "Kill 100 enemies." },
+                { "loc_achievement_name_5", "Near Death Experience" },
+                { "loc_achievement_desc_5", "Kill 5 enemies while your health is at 10HP or less." },
+                { "loc_achievement_name_6", "Hardcore" },
+                { "loc_achievement_desc_6", "Kill 10 enemies while your health is at 10HP or less." },
+                { "loc_achievement_name_7", "Candy Store for Adults!" },
+                { "loc_achievement_desc_7", "Pick up a weapon." },
             }
         },
         {
