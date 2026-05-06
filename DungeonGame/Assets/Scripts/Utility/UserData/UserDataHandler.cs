@@ -9,6 +9,7 @@ public static class UserDataHandler
     private static string pathAuxData = Path.Combine(pathBase, "auxdata.json");
     private static string pathSettings = Path.Combine(pathBase, "settings.json");
     private static string pathSaveData = Path.Combine(pathBase, "savedata.json");
+    private static string pathAchievements = Path.Combine(pathBase, "achievements.json");
 
     public static bool isFirstTimeBoot = false;
     public static bool isFirstTimePlay = false;
@@ -43,11 +44,19 @@ public static class UserDataHandler
         StructWrite(pathSaveData, save);
     }
 
+    public static void SaveAchievements()
+    {
+        UserAchievementsData achievements = new();
+        achievements.achievements = AchievementManager.GetAchievementsVector();
+        StructWrite(pathAchievements, achievements);
+    }
+
     public static void SaveAllData()
     {
         SaveUserAuxData();
         SaveUserSettings();
         SaveUserSaveData();
+        SaveAchievements();
     }
 
     public static void LoadUserAuxData()
@@ -73,11 +82,19 @@ public static class UserDataHandler
         // TODO : Implement these systems so that we can actually load the data somewhere lol
     }
 
+    public static void LoadAchievements()
+    {
+        UserAchievementsData achievements = new();
+        StructRead(pathAchievements, out achievements);
+        AchievementManager.SetAchievementsVector(achievements.achievements);
+    }
+
     public static void LoadAllData()
     {
         LoadUserAuxData();
         LoadUserSettings();
         LoadUserSaveData();
+        LoadAchievements();
     }
 
     #endregion

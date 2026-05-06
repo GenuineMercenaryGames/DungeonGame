@@ -64,3 +64,16 @@ public struct UserAuxData : IUserData
         hasPlayedOnce = false;
     }
 }
+
+[System.Serializable]
+public struct UserAchievementsData : IUserData
+{
+    public bool[] achievements;
+
+    public void SetDefault()
+    {
+        achievements = new bool[(int)AchievementManager.Achievement.Count];
+        for (int i = 0; i < achievements.Length; ++i)
+            achievements[i] = false;
+    }
+}
