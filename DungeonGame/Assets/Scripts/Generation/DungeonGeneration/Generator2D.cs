@@ -228,6 +228,20 @@ public class Generator2D {
         }
     }
 
+    public void DrawHallways()
+    {
+        Debug.Log(selectedEdges.Count);
+        foreach (var edge in selectedEdges)
+        {
+            Vector3 startRoom = new Vector3(edge.U.Position.x, 1.0f, edge.U.Position.y);
+            Vector3 endRoom = new Vector3(edge.V.Position.x, 1.0f, edge.V.Position.y);
+            Gizmos.color = Color.rebeccaPurple;
+            Gizmos.DrawSphere(startRoom, 5f);
+            Gizmos.DrawSphere(endRoom, 5f);
+            Gizmos.DrawLine(startRoom, endRoom);    
+        }
+    }
+
     void PathfindHallways() {
         DungeonPathfinder2D aStar = new DungeonPathfinder2D(_world.MaxDungeonSizeInCells);
 
@@ -261,6 +275,7 @@ public class Generator2D {
             if (path != null) {
                 for (int i = 0; i < path.Count; i++) {
                     Vector2Int current = path[i];
+                    if (_world.GetCell(current) >= World.CELL_TYPE_ROOM) continue;
                     Rect newRoom = new Rect(current, new Vector2Int(10, 10), PARENT_ROOM_NULL);
                     foreach (Vector2Int pos in newRoom.bounds.allPositionsWithin)
                     {
@@ -360,7 +375,7 @@ public class Generator2D {
             var current = queue.Dequeue();
             result.Add(current);
 
-            if(doorDir == Vector2Int.zero)
+            if(doorDir == Vector2Int.zero || true)
             {
                 foreach (Vector2Int dir in Directions4)
                 {

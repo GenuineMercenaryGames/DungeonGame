@@ -35,6 +35,7 @@ namespace Assets.Scripts.ScriptableObjects
 
         public GameObject DoorPrefab;
         public GameObject BossPrefab;
+        public GameObject AntennaPrefab;
 
         public void EnsureRuntimeData()
         {

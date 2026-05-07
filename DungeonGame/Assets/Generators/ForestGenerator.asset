@@ -49,3 +49,4 @@ MonoBehaviour:
   ChestPrefab: {fileID: 6043191992826200431, guid: 2766da762c00faf4c8be3727607c4520, type: 3}
   DoorPrefab: {fileID: 2560853741278093319, guid: 311ace5985c432e40abb83d6c1480e50, type: 3}
   BossPrefab: {fileID: 559639843164309230, guid: 6b9d973cd3bbf8545978b5363cbc35dc, type: 3}
+  AntennaPrefab: {fileID: 5448396975718530427, guid: f87581e7764e02b4a8d85c4335828c1f, type: 3}

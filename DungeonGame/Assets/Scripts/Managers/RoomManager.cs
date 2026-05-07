@@ -230,7 +230,7 @@ public class RoomManager : MonoBehaviour
         {
             Vector3 dir = door.End - door.Start;
             float length = dir.magnitude;
-            Vector3 center = (door.Start + door.End) * 0.5f;
+            Vector3 center = (door.Start + door.End) * 0.5f + new Vector3(0.0f, 5f, 0.0f);
 
             Quaternion rotation = Quaternion.FromToRotation(Vector3.right, dir.normalized);
 
@@ -244,6 +244,15 @@ public class RoomManager : MonoBehaviour
             Room room = _world.GetRoom(door.RoomId);
             door_go.SetActive(false);
             room.AddDoor(door_go);
+
+            Vector3 dirNormalized = dir.normalized;
+
+            GameObject antennaStart = Instantiate(gen.AntennaPrefab, door.Start - dirNormalized * 0.5f + new Vector3(0.0f, 3.3f, 0.0f), 
+                Quaternion.Euler(new Vector3(-90.0f, 0.0f, 0.0f)));
+            _world.AddGameObjectAtChunk(door.Start, antennaStart);
+            GameObject antennaEnd = Instantiate(gen.AntennaPrefab, door.End + dirNormalized * 0.5f + new Vector3(0.0f, 3.3f, 0.0f), 
+                Quaternion.Euler(new Vector3(-90.0f, 0.0f, 0.0f)));
+            _world.AddGameObjectAtChunk(door.End, antennaEnd);
         }
 
         for (int i = 0; i < _world.Rooms.Count; ++i)

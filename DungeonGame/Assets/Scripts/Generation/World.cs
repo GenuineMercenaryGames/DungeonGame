@@ -114,6 +114,7 @@ namespace Assets.Scripts.Generation
         public bool CellTypes;
         public bool RoomRects;
         public bool Doors;
+        public bool Hallways;
     }
 
     public class World : MonoBehaviour
@@ -499,6 +500,11 @@ namespace Assets.Scripts.Generation
             if(_chunks != null && gizmosInfo.RoomRects)
             {
                 _generator?.DrawRoomRectsGizmos();
+            }
+
+            if(_chunks!=null && gizmosInfo.Hallways)
+            {
+                _generator?.DrawHallways();
             }
         }
     }
