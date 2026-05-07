@@ -29,8 +29,14 @@ namespace Assets.Scripts.ScriptableObjects
         public GameObject[] PrefabsToSpawn;
         public float[] PrefabsProbabilities;
 
+        [Header("NewSpawn")]
+        public GameObject[] TreePrefabs;
+        public GameObject[] MeleeEnemyPrefabs;
+        public GameObject CoinPrefab;
+
 
         public float ChestRoomProbability;
+        public float DenseForestRoomProbability;
         public GameObject ChestPrefab;
 
         public GameObject DoorPrefab;

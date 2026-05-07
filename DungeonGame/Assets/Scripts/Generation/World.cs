@@ -21,6 +21,7 @@ namespace Assets.Scripts.Generation
         DEFAULT,
         PLAYER_SPAWN,
         BOSS,
+        DENSE_FOREST,
         CHEST
     }
 
@@ -427,6 +428,11 @@ namespace Assets.Scripts.Generation
                 if(r <= gen.ChestRoomProbability)
                 {
                     _rooms[i].RoomType = RoomType.CHEST;
+                }
+                r = GetRandom().Next(0, 100) / 100.0f;
+                if (r <= gen.DenseForestRoomProbability)
+                {
+                    _rooms[i].RoomType = RoomType.DENSE_FOREST;
                 }
             }
 
