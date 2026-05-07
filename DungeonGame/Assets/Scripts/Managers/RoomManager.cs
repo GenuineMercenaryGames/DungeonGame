@@ -131,12 +131,18 @@ public class RoomManager : MonoBehaviour
     {
         HashSet<Vector2Int> blockedCells = new();
 
+        Vector2 center = new Vector2(0.0f, 0.0f);
+
         for (int i = 0; i < points.Count; ++i)
         {
-            for (int j = 0; j < points.Count; ++j)
-            {
-                AddLine(blockedCells, points[i], points[j], padding);
-            }
+            center += points[i];
+        }
+
+        center /= points.Count;
+
+        for (int i = 0; i < points.Count; ++i)
+        {
+            AddLine(blockedCells, points[i], new Vector2Int((int)center.x, (int)center.y), padding);
         }
 
         return blockedCells;
@@ -191,27 +197,28 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-    private Vector2Int SampleDoorLines(List<Vector2Int> doorPoints)
+    private Vector2 GetDoorPointsCenter(List<Vector2Int> doorPoints)
     {
-        if (doorPoints == null || doorPoints.Count < 2)
-            throw new System.InvalidOperationException("Need at least two door points.");
+        Vector2 center = new Vector2(0.0f, 0.0f);
 
-        int i = UnityEngine.Random.Range(0, doorPoints.Count);
+        for (int i = 0; i < doorPoints.Count; ++i)
+        {
+            center += doorPoints[i];
+        }
 
-        int j = UnityEngine.Random.Range(0, doorPoints.Count - 1);
+        center /= doorPoints.Count;
+        return center;
+    }
 
-        if (j >= i)
-            ++j;
+    private Vector2 SampleDoorLines(List<Vector2Int> doorPoints, float s1, float s2)
+    {
 
-        float t = UnityEngine.Random.Range(0.3f, 0.7f);
-
-        Vector2Int a = doorPoints[i];
-        Vector2Int b = doorPoints[j];
-
-        int x = Mathf.RoundToInt(Mathf.Lerp(a.x, b.x, t));
-        int y = Mathf.RoundToInt(Mathf.Lerp(a.y, b.y, t));
-
-        return new Vector2Int(x, y);
+        int rpoint = (int)(s1 * doorPoints.Count);
+        return Vector2.Lerp(
+            new Vector2(doorPoints[rpoint].x, doorPoints[rpoint].y),
+            GetDoorPointsCenter(doorPoints),
+            s2
+        );
     }
 
     private Vector2Int UniformSampleRoom(Room room)
@@ -266,7 +273,7 @@ public class RoomManager : MonoBehaviour
 
     private void SpawnDenseForestRoom(Room room)
     {
-        float treeDensity = 0.1f;
+        float treeDensity = 0.15f;
         int treeCount = (int)(GetRoomArea(room) * treeDensity);
 
         List<Vector2Int> doorPoints = new List<Vector2Int>();
@@ -285,7 +292,7 @@ public class RoomManager : MonoBehaviour
             if (blockedCells.Contains(pos))
                 continue;
             GameObject gameObject = Instantiate(
-                gen.TreePrefabs[0],
+                gen.TreePrefabs[1], //TODO añadir más árboles.
                 new Vector3(pos.x, 0.0f, pos.y),
                 Quaternion.identity
             );
@@ -299,12 +306,15 @@ public class RoomManager : MonoBehaviour
             return;
         }
 
+
         float enemyDensity = 0.001f;
         int enemyCount = (int)(GetRoomArea(room) * enemyDensity);
 
         for (int i = 0; i < enemyCount; ++i)
         {
-            Vector2Int pos = SampleDoorLines(doorPoints);
+            float r1 = _random.Next(0, 100000) / 100000.0f;
+            float r2 = _random.Next(0, 100000) / 100000.0f;
+            Vector2 pos = SampleDoorLines(doorPoints, r1, 0.2f + r2 * 0.6f);
 
             GameObject gameObject = Instantiate(
                 gen.MeleeEnemyPrefabs[0],
@@ -316,21 +326,30 @@ public class RoomManager : MonoBehaviour
             gameObject.SetActive(false);
         }
 
+        
         float coinDensity = 0.05f;
-        for(int i = 0; i < doorPoints.Count; ++i)
+        Vector2 center = GetDoorPointsCenter(doorPoints);
+
+        float maxLength = 0.0f;
+        for (int i = 0; i < doorPoints.Count; ++i)
         {
-            for (int j = 0; j < doorPoints.Count; ++j)
+            float lineLength = Vector2.Distance(doorPoints[i], center);
+            if(lineLength > maxLength)
+                maxLength = lineLength;
+        }
+
+        for (int i = 0; i < doorPoints.Count; ++i)
+        {
+            float lineLength = Vector2.Distance(doorPoints[i], center);
+            for (float k = 0.2f; k < 0.8f; k += coinDensity)
             {
-                for(float k = 0.2f; k < 0.8f; k += coinDensity)
-                {
-                    Vector2 pos = Vector2.Lerp(doorPoints[i], doorPoints[j], k);
-                    GameObject gameObject = Instantiate(
-                        gen.CoinPrefab,
-                        new Vector3(pos.x, 0.5f, pos.y),
-                        Quaternion.identity
-                    );
-                    _world.AddGameObjectAtChunk(gameObject.transform.position, gameObject);
-                }
+                Vector2 pos = SampleDoorLines(doorPoints, (float)(i) / doorPoints.Count, k / (lineLength/maxLength));
+                GameObject gameObject = Instantiate(
+                    gen.CoinPrefab,
+                    new Vector3(pos.x, 0.5f, pos.y),
+                    Quaternion.identity
+                );
+                _world.AddGameObjectAtChunk(gameObject.transform.position, gameObject);
             }
         }
     }
