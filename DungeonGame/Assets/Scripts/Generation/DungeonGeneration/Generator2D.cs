@@ -44,7 +44,6 @@ public class Generator2D {
 
     private int _offset = 64;
 
-
     public Generator2D(World world, Random random, int maxRoomCount, DynamicArray<Room> rooms) {
         _roomRects = new DynamicArray<Rect>(maxRoomCount);
         vertices = new List<Vertex>();
@@ -230,7 +229,6 @@ public class Generator2D {
 
     public void DrawHallways()
     {
-        Debug.Log(selectedEdges.Count);
         foreach (var edge in selectedEdges)
         {
             Vector3 startRoom = new Vector3(edge.U.Position.x, 1.0f, edge.U.Position.y);
@@ -274,7 +272,7 @@ public class Generator2D {
 
             if (path != null) {
                 for (int i = 0; i < path.Count; i++) {
-                    Vector2Int current = path[i];
+                    Vector2Int current = path[i] + new Vector2Int(1, 1);
                     if (_world.GetCell(current) >= World.CELL_TYPE_ROOM) continue;
                     Rect newRoom = new Rect(current, new Vector2Int(10, 10), PARENT_ROOM_NULL);
                     foreach (Vector2Int pos in newRoom.bounds.allPositionsWithin)
