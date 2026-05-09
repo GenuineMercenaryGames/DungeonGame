@@ -82,6 +82,18 @@ public static class LanguageManager
                 { "loc_achievement_desc_6", "Kill 10 enemies while your health is at 10HP or less." },
                 { "loc_achievement_name_7", "Candy Store for Adults!" },
                 { "loc_achievement_desc_7", "Pick up a weapon." },
+
+                { "loc_ctrl_movement_title", "Movement" },
+                { "loc_ctrl_movement_details", "<b>W A S D</b>  -  Movement\n<b>SHIFT</b>   -  Sprint\n<b>SPACE</b>   -  Dash" },
+
+                { "loc_ctrl_combat_title", "Combat" },
+                { "loc_ctrl_combat_details", "<b>LMB</b>  -  Fire Weapon" },
+
+                { "loc_ctrl_camera_title", "Camera" },
+                { "loc_ctrl_camera_details", "<b>Mouse Wheel</b>  -  Zoom Camera\n<b>Q</b>  -  Smooth Rotation" },
+
+                { "loc_ctrl_system_title", "System" },
+                { "loc_ctrl_system_details", "<b>M</b>  -  Toggle Minimap\n<b>ESC</b>  -  Pause Operation" },
             }
         },
         {
@@ -142,6 +154,18 @@ public static class LanguageManager
                 { "loc_popup_quit", "¿Estás seguro de que quieres salir del programa?" },
                 { "loc_popup_tutorial", "¡Si esta es tu primera vez jugando a The Sweeper, recomendamos que tomes un entrenamiento básico y le eches un vistazo al tutorial!" },
                 { "loc_achievements_placeholder", "Todavía no has conseguido ningún logro..." },
+
+                { "loc_ctrl_movement_title", "Movimiento" },
+                { "loc_ctrl_movement_details", "<b>W A S D</b>  -  Movimiento\n<b>SHIFT</b>   -  Esprintar\n<b>SPACE</b>   -  Rodar" },
+
+                { "loc_ctrl_combat_title", "Combate" },
+                { "loc_ctrl_combat_details", "<b>Clic Izq.</b>  -  Disparar Arma" },
+
+                { "loc_ctrl_camera_title", "Cámara" },
+                { "loc_ctrl_camera_details", "<b>Rueda Ratón</b>  -  Zoom Cámara\n<b>Q</b>  -  Rotación Suave" },
+
+                { "loc_ctrl_system_title", "Sistema" },
+                { "loc_ctrl_system_details", "<b>M</b>  -  Mostrar Minimapa\n<b>ESC</b>  -  Pausar" },
             }
         },
         {
@@ -202,12 +226,24 @@ public static class LanguageManager
                 { "loc_popup_quit", "Êtes-vous sûr de vouloir quitter le programme?" },
                 { "loc_popup_tutorial", "Si c'est la première fois que vous jouez à The Sweeper, nous vous recommandons fortement de suivre une formation de base et de consulter le tutoriel!" },
                 { "loc_achievements_placeholder", "Vous n'avez encore débloqué aucun succès..." },
+
+                { "loc_ctrl_movement_title", "Mouvement" },
+                { "loc_ctrl_movement_details", "<b>W A S D</b>  -  Mouvement\n<b>SHIFT</b>   -  Sprint\n<b>SPACE</b>   -  Esquive" },
+
+                { "loc_ctrl_combat_title", "Combat" },
+                { "loc_ctrl_combat_details", "<b>Clic Gauche</b>  -  Tirer" },
+
+                { "loc_ctrl_camera_title", "Caméra" },
+                { "loc_ctrl_camera_details", "<b>Molette</b>  -  Zoom Caméra\n<b>Q</b>  -  Rotation Fluide" },
+
+                { "loc_ctrl_system_title", "Système" },
+                { "loc_ctrl_system_details", "<b>M</b>  -  Afficher la Carte\n<b>ESC</b>  -  Pause" },
             }
         },
         {
             Language.German, new()
             {
-                { "loc_language_name", "Deutsche" },
+                { "loc_language_name", "Deutsch" },
 
                 { "loc_start", "Starten" },
                 { "loc_continue", "Weitermachen" },
@@ -262,6 +298,18 @@ public static class LanguageManager
                 { "loc_popup_quit", "Sind Sie sicher, dass Sie das Programm abbrechen möchten?" },
                 { "loc_popup_tutorial", "Wenn Sie The Sweeper zum ersten Mal spielen, empfehlen wir Ihnen dringend, ein grundlegendes Training zu absolvieren und sich das Tutorial anzusehen!" },
                 { "loc_achievements_placeholder", "Du hast noch keine Erfolge erzielt..." },
+
+                { "loc_ctrl_movement_title", "Bewegung" },
+                { "loc_ctrl_movement_details", "<b>W A S D</b>  -  Bewegen\n<b>SHIFT</b>   -  Sprinten\n<b>SPACE</b>   -  Ausweichen" },
+
+                { "loc_ctrl_combat_title", "Kampf" },
+                { "loc_ctrl_combat_details", "<b>LMT</b>  -  Waffe abfeuern" },
+
+                { "loc_ctrl_camera_title", "Kamera" },
+                { "loc_ctrl_camera_details", "<b>Mausrad</b>  -  Kamerazoom\n<b>Q</b>  -  Sanfte Drehung" },
+
+                { "loc_ctrl_system_title", "System" },
+                { "loc_ctrl_system_details", "<b>M</b>  -  Minikarte umschalten\n<b>ESC</b>  -  Pause" },
             }
         }
     };
