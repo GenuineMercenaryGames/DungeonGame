@@ -210,6 +210,22 @@ public class RoomManager : MonoBehaviour
         return center;
     }
 
+    private static bool IsRadiusInsideRoomBounds(Room room, Vector2 center, float radius)
+    {
+        const int sampleCount = 16;
+
+        for (int i = 0; i < sampleCount; ++i)
+        {
+            float angle = i * Mathf.PI * 2.0f / sampleCount;
+            Vector2 point = center + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius;
+
+            if (!ContainsAnyRect(room, Vector2Int.FloorToInt(point)))
+                return false;
+        }
+
+        return ContainsAnyRect(room, Vector2Int.FloorToInt(center));
+    }
+
     private Vector2 SampleDoorLines(List<Vector2Int> doorPoints, float s1, float s2)
     {
 
@@ -271,6 +287,67 @@ public class RoomManager : MonoBehaviour
         return false;
     }
 
+    private bool IsEnemy(GameObject go)
+    {
+        return go.GetComponent<Enemy>() != null;
+    }
+
+    private GameObject SpawnEnemy(Room room, GameObject prefab, Vector3 pos)
+    {
+        if(!IsRadiusInsideRoomBounds(room, new Vector2(pos.x, pos.z), 1))
+            return null;
+        GameObject gameObject = Instantiate(
+               prefab,
+               pos,
+               Quaternion.identity
+           );
+        gameObject.transform.parent = room.parentGameObject.transform;
+        gameObject.AddComponent<FadeController>();
+        room.AddEnemy(gameObject.GetComponent<Enemy>());
+        gameObject.SetActive(false);
+        return gameObject;
+    }
+
+
+    private void SpawnAssetCircle(Room room, GameObject[] prefabs, Vector3 center, float radius, int count)
+    {
+
+        float angleStep = Mathf.PI * 2.0f / count;
+
+        for (int i = 0; i < count; ++i)
+        {
+            float angle = i * angleStep;
+
+            Vector3 pos = center + new Vector3(
+                Mathf.Cos(angle) * radius,
+                0.0f,
+                Mathf.Sin(angle) * radius
+            );
+
+            SpawnAsset(room, prefabs[_random.Next(0, prefabs.Count())], pos);
+        }
+    }
+
+    private void SpawnAssetCircle(Room room, GameObject prefab, Vector3 center, float radius, int count)
+    {
+        SpawnAssetCircle(room, new GameObject[]{ prefab}, center, radius, count);
+    }
+
+
+    private GameObject SpawnAsset(Room room, GameObject prefab, Vector3 pos)
+    {
+        if (!IsRadiusInsideRoomBounds(room, new Vector2(pos.x, pos.z), 1))
+            return null;
+        GameObject gameObject = Instantiate(
+                    prefab,
+                    pos,
+                    Quaternion.identity
+                );
+        gameObject.transform.parent = room.parentGameObject.transform;
+        _world.AddGameObjectAtChunk(gameObject.transform.position, gameObject);
+        return gameObject;
+    }
+
     private void SpawnDenseForestRoom(Room room)
     {
         float treeDensity = 0.15f;
@@ -291,14 +368,9 @@ public class RoomManager : MonoBehaviour
             Vector2Int pos = UniformSampleRoom(room);
             if (blockedCells.Contains(pos))
                 continue;
-            GameObject gameObject = Instantiate(
-                gen.TreePrefabs[1], //TODO añadir más árboles.
-                new Vector3(pos.x, 0.0f, pos.y),
-                Quaternion.identity
-            );
-            gameObject.transform.parent = roomParentEmpty.transform;
-            gameObject.transform.localScale = Vector3.one + Vector3.one * _random.Next(0, 100000) / 100000.0f;
-            _world.AddGameObjectAtChunk(gameObject.transform.position, gameObject);
+            GameObject instance = SpawnAsset(room, gen.TreePrefabs[1], new Vector3(pos.x, 0, pos.y));
+            if(instance != null)
+                instance.transform.localScale = Vector3.one + Vector3.one * _random.Next(0, 100000) / 100000.0f;
         }
 
         if(doorPoints.Count <= 1)
@@ -315,15 +387,7 @@ public class RoomManager : MonoBehaviour
             float r1 = _random.Next(0, 100000) / 100000.0f;
             float r2 = _random.Next(0, 100000) / 100000.0f;
             Vector2 pos = SampleDoorLines(doorPoints, r1, 0.2f + r2 * 0.6f);
-
-            GameObject gameObject = Instantiate(
-                gen.MeleeEnemyPrefabs[0],
-                new Vector3(pos.x, 0.0f, pos.y),
-                Quaternion.identity
-            );
-            gameObject.AddComponent<FadeController>();
-            room.AddEnemy(gameObject.GetComponent<Enemy>());
-            gameObject.SetActive(false);
+            SpawnEnemy(room, gen.MeleeEnemyPrefabs[0], new Vector3(pos.x, 0, pos.y));
         }
 
         
@@ -344,12 +408,7 @@ public class RoomManager : MonoBehaviour
             for (float k = 0.2f; k < 0.8f; k += coinDensity)
             {
                 Vector2 pos = SampleDoorLines(doorPoints, (float)(i) / doorPoints.Count, k / (lineLength/maxLength));
-                GameObject gameObject = Instantiate(
-                    gen.CoinPrefab,
-                    new Vector3(pos.x, 0.5f, pos.y),
-                    Quaternion.identity
-                );
-                _world.AddGameObjectAtChunk(gameObject.transform.position, gameObject);
+                SpawnAsset(room, gen.CoinPrefab, new Vector3(pos.x, 0.5f, pos.y));
             }
         }
     }
@@ -405,25 +464,12 @@ public class RoomManager : MonoBehaviour
                                     continue;
                                 }
 
-                                GameObject spawnedObject = Instantiate(
-                                    gen.PrefabsToSpawn[p],
-                                    new Vector3(pos.x + 0.5f, 0.0f, pos.y + 0.5f),
-                                    Quaternion.identity
-                                );
-
-                                spawnedObject.transform.parent = roomParentEmpty.transform;
-
-                                Enemy enemy = spawnedObject.GetComponent<Enemy>();
-
-                                if (enemy != null)
+                                if (IsEnemy(gen.PrefabsToSpawn[p]))
                                 {
-                                    spawnedObject.AddComponent<FadeController>();
-                                    room.AddEnemy(enemy);
-                                    spawnedObject.SetActive(false);
-                                }
-                                else
+                                    SpawnEnemy(room, gen.PrefabsToSpawn[p], new Vector3(pos.x + 0.5f, 0.0f, pos.y + 0.5f));
+                                } else
                                 {
-                                    _world.AddGameObjectAtChunk(spawnedObject.transform.position, spawnedObject);
+                                    SpawnAsset(room, gen.PrefabsToSpawn[p], new Vector3(pos.x + 0.5f, 0.0f, pos.y + 0.5f));
                                 }
                             }
                         }
@@ -440,37 +486,18 @@ public class RoomManager : MonoBehaviour
 
             case RoomType.BOSS:
                 {
-                    GameObject boss = Instantiate(
-                        gen.BossPrefab,
-                        new Vector3(room.Rects[0].Center.x, 1.0f, room.Rects[0].Center.y),
-                        Quaternion.identity
-                    );
-
-                    boss.AddComponent<FadeController>();
-
-                    Enemy enemy = boss.GetComponent<Enemy>();
-
-                    if (enemy != null)
-                    {
-                        room.AddEnemy(enemy);
-                    }
-                    else
-                    {
-                        Debug.LogError("Boss game object does not contain an Enemy component.");
-                    }
-
+                    SpawnEnemy(room, gen.BossPrefab, new Vector3(room.Rects[0].Center.x, 1.0f, room.Rects[0].Center.y));
+                    SpawnAssetCircle(room, gen.CoinPrefab, new Vector3(room.Rects[0].Center.x, 0.5f, room.Rects[0].Center.y), 6, 12);
+                    SpawnAssetCircle(room, gen.TreePrefabs, new Vector3(room.Rects[0].Center.x, 0.0f, room.Rects[0].Center.y), 10, 10);
+                    SpawnAssetCircle(room, gen.TreePrefabs, new Vector3(room.Rects[0].Center.x, 0.0f, room.Rects[0].Center.y), 20, 20);
                     break;
                 }
 
             case RoomType.CHEST:
                 {
-                    GameObject chest = Instantiate(
-                        gen.ChestPrefab,
-                        new Vector3(room.Rects[0].Center.x, 1.0f, room.Rects[0].Center.y),
-                        Quaternion.Euler(0.0f, 180.0f, 0.0f)
-                    );
-
-                    _world.AddGameObjectAtChunk(chest.transform.position, chest);
+                    GameObject inst = SpawnAsset(room, gen.ChestPrefab, new Vector3(room.Rects[0].Center.x, 1.0f, room.Rects[0].Center.y));
+                    if (inst != null)
+                        inst.transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
                     break;
                 }
         }

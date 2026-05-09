@@ -35,6 +35,7 @@ namespace Assets.Scripts.Generation
         // TODO: make private with a proper getter method
         public List<Enemy> _enemies = new List<Enemy>();
         private List<GameObject> _doors = new List<GameObject>();
+        public GameObject parentGameObject;
 
         public RoomType RoomType;
 
@@ -51,6 +52,7 @@ namespace Assets.Scripts.Generation
             EnemyCount = 0;
             _world = world;
             AlreadyCleared = false;
+            parentGameObject = new GameObject("Room Parent");
         }
 
         public void AddDoor(GameObject door)
