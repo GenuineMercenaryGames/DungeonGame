@@ -60,7 +60,7 @@ public class SingleProjectileWeapon : MonoBehaviour
         Vector2 randomCircle = Random.insideUnitCircle;
         float spreadRadius = Mathf.Tan(angle * Mathf.Deg2Rad * 0.5f);
         float spreadX = randomCircle.x * spreadRadius;
-        float spreadY = 0.0f; // Old: randomCircle.y * spreadRadius
+        float spreadY = randomCircle.y * spreadRadius * 0.1f; // Old: randomCircle.y * spreadRadius
         float spreadZ = 1.0f;
         Vector3 spread = new Vector3(spreadX, spreadY, spreadZ);
         spread = spread.normalized;
