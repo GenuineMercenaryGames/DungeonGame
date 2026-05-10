@@ -29,6 +29,7 @@ public static class LanguageManager
                 { "loc_secondary_weapon", "Secondary Weapon" },
 
                 { "loc_level_selection", "Level Selection" },
+                { "loc_level_begin", "Begin Level" },
                 { "loc_level_the_forest", "The Forest" },
 
                 { "loc_language", "Language" },
@@ -118,6 +119,7 @@ public static class LanguageManager
                 { "loc_secondary_weapon", "Arma Secundaria" },
 
                 { "loc_level_selection", "Selection de Nivel" },
+                { "loc_level_begin", "Iniciar Nivel" },
                 { "loc_level_the_forest", "El Bosque" },
 
                 { "loc_language", "Idioma" },
@@ -190,6 +192,7 @@ public static class LanguageManager
                 { "loc_secondary_weapon", "Arme secondaire" },
 
                 { "loc_level_selection", "Sélection du niveau" },
+                { "loc_level_begin", "Commencer Niveau" },
                 { "loc_level_the_forest", "La Forêt" },
 
                 { "loc_language", "Langue" },
@@ -262,6 +265,7 @@ public static class LanguageManager
                 { "loc_secondary_weapon", "Sekundärwaffe" },
 
                 { "loc_level_selection", "Levelauswahl" },
+                { "loc_level_begin", "Starten Level" },
                 { "loc_level_the_forest", "Der Wald" },
 
                 { "loc_language", "Sprache" },
