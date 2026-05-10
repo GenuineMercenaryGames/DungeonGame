@@ -75,17 +75,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        if (MatchManager.Instance != null)
-        {
-            if(MatchManager.Instance.selectedWeaponPrimary != null)
-            { 
-                weapons[0] = MatchManager.Instance.selectedWeaponPrimary;
-            }
-            if (MatchManager.Instance.selectedWeaponSecondary != null)
-            {
-                weapons[1] = MatchManager.Instance.selectedWeaponSecondary;
-            }
-        }
+        InitPlayerData();
         EquipPrimary();
     }
 
@@ -468,6 +458,25 @@ public class PlayerController : MonoBehaviour
         float vibration = weaponUser.weaponController.BaseVibration;
         CameraManager.Instance.AddCameraVibration(vibration);
         animator.SetTrigger("TriggerShoot");
+    }
+
+    #endregion
+
+    #region InitData
+
+    private void InitPlayerData()
+    {
+        if (GameConfigManager.Instance == null)
+            return;
+
+        if (GameConfigManager.Instance.selectedWeaponPrimary != null)
+            weapons[0] = GameConfigManager.Instance.selectedWeaponPrimary;
+
+        if (GameConfigManager.Instance.selectedWeaponSecondary != null)
+            weapons[1] = GameConfigManager.Instance.selectedWeaponSecondary;
+
+        int skin = GameConfigManager.Instance.selectedSkin;
+        // TODO : Handle player skin selection
     }
 
     #endregion

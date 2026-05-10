@@ -125,12 +125,12 @@ public class MainMenuController : MonoBehaviour
 
     public void SelectWeaponPrimary(GameObject prefab)
     {
-        MatchManager.Instance.selectedWeaponPrimary = prefab;
+        GameConfigManager.Instance.selectedWeaponPrimary = prefab;
     }
 
     public void SelectWeaponSecondary(GameObject prefab)
     {
-        MatchManager.Instance.selectedWeaponSecondary = prefab;
+        GameConfigManager.Instance.selectedWeaponSecondary = prefab;
     }
 
     #endregion
