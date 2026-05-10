@@ -28,7 +28,7 @@ public class EnemyStateFactory
             onLogic: _ => enemy.Flee(dist)
         );
     }
-    public HybridStateMachine CreateStateAttack()
+    public HybridStateMachine CreateStateAttack(string sfx) // no time to improve it, passing by arg
     {
         var sm = new HybridStateMachine();
 
@@ -56,7 +56,8 @@ public class EnemyStateFactory
 
         sm.AddState("AttackEnd", new State(
             onEnter: _ => {
-                SfxManager.Instance.PlaySfx("EnemyAttack");
+                SfxManager.Instance.PlaySfx(sfx, 2.5f);
+                //SfxManager.Instance.PlaySfx("EnemyAttack");
                 enemy.GetComponent<WeaponController>().AttackPressed();
                 enemy.GetComponent<WeaponController>().AttackReleased();
             }
@@ -88,6 +89,8 @@ public class EnemyStateFactory
                 enemy.SmoothLookToPlayer();
                 startY = enemy.transform.eulerAngles.y;
 
+                SfxManager.Instance.PlaySfx("boss_start_spin_attack", 7.0f);
+
                 //enemy.animator.ResetTrigger("MeleeAttack");
                 //enemy.animator.SetTrigger("MeleeAttack");
             },
@@ -103,7 +106,7 @@ public class EnemyStateFactory
                 if (shootTimer >= shootInterval)
                 {
                     shootTimer = 0f;
-
+                    
                     var weaponController = enemy.GetComponent<WeaponController>();
                     weaponController.AttackPressed();
                     weaponController.AttackReleased();
@@ -252,7 +255,7 @@ public class EnemyStateFactory
         ));
 
         sm.AddState("FollowPlayer", CreateStateFollowPlayer());
-        sm.AddState("Attack", CreateStateAttack());
+        sm.AddState("Attack", CreateStateAttack("EnemyAttack"));
 
         sm.AddTransition("Warn", "FollowPlayer");
         sm.AddTransition("FollowPlayer", "Attack", transition => enemy.InAttackRange());
@@ -272,6 +275,7 @@ public class EnemyStateFactory
         sm.AddState("Cover", new State(
         onEnter: _ =>
         {
+            SfxManager.Instance.PlaySfx("boss_cover", 5.0f);
             attackCycles = 0;
             enemy.animator.SetBool("Cover", true);
             enemy.GetComponent<BoxCollider>().enabled = false;
@@ -279,6 +283,7 @@ public class EnemyStateFactory
         sm.AddState("Uncover", new State(
             onEnter: _ =>
             {
+                SfxManager.Instance.PlaySfx("boss_spawn", 5.0f);
                 enemy.animator.SetBool("Cover", false);
                 enemy.GetComponent<BoxCollider>().enabled = true;
             },
@@ -294,7 +299,7 @@ public class EnemyStateFactory
                 attackCycles++;
             }
         ));
-        attackCycle.AddState("Attack", CreateStateAttack());
+        attackCycle.AddState("Attack", CreateStateAttack("boss_shoot"));
         attackCycle.AddState("SpinAttack", CreateStateSpinShotAttack(1.2f, 360f, 0.08f));
         attackCycle.AddState("Wait", CreateStateWait(0.5f));
 
@@ -322,7 +327,7 @@ public class EnemyStateFactory
 
         sm.AddState("GoAimPoint", CreateStateAimPlayer(attackDistance));
         sm.AddState("LookPlayer", CreateStateLookPlayer());
-        sm.AddState("Attack", CreateStateAttack());
+        sm.AddState("Attack", CreateStateAttack("EnemyAttack"));
 
         sm.AddTransition("GoAimPoint", "LookPlayer");
         sm.AddTransition("LookPlayer", "Attack");
