@@ -59,8 +59,13 @@ public class SingleProjectileWeapon : MonoBehaviour
     {
         Vector2 randomCircle = Random.insideUnitCircle;
         float spreadRadius = Mathf.Tan(angle * Mathf.Deg2Rad * 0.5f);
-        Vector3 spread = new Vector3(randomCircle.x * spreadRadius, randomCircle.y * spreadRadius, 1.0f);
+        float spreadX = randomCircle.x * spreadRadius;
+        float spreadY = 0.0f; // Old: randomCircle.y * spreadRadius
+        float spreadZ = 1.0f;
+        Vector3 spread = new Vector3(spreadX, spreadY, spreadZ);
         spread = spread.normalized;
+        // NOTE: Using 0.0 on Y spread is a temporary hack to make it so that there is no vertical spread.
+        // Leads to better gunplay on a top down game.
         Quaternion rot = Quaternion.LookRotation(forward);
         Vector3 direction = rot * spread;
         return direction;
