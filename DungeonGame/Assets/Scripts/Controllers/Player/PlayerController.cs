@@ -32,13 +32,13 @@ public class PlayerController : MonoBehaviour
     private GameObject currentWeapon;
 
     [Header("Stuff that should be hidden later")]
-    public CharacterController characterController;
-    public WeaponController weaponController;
-    public HealthController healthController;
-    public ShieldController shieldController;
-    public ObservableVariable<int> Coins = new(0);
+    [HideInInspector] public CharacterController characterController;
+    [HideInInspector] public WeaponController weaponController;
+    [HideInInspector] public HealthController healthController;
+    [HideInInspector] public ShieldController shieldController;
+    [HideInInspector] public ObservableVariable<int> Coins = new(0);
 
-    public PlayerItemSystem itemSystem; 
+    public PlayerItemSystem itemSystem;
 
     private Vector2 inputMoveRaw;
     private Vector2 inputMove;
