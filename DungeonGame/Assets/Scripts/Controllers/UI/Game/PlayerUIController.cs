@@ -30,6 +30,7 @@ public class PlayerUIController : MonoBehaviour
     void Update()
     {
         UpdateHealth();
+        UpdateAmmo();
     }
 
     private void UpdateHealth()
@@ -53,6 +54,13 @@ public class PlayerUIController : MonoBehaviour
         textCoins.text = $"{coins}";
     }
 
+    private void UpdateAmmo()
+    {
+        int ammo = GetPlayerAmmo();
+        textAmmo.text = $"{ammo}";
+    }
+
     private float GetPlayerHealth() { return PlayerManager.Instance.Player.healthController.Health.Value; }
     private float GetPlayerMaxHealth() { return PlayerManager.Instance.Player.healthController.MaxHealth.Value; }
+    private int GetPlayerAmmo() { var controller = PlayerManager.Instance.Player.weaponController; return controller == null ? 0 : controller.Ammo; }
 }
