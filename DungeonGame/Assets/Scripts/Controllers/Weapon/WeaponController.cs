@@ -16,8 +16,12 @@ public class WeaponController : MonoBehaviour
     [Header("Settings")]
     [SerializeField] public float BaseDamage = 10.0f;
     [SerializeField] public float BaseVibration = 4.0f;
+
+    [Header("Ammo")]
+    [SerializeField] public int MaxAmmo;
     
     public bool IsShooting { get; private set; }
+    public int Ammo { get; set; }
 
     #endregion
 
@@ -26,6 +30,7 @@ public class WeaponController : MonoBehaviour
     void Start()
     {
         IsShooting = false;
+        Ammo = MaxAmmo;
     }
 
     void Update()
@@ -39,14 +44,14 @@ public class WeaponController : MonoBehaviour
 
     public void AttackPressed()
     {
-        if (IsShooting) return;
+        if (IsShooting && Ammo > 0) return;
         IsShooting = true;
         OnShootPressed.Invoke();
     }
 
     public void AttackReleased()
     {
-        if (!IsShooting) return;
+        if (!IsShooting || Ammo <= 0) return;
         IsShooting = false;
         OnShootReleased.Invoke();
     }
@@ -59,7 +64,7 @@ public class WeaponController : MonoBehaviour
             The idea is to get the implementation rolling because time is running out.
             Also, this function is exposed for flexibility, but it should probably (almost) NEVER be invoked manually from anywhere else.
         */
-        if (!IsShooting) return;
+        if (!IsShooting || Ammo <= 0) return;
         OnShootTick.Invoke();
     }
 
