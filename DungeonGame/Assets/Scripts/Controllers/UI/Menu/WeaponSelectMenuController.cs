@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,66 +8,60 @@ public class WeaponSelectMenuController : MonoBehaviour
     [System.Serializable]
     public struct WeaponSelectionData
     {
-        public Transform mesh;
-        public Image button;
-        public string locName;
-        public string locDesc;
-        public GameObject weapon;
+        public string weaponName;
+        public Transform visualMesh;
+        public GameObject weaponPrefab;
+        public bool isUnlocked;
     }
 
-    [SerializeField] private TMP_Text weaponName;
-    [SerializeField] private TMP_Text weaponDescription;
+    [SerializeField] private Transform lockedPopUp;
+    [SerializeField] private LocalizedText weaponNameLocalizer;
+    [SerializeField] private LocalizedText weaponDescLocalizer;
+    [SerializeField] private int defaultWeaponIndex;
 
-    [SerializeField] public WeaponSelectionData[] weaponsPrimary;
-    [SerializeField] public WeaponSelectionData[] weaponsSecondary;
+    [SerializeField] public WeaponSelectionData[] weaponData;
 
     void Start()
     {
-        HideAllWeapons();
+        SelectWeapon(defaultWeaponIndex);
     }
 
-    private void SetWeaponMeshActiveFromList(WeaponSelectionData[] weapons, int index, bool active)
+    private void SetWeaponActive(int index, bool active)
     {
-        weapons[index].mesh.gameObject.SetActive(active);
-        weapons[index].button.color = active ? Color.yellow : Color.white;
-    }
-
-    private void HideAllWeaponsFromList(WeaponSelectionData[] weapons)
-    {
-        for (int i = 0; i < weapons.Length; i++)
-            SetWeaponMeshActiveFromList(weapons, i, false);
-    }
-
-    private void SelectWeaponFromList(WeaponSelectionData[] weapons, int index)
-    {
-        HideAllWeaponsFromList(weapons);
-        SetWeaponMeshActiveFromList(weapons, index, true);
-    }
-
-    private void HideAllPrimaryWeapons()
-    {
-        HideAllWeaponsFromList(weaponsPrimary);
-    }
-
-    private void HideAllSecondaryWeapons()
-    {
-        HideAllWeaponsFromList(weaponsSecondary);
+        weaponData[index].visualMesh.gameObject.SetActive(active);
+        if (active)
+        {
+            weaponNameLocalizer.LOC = $"loc_weapon_name_{weaponData[index].weaponName}";
+            weaponDescLocalizer.LOC = $"loc_weapon_desc_{weaponData[index].weaponName}";
+            lockedPopUp.gameObject.SetActive(!weaponData[index].isUnlocked);
+        }
     }
 
     private void HideAllWeapons()
     {
-        HideAllPrimaryWeapons();
-        HideAllSecondaryWeapons();
+        lockedPopUp.gameObject.SetActive(false);
+        for (int i = 0; i < weaponData.Length; i++)
+            SetWeaponActive(i, false);
     }
 
+    public void SelectWeapon(int index)
+    {
+        HideAllWeapons();
+        SetWeaponActive(index, true);
+    }
+
+    /*
     public void SelectPrimaryWeapon(int index)
     {
-        SelectWeaponFromList(weaponsPrimary, index);
+        SelectWeapon(index);
+        GameConfigManager.Instance.selectedWeaponPrimary = weaponData[index].weaponPrefab;
     }
 
     public void SelectSecondaryWeapon(int index)
     {
-        SelectWeaponFromList(weaponsSecondary, index);
+        SelectWeapon(index);
+        GameConfigManager.Instance.selectedWeaponSecondary = weaponData[index].weaponPrefab;
     }
+    */
 
 }
