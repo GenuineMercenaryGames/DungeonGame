@@ -27,6 +27,7 @@ public static class LanguageManager
 
                 { "loc_primary_weapon", "Primary Weapon" },
                 { "loc_secondary_weapon", "Secondary Weapon" },
+                { "loc_starting_equipment", "Starting Equipment" },
 
                 { "loc_level_selection", "Level Selection" },
                 { "loc_level_begin", "Begin Level" },
@@ -86,13 +87,10 @@ public static class LanguageManager
 
                 { "loc_ctrl_movement_title", "Movement" },
                 { "loc_ctrl_movement_details", "<b>W A S D</b>  -  Movement\n<b>SHIFT</b>   -  Sprint\n<b>SPACE</b>   -  Dash" },
-
                 { "loc_ctrl_combat_title", "Combat" },
                 { "loc_ctrl_combat_details", "<b>LMB</b>  -  Fire Weapon" },
-
                 { "loc_ctrl_camera_title", "Camera" },
                 { "loc_ctrl_camera_details", "<b>Mouse Wheel</b>  -  Zoom Camera\n<b>Q</b>  -  Smooth Rotation" },
-
                 { "loc_ctrl_system_title", "System" },
                 { "loc_ctrl_system_details", "<b>M</b>  -  Toggle Minimap\n<b>ESC</b>  -  Pause Operation" },
             }
@@ -117,6 +115,7 @@ public static class LanguageManager
 
                 { "loc_primary_weapon", "Arma Primaria" },
                 { "loc_secondary_weapon", "Arma Secundaria" },
+                { "loc_starting_equipment", "Equipamiento Inicial" },
 
                 { "loc_level_selection", "Selection de Nivel" },
                 { "loc_level_begin", "Iniciar Nivel" },
@@ -159,13 +158,10 @@ public static class LanguageManager
 
                 { "loc_ctrl_movement_title", "Movimiento" },
                 { "loc_ctrl_movement_details", "<b>W A S D</b>  -  Movimiento\n<b>SHIFT</b>   -  Esprintar\n<b>SPACE</b>   -  Rodar" },
-
                 { "loc_ctrl_combat_title", "Combate" },
                 { "loc_ctrl_combat_details", "<b>Clic Izq.</b>  -  Disparar Arma" },
-
                 { "loc_ctrl_camera_title", "Cámara" },
                 { "loc_ctrl_camera_details", "<b>Rueda Ratón</b>  -  Zoom Cámara\n<b>Q</b>  -  Rotación Suave" },
-
                 { "loc_ctrl_system_title", "Sistema" },
                 { "loc_ctrl_system_details", "<b>M</b>  -  Mostrar Minimapa\n<b>ESC</b>  -  Pausar" },
             }
@@ -190,6 +186,7 @@ public static class LanguageManager
 
                 { "loc_primary_weapon", "Arme principale" },
                 { "loc_secondary_weapon", "Arme secondaire" },
+                { "loc_starting_equipment", "Équipement de démarrage" },
 
                 { "loc_level_selection", "Sélection du niveau" },
                 { "loc_level_begin", "Commencer Niveau" },
@@ -232,13 +229,10 @@ public static class LanguageManager
 
                 { "loc_ctrl_movement_title", "Mouvement" },
                 { "loc_ctrl_movement_details", "<b>W A S D</b>  -  Mouvement\n<b>SHIFT</b>   -  Sprint\n<b>SPACE</b>   -  Esquive" },
-
                 { "loc_ctrl_combat_title", "Combat" },
                 { "loc_ctrl_combat_details", "<b>Clic Gauche</b>  -  Tirer" },
-
                 { "loc_ctrl_camera_title", "Caméra" },
                 { "loc_ctrl_camera_details", "<b>Molette</b>  -  Zoom Caméra\n<b>Q</b>  -  Rotation Fluide" },
-
                 { "loc_ctrl_system_title", "Système" },
                 { "loc_ctrl_system_details", "<b>M</b>  -  Afficher la Carte\n<b>ESC</b>  -  Pause" },
             }
@@ -263,6 +257,7 @@ public static class LanguageManager
 
                 { "loc_primary_weapon", "Primärwaffe" },
                 { "loc_secondary_weapon", "Sekundärwaffe" },
+                { "loc_starting_equipment", "Startausrüstung" },
 
                 { "loc_level_selection", "Levelauswahl" },
                 { "loc_level_begin", "Starten Level" },
@@ -305,13 +300,10 @@ public static class LanguageManager
 
                 { "loc_ctrl_movement_title", "Bewegung" },
                 { "loc_ctrl_movement_details", "<b>W A S D</b>  -  Bewegen\n<b>SHIFT</b>   -  Sprinten\n<b>SPACE</b>   -  Ausweichen" },
-
                 { "loc_ctrl_combat_title", "Kampf" },
                 { "loc_ctrl_combat_details", "<b>LMT</b>  -  Waffe abfeuern" },
-
                 { "loc_ctrl_camera_title", "Kamera" },
                 { "loc_ctrl_camera_details", "<b>Mausrad</b>  -  Kamerazoom\n<b>Q</b>  -  Sanfte Drehung" },
-
                 { "loc_ctrl_system_title", "System" },
                 { "loc_ctrl_system_details", "<b>M</b>  -  Minikarte umschalten\n<b>ESC</b>  -  Pause" },
             }
