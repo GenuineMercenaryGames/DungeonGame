@@ -95,6 +95,21 @@ public static class LanguageManager
                 { "loc_ctrl_system_details", "<b>M</b>  -  Toggle Minimap\n<b>ESC</b>  -  Pause Operation" },
 
                 { "loc_cosmetics", "Attire" },
+
+                { "loc_weapon_name_recharger_pistol", "Recharger Pistol" },
+                { "loc_weapon_desc_recharger_pistol", "Cheap, reliable, and endlessly reusable. A low-power sidearm with self-recharging ammo cells." },
+                { "loc_weapon_name_dispersion_pistol", "Dispersion Pistol" },
+                { "loc_weapon_desc_dispresion_pistol", "Sweeper.co's standard magnum pistol. Hard-hitting plasma rounds with slow recharge and deliberate fire." },
+                { "loc_weapon_name_machinegun", "CPP26" },
+                { "loc_weapon_desc_machinegun", "The Sweeper favorite. High-capacity submachine gun built for fast, messy cleanup jobs." },
+                { "loc_weapon_name_shotgun", "Shotgun" },
+                { "loc_weapon_desc_shotgun", "Devastating at close range. Officially illegal in civilized space, unofficially standard Sweeper equipment." },
+                { "loc_weapon_name_shrapnelgun", "Shrapnelgun" },
+                { "loc_weapon_desc_sharpnelgun", "Fires ricocheting plasma shards that rebound off walls until their energy burns out. Handle with care." },
+                { "loc_weapon_name_laser_beam", "Mining Plasma Beam" },
+                { "loc_weapon_desc_laser_beam", "Industrial-grade mining extraction beam repurposed for combat. Massive damage at extreme energy cost." },
+                { "loc_weapon_name_minigun", "The Sweeper" },
+                { "loc_weapon_desc_minigun", "Some problems need precision. Others need six rotating barrels and enough ammo to erase a hallway full of alien scum." },
             }
         },
         {
@@ -168,6 +183,21 @@ public static class LanguageManager
                 { "loc_ctrl_system_details", "<b>M</b>  -  Mostrar Minimapa\n<b>ESC</b>  -  Pausar" },
 
                 { "loc_cosmetics", "Atuendo" },
+
+                { "loc_weapon_name_recharger_pistol", "Pistola recargable" },
+                { "loc_weapon_desc_recharger_pistol", "Barata, fiable e infinitamente reutilizable. Un arma de mano de baja potencia con celdas de munición autorrecargables." },
+                { "loc_weapon_name_dispersion_pistol", "Pistola de dispersión" },
+                { "loc_weapon_desc_dispresion_pistol", "Pistola magnum estándar de Sweeper.co. Munición de plasma de gran impacto con recarga lenta y fuego preciso." },
+                { "loc_weapon_name_machinegun", "CPP26" },
+                { "loc_weapon_desc_machinegun", "La favorita de los Sweeper. Subfusil de alta capacidad diseñado para trabajos de limpieza rápidos y sucios." },
+                { "loc_weapon_name_shotgun", "Escopeta" },
+                { "loc_weapon_desc_shotgun", "Devastadora a corta distancia. Oficialmente ilegal en el espacio civilizado, extraoficialmente equipo estándar de los Sweepers." },
+                { "loc_weapon_name_shrapnelgun", "Escopeta de metralla" },
+                { "loc_weapon_desc_sharpnelgun", "Dispara fragmentos de plasma que rebotan en las paredes hasta que se agota su energía. Manéjela con cuidado." },
+                { "loc_weapon_name_laser_beam", "Rayo de plasma de minería" },
+                { "loc_weapon_desc_laser_beam", "Rayo de extracción minera de grado industrial adaptado para el combate. Daño masivo a un coste energético extremo." },
+                { "loc_weapon_name_minigun", "La Barredora" },
+                { "loc_weapon_desc_minigun", "Algunos problemas requieren precisión. Otros requieren seis cañones giratorios y suficiente munición para arrasar un pasillo lleno de escoria alienígena." },
             }
         },
         {
@@ -241,6 +271,21 @@ public static class LanguageManager
                 { "loc_ctrl_system_details", "<b>M</b>  -  Afficher la Carte\n<b>ESC</b>  -  Pause" },
 
                 { "loc_cosmetics", "Tenue" },
+
+                { "loc_weapon_name_recharger_pistol", "Pistolet à recharger" },
+                { "loc_weapon_desc_recharger_pistol", "Bon marché, fiable et réutilisable à l'infini. Une arme de poing de faible puissance avec des cellules de munitions auto-rechargeables." },
+                { "loc_weapon_name_dispersion_pistol", "Pistolet à dispersion" },
+                { "loc_weapon_desc_dispresion_pistol", "Le pistolet magnum standard de Sweeper.co. Munitions plasma à fort impact, recharge lente et tir contrôlé." },
+                { "loc_weapon_name_machinegun", "CPP26" },
+                { "loc_weapon_desc_machinegun", "Le favori de Sweeper. Une mitraillette haute capacité conçue pour les travaux de nettoyage rapides et salissants." },
+                { "loc_weapon_name_shotgun", "Fusil à pompe" },
+                { "loc_weapon_desc_shotgun", "Dévastateur à courte portée. Officiellement illégal dans l'espace civilisé, équipement standard officieux des nettoyeurs." },
+                { "loc_weapon_name_shrapnelgun", "Fusil à shrapnelgun" },
+                { "loc_weapon_desc_sharpnelgun", "Tire des éclats de plasma ricochants qui rebondissent sur les murs jusqu'à épuisement de leur énergie. À manipuler avec précaution." },
+                { "loc_weapon_name_laser_beam", "Rayon plasma minier" },
+                { "loc_weapon_desc_laser_beam", "Rayon d'extraction minière de qualité industrielle reconverti pour le combat. Dégâts massifs pour un coût énergétique extrême." },
+                { "loc_weapon_name_minigun", "Le Balayeur" },
+                { "loc_weapon_desc_minigun", "Certains problèmes exigent de la précision. D'autres nécessitent six canons rotatifs et suffisamment de munitions pour éradiquer un couloir rempli de vermine extraterrestre." },
             }
         },
         {
@@ -314,6 +359,21 @@ public static class LanguageManager
                 { "loc_ctrl_system_details", "<b>M</b>  -  Minikarte umschalten\n<b>ESC</b>  -  Pause" },
 
                 { "loc_cosmetics", "Kleidung" },
+
+                { "loc_weapon_name_recharger_pistol", "Aufladepistole" },
+                { "loc_weapon_desc_recharger_pistol", "Günstig, zuverlässig und unendlich oft wiederverwendbar. Eine schwache Seitenwaffe mit selbstaufladenden Munitionszellen." },
+                { "loc_weapon_name_dispersion_pistol", "Streupistole" },
+                { "loc_weapon_desc_dispresion_pistol", "Sweepers Standard-Magnumpistole. Durchschlagskräftige Plasmageschosse mit langsamer Aufladung und gezielter Feuerrate." },
+                { "loc_weapon_name_machinegun", "CPP26" },
+                { "loc_weapon_desc_machinegun", "Der Favorit von Sweeper. Eine Maschinenpistole mit hoher Magazinkapazität, entwickelt für schnelle und unordentliche Aufräumarbeiten." },
+                { "loc_weapon_name_shotgun", "Schrotflinte" },
+                { "loc_weapon_desc_shotgun", "Verheerend auf kurze Distanz. Offiziell im zivilisierten Raum verboten, inoffiziell Standardausrüstung der Sweeper." },
+                { "loc_weapon_name_shrapnelgun", "Schrapnellgewehr" },
+                { "loc_weapon_desc_sharpnelgun", "Verschießt abprallende Plasmasplitter, die von Wänden zurückprallen, bis ihre Energie verbraucht ist. Vorsicht beim Umgang." },
+                { "loc_weapon_name_laser_beam", "Bergbau-Plasmastrahl" },
+                { "loc_weapon_desc_laser_beam", "Industrieller Bergbau-Extraktionsstrahl, umfunktioniert für den Kampf. Massiver Schaden bei extrem hohem Energieaufwand." },
+                { "loc_weapon_name_minigun", "Der Kehrer" },
+                { "loc_weapon_desc_minigun", "Manche Probleme erfordern Präzision. Andere brauchen sechs rotierende Läufe und genug Munition, um einen ganzen Flur voller außerirdischer Abschaum auszulöschen." },
             }
         }
     };
