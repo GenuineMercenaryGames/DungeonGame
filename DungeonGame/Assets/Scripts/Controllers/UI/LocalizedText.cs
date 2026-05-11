@@ -5,6 +5,8 @@ public class LocalizedText : MonoBehaviour
 {
     [SerializeField] private string localizationString;
 
+    public string LOC { get { return localizationString; } set { localizationString = value; UpdateText(); } }
+
     void Start()
     {
         UpdateText();
