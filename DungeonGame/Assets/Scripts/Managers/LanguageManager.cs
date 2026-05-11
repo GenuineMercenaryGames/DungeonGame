@@ -12,6 +12,8 @@ public static class LanguageManager
             {
                 { "loc_language_name", "English" },
 
+                { "loc_not_available_in_demo", "Not Available in Demo" },
+
                 { "loc_start", "Start" },
                 { "loc_continue", "Continue" },
 
@@ -99,7 +101,7 @@ public static class LanguageManager
                 { "loc_weapon_name_recharger_pistol", "Recharger Pistol" },
                 { "loc_weapon_desc_recharger_pistol", "Cheap, reliable, and endlessly reusable. A low-power sidearm with self-recharging ammo cells." },
                 { "loc_weapon_name_dispersion_pistol", "Dispersion Pistol" },
-                { "loc_weapon_desc_dispresion_pistol", "Sweeper.co's standard magnum pistol. Hard-hitting plasma rounds with slow recharge and deliberate fire." },
+                { "loc_weapon_desc_dispersion_pistol", "Sweeper.co's standard magnum pistol. Hard-hitting plasma rounds with slow recharge and deliberate fire." },
                 { "loc_weapon_name_machinegun", "CPP26" },
                 { "loc_weapon_desc_machinegun", "The Sweeper favorite. High-capacity submachine gun built for fast, messy cleanup jobs." },
                 { "loc_weapon_name_shotgun", "Shotgun" },
@@ -116,6 +118,8 @@ public static class LanguageManager
             Language.Spanish, new()
             {
                 { "loc_language_name", "Español" },
+
+                { "loc_not_available_in_demo", "No Disponible en la Demo" },
 
                 { "loc_start", "Comenzar" },
                 { "loc_continue", "Continuar" },
@@ -187,7 +191,7 @@ public static class LanguageManager
                 { "loc_weapon_name_recharger_pistol", "Pistola recargable" },
                 { "loc_weapon_desc_recharger_pistol", "Barata, fiable e infinitamente reutilizable. Un arma de mano de baja potencia con celdas de munición autorrecargables." },
                 { "loc_weapon_name_dispersion_pistol", "Pistola de dispersión" },
-                { "loc_weapon_desc_dispresion_pistol", "Pistola magnum estándar de Sweeper.co. Munición de plasma de gran impacto con recarga lenta y fuego preciso." },
+                { "loc_weapon_desc_dispersion_pistol", "Pistola magnum estándar de Sweeper.co. Munición de plasma de gran impacto con recarga lenta y fuego preciso." },
                 { "loc_weapon_name_machinegun", "CPP26" },
                 { "loc_weapon_desc_machinegun", "La favorita de los Sweeper. Subfusil de alta capacidad diseñado para trabajos de limpieza rápidos y sucios." },
                 { "loc_weapon_name_shotgun", "Escopeta" },
@@ -204,6 +208,8 @@ public static class LanguageManager
             Language.French, new()
             {
                 { "loc_language_name", "Français" },
+
+                { "loc_not_available_in_demo", "Non Disponible dans la Démo" },
 
                 { "loc_start", "Commencer" },
                 { "loc_continue", "Continuer" },
@@ -275,7 +281,7 @@ public static class LanguageManager
                 { "loc_weapon_name_recharger_pistol", "Pistolet à recharger" },
                 { "loc_weapon_desc_recharger_pistol", "Bon marché, fiable et réutilisable à l'infini. Une arme de poing de faible puissance avec des cellules de munitions auto-rechargeables." },
                 { "loc_weapon_name_dispersion_pistol", "Pistolet à dispersion" },
-                { "loc_weapon_desc_dispresion_pistol", "Le pistolet magnum standard de Sweeper.co. Munitions plasma à fort impact, recharge lente et tir contrôlé." },
+                { "loc_weapon_desc_dispersion_pistol", "Le pistolet magnum standard de Sweeper.co. Munitions plasma à fort impact, recharge lente et tir contrôlé." },
                 { "loc_weapon_name_machinegun", "CPP26" },
                 { "loc_weapon_desc_machinegun", "Le favori de Sweeper. Une mitraillette haute capacité conçue pour les travaux de nettoyage rapides et salissants." },
                 { "loc_weapon_name_shotgun", "Fusil à pompe" },
@@ -292,6 +298,8 @@ public static class LanguageManager
             Language.German, new()
             {
                 { "loc_language_name", "Deutsch" },
+
+                { "loc_not_available_in_demo", "Nicht in der Demo Verfügbar" },
 
                 { "loc_start", "Starten" },
                 { "loc_continue", "Weitermachen" },
@@ -363,7 +371,7 @@ public static class LanguageManager
                 { "loc_weapon_name_recharger_pistol", "Aufladepistole" },
                 { "loc_weapon_desc_recharger_pistol", "Günstig, zuverlässig und unendlich oft wiederverwendbar. Eine schwache Seitenwaffe mit selbstaufladenden Munitionszellen." },
                 { "loc_weapon_name_dispersion_pistol", "Streupistole" },
-                { "loc_weapon_desc_dispresion_pistol", "Sweepers Standard-Magnumpistole. Durchschlagskräftige Plasmageschosse mit langsamer Aufladung und gezielter Feuerrate." },
+                { "loc_weapon_desc_dispersion_pistol", "Sweepers Standard-Magnumpistole. Durchschlagskräftige Plasmageschosse mit langsamer Aufladung und gezielter Feuerrate." },
                 { "loc_weapon_name_machinegun", "CPP26" },
                 { "loc_weapon_desc_machinegun", "Der Favorit von Sweeper. Eine Maschinenpistole mit hoher Magazinkapazität, entwickelt für schnelle und unordentliche Aufräumarbeiten." },
                 { "loc_weapon_name_shotgun", "Schrotflinte" },
