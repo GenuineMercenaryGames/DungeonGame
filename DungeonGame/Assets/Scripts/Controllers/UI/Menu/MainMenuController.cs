@@ -30,7 +30,8 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private Transform audioSettingsMenu;
 
     [Header("Menu References - Gameplay")]
-    [SerializeField] private Transform playerLoadoutMenu;
+    [SerializeField] private Transform weaponSelectMenu;
+    [SerializeField] private Transform attireSelectMenu;
     [SerializeField] private Transform levelSelectMenu;
 
     #endregion
@@ -71,7 +72,6 @@ public class MainMenuController : MonoBehaviour
         // TODO : Add logic to display an "are you sure mf???" pop up before quitting for real.
         Application.Quit(); // NOTE : Do not panic, this does not work in the editor (for obvious reasons), but it does work on release buils.
     }
-
     public void PlayGame(int id)
     {
         SceneManager.LoadScene(id);
@@ -86,7 +86,8 @@ public class MainMenuController : MonoBehaviour
     public void LoadLanguageSettingsMenu() { LoadMenu(languageSettingsMenu); }
     public void LoadGraphicsSettingsMenu() { LoadMenu(graphicsSettingsMenu); }
     public void LoadAudioSettingsMenu() { LoadMenu(audioSettingsMenu); }
-    public void LoadPlayerLoadoutMenu() { LoadMenu(playerLoadoutMenu); }
+    public void LoadWeaponSelectMenu() { LoadMenu(weaponSelectMenu); }
+    public void LoadAttireSelectMenu() { LoadMenu(attireSelectMenu); }
     public void LoadLevelSelectMenu() { LoadMenu(levelSelectMenu); }
     public void LoadContractMenu() { LoadMenu(contractMenu); }
     public void LoadQuitPopUpMenu() { LoadMenu(quitPopUpMenu); }
@@ -194,7 +195,8 @@ public class MainMenuController : MonoBehaviour
         SetMenuLoaded(languageSettingsMenu, false);
         SetMenuLoaded(graphicsSettingsMenu, false);
         SetMenuLoaded(audioSettingsMenu, false);
-        SetMenuLoaded(playerLoadoutMenu, false);
+        SetMenuLoaded(weaponSelectMenu, false);
+        SetMenuLoaded(attireSelectMenu, false);
         SetMenuLoaded(levelSelectMenu, false);
         SetMenuLoaded(contractMenu, false);
         SetMenuLoaded(quitPopUpMenu, false);
@@ -211,11 +213,6 @@ public class MainMenuController : MonoBehaviour
     {
         UnloadAllMenus();
         SetMenuLoaded(menu, true);
-    }
-
-    private void OpenURL(string url)
-    {
-        Application.OpenURL(url);
     }
 
     #endregion
