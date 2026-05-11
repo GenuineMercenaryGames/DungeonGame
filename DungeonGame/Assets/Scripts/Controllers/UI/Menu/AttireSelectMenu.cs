@@ -22,6 +22,7 @@ public class AttireSelectMenu : MonoBehaviour
         sliderR.value = color.r;
         sliderG.value = color.g;
         sliderB.value = color.b;
+        GameConfigManager.Instance.skinColor = color;
     }
 
     public void SetColor()
