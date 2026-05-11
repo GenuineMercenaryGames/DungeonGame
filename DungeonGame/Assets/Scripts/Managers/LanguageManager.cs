@@ -93,6 +93,8 @@ public static class LanguageManager
                 { "loc_ctrl_camera_details", "<b>Mouse Wheel</b>  -  Zoom Camera\n<b>Q</b>  -  Smooth Rotation" },
                 { "loc_ctrl_system_title", "System" },
                 { "loc_ctrl_system_details", "<b>M</b>  -  Toggle Minimap\n<b>ESC</b>  -  Pause Operation" },
+
+                { "loc_cosmetics", "Attire" },
             }
         },
         {
@@ -136,7 +138,7 @@ public static class LanguageManager
                 { "loc_ultra", "Ultra" },
 
                 { "loc_tutorial", "Tutorial" },
-                { "loc_loadout", "Equipamiento" },
+                { "loc_loadout", "Armamento" },
 
                 { "loc_control_scheme", "Esquema de controles" },
                 { "loc_control", "Control" },
@@ -164,6 +166,8 @@ public static class LanguageManager
                 { "loc_ctrl_camera_details", "<b>Rueda Ratón</b>  -  Zoom Cámara\n<b>Q</b>  -  Rotación Suave" },
                 { "loc_ctrl_system_title", "Sistema" },
                 { "loc_ctrl_system_details", "<b>M</b>  -  Mostrar Minimapa\n<b>ESC</b>  -  Pausar" },
+
+                { "loc_cosmetics", "Atuendo" },
             }
         },
         {
@@ -235,6 +239,8 @@ public static class LanguageManager
                 { "loc_ctrl_camera_details", "<b>Molette</b>  -  Zoom Caméra\n<b>Q</b>  -  Rotation Fluide" },
                 { "loc_ctrl_system_title", "Système" },
                 { "loc_ctrl_system_details", "<b>M</b>  -  Afficher la Carte\n<b>ESC</b>  -  Pause" },
+
+                { "loc_cosmetics", "Tenue" },
             }
         },
         {
@@ -306,6 +312,8 @@ public static class LanguageManager
                 { "loc_ctrl_camera_details", "<b>Mausrad</b>  -  Kamerazoom\n<b>Q</b>  -  Sanfte Drehung" },
                 { "loc_ctrl_system_title", "System" },
                 { "loc_ctrl_system_details", "<b>M</b>  -  Minikarte umschalten\n<b>ESC</b>  -  Pause" },
+
+                { "loc_cosmetics", "Kleidung" },
             }
         }
     };
