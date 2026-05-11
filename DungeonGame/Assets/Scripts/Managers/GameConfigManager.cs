@@ -4,6 +4,7 @@ public class GameConfigManager : SingletonPersistent<GameConfigManager>
 {
     public GameObject selectedWeaponPrimary;
     public GameObject selectedWeaponSecondary;
+    public Color skinColor;
 
     public int selectedSkin;
 
