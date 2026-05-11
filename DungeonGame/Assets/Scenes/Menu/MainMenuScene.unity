@@ -3291,8 +3291,8 @@ MonoBehaviour:
   languageSettingsMenu: {fileID: 2114470651}
   graphicsSettingsMenu: {fileID: 1971433526}
   audioSettingsMenu: {fileID: 968913792}
-  weaponSelectMenu: {fileID: 0}
-  attireSelectMenu: {fileID: 0}
+  weaponSelectMenu: {fileID: 1483789418}
+  attireSelectMenu: {fileID: 1991313124}
   levelSelectMenu: {fileID: 689480523}
 --- !u!114 &194239062
 MonoBehaviour:

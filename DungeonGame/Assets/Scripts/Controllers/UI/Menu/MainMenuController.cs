@@ -69,7 +69,7 @@ public class MainMenuController : MonoBehaviour
 
     public void QuitGame()
     {
-        // TODO : Add logic to display an "are you sure mf???" pop up before quitting for real.
+        // NOTE : This is the "internal" quit function. The game shows an "are you sure mf?" pop-up before quitting for real, to avoid misclicks fucking people over easily.
         Application.Quit(); // NOTE : Do not panic, this does not work in the editor (for obvious reasons), but it does work on release buils.
     }
     public void PlayGame(int id)
