@@ -308,11 +308,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundManager
   mixer: {fileID: 24100000, guid: 80c15a2012006034eb12dcea21e547bd, type: 2}
-  audioSourceMaster: {fileID: 0}
-  audioSourceMusic: {fileID: 0}
-  audioSourceSFX: {fileID: 0}
-  audioSourceEntity: {fileID: 0}
-  audioSourceUI: {fileID: 0}
+  audioSourceMaster: {fileID: 3907708027284098603}
+  audioSourceMusic: {fileID: 705442827599206852}
+  audioSourceSFX: {fileID: 764073072711403687}
+  audioSourceEntity: {fileID: 8099824896543023286}
+  audioSourceUI: {fileID: 2524175677270682357}
   SoundsList: []
 --- !u!1 &5119468999398903344
 GameObject:
