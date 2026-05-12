@@ -585,7 +585,7 @@ public class RoomManager : MonoBehaviour
 
     private void OnRoomCleared(Room room)
     {
-        SfxManager.Instance.PlaySfx("RoomCleared");
+        SoundManager.Instance.PlaySound("RoomCleared");
 
         if(room.RoomType == RoomType.BOSS)
         {

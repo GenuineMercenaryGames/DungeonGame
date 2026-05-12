@@ -55,7 +55,7 @@ public class ItemPickup : MonoBehaviour
             }
         }
 
-        SfxManager.Instance.PlaySfx(AudioNames.ItemPickupSfx);
+        // SfxManager.Instance.PlaySfx(AudioNames.ItemPickupSfx);
     }
 
     public void CreateItemPickup(ItemDefinitionBase item)
