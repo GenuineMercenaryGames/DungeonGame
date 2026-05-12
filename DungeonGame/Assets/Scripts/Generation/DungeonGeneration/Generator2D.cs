@@ -7,7 +7,6 @@ using Assets.Scripts.Generation.DungeonGeneration.Utils;
 using Assets.Scripts.ScriptableObjects;
 using Assets.Scripts.Generation;
 using Rect = Assets.Scripts.Generation.Rect;
-using UnityEngine.LightTransport;
 
 public struct DoorSegment
 {
