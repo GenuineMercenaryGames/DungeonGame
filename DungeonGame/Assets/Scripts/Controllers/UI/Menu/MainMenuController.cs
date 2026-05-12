@@ -181,6 +181,20 @@ public class MainMenuController : MonoBehaviour
 
     #endregion
 
+    #region PublicMethods - Sound
+
+    public void PlayButtonSoundImportant()
+    {
+        SoundManager.Instance.PlaySound("button_important");
+    }
+
+    public void PlayButtonSound()
+    {
+        SoundManager.Instance.PlaySound("button");
+    }
+
+    #endregion
+
     #region PrivateMethods
 
     private void UnloadAllMenus()
