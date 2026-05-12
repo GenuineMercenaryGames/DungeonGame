@@ -476,7 +476,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9f32a896f7908f47b7ccce6223e1cb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  enemies: []
   player: {fileID: 0}
   worldGenerator: {fileID: 0}
 --- !u!1 &6673560337098859937
@@ -921,42 +920,13 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3882552523774564868, guid: f4a532a2aa1373a48b7747fcce8b2912, type: 3}
       insertIndex: -1
       addedObject: {fileID: 284305086307408157}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2300967564268306534, guid: f4a532a2aa1373a48b7747fcce8b2912, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8689065937078055155}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4a532a2aa1373a48b7747fcce8b2912, type: 3}
 --- !u!224 &6540012844701884213 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3882552523774564868, guid: f4a532a2aa1373a48b7747fcce8b2912, type: 3}
   m_PrefabInstance: {fileID: 8008336899956770097}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &8128432401773430103 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2300967564268306534, guid: f4a532a2aa1373a48b7747fcce8b2912, type: 3}
-  m_PrefabInstance: {fileID: 8008336899956770097}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &8689065937078055155
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8128432401773430103}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ab26e58d12d6894ca3e8509001d64fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MinimapUIController
-  minimapGo: {fileID: 3254467873915677328}
-  minimapImage: {fileID: 3601199768099743225}
-  minimapPointTransform: {fileID: 0}
-  minimapPointRectTransform: {fileID: 3482088800550720654}
-  world: {fileID: 0}
-  navMeshController: {fileID: 0}
-  textureSize: 512
-  pixelsPerUnit: 10
-  revealRadius: 50
 --- !u!4 &8876485958244889928 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1444757213905055865, guid: f4a532a2aa1373a48b7747fcce8b2912, type: 3}
