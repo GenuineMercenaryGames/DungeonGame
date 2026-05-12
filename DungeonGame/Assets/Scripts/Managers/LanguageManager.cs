@@ -112,6 +112,12 @@ public static class LanguageManager
                 { "loc_weapon_desc_laser_beam", "Industrial-grade mining extraction beam repurposed for combat. Massive damage at extreme energy cost." },
                 { "loc_weapon_name_minigun", "The Sweeper" },
                 { "loc_weapon_desc_minigun", "Some problems need precision. Others need six rotating barrels and enough ammo to erase a hallway full of alien scum." },
+
+                { "loc_volume_master", "Master Volume" },
+                { "loc_volume_music", "Music Volume" },
+                { "loc_volume_sfx", "SFX Volume" },
+                { "loc_volume_entity", "Entity Volume" },
+                { "loc_volume_ui", "UI Volume" },
             }
         },
         {
@@ -202,6 +208,12 @@ public static class LanguageManager
                 { "loc_weapon_desc_laser_beam", "Rayo de extracción minera de grado industrial adaptado para el combate. Daño masivo a un coste energético extremo." },
                 { "loc_weapon_name_minigun", "La Barredora" },
                 { "loc_weapon_desc_minigun", "Algunos problemas requieren precisión. Otros requieren seis cañones giratorios y suficiente munición para arrasar un pasillo lleno de escoria alienígena." },
+
+                { "loc_volume_master", "Volumen Global" },
+                { "loc_volume_music", "Volumen de Música" },
+                { "loc_volume_sfx", "Volumen de Efectos" },
+                { "loc_volume_entity", "Volumen de Entidades" },
+                { "loc_volume_ui", "Volumen de Interfaz" },
             }
         },
         {
@@ -292,6 +304,12 @@ public static class LanguageManager
                 { "loc_weapon_desc_laser_beam", "Rayon d'extraction minière de qualité industrielle reconverti pour le combat. Dégâts massifs pour un coût énergétique extrême." },
                 { "loc_weapon_name_minigun", "Le Balayeur" },
                 { "loc_weapon_desc_minigun", "Certains problèmes exigent de la précision. D'autres nécessitent six canons rotatifs et suffisamment de munitions pour éradiquer un couloir rempli de vermine extraterrestre." },
+
+                { "loc_volume_master", "Volume global" },
+                { "loc_volume_music", "Volume de la musique" },
+                { "loc_volume_sfx", "Effets de volume" },
+                { "loc_volume_entity", "Volume de l'entité" },
+                { "loc_volume_ui", "Volume de l'interface" },
             }
         },
         {
@@ -382,6 +400,12 @@ public static class LanguageManager
                 { "loc_weapon_desc_laser_beam", "Industrieller Bergbau-Extraktionsstrahl, umfunktioniert für den Kampf. Massiver Schaden bei extrem hohem Energieaufwand." },
                 { "loc_weapon_name_minigun", "Der Kehrer" },
                 { "loc_weapon_desc_minigun", "Manche Probleme erfordern Präzision. Andere brauchen sechs rotierende Läufe und genug Munition, um einen ganzen Flur voller außerirdischer Abschaum auszulöschen." },
+
+                { "loc_volume_master", "Globale Lautstärke" },
+                { "loc_volume_music", "Musiklautstärke" },
+                { "loc_volume_sfx", "Lautstärkeeffekte" },
+                { "loc_volume_entity", "Entitätslautstärke" },
+                { "loc_volume_ui", "Benutzeroberflächenlautstärke" },
             }
         }
     };
