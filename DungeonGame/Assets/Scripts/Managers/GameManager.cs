@@ -35,7 +35,8 @@ public class GameManager : Singleton<GameManager>
     {
         if (GameHasEnded) return; // Disallow starting defeat in the event that player dies after victory
         GameHasEnded = true;
-        UIManager.Instance.VictoryUI.gameObject.SetActive(true); // TODO : This is a temporary hack, use the start animation stuff
+        UIManager.Instance.VictoryUI.gameObject.SetActive(true);
+        UIManager.Instance.VictoryUI.RunVictory();
     }
 
     public void StartGameOver(bool victory)
