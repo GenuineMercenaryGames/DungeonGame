@@ -26337,12 +26337,18 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Blah blah texto de simular lo del contrato de sweeper.co o lo que sea\n\nQuieres
-    hacer el tutorial si o no?\nNo se, vamos, notificar al user de que es la primera
-    vez que arranca el juego y ya est\xE1, que seleccione idioma y su puta madre,
-    lo de firmar el contrato para que quede guapo, etc etc...\n\nYo tambi\xE9n dar\xEDa
-    opci\xF3n a escoger el idioma aqu\xED, aunque sea redundante porque se puede
-    hacer en settings, a modo de accesibilidad, ya veremos que hacemos."
+  m_text: "SWEEPERS, INC. CONTRATO DE INCORPORACI\xD3N OPERATIVA\r\nDivisi\xF3n de
+    Saneamiento Planetario Exterior\r\n\r\nBienvenido a Sweepers, Inc. Su incorporaci\xF3n
+    autom\xE1tica al Programa de Limpieza Interestelar ha sido aprobada conforme
+    al Decreto Corporativo 11-42/B sobre recuperaci\xF3n de activos coloniales contaminados.
+    A partir de este momento, usted pasa a formar parte del personal operativo clasificado
+    como Sweeper.\r\n\r\nSu funci\xF3n consiste en:\r\n - Ingresar en instalaciones
+    infestadas.\r\n - Neutralizar organismos hostiles.\r\n - Destruir focos biol\xF3gicos.\r\n
+    - Restablecer condiciones m\xEDnimas de habitabilidad.\r\n - Proteger los intereses
+    econ\xF3micos de Sweepers, Inc. y sus socios comerciales.\r\n\r\nRecuerde: usted
+    no es un militar, no es un explorador y no es un h\xE9roe. Usted tan solo es
+    personal de limpieza.\r\n\r\nPorque en la frontera exterior de la galaxia,\r\nla
+    suciedad no se barre.\r\n\r\nSe ametralla."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0ed38427c2055b7469acc52172c9c743, type: 2}
   m_sharedMaterial: {fileID: 5319642855315129960, guid: 0ed38427c2055b7469acc52172c9c743, type: 2}
@@ -26369,10 +26375,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 24.15
+  m_fontSizeBase: 18
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
