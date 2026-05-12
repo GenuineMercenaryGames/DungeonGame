@@ -21,7 +21,7 @@ public class AmmoRegenerator : MonoBehaviour
         if (Weapon == null) return;
         if (timeAccumulator < RegenTime) return;
 
-        Weapon.Ammo += RegenAmmount;
+        // Weapon.Ammo += RegenAmmount;
         timeAccumulator = 0.0f;
     }
 }
