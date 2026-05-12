@@ -5,7 +5,6 @@ using System.Linq;
 using Assets.Scripts.Generation;
 using Assets.Scripts.ScriptableObjects;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 public class RoomManager : MonoBehaviour
 {
@@ -572,6 +571,9 @@ public class RoomManager : MonoBehaviour
 
     private void Awake()
     {
+        if (_world == null)
+            return;
+
         _world.OnRoomEnter += EnableRoomEnemies;
         _world.OnRoomExit += DisableRoomEnemies;
 
@@ -595,6 +597,9 @@ public class RoomManager : MonoBehaviour
 
     void Start()
     {
+        if (_world == null)
+            return;
+
         // Por ahora spawneamos todas las puertas
         foreach (DoorSegment door in _world.Doors)
         {

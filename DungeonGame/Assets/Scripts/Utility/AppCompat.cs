@@ -1,18 +1,17 @@
 using System;
-using UnityEditor;
 using UnityEngine;
 
 public class SoundAppPaths
 {
-    public static readonly String PERSISTENT_DATA = Application.persistentDataPath;
-    public static readonly String PATH_RESOURCE_SFX = "Music/Sfx";
-    public static readonly String PATH_RESOURCE_MUSIC = "Music/Background";
+    public static readonly string PERSISTENT_DATA = Application.persistentDataPath;
+    public static readonly string PATH_RESOURCE_SFX = "Music/Sfx";
+    public static readonly string PATH_RESOURCE_MUSIC = "Music/Background";
 }
 
 public class AudioNames
 {
-    public static readonly String BackgroundMusic = "InGameMusic2";
-    public static readonly String ItemPickupSfx = "PickupItem";    
+    public static readonly string BackgroundMusic = "InGameMusic2";
+    public static readonly string ItemPickupSfx = "PickupItem";    
 }
 
 public enum T_AudioSources

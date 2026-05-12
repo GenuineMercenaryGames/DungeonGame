@@ -30,7 +30,7 @@ public class SfxManager : Singleton<SfxManager>
     public AudioSource CreteAudioSource(string name, bool isLoop)
     {
         GameObject temporalAudioHost = new GameObject(name);
-        AudioSource audioSource = temporalAudioHost.AddComponent<AudioSource>() as AudioSource;
+        AudioSource audioSource = temporalAudioHost.AddComponent<AudioSource>();
         audioSource.playOnAwake = false;
         audioSource.loop = isLoop;
         audioSource.spatialBlend = 0.0f;
