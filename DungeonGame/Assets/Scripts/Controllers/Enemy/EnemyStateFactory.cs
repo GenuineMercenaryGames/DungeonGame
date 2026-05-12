@@ -157,6 +157,7 @@ public class EnemyStateFactory
                 enemy.enemyUIController.HideBar();
                 VFXManager.Instance.InstantiateVFX("DeathSkull", enemy.transform.position + new Vector3(0,2 * enemy.vfxScale, 0), enemy.vfxScale);
                 SoundManager.Instance.PlaySound("EnemyDeath");
+                enemy.GetComponent<ItemRain>()?.SpawnItemRain();
 
                 startRotation = enemy.transform.localRotation;
                 targetRotation = startRotation * Quaternion.Euler(0.0f, 0.0f, 90.0f);
