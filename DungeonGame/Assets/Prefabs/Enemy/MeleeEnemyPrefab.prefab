@@ -1084,6 +1084,8 @@ MonoBehaviour:
   maxSpawns: 10
   items:
   - prefab: {fileID: 778846711962324316, guid: db0cc6549cf2f43429a7537b3ec5a641, type: 3}
+    weight: 9
+  - prefab: {fileID: 3539385216737569272, guid: f18cf2794c11e044fa4b7214937b3867, type: 3}
     weight: 1
 --- !u!4 &905203547048942676 stripped
 Transform:
