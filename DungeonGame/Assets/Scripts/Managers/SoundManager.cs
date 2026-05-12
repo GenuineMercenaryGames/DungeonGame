@@ -40,6 +40,8 @@ public class SoundManager : SingletonPersistent<SoundManager>
     {
         foreach (var sound in SoundsList)
         {
+            if (sound.name == null || sound.clip == null)
+                continue;
             Sounds.Add(sound.name, sound);
         }
     }
