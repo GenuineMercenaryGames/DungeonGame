@@ -313,16 +313,7 @@ MonoBehaviour:
   audioSourceSFX: {fileID: 764073072711403687}
   audioSourceEntity: {fileID: 8099824896543023286}
   audioSourceUI: {fileID: 2524175677270682357}
-  SoundsList:
-  - name: button_important
-    clip: {fileID: 8300000, guid: abdfb4b79f0b156448a196024b369add, type: 3}
-    type: 4
-  - name: button
-    clip: {fileID: 8300000, guid: 84487d30cc76d9a4baeec6bd4760c1bf, type: 3}
-    type: 4
-  - name: click
-    clip: {fileID: 8300000, guid: 1f18ad9352af6cc4ea5bfaa4cc88f855, type: 3}
-    type: 4
+  SoundsList: []
 --- !u!1 &5119468999398903344
 GameObject:
   m_ObjectHideFlags: 0
