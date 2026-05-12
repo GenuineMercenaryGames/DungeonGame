@@ -31,6 +31,11 @@ public static class UserDataHandler
         UserSettings config = new();
         config.language = (int)LanguageManager.GetLanguage();
         config.quality = QualitySettings.GetQualityLevel();
+        config.volumeMaster = SoundManager.Instance.GetVolumeMaster();
+        config.volumeMusic = SoundManager.Instance.GetVolumeMusic();
+        config.volumeSFX = SoundManager.Instance.GetVolumeSFX();
+        config.volumeEntity = SoundManager.Instance.GetVolumeEntity();
+        config.volumeUI = SoundManager.Instance.GetVolumeUI();
         StructWrite(pathSettings, config);
     }
 
@@ -73,6 +78,11 @@ public static class UserDataHandler
         StructRead(pathSettings, out config);
         LanguageManager.SetLanguage(config.language);
         QualitySettings.SetQualityLevel(config.quality);
+        SoundManager.Instance.SetVolumeMaster(config.volumeMaster);
+        SoundManager.Instance.SetVolumeMusic(config.volumeMusic);
+        SoundManager.Instance.SetVolumeSFX(config.volumeSFX);
+        SoundManager.Instance.SetVolumeEntity(config.volumeEntity);
+        SoundManager.Instance.SetVolumeUI(config.volumeUI);
     }
 
     public static void LoadUserSaveData()
