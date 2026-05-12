@@ -21,10 +21,10 @@ public abstract class Enemy : MonoBehaviour
 {
 
 
-    [SerializeField] protected float playerScanningRange = 10.0f;
-    [SerializeField] protected float playerFollowRange = 20.0f;
-    [SerializeField] protected float playerAttackRange = 5.0f;
-    [SerializeField] protected Material hurtMaterial;
+    [SerializeField] public float playerScanningRange = 10.0f;
+    [SerializeField] public float playerFollowRange = 20.0f;
+    [SerializeField] public float playerAttackRange = 5.0f;
+    [SerializeField] public Material hurtMaterial;
 
     public bool attackFinished = true;
 
