@@ -10,5 +10,6 @@ public class PlayerSkinController : MonoBehaviour
     {
         instance = new Material(rendererReference.sharedMaterial);
         instance.SetColor("_Color", GameConfigManager.Instance.skinColor);
+        rendererReference.material = instance;
     }
 }
