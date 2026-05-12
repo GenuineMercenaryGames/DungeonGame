@@ -11,6 +11,12 @@ public struct UserSettings : IUserData
     public int language;
     public int quality;
 
+    public float volumeMaster;
+    public float volumeMusic;
+    public float volumeSFX;
+    public float volumeEntity;
+    public float volumeUI;
+
     public void SetDefault()
     {
         SystemLanguage syslang = Application.systemLanguage;
@@ -34,6 +40,11 @@ public struct UserSettings : IUserData
         }
         language = (int)lang;
         quality = (int)QualitySettings.GetQualityLevel();
+        volumeMaster = 1;
+        volumeMusic = 1;
+        volumeSFX = 1;
+        volumeEntity = 1;
+        volumeUI = 1;
     }
 }
 
