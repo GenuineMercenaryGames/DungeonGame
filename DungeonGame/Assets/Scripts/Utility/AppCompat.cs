@@ -4,14 +4,14 @@ using UnityEngine;
 public class SoundAppPaths
 {
     public static readonly string PERSISTENT_DATA = Application.persistentDataPath;
-    public static readonly string PATH_RESOURCE_SFX = "Music/Sfx";
-    public static readonly string PATH_RESOURCE_MUSIC = "Music/Background";
+    public static readonly string PATH_RESOURCE_SFX = "Sound/SFX";
+    public static readonly string PATH_RESOURCE_MUSIC = "Sound/Music";
 }
 
 public class AudioNames
 {
     public static readonly string BackgroundMusic = "InGameMusic2";
-    public static readonly string ItemPickupSfx = "PickupItem";    
+    public static readonly string ItemPickupSfx = "PickupItem";
 }
 
 public enum T_AudioSources

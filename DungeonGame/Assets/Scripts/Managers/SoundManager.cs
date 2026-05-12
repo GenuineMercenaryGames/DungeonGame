@@ -101,7 +101,7 @@ public class SoundManager : SingletonPersistent<SoundManager>
     }
 
     public void PlaySoundMaster(AudioClip clip) { audioSourceMaster.PlayOneShot(clip); }
-    public void PlaySoundMusic(AudioClip clip) { audioSourceMusic.Stop(); audioSourceMusic.clip = clip; audioSourceMusic.Play(); }
+    public void PlaySoundMusic(AudioClip clip) { audioSourceMusic.Stop(); audioSourceMusic.clip = clip; audioSourceMusic.loop = true; audioSourceMusic.Play(); }
     public void PlaySoundSFX(AudioClip clip) { audioSourceSFX.PlayOneShot(clip); }
     public void PlaySoundEntity(AudioClip clip) { audioSourceEntity.PlayOneShot(clip); }
     public void PlaySoundUI(AudioClip clip) { audioSourceUI.PlayOneShot(clip); }
