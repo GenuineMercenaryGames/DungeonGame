@@ -36,7 +36,9 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public WeaponController weaponController;
     [HideInInspector] public HealthController healthController;
     [HideInInspector] public ShieldController shieldController;
-    [HideInInspector] public ObservableVariable<int> Coins = new(0);
+
+    public ObservableVariable<int> Coins = new(0);
+    public ObservableVariable<int> Kills = new(0);
 
     public PlayerItemSystem itemSystem;
 
@@ -474,9 +476,6 @@ public class PlayerController : MonoBehaviour
 
         if (GameConfigManager.Instance.selectedWeaponSecondary != null)
             weapons[1] = GameConfigManager.Instance.selectedWeaponSecondary;
-
-        int skin = GameConfigManager.Instance.selectedSkin;
-        // TODO : Handle player skin selection
     }
 
     #endregion
