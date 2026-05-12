@@ -79,7 +79,7 @@ public class SoundManager : SingletonPersistent<SoundManager>
 
     public void SetVolume(string name, float volume)
     {
-        float volumeLinear = Mathf.Clamp01(volume);
+        float volumeLinear = Mathf.Clamp(volume, 0.0001f, 1.0f); // log(0) is undefined.
         float volumeLogarithmic = Mathf.Log10(volumeLinear) * 20;
         mixer.SetFloat(name, volumeLogarithmic);
     }
