@@ -32,17 +32,45 @@ public class SoundManager : SingletonPersistent<SoundManager>
     [SerializeField] private AudioSource audioSourceUI;
 
     [Header("Sounds")]
-    [SerializeField] private Sound[] SoundsList;
+    [SerializeField] private Sound[] SoundsList; // Used for aditional sounds hardcoded here. Should probably not be used, but just in case.
 
     public Dictionary<string, Sound> Sounds = new();
 
+    private readonly string PATH_RESOURCES_SOUND_MASTER = "Sound/Master";
+    private readonly string PATH_RESOURCES_SOUND_MUSIC = "Sound/Music";
+    private readonly string PATH_RESOURCES_SOUND_SFX = "Sound/SFX";
+    private readonly string PATH_RESOURCES_SOUND_ENTITY = "Sound/Entity";
+    private readonly string PATH_RESOURCES_SOUND_UI = "Sound/UI";
+
     void Start()
     {
+        // Init sounds from hacky sounds list
         foreach (var sound in SoundsList)
         {
             if (sound.name == null || sound.clip == null)
                 continue;
             Sounds.Add(sound.name, sound);
+        }
+
+        // Init sounds from resources directory
+        LoadAudios(PATH_RESOURCES_SOUND_MASTER, SoundType.Master);
+        LoadAudios(PATH_RESOURCES_SOUND_MUSIC, SoundType.Music);
+        LoadAudios(PATH_RESOURCES_SOUND_SFX, SoundType.SFX);
+        LoadAudios(PATH_RESOURCES_SOUND_ENTITY, SoundType.Entity);
+        LoadAudios(PATH_RESOURCES_SOUND_UI, SoundType.UI);
+    }
+
+    private void LoadAudios(string path, SoundType type)
+    {
+        AudioClip[] audios = Resources.LoadAll<AudioClip>(path);
+        if (audios == null) return;
+        foreach (var audio in audios)
+        {
+            Sound sound = new Sound();
+            sound.clip = audio;
+            sound.name = audio.name;
+            sound.type = type;
+            Sounds.Add(audio.name.ToLowerInvariant(), sound);
         }
     }
 
@@ -53,6 +81,7 @@ public class SoundManager : SingletonPersistent<SoundManager>
 
     public void PlaySound(string name)
     {
+        name = name.ToLowerInvariant();
         if (Sounds.ContainsKey(name))
             PlaySound(Sounds[name]);
         else
