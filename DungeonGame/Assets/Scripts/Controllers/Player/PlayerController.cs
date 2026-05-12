@@ -51,6 +51,8 @@ public class PlayerController : MonoBehaviour
 
     private float delta { get { return Time.deltaTime; } }
 
+    [HideInInspector] public bool inputEnabled = true;
+
     #endregion
 
     #region MonoBehaviour
@@ -97,6 +99,8 @@ public class PlayerController : MonoBehaviour
 
     public void InputMove(InputAction.CallbackContext ctx)
     {
+        if (!inputEnabled) return;
+
         inputMoveRaw = ctx.ReadValue<Vector2>();
         inputMove = inputMoveRaw.normalized;
 
@@ -109,12 +113,16 @@ public class PlayerController : MonoBehaviour
 
     public void InputCameraZoom(InputAction.CallbackContext ctx)
     {
+        if (!inputEnabled) return;
+
         float val = ctx.ReadValue<float>();
         CameraManager.Instance.AddCameraZoom(val);
     }
 
     public void InputCameraRotate(InputAction.CallbackContext ctx)
     {
+        if (!inputEnabled) return;
+
         inputCameraRotation = ctx.ReadValue<float>();
     }
 
@@ -122,17 +130,23 @@ public class PlayerController : MonoBehaviour
     bool attackMode = true; // true -> gun, false -> melee
     public void InputDEBUGCameraVibrate(InputAction.CallbackContext ctx) // For now, this has been repurposed to work as the melee to gun switch button.
     {
+        if (!inputEnabled) return;
+
         attackMode = !attackMode;
     }
 
     public void InputLook(InputAction.CallbackContext ctx)
     {
+        if (!inputEnabled) return;
+
         Vector2 v = ctx.ReadValue<Vector2>();
         // Debug.Log($"the value is : {v}");
     }
 
     public void InputAttack(InputAction.CallbackContext ctx)
     {
+        if (!inputEnabled) return;
+
         switch (ctx.phase)
         {
             case InputActionPhase.Performed:
@@ -148,19 +162,25 @@ public class PlayerController : MonoBehaviour
 
     public void InputRun(InputAction.CallbackContext ctx)
     {
+        if (!inputEnabled) return;
+
         isRunning = ctx.phase == InputActionPhase.Performed;
     }
 
     public void InputDash(InputAction.CallbackContext ctx)
     {
+        if (!inputEnabled) return;
+
         if (ctx.phase == InputActionPhase.Performed)
             Dash();
     }
 
     public void InputPause(InputAction.CallbackContext ctx)
     {
+        if (!inputEnabled) return;
+
         // NOTE : Ugly temporary hack to get things working. In the future, this logic should be more self contained. For now, fuck it.
-        if(GameTime.IsPaused && GameTime.CanPause)
+        if (GameTime.IsPaused && GameTime.CanPause)
             UIManager.Instance.PauseUI.Resume();
         else
             UIManager.Instance.PauseUI.Pause();
@@ -168,16 +188,22 @@ public class PlayerController : MonoBehaviour
 
     public void InputEquipPrimary(InputAction.CallbackContext ctx)
     {
+        if (!inputEnabled) return;
+
         EquipPrimary();
     }
 
     public void InputEquipSecondary(InputAction.CallbackContext ctx)
     {
+        if (!inputEnabled) return;
+
         EquipSecondary();
     }
 
     public void InputInteract(InputAction.CallbackContext ctx)
     {
+        if (!inputEnabled) return;
+
         if (ctx.phase != InputActionPhase.Performed)
             return;
 
@@ -226,6 +252,7 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateMoveWalk()
     {
+        if (!inputEnabled) return;
         Vector3 forward = GetMoveForward();
         Vector3 right = GetMoveRight();
         float speed = isRunning ? runSpeed : walkSpeed;
@@ -240,6 +267,8 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateLookAt()
     {
+        if (!inputEnabled) return;
+
         var cam = Camera.main;
         float groundY = transform.position.y;
         Ray ray = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
@@ -422,6 +451,8 @@ public class PlayerController : MonoBehaviour
         {
             GameManager.Instance.StartDefeat();
             GameTime.CanPause = false;
+            inputEnabled = false; // Disable controls. This should be a global shit or whatever, but fuck it, I don't care anymore, no time.
+            animator.gameObject.SetActive(false); // Hack to hide player mesh lol
             // TODO : Play death animation and disable controls.
         }
     }
