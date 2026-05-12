@@ -12,6 +12,7 @@ public class GameManager : Singleton<GameManager>
 
     void Start()
     {
+        if (player == null) player = PlayerManager.Instance.Player.gameObject;
         GameHasEnded = false;
         if(worldGenerator != null)
         {
