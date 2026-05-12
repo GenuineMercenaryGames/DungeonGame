@@ -30,6 +30,7 @@ public class GameManager : Singleton<GameManager>
         GameHasEnded = true;
         UIManager.Instance.DefeatUI.gameObject.SetActive(true); // TODO : This is a temporary hack, use the start animation stuff
         SoundManager.Instance.PlaySound("on_die_screen");
+        PlayerManager.Instance.Player.inputEnabled = false;
     }
 
     public void StartVictory()
@@ -38,6 +39,8 @@ public class GameManager : Singleton<GameManager>
         GameHasEnded = true;
         UIManager.Instance.VictoryUI.gameObject.SetActive(true);
         UIManager.Instance.VictoryUI.RunVictory();
+        SoundManager.Instance.PlaySound("victory_sound");
+        PlayerManager.Instance.Player.inputEnabled = false;
     }
 
     public void StartGameOver(bool victory)

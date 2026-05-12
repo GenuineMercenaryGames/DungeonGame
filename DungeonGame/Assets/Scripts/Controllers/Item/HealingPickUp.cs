@@ -12,6 +12,7 @@ public class HealingPickUp : MonoBehaviour
             // Only heal the player if they can pick up any more health, so as to prevent FAKs from being consumed unnecessarily by mistake when walking over them.
             if (player.healthController.Health.Value < player.healthController.MaxHealth.Value)
             {
+                SoundManager.Instance.PlaySound("healing_sound");
                 player.healthController.Health.Value += HealingAmount;
                 Destroy(gameObject);
                 gameObject.SetActive(false);
