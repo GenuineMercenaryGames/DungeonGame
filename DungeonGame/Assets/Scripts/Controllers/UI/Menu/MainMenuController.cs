@@ -193,12 +193,12 @@ public class MainMenuController : MonoBehaviour
 
     public void PlayButtonSoundImportant()
     {
-        SoundManager.Instance.PlaySound("button_important");
+        SoundManager.Instance.PlaySound("ButtonImportant");
     }
 
     public void PlayButtonSound()
     {
-        SoundManager.Instance.PlaySound("button");
+        SoundManager.Instance.PlaySound("Button1");
     }
 
     public void PlaySliderClickSound()
@@ -206,7 +206,7 @@ public class MainMenuController : MonoBehaviour
         if (sliderClickSoundTimeElapsed < sliderClickSoundTimeBetweenClicks)
             return;
         sliderClickSoundTimeElapsed = 0.0f;
-        SoundManager.Instance.PlaySound("click");
+        SoundManager.Instance.PlaySound("WeakClick");
     }
 
     #endregion
