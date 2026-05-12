@@ -34,6 +34,9 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private Transform attireSelectMenu;
     [SerializeField] private Transform levelSelectMenu;
 
+    private float sliderClickSoundTimeElapsed;
+    private readonly float sliderClickSoundTimeBetweenClicks = 0.15f;
+
     #endregion
 
     #region MonoBehaviour
@@ -42,6 +45,11 @@ public class MainMenuController : MonoBehaviour
     {
         StartCoroutine(TransitionCoroutine(0.5f, 0.0f, false));
         LoadTitleMenu();
+    }
+
+    void Update()
+    {
+        sliderClickSoundTimeElapsed += Time.deltaTime;
     }
 
     public IEnumerator TransitionCoroutine(float transitionSpeed, float targetOpacity, bool disableClickDuringTransition)
@@ -191,6 +199,14 @@ public class MainMenuController : MonoBehaviour
     public void PlayButtonSound()
     {
         SoundManager.Instance.PlaySound("button");
+    }
+
+    public void PlaySliderClickSound()
+    {
+        if (sliderClickSoundTimeElapsed < sliderClickSoundTimeBetweenClicks)
+            return;
+        sliderClickSoundTimeElapsed = 0.0f;
+        SoundManager.Instance.PlaySound("click");
     }
 
     #endregion

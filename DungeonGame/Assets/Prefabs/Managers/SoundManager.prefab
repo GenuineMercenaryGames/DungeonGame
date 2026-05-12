@@ -320,9 +320,9 @@ MonoBehaviour:
   - name: button
     clip: {fileID: 8300000, guid: 84487d30cc76d9a4baeec6bd4760c1bf, type: 3}
     type: 4
-  - name: 
-    clip: {fileID: 0}
-    type: 0
+  - name: click
+    clip: {fileID: 8300000, guid: 1f18ad9352af6cc4ea5bfaa4cc88f855, type: 3}
+    type: 4
 --- !u!1 &5119468999398903344
 GameObject:
   m_ObjectHideFlags: 0
