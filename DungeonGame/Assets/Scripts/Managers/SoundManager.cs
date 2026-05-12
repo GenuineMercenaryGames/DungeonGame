@@ -21,9 +21,17 @@ public class SoundManager : SingletonPersistent<SoundManager>
         public SoundType type;
     }
 
+    [Header("Audio Mixer")]
     [SerializeField] private AudioMixer mixer;
-    [SerializeField] private AudioSource audioSourceGeneric;
+
+    [Header("Audio Sources")]
+    [SerializeField] private AudioSource audioSourceMaster;
     [SerializeField] private AudioSource audioSourceMusic;
+    [SerializeField] private AudioSource audioSourceSFX;
+    [SerializeField] private AudioSource audioSourceEntity;
+    [SerializeField] private AudioSource audioSourceUI;
+
+    [Header("Sounds")]
     [SerializeField] private Sound[] SoundsList;
 
     public Dictionary<string, Sound> Sounds = new();
@@ -38,8 +46,34 @@ public class SoundManager : SingletonPersistent<SoundManager>
 
     public void PlaySound(Sound sound)
     {
-        
+        PlaySound(sound.clip, sound.type);
     }
+
+    public void PlaySound(string name)
+    {
+        if (Sounds.ContainsKey(name))
+            PlaySound(Sounds[name]);
+        else
+            Debug.Log($"Could not find Sound with name \"{name}\"");
+    }
+
+    public void PlaySound(AudioClip clip, SoundType type)
+    {
+        switch (type)
+        {
+            case SoundType.Master: PlaySoundMaster(clip); break;
+            case SoundType.Music: PlaySoundMusic(clip); break;
+            case SoundType.SFX: PlaySoundSFX(clip); break;
+            case SoundType.Entity: PlaySoundEntity(clip); break;
+            case SoundType.UI: PlaySoundUI(clip); break;
+        }
+    }
+
+    public void PlaySoundMaster(AudioClip clip) { audioSourceMaster.PlayOneShot(clip); }
+    public void PlaySoundMusic(AudioClip clip) { audioSourceMusic.Stop(); audioSourceMusic.clip = clip; audioSourceMusic.Play(); }
+    public void PlaySoundSFX(AudioClip clip) { audioSourceSFX.PlayOneShot(clip); }
+    public void PlaySoundEntity(AudioClip clip) { audioSourceEntity.PlayOneShot(clip); }
+    public void PlaySoundUI(AudioClip clip) { audioSourceUI.PlayOneShot(clip); }
 
     public void SetVolume(string name, float volume)
     {
