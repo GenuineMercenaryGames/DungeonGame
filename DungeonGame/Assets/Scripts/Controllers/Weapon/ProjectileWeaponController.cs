@@ -36,6 +36,12 @@ public class SingleProjectileWeapon : MonoBehaviour
         bullet.Init(weaponController.weaponUser);
     }
 
+    private void PlayShootSound()
+    {
+        if (weaponController.shootSound != null && weaponController.shootSound.Length > 0)
+            SoundManager.Instance.PlaySound(weaponController.shootSound);
+    }
+
     public void Shoot()
     {
         if (!CanShoot())
@@ -43,6 +49,7 @@ public class SingleProjectileWeapon : MonoBehaviour
         elapsedTime = 0.0f;
         SpawnProjectile();
         weaponController.weaponUser.ShootNotify();
+        PlayShootSound();
     }
 
     public void Shoot(int count)
@@ -53,6 +60,7 @@ public class SingleProjectileWeapon : MonoBehaviour
         for (int i = 0; i < count; ++i)
             SpawnProjectile();
         weaponController.weaponUser.ShootNotify();
+        PlayShootSound();
     }
 
     private Vector3 GetRandomSpreadDirection(Vector3 forward, float angle)
