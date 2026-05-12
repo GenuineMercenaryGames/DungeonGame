@@ -43,7 +43,7 @@ public class CoinController : MonoBehaviour
     {
         if (other.TryGetComponent<PlayerController>(out var player))
         {
-            SfxManager.Instance.PlaySfx("coin");
+            SoundManager.Instance.PlaySound("coin");
             player.Coins.Value += CoinTypeData.GetCoinValue(coinType);
             DestroyCoin();
         }

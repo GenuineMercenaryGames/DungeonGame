@@ -29,7 +29,7 @@ public class GameManager : Singleton<GameManager>
         if (GameHasEnded) return; // Disallow starting victory after death
         GameHasEnded = true;
         UIManager.Instance.DefeatUI.gameObject.SetActive(true); // TODO : This is a temporary hack, use the start animation stuff
-        SfxManager.Instance.PlaySfx("on_die_screen", 10.0f);
+        SoundManager.Instance.PlaySound("on_die_screen");
     }
 
     public void StartVictory()

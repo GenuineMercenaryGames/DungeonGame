@@ -6,7 +6,7 @@ namespace Assets.Scripts.Controllers.Player
     {
         public void PlayStepSound()
         {
-            SfxManager.Instance.PlaySfx("player_step", 5.0f, false);
+            SoundManager.Instance.PlaySound("player_step");
         }
     }
 }

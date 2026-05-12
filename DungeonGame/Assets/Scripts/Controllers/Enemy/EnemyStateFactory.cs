@@ -93,7 +93,7 @@ public class EnemyStateFactory
                 enemy.SmoothLookToPlayer();
                 startY = enemy.transform.eulerAngles.y;
 
-                SfxManager.Instance.PlaySfx("boss_start_spin_attack", 7.0f);
+                SoundManager.Instance.PlaySound("boss_start_spin_attack");
 
                 //enemy.animator.ResetTrigger("MeleeAttack");
                 //enemy.animator.SetTrigger("MeleeAttack");
@@ -281,7 +281,7 @@ public class EnemyStateFactory
         sm.AddState("Cover", new State(
         onEnter: _ =>
         {
-            SfxManager.Instance.PlaySfx("boss_cover", 5.0f);
+            SoundManager.Instance.PlaySound("boss_cover");
             attackCycles = 0;
             enemy.animator.SetBool("Cover", true);
             enemy.GetComponent<BoxCollider>().enabled = false;
@@ -289,7 +289,7 @@ public class EnemyStateFactory
         sm.AddState("Uncover", new State(
             onEnter: _ =>
             {
-                SfxManager.Instance.PlaySfx("boss_spawn", 5.0f);
+                SoundManager.Instance.PlaySound("boss_spawn");
                 enemy.animator.SetBool("Cover", false);
                 enemy.GetComponent<BoxCollider>().enabled = true;
             },
