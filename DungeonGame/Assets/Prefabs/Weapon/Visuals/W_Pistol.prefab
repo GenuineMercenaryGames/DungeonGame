@@ -70,6 +70,7 @@ MonoBehaviour:
       m_Calls: []
   BaseDamage: 15
   BaseVibration: 4
+  shootSound: BasicPistol
 --- !u!114 &572703075016098973
 MonoBehaviour:
   m_ObjectHideFlags: 0

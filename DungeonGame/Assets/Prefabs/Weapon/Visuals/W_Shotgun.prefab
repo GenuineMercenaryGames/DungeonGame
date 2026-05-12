@@ -71,6 +71,7 @@ MonoBehaviour:
       m_Calls: []
   BaseDamage: 10
   BaseVibration: 4
+  shootSound: Shotgun1
 --- !u!114 &99872613670782186
 MonoBehaviour:
   m_ObjectHideFlags: 0

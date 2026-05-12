@@ -83,6 +83,7 @@ MonoBehaviour:
       m_Calls: []
   BaseDamage: 5
   BaseVibration: 4
+  shootSound: BasicRifle
 --- !u!114 &4884239444074734869
 MonoBehaviour:
   m_ObjectHideFlags: 0
