@@ -13,8 +13,6 @@ public class RoomManager : MonoBehaviour
     public World _world;
     public DungeonGenerator gen;
 
-    private System.Random _random = new System.Random((int)DateTime.Now.Ticks);
-
     public void EnableDoors(Room room)
     {
         if(room.AlreadyCleared)
@@ -323,7 +321,7 @@ public class RoomManager : MonoBehaviour
                 Mathf.Sin(angle) * radius
             );
 
-            SpawnAsset(room, prefabs[_random.Next(0, prefabs.Count())], pos);
+            SpawnAsset(room, prefabs[_world.GetRandom().Next(0, prefabs.Count())], pos);
         }
     }
 
@@ -369,7 +367,7 @@ public class RoomManager : MonoBehaviour
                 continue;
             GameObject instance = SpawnAsset(room, gen.TreePrefabs[1], new Vector3(pos.x, 0, pos.y));
             if(instance != null)
-                instance.transform.localScale = Vector3.one + Vector3.one * _random.Next(0, 100000) / 100000.0f;
+                instance.transform.localScale = Vector3.one + Vector3.one * _world.GetRandom().Next(0, 100000) / 100000.0f;
         }
 
         if(doorPoints.Count <= 1)
@@ -383,8 +381,8 @@ public class RoomManager : MonoBehaviour
 
         for (int i = 0; i < enemyCount; ++i)
         {
-            float r1 = _random.Next(0, 100000) / 100000.0f;
-            float r2 = _random.Next(0, 100000) / 100000.0f;
+            float r1 = _world.GetRandom().Next(0, 100000) / 100000.0f;
+            float r2 = _world.GetRandom().Next(0, 100000) / 100000.0f;
             Vector2 pos = SampleDoorLines(doorPoints, r1, 0.2f + r2 * 0.6f);
             SpawnEnemy(room, gen.MeleeEnemyPrefabs[0], new Vector3(pos.x, 0, pos.y));
         }
@@ -448,8 +446,8 @@ public class RoomManager : MonoBehaviour
                             {
                                 Vector2Int pos = new Vector2Int(x, y);
 
-                                int p = _random.Next(0, prefabCount);
-                                float r = _random.Next(0, 100000) / 100000.0f;
+                                int p = _world.GetRandom().Next(0, prefabCount);
+                                float r = _world.GetRandom().Next(0, 100000) / 100000.0f;
 
                                 // Do not spawn enemies in the boss room or player spawn room.
                                 if ((room.RoomType == RoomType.BOSS || room.RoomType == RoomType.PLAYER_SPAWN)

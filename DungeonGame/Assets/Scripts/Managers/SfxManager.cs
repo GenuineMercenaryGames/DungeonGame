@@ -11,6 +11,8 @@ public class SfxManager : Singleton<SfxManager>
 
     private AudioSource m_sfxMusic;
 
+    private System.Random _random = new System.Random();
+
     public override void Awake()
     {
         base.Awake();
@@ -38,7 +40,7 @@ public class SfxManager : Singleton<SfxManager>
         return audioSource;
     }
 
-    public void PlaySfx(string audioName)
+    public void PlaySfx(string audioName, float volumeFactor = 1.0f, bool randomPitch = false)
     {
         if (m_sfxSoundDictionary == null)
         {
@@ -50,7 +52,14 @@ public class SfxManager : Singleton<SfxManager>
         {
             //m_sfxMusic.clip = clip;
             //m_sfxMusic.volume = m_sfxVolume;
-            m_sfxMusic.PlayOneShot(clip, m_sfxVolume);
+            if(randomPitch)
+            {
+                m_sfxMusic.pitch = _random.Next(90, 110) / 100.0f;
+            } else
+            {
+                m_sfxMusic.pitch = 1.0f;
+            }
+            m_sfxMusic.PlayOneShot(clip, m_sfxVolume * volumeFactor);
             //Debug.Log("Sfx music");
         }
         else
