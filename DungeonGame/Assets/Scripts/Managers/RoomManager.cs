@@ -124,22 +124,38 @@ public class RoomManager : MonoBehaviour
         return area;
     }
 
-    private HashSet<Vector2Int> BuildBlockedTreeCells(List<Vector2Int> points, int padding = 1)
+    private Vector2Int vec2vecInt(Vector2 v)
+    {
+        return new Vector2Int((int)v.x, (int)v.y);
+    }
+
+    private Vector2 vecInt2vec(Vector2Int v)
+    {
+        return new Vector2(v.x, v.y);
+    }
+
+    private HashSet<Vector2Int> BuildBlockedTreeCells(Room room, List<Vector2Int> points, int padding = 1)
     {
         HashSet<Vector2Int> blockedCells = new();
 
-        Vector2 center = new Vector2(0.0f, 0.0f);
-
-        for (int i = 0; i < points.Count; ++i)
+        for(int i = 1; i < room.RectCount; ++i)
         {
-            center += points[i];
+            AddLine(blockedCells, new Vector2Int((int)room.Rects[i-1].Center.x, (int)room.Rects[i - 1].Center.y), new Vector2Int((int)room.Rects[i].Center.x, (int)room.Rects[i].Center.y), padding);
         }
 
-        center /= points.Count;
-
         for (int i = 0; i < points.Count; ++i)
         {
-            AddLine(blockedCells, points[i], new Vector2Int((int)center.x, (int)center.y), padding);
+            Vector2 closest_center = room.Rects[0].Center;
+
+            for(int j = 0; j < room.RectCount; ++j)
+            {
+                if (Vector2.Distance(vecInt2vec(points[i]), room.Rects[j].Center) < Vector2.Distance(vecInt2vec(points[i]), closest_center))
+                {
+                    closest_center = room.Rects[j].Center;
+                }
+            }
+
+            AddLine(blockedCells, points[i], vec2vecInt(closest_center), padding);
         }
 
         return blockedCells;
@@ -223,15 +239,46 @@ public class RoomManager : MonoBehaviour
         return ContainsAnyRect(room, Vector2Int.FloorToInt(center));
     }
 
-    private Vector2 SampleDoorLines(List<Vector2Int> doorPoints, float s1, float s2)
+    private Vector2 SampleDoorLines(Room room, List<Vector2Int> doorPoints, float s1, float s2)
     {
+        List<Vector2> lineStarts = new();
+        List<Vector2> lineEnds = new();
 
-        int rpoint = (int)(s1 * doorPoints.Count);
-        return Vector2.Lerp(
-            new Vector2(doorPoints[rpoint].x, doorPoints[rpoint].y),
-            GetDoorPointsCenter(doorPoints),
-            s2
+        for (int i = 1; i < room.RectCount; ++i)
+        {
+            lineStarts.Add(room.Rects[i - 1].Center);
+            lineEnds.Add(room.Rects[i].Center);
+        }
+
+        for (int i = 0; i < doorPoints.Count; ++i)
+        {
+            Vector2 doorPoint = vecInt2vec(doorPoints[i]);
+            Vector2 closestCenter = room.Rects[0].Center;
+
+            for (int j = 1; j < room.RectCount; ++j)
+            {
+                Vector2 rectCenter = room.Rects[j].Center;
+
+                if (Vector2.Distance(doorPoint, rectCenter) < Vector2.Distance(doorPoint, closestCenter))
+                {
+                    closestCenter = rectCenter;
+                }
+            }
+
+            lineStarts.Add(doorPoint);
+            lineEnds.Add(closestCenter);
+        }
+
+        if (lineStarts.Count == 0)
+            return Vector2.zero;
+
+        int lineIndex = Mathf.Clamp(
+            Mathf.FloorToInt(s1 * lineStarts.Count),
+            0,
+            lineStarts.Count - 1
         );
+
+        return Vector2.Lerp(lineStarts[lineIndex], lineEnds[lineIndex], s2);
     }
 
     private Vector2Int UniformSampleRoom(Room room)
@@ -356,7 +403,7 @@ public class RoomManager : MonoBehaviour
             doorPoints.Add(new Vector2Int((int)(door.transform.position.x), (int)(door.transform.position.z)));
         }
 
-        HashSet<Vector2Int> blockedCells = BuildBlockedTreeCells(doorPoints, 2);
+        HashSet<Vector2Int> blockedCells = BuildBlockedTreeCells(room, doorPoints, 2);
 
         GameObject roomParentEmpty = new GameObject("Room Parent");
 
@@ -383,28 +430,34 @@ public class RoomManager : MonoBehaviour
         {
             float r1 = _world.GetRandom().Next(0, 100000) / 100000.0f;
             float r2 = _world.GetRandom().Next(0, 100000) / 100000.0f;
-            Vector2 pos = SampleDoorLines(doorPoints, r1, 0.2f + r2 * 0.6f);
+            Vector2 pos = SampleDoorLines(room, doorPoints, r1, 0.2f + r2 * 0.6f);
             SpawnEnemy(room, gen.MeleeEnemyPrefabs[0], new Vector3(pos.x, 0, pos.y));
         }
 
-        
-        float coinDensity = 0.05f;
-        Vector2 center = GetDoorPointsCenter(doorPoints);
 
-        float maxLength = 0.0f;
-        for (int i = 0; i < doorPoints.Count; ++i)
-        {
-            float lineLength = Vector2.Distance(doorPoints[i], center);
-            if(lineLength > maxLength)
-                maxLength = lineLength;
-        }
+        float coinSpacing = 3.0f;
+        float coinStartOffset = 2.0f;
+        float coinEndOffset = 2.0f;
 
-        for (int i = 0; i < doorPoints.Count; ++i)
+        int lineCount = Mathf.Max(0, room.RectCount - 1) + doorPoints.Count;
+
+        for (int i = 0; i < lineCount; ++i)
         {
-            float lineLength = Vector2.Distance(doorPoints[i], center);
-            for (float k = 0.2f; k < 0.8f; k += coinDensity)
+            float s1 = (i + 0.5f) / lineCount;
+
+            Vector2 start = SampleDoorLines(room, doorPoints, s1, 0.0f);
+            Vector2 end = SampleDoorLines(room, doorPoints, s1, 1.0f);
+
+            float lineLength = Vector2.Distance(start, end);
+
+            if (lineLength <= coinStartOffset + coinEndOffset)
+                continue;
+
+            for (float distance = coinStartOffset; distance <= lineLength - coinEndOffset; distance += coinSpacing)
             {
-                Vector2 pos = SampleDoorLines(doorPoints, (float)(i) / doorPoints.Count, k / (lineLength/maxLength));
+                float s2 = distance / lineLength;
+                Vector2 pos = SampleDoorLines(room, doorPoints, s1, s2);
+
                 SpawnAsset(room, gen.CoinPrefab, new Vector3(pos.x, 0.5f, pos.y));
             }
         }
